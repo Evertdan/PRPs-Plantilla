@@ -89,8 +89,8 @@ Rutas y contenido de archivos precisos, versiones de bibliotecas y contexto de l
 1.  **Clona este repositorio**:
 
     ```bash
-    git clone https://github.com/Wirasm/PRPs-agentic-eng.git
-    cd PRPs-agentic-eng
+    git clone git@github.com:Evertdan/PRPs-Plantilla.git
+    cd PRPs-Plantilla
     ```
 
 2.  **Crea la estructura de tu proyecto**:
