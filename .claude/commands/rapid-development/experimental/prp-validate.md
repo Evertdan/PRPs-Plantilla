@@ -1,191 +1,191 @@
-# Validate PRP
+# Validar PRP
 
-## PRP File: $ARGUMENTS
+## Archivo PRP: $ARGUMENTS
 
-Pre-flight validation of a PRP to ensure all context and dependencies are available before execution.
+Validación previa de un PRP para asegurar que todo el contexto y las dependencias estén disponibles antes de la ejecución.
 
-## Validation Process
+## Proceso de Validación
 
-1. **Parse PRP**
-   - Read the specified PRP file
-   - Extract all file references, URLs, and dependencies
-   - Parse validation checklist items
+1.  **Analizar (Parse) el PRP**
+    -   Leer el archivo PRP especificado.
+    -   Extraer todas las referencias de archivos, URLs y dependencias.
+    -   Analizar los elementos de la lista de verificación de validación.
 
-2. **Context Validation**
-   - Check all referenced files exist
-   - Validate all URLs are accessible
-   - Verify environment dependencies are available
-   - Check for required API keys/credentials
+2.  **Validación del Contexto**
+    -   Verificar que todos los archivos referenciados existan.
+    -   Validar que todas las URLs sean accesibles.
+    -   Verificar que las dependencias del entorno estén disponibles.
+    -   Comprobar las claves de API/credenciales requeridas.
 
-3. **Codebase Analysis**
-   - Scan for similar patterns mentioned in PRP
-   - Validate existing examples are current
-   - Check for architectural consistency
+3.  **Análisis de la Base de Código**
+    -   Buscar patrones similares mencionados en el PRP.
+    -   Validar que los ejemplos existentes estén actualizados.
+    -   Verificar la consistencia arquitectónica.
 
-4. **Dependency Check**
-   - Verify all required libraries are installed
-   - Check version compatibility
-   - Validate external service connectivity
+4.  **Comprobación de Dependencias**
+    -   Verificar que todas las bibliotecas requeridas estén instaladas.
+    -   Comprobar la compatibilidad de versiones.
+    -   Validar la conectividad con servicios externos.
 
-5. **Risk Assessment**
-   - Analyze failure patterns mentioned in PRP
-   - Assess complexity and confidence score
-   - Identify potential bottlenecks
+5.  **Evaluación de Riesgos**
+    -   Analizar los patrones de fallo mencionados en el PRP.
+    -   Evaluar la complejidad y la puntuación de confianza.
+    -   Identificar posibles cuellos de botella.
 
-## Validation Gates
+## Puertas de Validación
 
-### File References
+### Referencias de Archivos
 
 ```bash
-# Check all referenced files exist
-echo "Validating file references..."
-for file in $(grep -o 'file: [^[:space:]]*' "$PRP_FILE" | cut -d' ' -f2); do
-    if [ ! -f "$file" ]; then
-        echo "❌ Missing file: $file"
+# Verificar que todos los archivos referenciados existan
+echo "Validando referencias de archivos..."
+for archivo in $(grep -o 'file: [^[:space:]]*' "$PRP_FILE" | cut -d' ' -f2); do
+    if [ ! -f "$archivo" ]; then
+        echo "❌ Archivo faltante: $archivo"
         exit 1
     else
-        echo "✅ Found: $file"
+        echo "✅ Encontrado: $archivo"
     fi
 done
 ```
 
-### URL Accessibility
+### Accesibilidad de URLs
 
 ```bash
-# Check all referenced URLs are accessible
-echo "Validating URL references..."
+# Verificar que todas las URLs referenciadas sean accesibles
+echo "Validando referencias de URLs..."
 for url in $(grep -o 'url: [^[:space:]]*' "$PRP_FILE" | cut -d' ' -f2); do
     if curl -s --head "$url" > /dev/null; then
-        echo "✅ Accessible: $url"
+        echo "✅ Accesible: $url"
     else
-        echo "⚠️  Cannot access: $url"
+        echo "⚠️  No se puede acceder a: $url"
     fi
 done
 ```
 
-### Environment Dependencies
+### Dependencias del Entorno
 
 ```bash
-# Check environment setup
-echo "Validating environment dependencies..."
+# Comprobar la configuración del entorno
+echo "Validando dependencias del entorno..."
 
-# Check Python dependencies
+# Comprobar dependencias de Python
 if command -v python3 &> /dev/null; then
-    echo "✅ Python3 available"
+    echo "✅ Python3 disponible"
 
-    # Check specific imports mentioned in PRP
+    # Comprobar importaciones específicas mencionadas en el PRP
     python3 -c "
 import re
 import sys
-# Read PRP file and extract import statements
+# Leer el archivo PRP y extraer las declaraciones de importación
 with open('$PRP_FILE', 'r') as f:
-    content = f.read()
-# Find import statements in code blocks
-imports = re.findall(r'^(?:import|from)\s+([a-zA-Z_][a-zA-Z0-9_]*)', content, re.MULTILINE)
-unique_imports = set(imports)
-failed_imports = []
-for module in unique_imports:
+    contenido = f.read()
+# Encontrar declaraciones de importación en bloques de código
+importaciones = re.findall(r'^(?:import|from)\s+([a-zA-Z_][a-zA-Z0-9_]*)', contenido, re.MULTILINE)
+importaciones_unicas = set(importaciones)
+importaciones_fallidas = []
+for modulo in importaciones_unicas:
     try:
-        __import__(module)
-        print(f'✅ Module available: {module}')
+        __import__(modulo)
+        print(f'✅ Módulo disponible: {modulo}')
     except ImportError:
-        failed_imports.append(module)
-        print(f'⚠️  Module missing: {module}')
-if failed_imports:
-    print(f'❌ Missing modules: {failed_imports}')
+        importaciones_fallidas.append(modulo)
+        print(f'⚠️  Módulo faltante: {modulo}')
+if importaciones_fallidas:
+    print(f'❌ Módulos faltantes: {importaciones_fallidas}')
     sys.exit(1)
 "
 else
-    echo "❌ Python3 not available"
+    echo "❌ Python3 no disponible"
     exit 1
 fi
 ```
 
-### API Connectivity
+### Conectividad de API
 
 ```bash
-# Check external API connectivity
-echo "Validating API connectivity..."
+# Comprobar la conectividad con APIs externas
+echo "Validando conectividad de API..."
 
-# Check common APIs mentioned in PRP
+# Comprobar APIs comunes mencionadas en el PRP
 if grep -q "api.openai.com" "$PRP_FILE"; then
     if [ -n "$OPENAI_API_KEY" ]; then
-        echo "✅ OpenAI API key configured"
+        echo "✅ Clave de API de OpenAI configurada"
     else
-        echo "⚠️  OpenAI API key not set"
+        echo "⚠️  Clave de API de OpenAI no establecida"
     fi
 fi
 
 if grep -q "api.anthropic.com" "$PRP_FILE"; then
     if [ -n "$ANTHROPIC_API_KEY" ]; then
-        echo "✅ Anthropic API key configured"
+        echo "✅ Clave de API de Anthropic configurada"
     else
-        echo "⚠️  Anthropic API key not set"
+        echo "⚠️  Clave de API de Anthropic no establecida"
     fi
 fi
 
-# Add more API checks as needed
+# Añadir más comprobaciones de API según sea necesario
 ```
 
-## Validation Report
+## Informe de Validación
 
-Generate a comprehensive validation report with:
+Genera un informe de validación completo con:
 
-1. **Context Completeness Score** (0-100)
-2. **Dependency Readiness** (Ready/Issues/Blocked)
-3. **Risk Assessment** (Low/Medium/High)
-4. **Recommended Actions** (before execution)
+1.  **Puntuación de Completitud del Contexto** (0-100)
+2.  **Preparación de Dependencias** (Listo/Problemas/Bloqueado)
+3.  **Evaluación de Riesgos** (Bajo/Medio/Alto)
+4.  **Acciones Recomendadas** (antes de la ejecución)
 
-## Output Format
+## Formato de Salida
 
 ```
-🔍 PRP Validation Report
+🔍 Informe de Validación de PRP
 ========================
-📁 Context Validation: [PASS/FAIL]
-- Files referenced: X/X found
-- URLs accessible: X/X responding
-- Examples current: [YES/NO]
-🔧 Dependencies: [READY/ISSUES/BLOCKED]
-- Python modules: X/X available
-- External services: X/X accessible
-- API keys: X/X configured
-⚠️  Risk Assessment: [LOW/MEDIUM/HIGH]
-- Complexity score: X/10
-- Failure patterns: X identified
-- Mitigation strategies: X documented
-📊 Readiness Score: XX/100
-🎯 Recommended Actions:
-[ ] Install missing dependencies
-[ ] Configure missing API keys
-[ ] Update stale examples
-[ ] Review risk mitigation strategies
-Status: [READY_TO_EXECUTE/NEEDS_ATTENTION/BLOCKED]
+📁 Validación de Contexto: [PASA/FALLA]
+- Archivos referenciados: X/X encontrados
+- URLs accesibles: X/X responden
+- Ejemplos actualizados: [SÍ/NO]
+🔧 Dependencias: [LISTO/PROBLEMAS/BLOQUEADO]
+- Módulos de Python: X/X disponibles
+- Servicios externos: X/X accesibles
+- Claves de API: X/X configuradas
+⚠️  Evaluación de Riesgos: [BAJO/MEDIO/ALTO]
+- Puntuación de complejidad: X/10
+- Patrones de fallo: X identificados
+- Estrategias de mitigación: X documentadas
+📊 Puntuación de Preparación: XX/100
+🎯 Acciones Recomendadas:
+[ ] Instalar dependencias faltantes
+[ ] Configurar claves de API faltantes
+[ ] Actualizar ejemplos obsoletos
+[ ] Revisar estrategias de mitigación de riesgos
+Estado: [LISTO_PARA_EJECUTAR/NECESITA_ATENCIÓN/BLOQUEADO]
 ```
 
-## Auto-Fix Suggestions
+## Sugerencias de Auto-corrección
 
-When validation fails, provide actionable suggestions:
+Cuando la validación falle, proporciona sugerencias accionables:
 
 ```bash
-# Auto-generate fixes where possible
-if [ "$STATUS" != "READY_TO_EXECUTE" ]; then
-    echo "🔧 Auto-fix suggestions:"
-    echo "pip install missing-module-1 missing-module-2"
-    echo "export MISSING_API_KEY=your_key_here"
-    echo "git checkout HEAD -- outdated-example.py"
+# Generar correcciones automáticas donde sea posible
+if [ "$ESTADO" != "LISTO_PARA_EJECUTAR" ]; then
+    echo "🔧 Sugerencias de auto-corrección:"
+    echo "pip install modulo-faltante-1 modulo-faltante-2"
+    echo "export CLAVE_API_FALTANTE=tu_clave_aqui"
+    echo "git checkout HEAD -- ejemplo-obsoleto.py"
 fi
 ```
 
-## Integration with Execute Command
+## Integración con el Comando de Ejecución
 
-The validate command should be automatically called by execute-prp before starting implementation:
+El comando de validación debería ser llamado automáticamente por `execute-prp` antes de iniciar la implementación:
 
 ```bash
-# In execute-prp.md, add this as step 0:
-echo "Running pre-execution validation..."
+# En execute-prp.md, añade esto como paso 0:
+echo "Ejecutando validación pre-ejecución..."
 validate-prp "$PRP_FILE"
 if [ $? -ne 0 ]; then
-    echo "❌ Validation failed. Please fix issues before execution."
+    echo "❌ La validación falló. Por favor, corrige los problemas antes de la ejecución."
     exit 1
 fi
 ```

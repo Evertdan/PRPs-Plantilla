@@ -1,66 +1,66 @@
-# Execute TypeScript PRP
+# Ejecutar PRP de TypeScript
 
-## PRP File: $ARGUMENTS
+## Archivo PRP: $ARGUMENTS
 
-## Mission: One-Pass TypeScript Implementation Success
+## Misión: Éxito en la Implementación de TypeScript en un Solo Intento
 
-PRPs enable working TypeScript/React code on the first attempt through:
+Los PRPs permiten obtener código TypeScript/React funcional al primer intento a través de:
 
-- **Context Completeness**: Everything needed, nothing guessed
-- **Progressive Validation**: 4-level gates catch errors early
-- **Pattern Consistency**: Follow existing TypeScript/React codebase approaches
-- **Type Safety**: Leverage TypeScript's compile-time error detection
-- Read PRPs/README.md to understand PRP concepts
+-   **Completitud del Contexto**: Todo lo necesario, nada adivinado.
+-   **Validación Progresiva**: Puertas de 4 niveles que detectan errores temprano.
+-   **Consistencia de Patrones**: Seguir los enfoques existentes en la base de código de TypeScript/React.
+-   **Seguridad de Tipos**: Aprovechar la detección de errores en tiempo de compilación de TypeScript.
+-   Leer `PRPs/README.md` para entender los conceptos de PRP.
 
-**Your Goal**: Transform the PRP into working TypeScript code that passes all validation gates and maintains type safety.
+**Tu Objetivo**: Transformar el PRP en código TypeScript funcional que pase todas las puertas de validación y mantenga la seguridad de tipos.
 
-## Execution Process
+## Proceso de Ejecución
 
-1. **Load PRP**
-   - Read the specified TypeScript PRP file completely
-   - Absorb all context, patterns, requirements and gather codebase intelligence
-   - Use the provided documentation references and file patterns, consume the right documentation before the appropriate todo/task
-   - Trust the PRP's context and guidance - it's designed for one-pass success
-   - If needed do additional codebase exploration and research as needed
-   - Pay special attention to TypeScript interfaces, component patterns, and Next.js App Router structure
+1.  **Cargar PRP**
+    -   Leer el archivo PRP de TypeScript especificado por completo.
+    -   Absorber todo el contexto, patrones, requisitos y recopilar inteligencia de la base de código.
+    -   Usar las referencias de documentación y patrones de archivo proporcionados, consumir la documentación correcta antes de la tarea/todo apropiado.
+    -   Confiar en el contexto y la guía del PRP - está diseñado para el éxito en un solo intento.
+    -   Si es necesario, realizar exploración e investigación adicional de la base de código según sea necesario.
+    -   Prestar especial atención a las interfaces de TypeScript, patrones de componentes y la estructura del App Router de Next.js.
 
-2. **ULTRATHINK & Plan**
-   - Create comprehensive implementation plan following the PRP's task order
-   - Break down into clear todos using TodoWrite tool
-   - Use subagents for parallel work when beneficial (always create prp inspired prompts for subagents when used)
-   - Follow the TypeScript/React patterns referenced in the PRP
-   - Use specific file paths, interface names, component names, and type definitions from PRP context
-   - Never guess - always verify the codebase patterns and examples referenced in the PRP yourself
-   - Consider TypeScript compilation dependencies (types before components, components before pages)
+2.  **ULTRAPENSAR y Planificar**
+    -   Crear un plan de implementación completo siguiendo el orden de tareas del PRP.
+    -   Desglosar en "todos" (tareas pendientes) claros usando la herramienta TodoWrite.
+    -   Usar subagentes para trabajo en paralelo cuando sea beneficioso (siempre crear prompts inspirados en el prp para los subagentes cuando se usen).
+    -   Seguir los patrones de TypeScript/React referenciados en el PRP.
+    -   Usar rutas de archivo, nombres de interfaz, nombres de componentes y definiciones de tipos específicos del contexto del PRP.
+    -   Nunca adivinar - siempre verificar por ti mismo los patrones y ejemplos de la base de código referenciados en el PRP.
+    -   Considerar las dependencias de compilación de TypeScript (tipos antes de componentes, componentes antes de páginas).
 
-3. **Execute Implementation**
-   - Follow the PRP's Implementation Tasks sequence, add more detail as needed, especially when using subagents
-   - Use the TypeScript/React patterns and examples referenced in the PRP
-   - Create files in locations specified by the desired codebase tree
-   - Apply TypeScript naming conventions from the task specifications and CLAUDE.md
-   - Ensure proper TypeScript typing throughout (interfaces, props, return types)
-   - Follow Next.js App Router patterns for file-based routing
+3.  **Ejecutar Implementación**
+    -   Seguir la secuencia de Tareas de Implementación del PRP, añadir más detalles según sea necesario, especialmente al usar subagentes.
+    -   Usar los patrones y ejemplos de TypeScript/React referenciados en el PRP.
+    -   Crear archivos en las ubicaciones especificadas por el árbol de la base de código deseado.
+    -   Aplicar las convenciones de nomenclatura de TypeScript de las especificaciones de la tarea y de `CLAUDE.md`.
+    -   Asegurar un tipado de TypeScript adecuado en todo momento (interfaces, props, tipos de retorno).
+    -   Seguir los patrones del App Router de Next.js para el enrutamiento basado en archivos.
 
-4. **Progressive Validation**
+4.  **Validación Progresiva**
 
-   **Execute the 4-level validation system from the TypeScript PRP:**
-   - **Level 1**: Run TypeScript syntax & style validation commands from PRP (ESLint, tsc, Prettier)
-   - **Level 2**: Execute component and hook unit test validation from PRP
-   - **Level 3**: Run Next.js integration testing commands from PRP (dev server, API routes, production build)
-   - **Level 4**: Execute TypeScript/React-specific validation from PRP (E2E, performance, accessibility)
+    **Ejecutar el sistema de validación de 4 niveles del PRP de TypeScript:**
+    -   **Nivel 1**: Ejecutar los comandos de validación de sintaxis y estilo de TypeScript del PRP (ESLint, tsc, Prettier).
+    -   **Nivel 2**: Ejecutar la validación de pruebas unitarias de componentes y hooks del PRP.
+    -   **Nivel 3**: Ejecutar los comandos de pruebas de integración de Next.js del PRP (servidor de desarrollo, rutas de API, build de producción).
+    -   **Nivel 4**: Ejecutar la validación específica de TypeScript/React del PRP (E2E, rendimiento, accesibilidad).
 
-   **Each level must pass before proceeding to the next.**
+    **Cada nivel debe pasarse antes de proceder al siguiente.**
 
-5. **Completion Verification**
-   - Work through the Final Validation Checklist in the PRP
-   - Verify all Success Criteria from the "What" section are met
-   - Confirm all Anti-Patterns were avoided (especially TypeScript/React-specific ones)
-   - Verify TypeScript compilation is successful with no errors
-   - Ensure proper Server/Client component separation if using Next.js
-   - Implementation is ready and working with full type safety
+5.  **Verificación de Finalización**
+    -   Revisar la Lista de Verificación de Validación Final en el PRP.
+    -   Verificar que se cumplan todos los Criterios de Éxito de la sección "Qué".
+    -   Confirmar que se evitaron todos los Anti-Patrones (especialmente los específicos de TypeScript/React).
+    -   Verificar que la compilación de TypeScript sea exitosa y sin errores.
+    -   Asegurar la separación adecuada de componentes de Servidor/Cliente si se usa Next.js.
+    -   La implementación está lista y funcionando con total seguridad de tipos.
 
-**Failure Protocol**: When validation fails, use the TypeScript/React patterns and gotchas from the PRP to fix issues, then re-run validation until passing. Pay special attention to:
-- TypeScript compilation errors and type mismatches
-- React hydration issues between server and client
-- Next.js App Router specific requirements
-- Component prop interface violations
+**Protocolo de Fallo**: Cuando la validación falle, usa los patrones y problemas conocidos (gotchas) de TypeScript/React del PRP para solucionar los problemas, luego vuelve a ejecutar la validación hasta que pase. Presta especial atención a:
+-   Errores de compilación de TypeScript y discrepancias de tipos.
+-   Problemas de hidratación de React entre el servidor y el cliente.
+-   Requisitos específicos del App Router de Next.js.
+-   Violaciones de la interfaz de props de los componentes.

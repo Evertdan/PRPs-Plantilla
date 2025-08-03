@@ -1,55 +1,55 @@
-# Execute BASE PRP
+# Ejecutar PRP BASE
 
-## PRP File: $ARGUMENTS
+## Archivo PRP: $ARGUMENTS
 
-## Mission: One-Pass Implementation Success
+## Misión: Éxito en la Implementación en un Solo Intento
 
-PRPs enable working code on the first attempt through:
+Los PRPs permiten obtener código funcional al primer intento a través de:
 
-- **Context Completeness**: Everything needed, nothing guessed
-- **Progressive Validation**: 4-level gates catch errors early
-- **Pattern Consistency**: Follow existing codebase approaches
-- Read PRPs/README.md to understand PRP concepts
+-   **Completitud del Contexto**: Todo lo necesario, nada adivinado.
+-   **Validación Progresiva**: Puertas de 4 niveles que detectan errores temprano.
+-   **Consistencia de Patrones**: Seguir los enfoques existentes en la base de código.
+-   Leer `PRPs/README.md` para entender los conceptos de PRP.
 
-**Your Goal**: Transform the PRP into working code that passes all validation gates.
+**Tu Objetivo**: Transformar el PRP en código funcional que pase todas las puertas de validación.
 
-## Execution Process
+## Proceso de Ejecución
 
-1. **Load PRP**
-   - Read the specified PRP file completely
-   - Absorb all context, patterns, requirements and gather codebase intelligence
-   - Use the provided documentation references and file patterns, consume the right documentation before the appropriate todo/task
-   - Trust the PRP's context and guidance - it's designed for one-pass success
-   - If needed do additional codebase exploration and research as needed
+1.  **Cargar PRP**
+    -   Leer el archivo PRP especificado por completo.
+    -   Absorber todo el contexto, patrones, requisitos y recopilar inteligencia de la base de código.
+    -   Usar las referencias de documentación y patrones de archivo proporcionados, consumir la documentación correcta antes de la tarea/todo apropiado.
+    -   Confiar en el contexto y la guía del PRP - está diseñado para el éxito en un solo intento.
+    -   Si es necesario, realizar exploración e investigación adicional de la base de código según sea necesario.
 
-2. **ULTRATHINK & Plan**
-   - Create comprehensive implementation plan following the PRP's task order
-   - Break down into clear todos using TodoWrite tool
-   - Use subagents for parallel work when beneficial (always create prp inspired prompts for subagents when used)
-   - Follow the patterns referenced in the PRP
-   - Use specific file paths, class names, and method signatures from PRP context
-   - Never guess - always verify the codebase patterns and examples referenced in the PRP yourself
+2.  **ULTRAPENSAR y Planificar**
+    -   Crear un plan de implementación completo siguiendo el orden de tareas del PRP.
+    -   Desglosar en "todos" (tareas pendientes) claros usando la herramienta TodoWrite.
+    -   Usar subagentes para trabajo en paralelo cuando sea beneficioso (siempre crear prompts inspirados en el prp para los subagentes cuando se usen).
+    -   Seguir los patrones referenciados en el PRP.
+    -   Usar rutas de archivo, nombres de clase y firmas de métodos específicos del contexto del PRP.
+    -   Nunca adivinar - siempre verificar por ti mismo los patrones y ejemplos de la base de código referenciados en el PRP.
 
-3. **Execute Implementation**
-   - Follow the PRP's Implementation Tasks sequence, add more detail as needed, especially when using subagents
-   - Use the patterns and examples referenced in the PRP
-   - Create files in locations specified by the desired codebase tree
-   - Apply naming conventions from the task specifications and CLAUDE.md
+3.  **Ejecutar Implementación**
+    -   Seguir la secuencia de Tareas de Implementación del PRP, añadir más detalles según sea necesario, especialmente al usar subagentes.
+    -   Usar los patrones y ejemplos referenciados en el PRP.
+    -   Crear archivos en las ubicaciones especificadas por el árbol de la base de código deseado.
+    -   Aplicar las convenciones de nomenclatura de las especificaciones de la tarea y de `CLAUDE.md`.
 
-4. **Progressive Validation**
+4.  **Validación Progresiva**
 
-   **Execute the level validation system from the PRP:**
-   - **Level 1**: Run syntax & style validation commands from PRP
-   - **Level 2**: Execute unit test validation from PRP
-   - **Level 3**: Run integration testing commands from PRP
-   - **Level 4**: Execute specified validation from PRP
+    **Ejecutar el sistema de validación por niveles del PRP:**
+    -   **Nivel 1**: Ejecutar los comandos de validación de sintaxis y estilo del PRP.
+    -   **Nivel 2**: Ejecutar la validación de pruebas unitarias del PRP.
+    -   **Nivel 3**: Ejecutar los comandos de pruebas de integración del PRP.
+    -   **Nivel 4**: Ejecutar la validación especificada del PRP.
 
-   **Each level must pass before proceeding to the next.**
+    **Cada nivel debe pasarse antes de proceder al siguiente.**
 
-5. **Completion Verification**
-   - Work through the Final Validation Checklist in the PRP
-   - Verify all Success Criteria from the "What" section are met
-   - Confirm all Anti-Patterns were avoided
-   - Implementation is ready and working
+5.  **Verificación de Finalización**
+    -   Revisar la Lista de Verificación de Validación Final en el PRP.
+    -   Verificar que se cumplan todos los Criterios de Éxito de la sección "Qué".
+    -   Confirmar que se evitaron todos los Anti-Patrones.
+    -   La implementación está lista y funcionando.
 
-**Failure Protocol**: When validation fails, use the patterns and gotchas from the PRP to fix issues, then re-run validation until passing.
+**Protocolo de Fallo**: Cuando la validación falle, usa los patrones y problemas conocidos (gotchas) del PRP para solucionar los problemas, luego vuelve a ejecutar la validación hasta que pase.

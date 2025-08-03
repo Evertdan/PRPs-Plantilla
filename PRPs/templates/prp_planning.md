@@ -1,307 +1,307 @@
-name: "Planning PRP Template - PRD Generation with Diagrams"
+name: "Plantilla de PRP de Planificación - Generación de PRD con Diagramas"
 description: |
 
-## Purpose
-Generate comprehensive Product Requirements Documents (PRDs) with visual diagrams, turning rough ideas into detailed specifications ready for implementation PRPs.
+## Propósito
+Generar Documentos de Requisitos de Producto (PRDs) completos con diagramas visuales, convirtiendo ideas aproximadas en especificaciones detalladas listas para PRPs de implementación.
 
-## Philosophy
-1. **Research First**: Gather context before planning
-2. **Visual Thinking**: Use diagrams to clarify concepts
-3. **Validation Built-in**: Include challenges and edge cases
-4. **Implementation Ready**: Output feeds directly into other PRPs
+## Filosofía
+1. **Investigar Primero**: Recopilar contexto antes de planificar.
+2. **Pensamiento Visual**: Usar diagramas para clarificar conceptos.
+3. **Validación Incorporada**: Incluir desafíos y casos borde.
+4. **Listo para Implementar**: La salida alimenta directamente a otros PRPs.
 
 ---
 
-## Initial Concept
+## Concepto Inicial
 $ARGUMENTS
 
-## Planning Process
+## Proceso de Planificación
 
-### Phase 1: Idea Expansion & Research
+### Fase 1: Expansión de la Idea e Investigación
 
-#### Context Gathering
+#### Recopilación de Contexto
 ```yaml
-research_areas:
-  market_analysis:
-    - competitors: [Research similar solutions]
-    - user_needs: [Identify pain points]
-    - trends: [Current industry directions]
+areas_de_investigacion:
+  analisis_de_mercado:
+    - competidores: [Investigar soluciones similares]
+    - necesidades_del_usuario: [Identificar puntos de dolor]
+    - tendencias: [Direcciones actuales de la industria]
   
-  technical_research:
-    - existing_solutions: [How others solve this]
-    - libraries: [Available tools/frameworks]
-    - patterns: [Common implementation approaches]
+  investigacion_tecnica:
+    - soluciones_existentes: [Cómo otros resuelven esto]
+    - bibliotecas: [Herramientas/frameworks disponibles]
+    - patrones: [Enfoques de implementación comunes]
   
-  internal_context:
-    - current_system: [How it works today]
-    - constraints: [Technical/business limitations]
-    - integration_points: [What it must work with]
+  contexto_interno:
+    - sistema_actual: [Cómo funciona hoy]
+    - restricciones: [Limitaciones técnicas/de negocio]
+    - puntos_de_integracion: [Con qué debe funcionar]
 ```
 
-#### Initial Exploration
+#### Exploración Inicial
 ```
-RESEARCH similar solutions:
-  - WEB_SEARCH: "{concept} implementation examples"
-  - WEB_SEARCH: "{concept} best practices"
-  - WEB_SEARCH: "{concept} architecture patterns"
+INVESTIGAR soluciones similares:
+  - BUSQUEDA_WEB: "ejemplos de implementación de {concepto}"
+  - BUSQUEDA_WEB: "mejores prácticas de {concepto}"
+  - BUSQUEDA_WEB: "patrones de arquitectura de {concepto}"
 
-ANALYZE existing codebase:
-  - FIND: Similar features already implemented
-  - IDENTIFY: Patterns to follow
-  - NOTE: Technical constraints
+ANALIZAR base de código existente:
+  - ENCONTRAR: Funcionalidades similares ya implementadas
+  - IDENTIFICAR: Patrones a seguir
+  - ANOTAR: Restricciones técnicas
 ```
 
-### Phase 2: PRD Structure Generation
+### Fase 2: Generación de la Estructura del PRD
 
-#### 1. Executive Summary
+#### 1. Resumen Ejecutivo
 ```markdown
-## Problem Statement
-[Clear articulation of the problem being solved]
+## Declaración del Problema
+[Articulación clara del problema que se está resolviendo]
 
-## Solution Overview
-[High-level description of proposed solution]
+## Resumen de la Solución
+[Descripción de alto nivel de la solución propuesta]
 
-## Success Metrics
-- Metric 1: [Measurable outcome]
-- Metric 2: [Measurable outcome]
-- KPI: [Key performance indicator]
+## Métricas de Éxito
+- Métrica 1: [Resultado medible]
+- Métrica 2: [Resultado medible]
+- KPI: [Indicador clave de rendimiento]
 ```
 
-#### 2. User Stories & Scenarios
+#### 2. Historias de Usuario y Escenarios
 ```markdown
-## Primary User Flow
+## Flujo de Usuario Principal
 \```mermaid
 graph LR
-    A[User Action] --> B{Decision Point}
-    B -->|Path 1| C[Outcome 1]
-    B -->|Path 2| D[Outcome 2]
-    D --> E[Final State]
+    A[Acción del Usuario] --> B{Punto de Decisión}
+    B -->|Ruta 1| C[Resultado 1]
+    B -->|Ruta 2| D[Resultado 2]
+    D --> E[Estado Final]
     C --> E
 \```
 
-## User Stories
-1. **As a [user type]**, I want to [action] so that [benefit]
-   - Acceptance Criteria:
-     - [ ] Criterion 1
-     - [ ] Criterion 2
-   - Edge Cases:
-     - [Edge case 1]
-     - [Edge case 2]
+## Historias de Usuario
+1. **Como un [tipo de usuario]**, quiero [acción] para que [beneficio]
+   - Criterios de Aceptación:
+     - [ ] Criterio 1
+     - [ ] Criterio 2
+   - Casos Borde:
+     - [Caso borde 1]
+     - [Caso borde 2]
 ```
 
-#### 3. System Architecture
+#### 3. Arquitectura del Sistema
 ```markdown
-## High-Level Architecture
+## Arquitectura de Alto Nivel
 \```mermaid
 graph TB
     subgraph "Frontend"
-        UI[User Interface]
-        State[State Management]
+        UI[Interfaz de Usuario]
+        Estado[Gestión de Estado]
     end
     
     subgraph "Backend"
-        API[API Layer]
-        BL[Business Logic]
-        DB[(Database)]
+        API[Capa de API]
+        LN[Lógica de Negocio]
+        BD[(Base de Datos)]
     end
     
-    subgraph "External"
-        EXT[External Services]
+    subgraph "Externo"
+        EXT[Servicios Externos]
     end
     
     UI --> API
-    API --> BL
-    BL --> DB
-    BL --> EXT
-    State --> UI
+    API --> LN
+    LN --> BD
+    LN --> EXT
+    Estado --> UI
 \```
 
-## Component Breakdown
-- **Frontend Components**:
-  - [Component 1]: [Purpose]
-  - [Component 2]: [Purpose]
+## Desglose de Componentes
+- **Componentes del Frontend**:
+  - [Componente 1]: [Propósito]
+  - [Componente 2]: [Propósito]
 
-- **Backend Services**:
-  - [Service 1]: [Purpose]
-  - [Service 2]: [Purpose]
+- **Servicios del Backend**:
+  - [Servicio 1]: [Propósito]
+  - [Servicio 2]: [Propósito]
 
-- **Data Models**:
-  - [Model 1]: [Fields and relationships]
-  - [Model 2]: [Fields and relationships]
+- **Modelos de Datos**:
+  - [Modelo 1]: [Campos y relaciones]
+  - [Modelo 2]: [Campos y relaciones]
 ```
 
-#### 4. Technical Specifications
+#### 4. Especificaciones Técnicas
 ```markdown
-## API Design
+## Diseño de la API
 \```mermaid
 sequenceDiagram
-    participant U as User
+    participant U as Usuario
     participant F as Frontend
     participant A as API
-    participant D as Database
-    participant E as External Service
+    participant B as BaseDeDatos
+    participant E as Servicio Externo
     
-    U->>F: Initiates Action
+    U->>F: Inicia Acción
     F->>A: POST /api/endpoint
-    A->>D: Query Data
-    D-->>A: Return Data
-    A->>E: Call External API
-    E-->>A: Response
-    A-->>F: Processed Result
-    F-->>U: Display Result
+    A->>B: Consulta Datos
+    B-->>A: Devuelve Datos
+    A->>E: Llama a API Externa
+    E-->>A: Respuesta
+    A-->>F: Resultado Procesado
+    F-->>U: Muestra Resultado
 \```
 
 ## Endpoints
-- **POST /api/[resource]**
-  - Request: `{field1: type, field2: type}`
-  - Response: `{status: string, data: {...}}`
-  - Errors: `400 Bad Request`, `401 Unauthorized`
+- **POST /api/[recurso]**
+  - Solicitud: `{campo1: tipo, campo2: tipo}`
+  - Respuesta: `{estado: string, datos: {...}}`
+  - Errores: `400 Solicitud Incorrecta`, `401 No Autorizado`
 
-## Data Flow
+## Flujo de Datos
 \```mermaid
 flowchart TD
-    A[Input Data] --> B{Validation}
-    B -->|Valid| C[Processing]
-    B -->|Invalid| D[Error Response]
-    C --> E[Transform]
-    E --> F[Store]
-    F --> G[Return Success]
+    A[Datos de Entrada] --> B{Validación}
+    B -->|Válido| C[Procesamiento]
+    B -->|Inválido| D[Respuesta de Error]
+    C --> E[Transformación]
+    E --> F[Almacenamiento]
+    F --> G[Devolver Éxito]
 \```
 ```
 
-#### 5. Implementation Strategy
+#### 5. Estrategia de Implementación
 ```markdown
-## Development Phases
+## Fases de Desarrollo
 \```mermaid
 graph LR
-    A[Foundation] --> B[Core Features]
-    B --> C[Integration]
-    C --> D[Testing]
-    D --> E[Deployment]
+    A[Base] --> B[Funcionalidades Principales]
+    B --> C[Integración]
+    C --> D[Pruebas]
+    D --> E[Despliegue]
     
-    A -.- F[Database Schema<br/>API Framework<br/>Authentication]
-    B -.- G[Business Logic<br/>API Endpoints<br/>Basic UI]
-    C -.- H[External Services<br/>Full UI Integration<br/>Error Handling]
-    D -.- I[Unit Tests<br/>Integration Tests<br/>Performance Tests]
-    E -.- J[Documentation<br/>Monitoring<br/>Launch]
+    A -.- F[Esquema de BD<br/>Framework de API<br/>Autenticación]
+    B -.- G[Lógica de Negocio<br/>Endpoints de API<br/>UI Básica]
+    C -.- H[Servicios Externos<br/>Integración UI Completa<br/>Manejo de Errores]
+    D -.- I[Pruebas Unitarias<br/>Pruebas de Integración<br/>Pruebas de Rendimiento]
+    E -.- J[Documentación<br/>Monitoreo<br/>Lanzamiento]
 \```
 
-## Implementation Priority
-1. **Foundation**: Core infrastructure and setup
-2. **MVP Features**: Minimum viable functionality
-3. **Enhanced Features**: Additional capabilities
-4. **Polish**: Performance, UX improvements
-5. **Production Ready**: Full testing and deployment
+## Prioridad de Implementación
+1. **Base**: Infraestructura y configuración principal.
+2. **Funcionalidades MVP**: Funcionalidad mínima viable.
+3. **Funcionalidades Mejoradas**: Capacidades adicionales.
+4. **Pulido**: Mejoras de rendimiento y UX.
+5. **Listo para Producción**: Pruebas completas y despliegue.
 ```
 
-### Phase 3: Challenge & Validation
+### Fase 3: Desafío y Validación
 
-#### Devil's Advocate Analysis
+#### Análisis del "Abogado del Diablo"
 ```yaml
-challenges:
-  technical_risks:
-    - risk: "Performance at scale"
-      mitigation: "Implement caching layer"
+desafios:
+  riesgos_tecnicos:
+    - riesgo: "Rendimiento a escala"
+      mitigacion: "Implementar capa de caché"
     
-    - risk: "Third-party API reliability"
-      mitigation: "Build fallback mechanisms"
+    - riesgo: "Fiabilidad de la API de terceros"
+      mitigacion: "Construir mecanismos de respaldo"
   
-  business_risks:
-    - risk: "User adoption"
-      mitigation: "Phased rollout with feedback loops"
+  riesgos_de_negocio:
+    - riesgo: "Adopción por parte del usuario"
+      mitigacion: "Lanzamiento por fases con bucles de retroalimentación"
     
-    - risk: "Scope creep"
-      mitigation: "Strict MVP definition"
+    - riesgo: "Ampliación del alcance (Scope creep)"
+      mitigacion: "Definición estricta del MVP"
   
-  edge_cases:
-    - scenario: "No network connectivity"
-      handling: "Offline mode with sync"
+  casos_borde:
+    - escenario: "Sin conectividad de red"
+      manejo: "Modo offline con sincronización"
     
-    - scenario: "Concurrent updates"
-      handling: "Optimistic locking"
+    - escenario: "Actualizaciones concurrentes"
+      manejo: "Bloqueo optimista"
 ```
 
-#### Success Criteria
+#### Criterios de Éxito
 ```markdown
-## Definition of Done
-- [ ] All user stories implemented
-- [ ] Test coverage > 80%
-- [ ] Performance benchmarks met
-- [ ] Security review passed
-- [ ] Documentation complete
+## Definición de "Hecho" (Done)
+- [ ] Todas las historias de usuario implementadas.
+- [ ] Cobertura de pruebas > 80%.
+- [ ] Benchmarks de rendimiento cumplidos.
+- [ ] Revisión de seguridad pasada.
+- [ ] Documentación completa.
 
-## Measurable Outcomes
-- Metric 1: [Target value]
-- Metric 2: [Target value]
-- User satisfaction: [Target score]
+## Resultados Medibles
+- Métrica 1: [Valor objetivo]
+- Métrica 2: [Valor objetivo]
+- Satisfacción del usuario: [Puntuación objetivo]
 ```
 
-### Phase 4: Validation & Output
+### Fase 4: Validación y Salida
 
-#### Pre-Implementation Checklist
+#### Lista de Verificación Pre-implementación
 ```
-VALIDATE assumptions:
-  - Technical feasibility confirmed
-  - Resource availability verified
-  - Dependencies identified
-  - Risks documented with mitigations
+VALIDAR suposiciones:
+  - Viabilidad técnica confirmada.
+  - Disponibilidad de recursos verificada.
+  - Dependencias identificadas.
+  - Riesgos documentados con mitigaciones.
 
-REVIEW with stakeholders:
-  - Business alignment confirmed
-  - Technical approach approved
-  - Timeline acceptable
-  - Success metrics agreed
+REVISAR con las partes interesadas:
+  - Alineación de negocio confirmada.
+  - Enfoque técnico aprobado.
+  - Cronograma aceptable.
+  - Métricas de éxito acordadas.
 ```
 
-#### Output Format
-The final PRD should be structured as:
+#### Formato de Salida
+El PRD final debe estructurarse como:
 
-1. **Executive Summary** (1 page)
-2. **Detailed Requirements** (with diagrams)
-3. **Technical Architecture** (with diagrams)
-4. **Implementation Plan** (with timeline)
-5. **Appendices** (research, alternatives considered)
+1.  **Resumen Ejecutivo** (1 página)
+2.  **Requisitos Detallados** (con diagramas)
+3.  **Arquitectura Técnica** (con diagramas)
+4.  **Plan de Implementación** (con cronograma)
+5.  **Apéndices** (investigación, alternativas consideradas)
 
-### Validation Commands
+### Comandos de Validación
 
 ```bash
-# Verify PRD completeness
-grep -E "(TODO|TBD|FIXME)" generated_prd.md
+# Verificar la completitud del PRD
+grep -E "(TODO|TBD|FIXME)" prd_generado.md
 
-# Check diagram syntax
-mermaid-cli -i generated_prd.md -o prd_diagrams.pdf
+# Comprobar la sintaxis de los diagramas
+mermaid-cli -i prd_generado.md -o diagramas_prd.pdf
 
-# Validate structure
-python validate_prd_structure.py generated_prd.md
+# Validar la estructura
+python validar_estructura_prd.py prd_generado.md
 ```
 
-## Anti-Patterns to Avoid
-- ❌ Vague requirements without acceptance criteria
-- ❌ Missing edge cases and error scenarios
-- ❌ Diagrams that don't match the text
-- ❌ Technical jargon without explanation
-- ❌ Unrealistic timelines
-- ❌ No success metrics
+## Anti-Patrones a Evitar
+- ❌ Requisitos vagos sin criterios de aceptación.
+- ❌ Falta de casos borde y escenarios de error.
+- ❌ Diagramas que no coinciden con el texto.
+- ❌ Jerga técnica sin explicación.
+- ❌ Cronogramas poco realistas.
+- ❌ Sin métricas de éxito.
 
-## Success Indicators
-- ✅ Another developer could implement from this PRD alone
-- ✅ All stakeholders understand the plan
-- ✅ Risks are identified with mitigations
-- ✅ Clear path from current state to desired state
-- ✅ Diagrams clarify rather than confuse
+## Indicadores de Éxito
+- ✅ Otro desarrollador podría implementar solo a partir de este PRD.
+- ✅ Todas las partes interesadas entienden el plan.
+- ✅ Los riesgos están identificados con mitigaciones.
+- ✅ Camino claro desde el estado actual hasta el estado deseado.
+- ✅ Los diagramas clarifican en lugar de confundir.
 
-## Template Usage Example
+## Ejemplo de Uso de la Plantilla
 
-Input: "Build a notification system for our app"
+Entrada: "Construir un sistema de notificaciones para nuestra aplicación"
 
-Output would include:
-- User flow diagrams for different notification types
-- System architecture showing pub/sub patterns
-- Sequence diagrams for real-time delivery
-- Database schema for notification preferences
-- API specifications for notification endpoints
-- Implementation phases and priorities
-- Edge cases like offline users, rate limiting
-- Success metrics like delivery rate, user engagement
+La salida incluiría:
+- Diagramas de flujo de usuario para diferentes tipos de notificaciones.
+- Arquitectura del sistema mostrando patrones de pub/sub.
+- Diagramas de secuencia para la entrega en tiempo real.
+- Esquema de la base de datos para las preferencias de notificación.
+- Especificaciones de la API para los endpoints de notificación.
+- Fases y prioridades de implementación.
+- Casos borde como usuarios offline, limitación de velocidad.
+- Métricas de éxito como la tasa de entrega, la interacción del usuario.
 
-The resulting PRD becomes the `$ARGUMENTS` input for implementation PRPs like BASE_PRP or SPEC_PRP.
+El PRD resultante se convierte en la entrada `$ARGUMENTS` para PRPs de implementación como BASE_PRP o SPEC_PRP.

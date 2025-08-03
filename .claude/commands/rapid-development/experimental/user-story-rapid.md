@@ -1,101 +1,103 @@
-# Analyze User Story and Create Implementation Plan
+# Analizar Historia de Usuario y Crear Plan de Implementación
 
-User Story: $ARGUMENTS
+Historia de Usuario: $ARGUMENTS
 
-## Task: Create detailed implementation plan for separate backend and frontend projects based on the tech stack detailed in the user story
+## Tarea: Crear un plan de implementación detallado para proyectos de backend y frontend separados, basado en la pila tecnológica detallada en la historia de usuario.
 
-1. **Parse user story**:
-   - Extract: As a [user], I want [feature], so that [benefit]
-   - List explicit and implicit acceptance criteria
-   - Identify non-functional requirements (performance, security, UX)
-   - Define success metrics
+1.  **Analizar (Parse) la historia de usuario**:
+    -   Extraer: Como [usuario], quiero [funcionalidad], para que [beneficio].
+    -   Listar criterios de aceptación explícitos e implícitos.
+    -   Identificar requisitos no funcionales (rendimiento, seguridad, UX).
+    -   Definir métricas de éxito.
 
-2. **Plan API contract first** (backend/frontend agreement):
-   ```yaml
-   Endpoints:
-     - GET /api/v1/{resources} - List with pagination
-     - GET /api/v1/{resources}/{id} - Get single resource
-     - POST /api/v1/{resources} - Create new
-     - PUT /api/v1/{resources}/{id} - Update existing
-     - DELETE /api/v1/{resources}/{id} - Delete
+2.  **Planificar primero el contrato de la API** (acuerdo backend/frontend):
+    ```yaml
+    Endpoints:
+      - GET /api/v1/{recursos} - Listar con paginación
+      - GET /api/v1/{recursos}/{id} - Obtener un solo recurso
+      - POST /api/v1/{recursos} - Crear nuevo
+      - PUT /api/v1/{recursos}/{id} - Actualizar existente
+      - DELETE /api/v1/{recursos}/{id} - Eliminar
    
-   DTOs:
-     Request: {field validations}
-     Response: {field types}
-     Error: {standard error format}
-   ```
+    DTOs:
+      Solicitud: {validaciones de campos}
+      Respuesta: {tipos de campos}
+      Error: {formato de error estándar}
+    ```
 
-3. **Backend implementation plan** (Java project):
-   ```
-   Package structure:
-   com.company.feature/
-   ├── controller/
-   ├── service/
-   ├── repository/
-   ├── entity/
-   ├── dto/
-   ├── exception/
-   └── mapper/
-   ```
+3.  **Plan de implementación del Backend** (proyecto Java):
+    ```
+    Estructura de paquetes:
+    com.empresa.funcionalidad/
+    ├── controller/
+    ├── service/
+    ├── repository/
+    ├── entity/
+    ├── dto/
+    ├── exception/
+    └── mapper/
+    ```
    
-   Implementation order:
-   1. Entity with JPA annotations
-   2. Repository interface
-   3. DTOs with validation
-   4. Mapper interface
-   5. Service with business logic
-   6. Controller with OpenAPI
-   7. Exception handling
-   8. Integration tests
+    Orden de implementación:
+    1. Entidad con anotaciones JPA.
+    2. Interfaz del Repositorio.
+    3. DTOs con validación.
+    4. Interfaz del Mapper.
+    5. Servicio con lógica de negocio.
+    6. Controlador con OpenAPI.
+    7. Manejo de excepciones.
+    8. Pruebas de integración.
 
-4. **Frontend implementation plan** (React project):
-   ```
-   src/features/{feature}/
-   ├── api/          # API client functions
-   ├── components/   # UI components
-   ├── hooks/        # Custom hooks
-   ├── schemas/      # Zod validation
-   ├── types/        # TypeScript types
-   ├── __tests__/    # Component tests
-   └── index.ts      # Public exports
-   ```
+4.  **Plan de implementación del Frontend** (proyecto React):
+    ```
+    src/features/{funcionalidad}/
+    ├── api/          # Funciones del cliente de API
+    ├── components/   # Componentes de UI
+    ├── hooks/        # Hooks personalizados
+    ├── schemas/      # Validación con Zod
+    ├── types/        # Tipos de TypeScript
+    ├── __tests__/    # Pruebas de componentes
+    └── index.ts      # Exportaciones públicas
+    ```
    
-   Implementation order:
-   1. Zod schemas matching backend DTOs
-   2. TypeScript types
-   3. API client functions
-   4. Custom hooks with TanStack Query
-   5. UI components
-   6. Forms with validation
-   7. Error handling
-   8. Component tests
+    Orden de implementación:
+    1. Esquemas de Zod que coincidan con los DTOs del backend.
+    2. Tipos de TypeScript.
+    3. Funciones del cliente de API.
+    4. Hooks personalizados con TanStack Query.
+    5. Componentes de UI.
+    6. Formularios con validación.
+    7. Manejo de errores.
+    8. Pruebas de componentes.
 
-5. **Integration plan**:
-   - CORS configuration on backend
-   - Environment variables for API URL
-   - Error response handling
-   - Loading states
-   - Optimistic updates where applicable
+5.  **Plan de integración**:
+    -   Configuración de CORS en el backend.
+    -   Variables de entorno para la URL de la API.
+    -   Manejo de respuestas de error.
+    -   Estados de carga.
+    -   Actualizaciones optimistas donde aplique.
 
-6. **Validation commands**:
-   ```bash
-   # Backend (in Java project)
-   ./gradlew clean build test
+6.  **Comandos de validación**:
+    ```bash
+    # Backend (en el proyecto Java)
+    ./gradlew clean build test
    
-   # Frontend (in React project)
-   npm run type-check && npm run lint && npm run test:coverage
+    # Frontend (en el proyecto React)
+    npm run type-check && npm run lint && npm run test:coverage
    
-   # Integration (manual or e2e)
-   - Start backend: ./gradlew bootRun
-   - Start frontend: npm run dev
-   - Test full user flow
-   ```
+    # Integración (manual o e2e)
+    - Iniciar backend: ./gradlew bootRun
+    - Iniciar frontend: npm run dev
+    - Probar el flujo de usuario completo
+    ```
 
-7. **Risk mitigation**:
-   - Start with API contract agreement
-   - Use API mocking in frontend if backend delayed
-   - Implement health check endpoint
-   - Add request/response logging
-   - Plan for error scenarios
+7.  **Mitigación de riesgos**:
+    -   Comenzar con un acuerdo sobre el contrato de la API.
+    -   Usar simulación (mocking) de la API en el frontend si el backend se retrasa.
+    -   Implementar un endpoint de "health check".
+    -   Añadir registro de solicitudes/respuestas.
+    -   Planificar para escenarios de error.
 
-Save this plan as: `PRPs/implementations/{feature}-plan.md`
+Guarda este plan como: `PRPs/implementations/{funcionalidad}-plan.md`
+
+Comparte este archivo entre los equipos de backend y frontend para la alineación.

@@ -1,108 +1,62 @@
-# Debug Issue
+# Depuración y Análisis de Causa Raíz (RCA)
 
-Systematically debug and diagnose the reported problem.
+Este comando te guía a través de un proceso estructurado de depuración para identificar la causa raíz de un problema.
 
-## Problem Description
+## Argumentos: $ARGUMENTS
+(Descripción del problema, error, o comportamiento inesperado)
 
-$ARGUMENTS
+## Proceso de Depuración
 
-## Debugging Process
+1.  **Entender el Problema**
+    -   ¿Cuál es el comportamiento esperado?
+    -   ¿Cuál es el comportamiento real?
+    -   ¿Cuándo empezó a ocurrir?
+    -   ¿Se puede reproducir de forma consistente?
 
-1. **Reproduce the Issue**
-   - Get exact steps to reproduce
-   - Verify you can see the same problem
-   - Note any error messages or logs
-   - Document the expected vs actual behavior
+2.  **Recopilar Contexto**
+    -   Revisar logs relevantes.
+    -   Inspeccionar el código relacionado con la funcionalidad.
+    -   Comprobar cambios recientes en el código (`git log -p`).
+    -   Analizar la configuración del entorno.
 
-2. **Gather Information**
+3.  **Formular Hipótesis**
+    -   Basado en el contexto, ¿cuál podría ser la causa probable?
+    -   Ejemplo: "La base de datos podría no estar conectada" o "Un cambio reciente en el modelo de datos está causando un error de serialización".
 
-   ```bash
-   # Check recent changes
-   git log --oneline -10
+4.  **Probar Hipótesis (Bucle de Validación)**
+    -   Diseñar un experimento para confirmar o refutar la hipótesis.
+    -   **Ejecutar Pruebas**: `uv run pytest tests/test_feature.py`
+    -   **Ejecutar Linters**: `ruff check . && mypy .`
+    -   **Prueba de Integración**: Usar `curl` o una herramienta similar para probar el endpoint afectado.
+    -   **Añadir Logging**: Añadir sentencias de log para rastrear el flujo de ejecución.
+    -   **Depurador Interactivo**: Usar `pdb` o el depurador de tu IDE.
 
-   # Look for error patterns in logs
-   # Search for related error messages
-   ```
+5.  **Identificar Causa Raíz**
+    -   Una vez que una hipótesis es confirmada, documentar la causa raíz.
 
-3. **Isolate the Problem**
-   - **Binary Search**: Comment out code sections to narrow down
-   - **Git Bisect**: Find when the bug was introduced
-   - **Logging**: Add strategic log statements
-   - **Debugger**: Set breakpoints if applicable
+6.  **Proponer una Solución**
+    -   Describir el cambio de código necesario para arreglar el problema.
+    -   Especificar los archivos a modificar.
 
-4. **Common Debugging Strategies**
+## Resultado
 
-   ### For Runtime Errors
-   - Read the full stack trace
-   - Identify the exact line causing the error
-   - Check variable values at that point
-   - Verify assumptions about data types
+Genera un informe de depuración en `PRPs/debugging/debug_report_[timestamp].md` con:
 
-   ### For Logic Errors
-   - Add print/log statements to trace execution
-   - Verify each step produces expected results
-   - Check boundary conditions
-   - Test with minimal reproducible example
+```markdown
+# Informe de Depuración: [Breve Descripción del Problema]
 
-   ### For Performance Issues
-   - Add timing measurements
-   - Check for N+1 queries
-   - Look for inefficient algorithms
-   - Profile if necessary
+## Problema
+- **Comportamiento Esperado**: ...
+- **Comportamiento Real**: ...
 
-   ### For Integration Issues
-   - Verify external service is accessible
-   - Check authentication/credentials
-   - Validate request/response formats
-   - Test with curl/Postman first
+## Análisis y Contexto
+- **Logs Relevantes**: ...
+- **Código Afectado**: ...
+- **Cambios Recientes**: ...
 
-5. **Root Cause Analysis**
-   - Why did this happen?
-   - Why wasn't it caught earlier?
-   - Are there similar issues elsewhere?
-   - How can we prevent this class of bugs?
+## Causa Raíz Identificada
+[Explicación detallada de la causa raíz]
 
-6. **Implement Fix**
-   - Fix the root cause, not just symptoms
-   - Add defensive programming if needed
-   - Consider edge cases
-   - Keep fix minimal and focused, follow KISS
-
-7. **Verify Resolution**
-   - Confirm original issue is fixed
-   - Check for regression
-   - Test related functionality
-   - Add test to prevent recurrence
-
-8. **Document Findings**
-
-   ```markdown
-   ## Debug Summary
-
-   ### Issue
-
-   [What was broken]
-
-   ### Root Cause
-
-   [Why it was broken]
-
-   ### Fix
-
-   [What was changed]
-
-   ### Prevention
-
-   [How to avoid similar issues]
-   ```
-
-## Debug Checklist
-
-- [ ] Issue reproduced locally
-- [ ] Root cause identified
-- [ ] Fix implemented
-- [ ] Tests added/updated
-- [ ] No regressions introduced
-- [ ] Documentation updated if needed
-
-Remember: The goal is not just to fix the bug, but to understand why it happened and prevent similar issues in the future.
+## Solución Propuesta
+[Descripción de los cambios de código necesarios]
+```

@@ -1,100 +1,98 @@
 # CLAUDE.md
 
-This file provides comprehensive guidance to Claude Code when working with Astro 5+ applications and the Islands Architecture.
+Este archivo proporciona una guía completa a Claude Code cuando se trabaja con aplicaciones Astro 5+ y la Arquitectura de Islas.
 
-## Core Development Philosophy
+## Filosofía de Desarrollo Principal
 
-### KISS (Keep It Simple, Stupid)
+### KISS (Keep It Simple, Stupid - Mantenlo Simple, Estúpido)
 
-Simplicity should be a key goal in design. Choose straightforward solutions over complex ones whenever possible. Simple solutions are easier to understand, maintain, and debug.
+La simplicidad debe ser un objetivo clave en el diseño. Elige soluciones sencillas sobre las complejas siempre que sea posible. Las soluciones simples son más fáciles de entender, mantener y depurar.
 
-### YAGNI (You Aren't Gonna Need It)
+### YAGNI (You Aren't Gonna Need It - No lo vas a necesitar)
 
-Avoid building functionality on speculation. Implement features only when they are needed, not when you anticipate they might be useful in the future.
+Evita construir funcionalidades por especulación. Implementa características solo cuando sean necesarias, no cuando anticipes que podrían ser útiles en el futuro.
 
-### Design Principles
+### Principios de Diseño
 
-- **Islands Architecture**: Ship minimal JavaScript, hydrate only what needs interactivity
-- **Performance by Default**: Static-first with selective hydration for optimal performance
-- **Framework Agnostic**: Mix React, Vue, Svelte, and other frameworks in the same project
-- **Content-Driven**: Optimized for content-heavy websites with type-safe content management
-- **Zero JavaScript by Default**: Only ship JavaScript when explicitly needed
+- **Arquitectura de Islas**: Envía un mínimo de JavaScript, hidrata solo lo que necesita interactividad.
+- **Rendimiento por Defecto**: Primero estático con hidratación selectiva para un rendimiento óptimo.
+- **Agnóstico al Framework**: Mezcla React, Vue, Svelte y otros frameworks en el mismo proyecto.
+- **Impulsado por el Contenido**: Optimizado para sitios web con mucho contenido con gestión de contenido segura en tipos.
+- **Cero JavaScript por Defecto**: Solo envía JavaScript cuando sea explícitamente necesario.
 
-## 🤖 AI Assistant Guidelines
+## 🤖 Directrices para el Asistente de IA
 
-### Context Awareness
+### Conciencia del Contexto
 
-- When implementing features, always check existing patterns first
-- Prefer static generation over client-side rendering when possible
-- Use framework-specific components only when interactivity is required
-- Check for similar functionality across different framework integrations
-- Understand when to use `.astro` vs framework components
+- Al implementar características, siempre revisa primero los patrones existentes.
+- Prefiere la generación estática sobre el renderizado del lado del cliente cuando sea posible.
+- Usa componentes específicos del framework solo cuando se requiera interactividad.
+- Revisa si hay funcionalidades similares en diferentes integraciones de frameworks.
+- Entiende cuándo usar componentes `.astro` vs componentes de framework.
 
-### Common Pitfalls to Avoid
+### Errores Comunes a Evitar
 
-- Over-hydrating components that could be static
-- Mixing multiple frameworks unnecessarily in single components
-- Ignoring Astro's partial hydration benefits
-- Creating duplicate functionality across different framework islands
-- Overwriting existing integrations without checking alternatives
+- Sobre-hidratar componentes que podrían ser estáticos.
+- Mezclar múltiples frameworks innecesariamente en un solo componente.
+- Ignorar los beneficios de la hidratación parcial de Astro.
+- Crear funcionalidades duplicadas en diferentes islas de frameworks.
+- Sobrescribir integraciones existentes sin revisar alternativas.
 
-### Workflow Patterns
+### Patrones de Flujo de Trabajo
 
-- Preferably create tests BEFORE implementation (TDD)
-- Use "think hard" for hydration strategy decisions
-- Break complex interactive components into smaller, focused islands
-- Validate framework choice and hydration requirements before implementation
+- Preferiblemente, crea pruebas ANTES de la implementación (TDD).
+- Usa "pensar detenidamente" para las decisiones de estrategia de hidratación.
+- Descompón componentes interactivos complejos en islas más pequeñas y enfocadas.
+- Valida la elección del framework y los requisitos de hidratación antes de la implementación.
 
-### Search Command Requirements
+### Requisitos del Comando de Búsqueda
 
-**CRITICAL**: Always use `rg` (ripgrep) instead of traditional `grep` and `find` commands:
+**CRÍTICO**: Siempre usa `rg` (ripgrep) en lugar de los comandos tradicionales `grep` y `find`:
 
 ```bash
-# ❌ Don't use grep
-grep -r "pattern" .
+# ❌ No uses grep
+grep -r "patron" .
 
-# ✅ Use rg instead
-rg "pattern"
+# ✅ Usa rg en su lugar
+rg "patron"
 
-# ❌ Don't use find with name
+# ❌ No uses find con name
 find . -name "*.ts"
 
-# ✅ Use rg with file filtering
+# ✅ Usa rg con filtrado de archivos
 rg --files | rg "\.ts$"
-# or
+# o
 rg --files -g "*.ts"
 ```
 
-**Enforcement Rules:**
+**Reglas de Aplicación:**
 
 ```
 (
-    r"^grep\b(?!.*\|)",
-    "Use 'rg' (ripgrep) instead of 'grep' for better performance and features",
+    r"^grep\b(?!.*\|)", "Usa 'rg' (ripgrep) en lugar de 'grep' para un mejor rendimiento y características",
 ),
 (
-    r"^find\s+\S+\s+-name\b",
-    "Use 'rg --files | rg pattern' or 'rg --files -g pattern' instead of 'find -name' for better performance",
+    r"^find\s+\S+\s+-name\b", "Usa 'rg --files | rg patron' o 'rg --files -g patron' en lugar de 'find -name' para un mejor rendimiento",
 ),
 ```
 
-## 🧱 Code Structure & Modularity
+## 🧱 Estructura del Código y Modularidad
 
-### File and Component Limits
+### Límites de Archivos y Componentes
 
-- **Never create a file longer than 500 lines of code.** If approaching this limit, refactor by splitting into modules or helper components.
-- **Astro components should be under 200 lines** for better maintainability.
-- **Functions should be short and focused sub 50 lines** and have a single responsibility.
-- **Organize code by feature and framework**, keeping related components together.
+- **Nunca crees un archivo de más de 500 líneas de código.** Si te acercas a este límite, refactoriza dividiendo en módulos o componentes auxiliares.
+- **Los componentes de Astro deben tener menos de 200 líneas** para una mejor mantenibilidad.
+- **Las funciones deben ser cortas y enfocadas, de menos de 50 líneas** y tener una única responsabilidad.
+- **Organiza el código por característica y framework**, manteniendo juntos los componentes relacionados.
 
-## 🚀 Astro 5+ Key Features
+## 🚀 Características Clave de Astro 5+
 
-### Content Layer (New in Astro 5)
+### Capa de Contenido (Nuevo en Astro 5)
 
-- **Flexible Content Management**: Load content from any source (files, APIs, CMSs)
-- **Type-Safe Content**: Automatic TypeScript types for all content collections
-- **Performance Boost**: Up to 5x faster builds for Markdown, 2x for MDX
-- **Unified API**: Single interface for all content sources
+- **Gestión de Contenido Flexible**: Carga contenido de cualquier fuente (archivos, APIs, CMSs).
+- **Contenido Seguro en Tipos**: Tipos de TypeScript automáticos para todas las colecciones de contenido.
+- **Aumento de Rendimiento**: Compilaciones hasta 5 veces más rápidas para Markdown, 2x para MDX.
+- **API Unificada**: Interfaz única para todas las fuentes de contenido.
 
 ```typescript
 // content/config.ts
@@ -120,29 +118,29 @@ const blog = defineCollection({
 export const collections = { blog };
 ```
 
-### Server Islands (New in Astro 5)
+### Islas de Servidor (Nuevo en Astro 5)
 
-- **Mixed Static/Dynamic Content**: Combine cached static content with personalized dynamic content
-- **Independent Loading**: Each island loads separately for optimal performance
-- **Custom Caching**: Set custom cache headers and fallback content per island
+- **Contenido Mixto Estático/Dinámico**: Combina contenido estático en caché con contenido dinámico personalizado.
+- **Carga Independiente**: Cada isla se carga por separado para un rendimiento óptimo.
+- **Caché Personalizado**: Establece cabeceras de caché personalizadas y contenido de respaldo por isla.
 
 ```astro
 ---
 // components/PersonalizedContent.astro
-export const prerender = false; // Server island
+export const prerender = false; // Isla de servidor
 ---
 
 <div>
-  <h2>Welcome back, {Astro.locals.user?.name}!</h2>
-  <p>Your personalized content here...</p>
+  <h2>¡Bienvenido de nuevo, {Astro.locals.user?.name}!</h2>
+  <p>Tu contenido personalizado aquí...</p>
 </div>
 ```
 
-### Environment Configuration (astro:env)
+### Configuración del Entorno (astro:env)
 
-- **Type-Safe Environment Variables**: Validation and TypeScript support
-- **Runtime Validation**: Automatic validation at build time
-- **Client/Server Separation**: Clear distinction between public and private variables
+- **Variables de Entorno Seguras en Tipos**: Validación y soporte de TypeScript.
+- **Validación en Tiempo de Ejecución**: Validación automática en tiempo de compilación.
+- **Separación Cliente/Servidor**: Distinción clara entre variables públicas y privadas.
 
 ```typescript
 // env.d.ts
@@ -160,35 +158,35 @@ export default defineEnv({
 });
 ```
 
-## 🏗️ Project Structure (Islands Architecture)
+## 🏗️ Estructura del Proyecto (Arquitectura de Islas)
 
 ```
 src/
-├── components/            # Astro components (.astro)
-│   ├── ui/               # Static UI components
-│   ├── islands/          # Interactive components (framework-specific)
-│   └── layouts/          # Layout components
-├── content/              # Content collections
-│   ├── config.ts         # Content configuration
-│   ├── blog/            # Blog posts (markdown/mdx)
-│   └── docs/            # Documentation
-├── pages/                # File-based routing (REQUIRED)
-│   ├── api/             # API routes
-│   ├── blog/            # Blog pages
-│   └── [...slug].astro  # Dynamic routes
-├── lib/                  # Utility functions and configurations
-│   ├── utils.ts         # Helper functions
-│   ├── constants.ts     # Application constants
-│   └── schemas.ts       # Zod validation schemas
-├── styles/              # Global styles
-│   └── global.css       # CSS custom properties and globals
-├── assets/              # Processed assets (images, etc.)
-└── env.d.ts            # Environment and type definitions
+├── components/            # Componentes de Astro (.astro)
+│   ├── ui/               # Componentes de UI estáticos
+│   ├── islands/          # Componentes interactivos (específicos del framework)
+│   └── layouts/          # Componentes de diseño
+├── content/              # Colecciones de contenido
+│   ├── config.ts         # Configuración del contenido
+│   ├── blog/            # Publicaciones del blog (markdown/mdx)
+│   └── docs/            # Documentación
+├── pages/                # Enrutamiento basado en archivos (REQUERIDO)
+│   ├── api/             # Rutas de API
+│   ├── blog/            # Páginas del blog
+│   └── [...slug].astro  # Rutas dinámicas
+├── lib/                  # Funciones de utilidad y configuraciones
+│   ├── utils.ts         # Funciones auxiliares
+│   ├── constants.ts     # Constantes de la aplicación
+│   └── schemas.ts       # Esquemas de validación de Zod
+├── styles/              # Estilos globales
+│   └── global.css       # Propiedades personalizadas de CSS y globales
+├── assets/              # Activos procesados (imágenes, etc.)
+└── env.d.ts            # Definiciones de entorno y tipos
 ```
 
-## 🎯 TypeScript Configuration (STRICT REQUIREMENTS)
+## 🎯 Configuración de TypeScript (REQUISITOS ESTRICTOS)
 
-### MUST Follow Astro TypeScript Templates
+### DEBE Seguir las Plantillas de TypeScript de Astro
 
 ```json
 {
@@ -214,18 +212,18 @@ src/
 }
 ```
 
-### MANDATORY Type Requirements
+### Requisitos de Tipado OBLIGATORIOS
 
-- **NEVER use `any` type** - use `unknown` if type is truly unknown
-- **MUST use explicit type imports** with `import type { }` syntax
-- **MUST define props interfaces** for all Astro components
-- **MUST use Astro's built-in types** like `HTMLAttributes`, `ComponentProps`
-- **MUST validate content with Zod schemas** in content collections
+- **NUNCA uses el tipo `any`** - usa `unknown` si el tipo es verdaderamente desconocido.
+- **DEBE usar importaciones de tipo explícitas** con la sintaxis `import type { }`.
+- **DEBE definir interfaces de props** para todos los componentes de Astro.
+- **DEBE usar los tipos incorporados de Astro** como `HTMLAttributes`, `ComponentProps`.
+- **DEBE validar el contenido con esquemas de Zod** en las colecciones de contenido.
 
-### Component Props Typing (MANDATORY)
+### Tipado de Props de Componentes (OBLIGATORIO)
 
 ```typescript
-// Astro component props
+// Props de componente de Astro
 export interface Props {
   title: string;
   description?: string;
@@ -239,25 +237,25 @@ export interface Props {
 const { title, description, image, class: className } = Astro.props;
 ```
 
-## 📦 Package Management & Dependencies
+## 📦 Gestión de Paquetes y Dependencias
 
-### MUST Use pnpm (MANDATORY)
+### DEBE Usar pnpm (OBLIGATORIO)
 
-**CRITICAL**: Always use pnpm for Astro projects for better performance and dependency management.
+**CRÍTICO**: Siempre usa pnpm para proyectos de Astro para un mejor rendimiento y gestión de dependencias.
 
 ```bash
-# Install pnpm globally
+# Instalar pnpm globalmente
 npm install -g pnpm
-# or
+# o
 curl -fsSL https://get.pnpm.io/install.sh | sh
 
-# Project setup
+# Configuración del proyecto
 pnpm create astro@latest
 pnpm install
 pnpm dev
 ```
 
-### Essential Astro 5 Dependencies
+### Dependencias Esenciales de Astro 5
 
 ```json
 {
@@ -276,53 +274,53 @@ pnpm dev
 }
 ```
 
-### Framework Integrations (Add as needed)
+### Integraciones de Frameworks (Añadir según sea necesario)
 
 ```bash
-# React integration
+# Integración con React
 pnpm astro add react
-# or
+# o
 npx astro add react
 
-# Vue integration
+# Integración con Vue
 pnpm astro add vue
 
-# Svelte integration
+# Integración con Svelte
 pnpm astro add svelte
 
-# Preact integration
+# Integración con Preact
 pnpm astro add preact
 
-# SolidJS integration
+# Integración con SolidJS
 pnpm astro add solid
 
-# Multiple frameworks (framework-agnostic approach)
+# Múltiples frameworks (enfoque agnóstico al framework)
 pnpm astro add react vue svelte
 ```
 
-### Essential Integrations
+### Integraciones Esenciales
 
 ```bash
-# Styling and UI
+# Estilos y UI
 pnpm astro add tailwind
 pnpm astro add mdx
 
-# Performance and SEO
+# Rendimiento y SEO
 pnpm astro add sitemap
 pnpm astro add compress
 
-# Content and CMS
+# Contenido y CMS
 pnpm astro add @astrojs/content
 pnpm astro add @astrojs/rss
 
-# Manual package installation when needed
-pnpm add package-name
-pnpm add -D dev-package-name
+# Instalación manual de paquetes cuando sea necesario
+pnpm add nombre-paquete
+pnpm add -D paquete-desarrollo
 ```
 
-## 🛡️ Data Validation with Zod (MANDATORY FOR CONTENT)
+## 🛡️ Validación de Datos con Zod (OBLIGATORIO PARA EL CONTENIDO)
 
-### Content Collections (REQUIRED Pattern)
+### Colecciones de Contenido (Patrón REQUERIDO)
 
 ```typescript
 // src/content/config.ts
@@ -369,7 +367,7 @@ export type BlogPost = z.infer<typeof blogSchema>;
 export type DocsPage = z.infer<typeof docsSchema>;
 ```
 
-### API Route Validation
+### Validación de Rutas de API
 
 ```typescript
 // src/pages/api/newsletter.ts
@@ -386,7 +384,7 @@ export const POST: APIRoute = async ({ request }) => {
     const data = await request.json();
     const validatedData = subscribeSchema.parse(data);
 
-    // Process subscription
+    // Procesar suscripción
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
@@ -413,17 +411,17 @@ export const POST: APIRoute = async ({ request }) => {
 };
 ```
 
-## 🧪 Testing Strategy (VITEST RECOMMENDED)
+## 🧪 Estrategia de Pruebas (VITEST RECOMENDADO)
 
-### MUST Meet These Testing Standards
+### DEBE Cumplir Estos Estándares de Pruebas
 
-- **MINIMUM 80% code coverage** - NO EXCEPTIONS
-- **MUST use Vitest** for unit and component tests (Jest-compatible, Vite-native)
-- **MUST use Astro Container API** for component testing
-- **MUST test islands separately** from static components
-- **MUST mock external dependencies** appropriately
+- **MÍNIMO 80% de cobertura de código** - SIN EXCEPCIONES
+- **DEBE usar Vitest** para pruebas unitarias y de componentes (compatible con Jest, nativo de Vite)
+- **DEBE usar la API de Contenedor de Astro** para las pruebas de componentes
+- **DEBE probar las islas por separado** de los componentes estáticos
+- **DEBE simular (mock) las dependencias externas** apropiadamente
 
-### Vitest Configuration (MANDATORY)
+### Configuración de Vitest (OBLIGATORIA)
 
 ```typescript
 // vitest.config.ts
@@ -433,7 +431,7 @@ import { getViteConfig } from "astro/config";
 export default defineConfig(
   getViteConfig({
     test: {
-      environment: "happy-dom", // or 'jsdom'
+      environment: "happy-dom", // o 'jsdom'
       coverage: {
         reporter: ["text", "json", "html"],
         threshold: {
@@ -450,7 +448,7 @@ export default defineConfig(
 );
 ```
 
-### Component Testing with Container API
+### Pruebas de Componentes con la API de Contenedor
 
 ```typescript
 // src/components/__tests__/Card.test.ts
@@ -458,41 +456,41 @@ import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { expect, test } from "vitest";
 import Card from "../Card.astro";
 
-test("Card component renders correctly", async () => {
+test("El componente Card se renderiza correctamente", async () => {
   const container = await AstroContainer.create();
   const result = await container.renderToString(Card, {
     props: {
-      title: "Test Title",
-      description: "Test description",
+      title: "Título de Prueba",
+      description: "Descripción de prueba",
     },
   });
 
-  expect(result).toContain("Test Title");
-  expect(result).toContain("Test description");
+  expect(result).toContain("Título de Prueba");
+  expect(result).toContain("Descripción de prueba");
 });
 
-test("Card component handles missing props gracefully", async () => {
+test("El componente Card maneja props faltantes con gracia", async () => {
   const container = await AstroContainer.create();
   const result = await container.renderToString(Card, {
-    props: { title: "Test Title" },
+    props: { title: "Título de Prueba" },
   });
 
-  expect(result).toContain("Test Title");
+  expect(result).toContain("Título de Prueba");
   expect(result).not.toContain("undefined");
 });
 ```
 
-### Integration Testing for API Routes
+### Pruebas de Integración para Rutas de API
 
 ```typescript
 // src/pages/api/__tests__/newsletter.test.ts
 import { expect, test } from "vitest";
 
-test("POST /api/newsletter validates email", async () => {
+test("POST /api/newsletter valida el correo electrónico", async () => {
   const response = await fetch("/api/newsletter", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email: "invalid-email", name: "Test" }),
+    body: JSON.stringify({ email: "correo-invalido", name: "Prueba" }),
   });
 
   expect(response.status).toBe(400);
@@ -501,9 +499,9 @@ test("POST /api/newsletter validates email", async () => {
 });
 ```
 
-## 🎨 Component Guidelines (ASTRO-SPECIFIC)
+## 🎨 Directrices de Componentes (ESPECÍFICAS DE ASTRO)
 
-### Astro Component Structure (MANDATORY)
+### Estructura de Componente de Astro (OBLIGATORIA)
 
 ```astro
 ---
@@ -529,8 +527,8 @@ const {
   href
 } = Astro.props;
 
-// Server-side logic here
-const formattedDate = pubDate.toLocaleDateString('en-US', {
+// Lógica del lado del servidor aquí
+const formattedDate = pubDate.toLocaleDateString('es-ES', {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
@@ -571,7 +569,7 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 
 <style>
   .blog-card {
-    /* Component-scoped styles */
+    /* Estilos con ámbito de componente */
     border: 1px solid var(--color-border);
     border-radius: 8px;
     overflow: hidden;
@@ -604,7 +602,7 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 </style>
 ```
 
-### Framework Component Integration
+### Integración de Componentes de Framework
 
 ```astro
 ---
@@ -617,11 +615,11 @@ export interface Props {
 const { initialCount = 0, maxCount = 100 } = Astro.props;
 ---
 
-<!-- Static wrapper with framework island -->
+<!-- Envoltorio estático con isla de framework -->
 <div class="counter-wrapper">
-  <h3>Interactive Counter</h3>
+  <h3>Contador Interactivo</h3>
 
-  <!-- React island with hydration directive -->
+  <!-- Isla de React con directiva de hidratación -->
   <Counter
     client:load
     initialCount={initialCount}
@@ -638,28 +636,28 @@ const { initialCount = 0, maxCount = 100 } = Astro.props;
 </style>
 ```
 
-### Hydration Directives (CRITICAL UNDERSTANDING)
+### Directivas de Hidratación (COMPRENSIÓN CRÍTICA)
 
 ```astro
-<!-- Load immediately -->
+<!-- Cargar inmediatamente -->
 <Component client:load />
 
-<!-- Load when component becomes visible -->
+<!-- Cargar cuando el componente se vuelve visible -->
 <Component client:visible />
 
-<!-- Load when browser is idle -->
+<!-- Cargar cuando el navegador está inactivo -->
 <Component client:idle />
 
-<!-- Load on media query match -->
+<!-- Cargar al coincidir con una media query -->
 <Component client:media="(max-width: 768px)" />
 
-<!-- Render only on client (no SSR) -->
+<!-- Renderizar solo en el cliente (sin SSR) -->
 <Component client:only="react" />
 ```
 
-## 🔄 Content Management Patterns
+## 🔄 Patrones de Gestión de Contenido
 
-### Content Collection Usage
+### Uso de Colecciones de Contenido
 
 ```astro
 ---
@@ -691,7 +689,7 @@ const { Content } = await post.render();
 </BlogLayout>
 ```
 
-### Dynamic Content Loading
+### Carga de Contenido Dinámico
 
 ```typescript
 // src/lib/content.ts
@@ -718,9 +716,9 @@ export async function getFeaturedPosts(): Promise<CollectionEntry<"blog">[]> {
 }
 ```
 
-## 🚀 Performance Optimization (ASTRO-SPECIFIC)
+## 🚀 Optimización del Rendimiento (ESPECÍFICA DE ASTRO)
 
-### Image Optimization (MANDATORY)
+### Optimización de Imágenes (OBLIGATORIA)
 
 ```astro
 ---
@@ -728,10 +726,10 @@ import { Image } from 'astro:assets';
 import heroImage from '../assets/hero.jpg';
 ---
 
-<!-- Optimized images with Astro -->
+<!-- Imágenes optimizadas con Astro -->
 <Image
   src={heroImage}
-  alt="Hero image description"
+  alt="Descripción de la imagen de héroe"
   width={800}
   height={400}
   format="webp"
@@ -739,17 +737,17 @@ import heroImage from '../assets/hero.jpg';
   loading="eager"
 />
 
-<!-- Responsive images -->
+<!-- Imágenes responsivas -->
 <Image
   src={heroImage}
-  alt="Responsive hero"
+  alt="Héroe responsivo"
   widths={[400, 800, 1200]}
   sizes="(max-width: 400px) 400px, (max-width: 800px) 800px, 1200px"
   format="webp"
 />
 ```
 
-### Bundle Optimization
+### Optimización del Paquete (Bundle)
 
 ```typescript
 // astro.config.mjs
@@ -779,20 +777,20 @@ export default defineConfig({
 });
 ```
 
-### Server Islands for Performance
+### Islas de Servidor para el Rendimiento
 
 ```astro
 ---
 // src/components/DynamicContent.astro
-export const prerender = false; // Mark as server island
+export const prerender = false; // Marcar como isla de servidor
 
-// This runs on the server for each request
+// Esto se ejecuta en el servidor para cada solicitud
 const userPreferences = await getUserPreferences(Astro.locals.userId);
 const recommendations = await getRecommendations(userPreferences);
 ---
 
 <section class="dynamic-content">
-  <h2>Recommended for you</h2>
+  <h2>Recomendado para ti</h2>
   <div class="recommendations">
     {recommendations.map((item) => (
       <div class="recommendation-card">
@@ -805,14 +803,14 @@ const recommendations = await getRecommendations(userPreferences);
 
 <style>
   .dynamic-content {
-    /* Styles for dynamic content */
+    /* Estilos para el contenido dinámico */
   }
 </style>
 ```
 
-## 🔐 Security Requirements (MANDATORY)
+## 🔐 Requisitos de Seguridad (OBLIGATORIOS)
 
-### Environment Variables (MUST VALIDATE)
+### Variables de Entorno (DEBEN VALIDARSE)
 
 ```typescript
 // src/env.d.ts
@@ -844,7 +842,7 @@ export default defineEnv({
 });
 ```
 
-### Content Security Policy
+### Política de Seguridad de Contenido (CSP)
 
 ```astro
 ---
@@ -858,7 +856,7 @@ const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="description" content={description} />
@@ -873,9 +871,9 @@ const { title, description } = Astro.props;
 </html>
 ```
 
-## 💅 Code Style & Quality
+## 💅 Estilo y Calidad del Código
 
-### Astro Configuration (MANDATORY)
+### Configuración de Astro (OBLIGATORIA)
 
 ```typescript
 // astro.config.mjs
@@ -901,7 +899,7 @@ export default defineConfig({
 });
 ```
 
-### Prettier Configuration
+### Configuración de Prettier
 
 ```json
 {
@@ -918,9 +916,9 @@ export default defineConfig({
 }
 ```
 
-## 📋 Development Commands
+## 📋 Comandos de Desarrollo
 
-### pnpm Scripts (MANDATORY)
+### Scripts de pnpm (OBLIGATORIOS)
 
 ```json
 {
@@ -941,83 +939,83 @@ export default defineConfig({
 }
 ```
 
-### pnpm Command Reference
+### Referencia de Comandos de pnpm
 
 ```bash
-# Development
-pnpm dev              # Start development server
-pnpm build            # Build for production
-pnpm preview          # Preview production build
+# Desarrollo
+pnpm dev              # Iniciar servidor de desarrollo
+pnpm build            # Compilar para producción
+pnpm preview          # Previsualizar compilación de producción
 
-# Code Quality
-pnpm run check        # TypeScript and Astro validation
-pnpm run lint         # ESLint with zero warnings
-pnpm run format       # Format code with Prettier
-pnpm run validate     # Run all quality checks
+# Calidad del Código
+pnpm run check        # Validación de TypeScript y Astro
+pnpm run lint         # ESLint con cero advertencias
+pnpm run format       # Formatear código con Prettier
+pnpm run validate     # Ejecutar todas las comprobaciones de calidad
 
-# Testing
-pnpm test             # Run tests
-pnpm run test:coverage # Run tests with coverage
+# Pruebas
+pnpm test             # Ejecutar pruebas
+pnpm run test:coverage # Ejecutar pruebas con cobertura
 
-# Package Management
-pnpm install          # Install dependencies
-pnpm add package      # Add runtime dependency
-pnpm add -D package   # Add dev dependency
-pnpm update           # Update dependencies
-pnpm audit            # Security audit
-pnpm list             # List installed packages
-pnpm outdated         # Check for outdated packages
+# Gestión de Paquetes
+pnpm install          # Instalar dependencias
+pnpm add paquete      # Añadir dependencia de ejecución
+pnpm add -D paquete   # Añadir dependencia de desarrollo
+pnpm update           # Actualizar dependencias
+pnpm audit            # Auditoría de seguridad
+pnpm list             # Listar paquetes instalados
+pnpm outdated         # Comprobar paquetes desactualizados
 ```
 
-## ⚠️ CRITICAL GUIDELINES (MUST FOLLOW ALL)
+## ⚠️ DIRECTRICES CRÍTICAS (DEBEN SEGUIRSE TODAS)
 
-1. **MUST use pnpm** - Never use npm or yarn for package management
-2. **ENFORCE TypeScript strict mode** - Use `astro/tsconfigs/strict` template
-3. **VALIDATE all content with Zod** - Content collections MUST have schemas
-4. **MINIMUM 80% test coverage** - Use Vitest with Container API
-5. **MUST understand hydration strategy** - Use appropriate client directives
-6. **MAXIMUM 500 lines per file** - Split large components
-7. **MUST use semantic imports** - `import type` for type-only imports
-8. **MUST optimize images** - Use Astro's Image component
-9. **MUST validate environment variables** - Use astro:env for type safety
-10. **NEVER over-hydrate** - Default to static, hydrate only when needed
-11. **MUST use framework components sparingly** - Prefer Astro components for static content
-12. **MUST pass astro check** - Zero TypeScript errors required
+1. **DEBE usar pnpm** - Nunca usar npm o yarn para la gestión de paquetes.
+2. **APLICAR el modo estricto de TypeScript** - Usar la plantilla `astro/tsconfigs/strict`.
+3. **VALIDAR todo el contenido con Zod** - Las colecciones de contenido DEBEN tener esquemas.
+4. **MÍNIMO 80% de cobertura de pruebas** - Usar Vitest con la API de Contenedor.
+5. **DEBE entender la estrategia de hidratación** - Usar las directivas de cliente apropiadas.
+6. **MÁXIMO 500 líneas por archivo** - Dividir componentes grandes.
+7. **DEBE usar importaciones semánticas** - `import type` para importaciones de solo tipo.
+8. **DEBE optimizar las imágenes** - Usar el componente `Image` de Astro.
+9. **DEBE validar las variables de entorno** - Usar `astro:env` para la seguridad de tipos.
+10. **NUNCA sobre-hidratar** - Por defecto estático, hidratar solo cuando sea necesario.
+11. **DEBE usar componentes de framework con moderación** - Preferir componentes de Astro para contenido estático.
+12. **DEBE pasar `astro check`** - Se requieren cero errores de TypeScript.
 
-## 📋 Pre-commit Checklist (MUST COMPLETE ALL)
+## 📋 Lista de Verificación Pre-commit (DEBEN COMPLETARSE TODAS)
 
-- [ ] `astro check` passes with ZERO errors
-- [ ] Content collections have proper Zod schemas
-- [ ] Components use appropriate hydration directives
-- [ ] Images are optimized with Astro's Image component
-- [ ] Tests written with 80%+ coverage using Vitest
-- [ ] Environment variables are properly typed with astro:env
-- [ ] No unnecessary framework components (static content uses .astro)
-- [ ] TypeScript strict mode compliance
-- [ ] Prettier formatting applied to all .astro files
-- [ ] All API routes have proper Zod validation
-- [ ] Content types are properly exported and used
-- [ ] No client-side JavaScript for static content
-- [ ] Performance budget maintained (check bundle size)
-- [ ] SEO metadata properly configured
+- [ ] `astro check` pasa con CERO errores.
+- [ ] Las colecciones de contenido tienen esquemas de Zod adecuados.
+- [ ] Los componentes usan las directivas de hidratación apropiadas.
+- [ ] Las imágenes están optimizadas con el componente `Image` de Astro.
+- [ ] Pruebas escritas con más del 80% de cobertura usando Vitest.
+- [ ] Las variables de entorno están debidamente tipadas con `astro:env`.
+- [ ] No hay componentes de framework innecesarios (el contenido estático usa `.astro`).
+- [ ] Cumplimiento del modo estricto de TypeScript.
+- [ ] Formato de Prettier aplicado a todos los archivos `.astro`.
+- [ ] Todas las rutas de API tienen una validación de Zod adecuada.
+- [ ] Los tipos de contenido se exportan y usan correctamente.
+- [ ] No hay JavaScript del lado del cliente para contenido estático.
+- [ ] Se mantiene el presupuesto de rendimiento (revisar el tamaño del paquete).
+- [ ] Los metadatos de SEO están configurados correctamente.
 
-### FORBIDDEN Practices
+### Prácticas PROHIBIDAS
 
-- **NEVER use npm or yarn** - MUST use pnpm for all package management
-- **NEVER use client:load** without justification - prefer client:visible or client:idle
-- **NEVER skip content validation** - all content MUST have Zod schemas
-- **NEVER ignore hydration impact** - understand JavaScript bundle size
-- **NEVER use framework components for static content** - use .astro files
-- **NEVER bypass TypeScript checking** - astro check must pass
-- **NEVER store secrets in client-side code** - use astro:env server context
-- **NEVER ignore image optimization** - always use Astro's Image component
-- **NEVER mix concerns** - separate static content from interactive islands
-- **NEVER use any type** - leverage Astro's built-in type safety
-- **NEVER ignore build warnings** - address all build and TypeScript issues
-- **NEVER use npx for regular commands** - use pnpm equivalents when available
+- **NUNCA usar npm o yarn** - DEBE usar pnpm para toda la gestión de paquetes.
+- **NUNCA usar `client:load` sin justificación** - preferir `client:visible` o `client:idle`.
+- **NUNCA omitir la validación de contenido** - todo el contenido DEBE tener esquemas de Zod.
+- **NUNCA ignorar el impacto de la hidratación** - entender el tamaño del paquete de JavaScript.
+- **NUNCA usar componentes de framework para contenido estático** - usar archivos `.astro`.
+- **NUNCA omitir la verificación de TypeScript** - `astro check` debe pasar.
+- **NUNCA almacenar secretos en el código del lado del cliente** - usar el contexto del servidor de `astro:env`.
+- **NUNCA ignorar la optimización de imágenes** - siempre usar el componente `Image` de Astro.
+- **NUNCA mezclar responsabilidades** - separar el contenido estático de las islas interactivas.
+- **NUNCA usar el tipo `any`** - aprovechar la seguridad de tipos incorporada de Astro.
+- **NUNCA ignorar las advertencias de compilación** - abordar todos los problemas de compilación y TypeScript.
+- **NUNCA usar `npx` para comandos regulares** - usar equivalentes de `pnpm` cuando estén disponibles.
 
 ---
 
-_This guide is optimized for Astro 5+ with Islands Architecture and modern web performance._
-_Focus on minimal JavaScript, optimal hydration, and type-safe content management._
-_Last updated: January 2025_
+_Esta guía está optimizada para Astro 5+ con Arquitectura de Islas y rendimiento web moderno._
+_Enfócate en un mínimo de JavaScript, hidratación óptima y gestión de contenido segura en tipos._
+_Última actualización: Enero de 2025_

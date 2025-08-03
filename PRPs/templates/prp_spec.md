@@ -1,61 +1,61 @@
-# Specification Template (prompt inspired by IndyDevDan)
+# Plantilla de Especificación (prompt inspirado por IndyDevDan)
 
-> Ingest the information from this file, implement the Low-Level Tasks, and generate the code that will satisfy the High and Mid-Level Objectives.
+> Asimila la información de este archivo, implementa las Tareas de Bajo Nivel y genera el código que satisfará los Objetivos de Alto y Medio Nivel.
 
-## High-Level Objective
+## Objetivo de Alto Nivel
 
-- [High level goal goes here - what do you want to build?]
+- [El objetivo de alto nivel va aquí - ¿qué quieres construir?]
 
-## Mid-Level Objective
+## Objetivo de Medio Nivel
 
-- [List of mid-level objectives - what are the steps to achieve the high-level objective?]
-- [Each objective should be concrete and measurable]
-- [But not too detailed - save details for implementation notes]
+- [Lista de objetivos de nivel medio - ¿cuáles son los pasos para alcanzar el objetivo de alto nivel?]
+- [Cada objetivo debe ser concreto y medible]
+- [Pero no demasiado detallado - guarda los detalles para las notas de implementación]
 
-## Implementation Notes
+## Notas de Implementación
 
-- [Important technical details - what are the important technical details?]
-- [Dependencies and requirements - what are the dependencies and requirements?]
-- [Coding standards to follow - what are the coding standards to follow?]
-- [Other technical guidance - what are other technical guidance?]
+- [Detalles técnicos importantes - ¿cuáles son los detalles técnicos importantes?]
+- [Dependencias y requisitos - ¿cuáles son las dependencias y los requisitos?]
+- [Estándares de codificación a seguir - ¿cuáles son los estándares de codificación a seguir?]
+- [Otra guía técnica - ¿cuál es otra guía técnica?]
 
-## Context
+## Contexto
 
-### Beginning context
+### Contexto Inicial
 
-- [List of files that exist at start - what files exist at start?]
+- [Lista de archivos que existen al principio - ¿qué archivos existen al principio?]
 
-### Ending context
+### Contexto Final
 
-- [List of files that will exist at end - what files will exist at end?]
+- [Lista de archivos que existirán al final - ¿qué archivos existirán al final?]
 
-## Low-Level Tasks
+## Tareas de Bajo Nivel
 
-> Ordered from start to finish
+> Ordenadas de principio a fin
 
-1. [First task - what is the first task?]
-
-```
-What prompt would you run to complete this task?
-What file do you want to CREATE or UPDATE?
-What function do you want to CREATE or UPDATE?
-What are details you want to add to drive the code changes?
-```
-
-2. [Second task - what is the second task?]
+1. [Primera tarea - ¿cuál es la primera tarea?]
 
 ```
-What prompt would you run to complete this task?
-What file do you want to CREATE or UPDATE?
-What function do you want to CREATE or UPDATE?
-What are details you want to add to drive the code changes?
+¿Qué prompt ejecutarías para completar esta tarea?
+¿Qué archivo quieres CREAR o ACTUALIZAR?
+¿Qué función quieres CREAR o ACTUALIZAR?
+¿Qué detalles quieres añadir para impulsar los cambios en el código?
 ```
 
-3. [Third task - what is the third task?]
+2. [Segunda tarea - ¿cuál es la segunda tarea?]
 
 ```
-What prompt would you run to complete this task?
-What file do you want to CREATE or UPDATE?
-What function do you want to CREATE or UPDATE?
-What are details you want to add to drive the code changes?
+¿Qué prompt ejecutarías para completar esta tarea?
+¿Qué archivo quieres CREAR o ACTUALIZAR?
+¿Qué función quieres CREAR o ACTUALIZAR?
+¿Qué detalles quieres añadir para impulsar los cambios en el código?
+```
+
+3. [Tercera tarea - ¿cuál es la tercera tarea?]
+
+```
+¿Qué prompt ejecutarías para completar esta tarea?
+¿Qué archivo quieres CREAR o ACTUALIZAR?
+¿Qué función quieres CREAR o ACTUALIZAR?
+¿Qué detalles quieres añadir para impulsar los cambios en el código?
 ```

@@ -1,316 +1,316 @@
-name: "Base PRP Template v3 - Implementation-Focused with Precision Standards"
+name: "Plantilla Base de PRP v3 - Enfocada en la Implementación con Estándares de Precisión"
 description: |
 
 ---
 
-## Goal
+## Objetivo
 
-**Feature Goal**: [Specific, measurable end state of what needs to be built]
+**Objetivo de la Funcionalidad**: [Estado final específico y medible de lo que se necesita construir]
 
-**Deliverable**: [Concrete artifact - API endpoint, service class, integration, etc.]
+**Entregable**: [Artefacto concreto - endpoint de API, clase de servicio, integración, etc.]
 
-**Success Definition**: [How you'll know this is complete and working]
+**Definición de Éxito**: [Cómo sabrás que esto está completo y funcionando]
 
-## User Persona (if applicable)
+## Persona de Usuario (si aplica)
 
-**Target User**: [Specific user type - developer, end user, admin, etc.]
+**Usuario Objetivo**: [Tipo de usuario específico - desarrollador, usuario final, administrador, etc.]
 
-**Use Case**: [Primary scenario when this feature will be used]
+**Caso de Uso**: [Escenario principal en el que se utilizará esta funcionalidad]
 
-**User Journey**: [Step-by-step flow of how user interacts with this feature]
+**Viaje del Usuario**: [Flujo paso a paso de cómo el usuario interactúa con esta funcionalidad]
 
-**Pain Points Addressed**: [Specific user frustrations this feature solves]
+**Puntos de Dolor Abordados**: [Frustraciones específicas del usuario que esta funcionalidad resuelve]
 
-## Why
+## Por qué
 
-- [Business value and user impact]
-- [Integration with existing features]
-- [Problems this solves and for whom]
+- [Valor de negocio e impacto para el usuario]
+- [Integración con funcionalidades existentes]
+- [Problemas que esto resuelve y para quién]
 
-## What
+## Qué
 
-[User-visible behavior and technical requirements]
+[Comportamiento visible para el usuario y requisitos técnicos]
 
-### Success Criteria
+### Criterios de Éxito
 
-- [ ] [Specific measurable outcomes]
+- [ ] [Resultados medibles específicos]
 
-## All Needed Context
+## Todo el Contexto Necesario
 
-### Context Completeness Check
+### Verificación de Completitud del Contexto
 
-_Before writing this PRP, validate: "If someone knew nothing about this codebase, would they have everything needed to implement this successfully?"_
+_Antes de escribir este PRP, valida: "Si alguien no supiera nada sobre esta base de código, ¿tendría todo lo necesario para implementar esto con éxito?"_
 
-### Documentation & References
+### Documentación y Referencias
 
 ```yaml
-# MUST READ - Include these in your context window
-- url: [Complete URL with section anchor]
-  why: [Specific methods/concepts needed for implementation]
-  critical: [Key insights that prevent common implementation errors]
+# LECTURA OBLIGATORIA - Incluye esto en tu ventana de contexto
+- url: [URL completa con ancla de sección]
+  why: [Métodos/conceptos específicos necesarios para la implementación]
+  critical: [Perspectivas clave que previenen errores comunes de implementación]
 
-- file: [exact/path/to/pattern/file.py]
-  why: [Specific pattern to follow - class structure, error handling, etc.]
-  pattern: [Brief description of what pattern to extract]
-  gotcha: [Known constraints or limitations to avoid]
+- file: [ruta/exacta/al/archivo/de/patron.py]
+  why: [Patrón específico a seguir - estructura de clase, manejo de errores, etc.]
+  pattern: [Breve descripción de qué patrón extraer]
+  gotcha: [Restricciones o limitaciones conocidas a evitar]
 
-- docfile: [PRPs/ai_docs/domain_specific.md]
-  why: [Custom documentation for complex library/integration patterns]
-  section: [Specific section if document is large]
+- docfile: [PRPs/ai_docs/dominio_especifico.md]
+  why: [Documentación personalizada para patrones complejos de bibliotecas/integración]
+  section: [Sección específica si el documento es grande]
 ```
 
-### Current Codebase tree (run `tree` in the root of the project) to get an overview of the codebase
+### Árbol Actual de la Base de Código (ejecuta `tree` en la raíz del proyecto) para obtener una visión general de la base de código
 
 ```bash
 
 ```
 
-### Desired Codebase tree with files to be added and responsibility of file
+### Árbol Deseado de la Base de Código con archivos a añadir y responsabilidad del archivo
 
 ```bash
 
 ```
 
-### Known Gotchas of our codebase & Library Quirks
+### Problemas Conocidos (Gotchas) de nuestra base de código y Peculiaridades de las Bibliotecas
 
 ```python
-# CRITICAL: [Library name] requires [specific setup]
-# Example: FastAPI requires async functions for endpoints
-# Example: This ORM doesn't support batch inserts over 1000 records
+# CRÍTICO: [Nombre de la biblioteca] requiere [configuración específica]
+# Ejemplo: FastAPI requiere funciones asíncronas para los endpoints
+# Ejemplo: Este ORM no soporta inserciones por lotes de más de 1000 registros
 ```
 
-## Implementation Blueprint
+## Plan de Implementación
 
-### Data models and structure
+### Modelos de datos y estructura
 
-Create the core data models, we ensure type safety and consistency.
+Crear los modelos de datos principales, aseguramos la seguridad de tipos y la consistencia.
 
 ```python
-Examples:
- - orm models
- - pydantic models
- - pydantic schemas
- - pydantic validators
+Ejemplos:
+ - modelos de ORM
+ - modelos de pydantic
+ - esquemas de pydantic
+ - validadores de pydantic
 
 ```
 
-### Implementation Tasks (ordered by dependencies)
+### Tareas de Implementación (ordenadas por dependencias)
 
 ```yaml
-Task 1: CREATE src/models/{domain}_models.py
-  - IMPLEMENT: {SpecificModel}Request, {SpecificModel}Response Pydantic models
-  - FOLLOW pattern: src/models/existing_model.py (field validation approach)
-  - NAMING: CamelCase for classes, snake_case for fields
-  - PLACEMENT: Domain-specific model file in src/models/
+Tarea 1: CREAR src/models/{dominio}_models.py
+  - IMPLEMENTAR: Modelos de Pydantic {ModeloEspecifico}Request, {ModeloEspecifico}Response
+  - SEGUIR patrón: src/models/existing_model.py (enfoque de validación de campos)
+  - NOMENCLATURA: CamelCase para clases, snake_case para campos
+  - UBICACIÓN: Archivo de modelo específico del dominio en src/models/
 
-Task 2: CREATE src/services/{domain}_service.py
-  - IMPLEMENT: {Domain}Service class with async methods
-  - FOLLOW pattern: src/services/database_service.py (service structure, error handling)
-  - NAMING: {Domain}Service class, async def create_*, get_*, update_*, delete_* methods
-  - DEPENDENCIES: Import models from Task 1
-  - PLACEMENT: Service layer in src/services/
+Tarea 2: CREAR src/services/{dominio}_service.py
+  - IMPLEMENTAR: Clase {Dominio}Service con métodos asíncronos
+  - SEGUIR patrón: src/services/database_service.py (estructura de servicio, manejo de errores)
+  - NOMENCLATURA: Clase {Dominio}Service, métodos async def create_*, get_*, update_*, delete_*
+  - DEPENDENCIAS: Importar modelos de la Tarea 1
+  - UBICACIÓN: Capa de servicio en src/services/
 
-Task 3: CREATE src/tools/{action}_{resource}.py
-  - IMPLEMENT: MCP tool wrapper calling service methods
-  - FOLLOW pattern: src/tools/existing_tool.py (FastMCP tool structure)
-  - NAMING: snake_case file name, descriptive tool function name
-  - DEPENDENCIES: Import service from Task 2
-  - PLACEMENT: Tool layer in src/tools/
+Tarea 3: CREAR src/tools/{accion}_{recurso}.py
+  - IMPLEMENTAR: Envoltorio de herramienta MCP que llama a métodos de servicio
+  - SEGUIR patrón: src/tools/existing_tool.py (estructura de herramienta FastMCP)
+  - NOMENCLATURA: Nombre de archivo en snake_case, nombre de función de herramienta descriptivo
+  - DEPENDENCIAS: Importar servicio de la Tarea 2
+  - UBICACIÓN: Capa de herramientas en src/tools/
 
-Task 4: MODIFY src/main.py or src/server.py
-  - INTEGRATE: Register new tool with MCP server
-  - FIND pattern: existing tool registrations
-  - ADD: Import and register new tool following existing pattern
-  - PRESERVE: Existing tool registrations and server configuration
+Tarea 4: MODIFICAR src/main.py o src/server.py
+  - INTEGRAR: Registrar nueva herramienta con el servidor MCP
+  - ENCONTRAR patrón: registros de herramientas existentes
+  - AÑADIR: Importar y registrar nueva herramienta siguiendo el patrón existente
+  - PRESERVAR: Registros de herramientas y configuración del servidor existentes
 
-Task 5: CREATE src/services/tests/test_{domain}_service.py
-  - IMPLEMENT: Unit tests for all service methods (happy path, edge cases, error handling)
-  - FOLLOW pattern: src/services/tests/test_existing_service.py (fixture usage, assertion patterns)
-  - NAMING: test_{method}_{scenario} function naming
-  - COVERAGE: All public methods with positive and negative test cases
-  - PLACEMENT: Tests alongside the code they test
+Tarea 5: CREAR src/services/tests/test_{dominio}_service.py
+  - IMPLEMENTAR: Pruebas unitarias para todos los métodos de servicio (camino feliz, casos borde, manejo de errores)
+  - SEGUIR patrón: src/services/tests/test_existing_service.py (uso de fixtures, patrones de aserción)
+  - NOMENCLATURA: Nomenclatura de funciones test_{metodo}_{escenario}
+  - COBERTURA: Todos los métodos públicos con casos de prueba positivos y negativos
+  - UBICACIÓN: Pruebas junto al código que prueban
 
-Task 6: CREATE src/tools/tests/test_{action}_{resource}.py
-  - IMPLEMENT: Unit tests for MCP tool functionality
-  - FOLLOW pattern: src/tools/tests/test_existing_tool.py (MCP tool testing approach)
-  - MOCK: External service dependencies
-  - COVERAGE: Tool input validation, success responses, error handling
-  - PLACEMENT: Tool tests in src/tools/tests/
+Tarea 6: CREAR src/tools/tests/test_{accion}_{recurso}.py
+  - IMPLEMENTAR: Pruebas unitarias para la funcionalidad de la herramienta MCP
+  - SEGUIR patrón: src/tools/tests/test_existing_tool.py (enfoque de prueba de herramientas MCP)
+  - SIMULAR: Dependencias de servicios externos
+  - COBERTURA: Validación de entrada de la herramienta, respuestas de éxito, manejo de errores
+  - UBICACIÓN: Pruebas de herramientas en src/tools/tests/
 ```
 
-### Implementation Patterns & Key Details
+### Patrones de Implementación y Detalles Clave
 
 ```python
-# Show critical patterns and gotchas - keep concise, focus on non-obvious details
+# Muestra patrones críticos y problemas conocidos - sé conciso, céntrate en detalles no obvios
 
-# Example: Service method pattern
-async def {domain}_operation(self, request: {Domain}Request) -> {Domain}Response:
-    # PATTERN: Input validation first (follow src/services/existing_service.py)
+# Ejemplo: Patrón de método de servicio
+async def {operacion_dominio}(self, request: {Dominio}Request) -> {Dominio}Response:
+    # PATRÓN: Validación de entrada primero (seguir src/services/existing_service.py)
     validated = self.validate_request(request)
 
-    # GOTCHA: [Library-specific constraint or requirement]
-    # PATTERN: Error handling approach (reference existing service pattern)
-    # CRITICAL: [Non-obvious requirement or configuration detail]
+    # GOTCHA: [Restricción o requisito específico de la biblioteca]
+    # PATRÓN: Enfoque de manejo de errores (referenciar patrón de servicio existente)
+    # CRÍTICO: [Requisito o detalle de configuración no obvio]
 
-    return {Domain}Response(status="success", data=result)
+    return {Dominio}Response(status="success", data=result)
 
-# Example: MCP tool pattern
+# Ejemplo: Patrón de herramienta MCP
 @app.tool()
-async def {tool_name}({parameters}) -> str:
-    # PATTERN: Tool validation and service delegation (see src/tools/existing_tool.py)
-    # RETURN: JSON string with standardized response format
+async def {nombre_herramienta}({parametros}) -> str:
+    # PATRÓN: Validación de la herramienta y delegación al servicio (ver src/tools/existing_tool.py)
+    # RETORNAR: Cadena JSON con formato de respuesta estandarizado
 ```
 
-### Integration Points
+### Puntos de Integración
 
 ```yaml
-DATABASE:
-  - migration: "Add column 'feature_enabled' to users table"
-  - index: "CREATE INDEX idx_feature_lookup ON users(feature_id)"
+BASE DE DATOS:
+  - migración: "Añadir columna 'feature_enabled' a la tabla de usuarios"
+  - índice: "CREATE INDEX idx_feature_lookup ON users(feature_id)"
 
-CONFIG:
-  - add to: config/settings.py
-  - pattern: "FEATURE_TIMEOUT = int(os.getenv('FEATURE_TIMEOUT', '30'))"
+CONFIGURACIÓN:
+  - añadir a: config/settings.py
+  - patrón: "FEATURE_TIMEOUT = int(os.getenv('FEATURE_TIMEOUT', '30'))"
 
-ROUTES:
-  - add to: src/api/routes.py
-  - pattern: "router.include_router(feature_router, prefix='/feature')"
+RUTAS:
+  - añadir a: src/api/routes.py
+  - patrón: "router.include_router(feature_router, prefix='/feature')"
 ```
 
-## Validation Loop
+## Bucle de Validación
 
-### Level 1: Syntax & Style (Immediate Feedback)
+### Nivel 1: Sintaxis y Estilo (Retroalimentación Inmediata)
 
 ```bash
-# Run after each file creation - fix before proceeding
-ruff check src/{new_files} --fix     # Auto-format and fix linting issues
-mypy src/{new_files}                 # Type checking with specific files
-ruff format src/{new_files}          # Ensure consistent formatting
+# Ejecutar después de la creación de cada archivo - corregir antes de continuar
+ruff check src/{nuevos_archivos} --fix     # Auto-formatear y corregir problemas de linting
+mypy src/{nuevos_archivos}                 # Verificación de tipos con archivos específicos
+ruff format src/{nuevos_archivos}          # Asegurar un formato consistente
 
-# Project-wide validation
+# Validación a nivel de proyecto
 ruff check src/ --fix
 mypy src/
 ruff format src/
 
-# Expected: Zero errors. If errors exist, READ output and fix before proceeding.
+# Esperado: Cero errores. Si existen errores, LEER la salida y corregir antes de continuar.
 ```
 
-### Level 2: Unit Tests (Component Validation)
+### Nivel 2: Pruebas Unitarias (Validación de Componentes)
 
 ```bash
-# Test each component as it's created
-uv run pytest src/services/tests/test_{domain}_service.py -v
-uv run pytest src/tools/tests/test_{action}_{resource}.py -v
+# Probar cada componente a medida que se crea
+uv run pytest src/services/tests/test_{dominio}_service.py -v
+uv run pytest src/tools/tests/test_{accion}_{recurso}.py -v
 
-# Full test suite for affected areas
+# Suite de pruebas completa para las áreas afectadas
 uv run pytest src/services/tests/ -v
 uv run pytest src/tools/tests/ -v
 
-# Coverage validation (if coverage tools available)
+# Validación de cobertura (si hay herramientas de cobertura disponibles)
 uv run pytest src/ --cov=src --cov-report=term-missing
 
-# Expected: All tests pass. If failing, debug root cause and fix implementation.
+# Esperado: Todas las pruebas pasan. Si fallan, depurar la causa raíz y corregir la implementación.
 ```
 
-### Level 3: Integration Testing (System Validation)
+### Nivel 3: Pruebas de Integración (Validación del Sistema)
 
 ```bash
-# Service startup validation
+# Validación del arranque del servicio
 uv run python main.py &
-sleep 3  # Allow startup time
+sleep 3  # Dar tiempo para el arranque
 
-# Health check validation
-curl -f http://localhost:8000/health || echo "Service health check failed"
+# Validación del chequeo de salud
+curl -f http://localhost:8000/health || echo "El chequeo de salud del servicio falló"
 
-# Feature-specific endpoint testing
-curl -X POST http://localhost:8000/{your_endpoint} \
+# Pruebas del endpoint específico de la funcionalidad
+curl -X POST http://localhost:8000/{tu_endpoint} \
   -H "Content-Type: application/json" \
   -d '{"test": "data"}' \
-  | jq .  # Pretty print JSON response
+  | jq .  # Imprimir en formato legible la respuesta JSON
 
-# MCP server validation (if MCP-based)
-# Test MCP tool functionality
-echo '{"method": "tools/call", "params": {"name": "{tool_name}", "arguments": {}}}' | \
+# Validación del servidor MCP (si se basa en MCP)
+# Probar la funcionalidad de la herramienta MCP
+echo '{"method": "tools/call", "params": {"name": "{nombre_herramienta}", "arguments": {}}}' | \
   uv run python -m src.main
 
-# Database validation (if database integration)
-# Verify database schema, connections, migrations
-psql $DATABASE_URL -c "SELECT 1;" || echo "Database connection failed"
+# Validación de la base de datos (si hay integración con base de datos)
+# Verificar el esquema de la base de datos, conexiones, migraciones
+psql $DATABASE_URL -c "SELECT 1;" || echo "La conexión a la base de datos falló"
 
-# Expected: All integrations working, proper responses, no connection errors
+# Esperado: Todas las integraciones funcionando, respuestas adecuadas, sin errores de conexión
 ```
 
-### Level 4: Creative & Domain-Specific Validation
+### Nivel 4: Validación Creativa y Específica del Dominio
 
 ```bash
-# MCP Server Validation Examples:
+# Ejemplos de Validación del Servidor MCP:
 
-# Playwright MCP (for web interfaces)
+# Playwright MCP (para interfaces web)
 playwright-mcp --url http://localhost:8000 --test-user-journey
 
-# Docker MCP (for containerized services)
+# Docker MCP (para servicios en contenedores)
 docker-mcp --build --test --cleanup
 
-# Database MCP (for data operations)
+# Database MCP (para operaciones de datos)
 database-mcp --validate-schema --test-queries --check-performance
 
-# Custom Business Logic Validation
-# [Add domain-specific validation commands here]
+# Validación de Lógica de Negocio Personalizada
+# [Añadir comandos de validación específicos del dominio aquí]
 
-# Performance Testing (if performance requirements)
+# Pruebas de Rendimiento (si hay requisitos de rendimiento)
 ab -n 100 -c 10 http://localhost:8000/{endpoint}
 
-# Security Scanning (if security requirements)
+# Escaneo de Seguridad (si hay requisitos de seguridad)
 bandit -r src/
 
-# Load Testing (if scalability requirements)
+# Pruebas de Carga (si hay requisitos de escalabilidad)
 # wrk -t12 -c400 -d30s http://localhost:8000/{endpoint}
 
-# API Documentation Validation (if API endpoints)
+# Validación de la Documentación de la API (si hay endpoints de API)
 # swagger-codegen validate -i openapi.json
 
-# Expected: All creative validations pass, performance meets requirements
+# Esperado: Todas las validaciones creativas pasan, el rendimiento cumple con los requisitos
 ```
 
-## Final Validation Checklist
+## Lista de Verificación de Validación Final
 
-### Technical Validation
+### Validación Técnica
 
-- [ ] All 4 validation levels completed successfully
-- [ ] All tests pass: `uv run pytest src/ -v`
-- [ ] No linting errors: `uv run ruff check src/`
-- [ ] No type errors: `uv run mypy src/`
-- [ ] No formatting issues: `uv run ruff format src/ --check`
+- [ ] Los 4 niveles de validación se completaron con éxito.
+- [ ] Todas las pruebas pasan: `uv run pytest src/ -v`
+- [ ] Sin errores de linting: `uv run ruff check src/`
+- [ ] Sin errores de tipo: `uv run mypy src/`
+- [ ] Sin problemas de formato: `uv run ruff format src/ --check`
 
-### Feature Validation
+### Validación de la Funcionalidad
 
-- [ ] All success criteria from "What" section met
-- [ ] Manual testing successful: [specific commands from Level 3]
-- [ ] Error cases handled gracefully with proper error messages
-- [ ] Integration points work as specified
-- [ ] User persona requirements satisfied (if applicable)
+- [ ] Todos los criterios de éxito de la sección "Qué" se cumplieron.
+- [ ] Las pruebas manuales fueron exitosas: [comandos específicos del Nivel 3]
+- [ ] Los casos de error se manejan con elegancia con mensajes de error adecuados.
+- [ ] Los puntos de integración funcionan como se especificó.
+- [ ] Los requisitos de la persona de usuario se satisfacen (si aplica).
 
-### Code Quality Validation
+### Validación de la Calidad del Código
 
-- [ ] Follows existing codebase patterns and naming conventions
-- [ ] File placement matches desired codebase tree structure
-- [ ] Anti-patterns avoided (check against Anti-Patterns section)
-- [ ] Dependencies properly managed and imported
-- [ ] Configuration changes properly integrated
+- [ ] Sigue los patrones y convenciones de nomenclatura existentes en la base de código.
+- [ ] La ubicación de los archivos coincide con la estructura deseada del árbol de la base de código.
+- [ ] Se evitaron los anti-patrones (verificar contra la sección de Anti-Patrones).
+- [ ] Las dependencias se gestionan e importan correctamente.
+- [ ] Los cambios de configuración se integraron correctamente.
 
-### Documentation & Deployment
+### Documentación y Despliegue
 
-- [ ] Code is self-documenting with clear variable/function names
-- [ ] Logs are informative but not verbose
-- [ ] Environment variables documented if new ones added
+- [ ] El código es autodocumentado con nombres de variables/funciones claros.
+- [ ] Los registros son informativos pero no verbosos.
+- [ ] Las variables de entorno se documentan si se añaden nuevas.
 
 ---
 
-## Anti-Patterns to Avoid
+## Anti-Patrones a Evitar
 
-- ❌ Don't create new patterns when existing ones work
-- ❌ Don't skip validation because "it should work"
-- ❌ Don't ignore failing tests - fix them
-- ❌ Don't use sync functions in async context
-- ❌ Don't hardcode values that should be config
-- ❌ Don't catch all exceptions - be specific
+- ❌ No crear nuevos patrones cuando los existentes funcionan.
+- ❌ No saltarse la validación porque "debería funcionar".
+- ❌ No ignorar las pruebas que fallan - arréglalas.
+- ❌ No usar funciones síncronas en un contexto asíncrono.
+- ❌ No codificar valores fijos que deberían estar en la configuración.
+- ❌ No capturar todas las excepciones - sé específico.

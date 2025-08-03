@@ -1,190 +1,190 @@
-name: "PRP Creation Agent using PydanticAI - Context-Rich Implementation"
+name: "Agente de Creación de PRP usando PydanticAI - Implementación Rica en Contexto"
 description: |
-Comprehensive PRP for building an automated PRP creation agent using PydanticAI framework,
-leveraging parallel research capabilities and existing codebase patterns for maximum efficiency.
+  PRP completo para construir un agente automatizado de creación de PRP usando el framework PydanticAI,
+  aprovechando capacidades de investigación paralela y patrones de la base de código existente para máxima eficiencia.
 
-## Goal
+## Objetivo
 
-Build a production-ready PRP creation agent using PydanticAI that can automatically generate comprehensive PRPs by:
+Construir un agente de creación de PRP listo para producción usando PydanticAI que pueda generar automáticamente PRPs completos mediante:
 
-- Analyzing user requirements and context
-- Conducting parallel research (codebase analysis, external documentation, testing patterns)
-- Generating structured PRPs following established templates
-- Validating output quality and completeness
-- Integrating with existing Claude Code infrastructure
+- El análisis de los requisitos y el contexto del usuario.
+- La realización de investigación paralela (análisis de la base de código, documentación externa, patrones de prueba).
+- La generación de PRPs estructurados siguiendo plantillas establecidas.
+- La validación de la calidad y completitud del resultado.
+- La integración con la infraestructura existente de Claude Code.
 
-**End State**: A Python agent that takes a feature description as input and outputs a complete, validated PRP file ready for implementation.
+**Estado Final**: Un agente de Python que toma una descripción de una funcionalidad como entrada y produce un archivo PRP completo y validado, listo para su implementación.
 
-## Why
+## Por qué
 
-- **Efficiency**: Reduce PRP creation time from manual hours to automated minutes
-- **Consistency**: Ensure all PRPs follow established patterns and include necessary context
-- **Quality**: Leverage AI capabilities for comprehensive research and validation
-- **Scalability**: Enable rapid prototyping and feature development across teams
-- **Integration**: Work seamlessly with existing Claude Code workflows and validation gates
+- **Eficiencia**: Reducir el tiempo de creación de PRP de horas manuales a minutos automatizados.
+- **Consistencia**: Asegurar que todos los PRPs sigan patrones establecidos e incluyan el contexto necesario.
+- **Calidad**: Aprovechar las capacidades de la IA para una investigación y validación exhaustivas.
+- **Escalabilidad**: Permitir la creación rápida de prototipos y el desarrollo de funcionalidades en todos los equipos.
+- **Integración**: Funcionar sin problemas con los flujos de trabajo y las puertas de validación existentes de Claude Code.
 
-## What
+## Qué
 
-### Core Functionality
+### Funcionalidad Principal
 
-- **Input Processing**: Parse natural language feature descriptions into structured requirements
-- **Parallel Research**: Simultaneously analyze codebase patterns, external documentation, and testing strategies
-- **PRP Generation**: Create comprehensive PRPs using established templates and discovered patterns
-- **Quality Validation**: Score and validate generated PRPs against quality metrics
-- **File Management**: Handle PRP file creation, organization, and versioning
+- **Procesamiento de Entrada**: Analizar descripciones de funcionalidades en lenguaje natural para convertirlas en requisitos estructurados.
+- **Investigación Paralela**: Analizar simultáneamente patrones de la base de código, documentación externa y estrategias de prueba.
+- **Generación de PRP**: Crear PRPs completos usando plantillas establecidas y patrones descubiertos.
+- **Validación de Calidad**: Puntuar y validar los PRPs generados contra métricas de calidad.
+- **Gestión de Archivos**: Manejar la creación, organización y versionado de archivos PRP.
 
-### User Experience
+### Experiencia de Usuario
 
 ```bash
-# Command-line interface
-uv run python -m prp_agent "Create a user authentication system with OAuth2 and JWT tokens"
+# Interfaz de línea de comandos
+uv run python -m prp_agent "Crear un sistema de autenticación de usuarios con OAuth2 y tokens JWT"
 
-# Python API
+# API de Python
 from prp_agent import PRPCreationAgent
 agent = PRPCreationAgent()
-prp = await agent.create_prp("Feature description here")
+prp = await agent.create_prp("Descripción de la funcionalidad aquí")
 ```
 
-### Success Criteria
+### Criterios de Éxito
 
-- [ ] Generate PRPs with 8+ quality score on all metrics (Context, Clarity, Validation, Success Probability)
-- [ ] Complete PRP generation in under 2 minutes
-- [ ] 90%+ first-pass implementation success rate
-- [ ] Full integration with existing validation gates
-- [ ] Support for both interactive and headless modes
+- [ ] Generar PRPs con una puntuación de calidad de 8+ en todas las métricas (Contexto, Claridad, Validación, Probabilidad de Éxito).
+- [ ] Completar la generación de PRP en menos de 2 minutos.
+- [ ] Tasa de éxito de implementación al primer intento del 90%+.
+- [ ] Integración completa con las puertas de validación existentes.
+- [ ] Soporte para modos interactivo y sin supervisión (headless).
 
-## All Needed Context
+## Todo el Contexto Necesario
 
-### Documentation & References
+### Documentación y Referencias
 
 ```yaml
-# MUST READ - Include these in your context window
+# LECTURA OBLIGATORIA - Incluye esto en tu ventana de contexto
 - url: https://ai.pydantic.dev/
-  why: Core PydanticAI framework documentation and API reference
+  why: Documentación principal del framework PydanticAI y referencia de la API.
 
 - url: https://ai.pydantic.dev/agents/
-  why: Agent creation patterns and best practices
+  why: Patrones de creación de agentes y mejores prácticas.
 
 - url: https://ai.pydantic.dev/models/
-  why: Model provider configuration and usage patterns
+  why: Configuración de proveedores de modelos y patrones de uso.
 
 - url: https://ai.pydantic.dev/examples/
-  why: Real-world implementation examples and patterns
+  why: Ejemplos de implementación y patrones del mundo real.
 
 - url: https://github.com/pydantic/pydantic-ai
-  why: Source code examples and issue tracking
+  why: Ejemplos de código fuente y seguimiento de problemas.
 
 - url: https://ai.pydantic.dev/troubleshooting/
-  why: Common issues and solutions for production deployment
+  why: Problemas comunes y soluciones para el despliegue en producción.
 
 - file: /Users/rasmus/Projects/prp-spaces/dynamo-share/PRPs/templates/prp_base.md
-  why: Established PRP template structure and validation patterns
+  why: Estructura de plantilla de PRP establecida y patrones de validación.
 
 - file: /Users/rasmus/Projects/prp-spaces/dynamo-share/PRPs/scripts/prp_runner.py
-  why: Existing PRP execution patterns and Claude Code integration
+  why: Patrones de ejecución de PRP existentes e integración con Claude Code.
 
 - file: /Users/rasmus/Projects/prp-spaces/dynamo-share/.claude/commands/create-base-prp-parallel.md
-  why: Parallel research agent patterns and coordination strategies
+  why: Patrones de agentes de investigación paralela y estrategias de coordinación.
 
 - file: /Users/rasmus/Projects/prp-spaces/dynamo-share/CLAUDE.md
-  why: Project conventions, architecture patterns, and development standards
+  why: Convenciones del proyecto, patrones de arquitectura y estándares de desarrollo.
 
 - docfile: /Users/rasmus/Projects/prp-spaces/dynamo-share/PRPs/ai_docs/build_with_claude_code.md
-  why: Claude Code SDK integration patterns and async operations
+  why: Patrones de integración del SDK de Claude Code y operaciones asíncronas.
 
 - docfile: /Users/rasmus/Projects/prp-spaces/dynamo-share/PRPs/ai_docs/cc_mcp.md
-  why: MCP server configuration and tool extension patterns
+  why: Configuración del servidor MCP y patrones de extensión de herramientas.
 ```
 
-### Current Codebase Tree
+### Árbol Actual de la Base de Código
 
 ```bash
 .
-├── CLAUDE.md                    # Project conventions and architecture
+├── CLAUDE.md                    # Convenciones y arquitectura del proyecto
 ├── PRPs/
-│   ├── ai_docs/                 # AI agent documentation
+│   ├── ai_docs/                 # Documentación del agente de IA
 │   │   ├── build_with_claude_code.md
 │   │   ├── cc_mcp.md
 │   │   └── cc_overview.md
-│   ├── templates/               # PRP templates
+│   ├── templates/               # Plantillas de PRP
 │   │   ├── prp_base.md
 │   │   └── prp_planning_base.md
 │   └── scripts/
-│       └── prp_runner.py        # Existing PRP execution script
+│       └── prp_runner.py        # Script de ejecución de PRP existente
 ├── .claude/
-│   └── commands/                # Claude Code custom commands
+│   └── commands/                # Comandos personalizados de Claude Code
 │       ├── create-base-prp.md
 │       └── create-base-prp-parallel.md
-├── pyproject.toml               # Project configuration
-└── uv.lock                      # UV lock file
+├── pyproject.toml               # Configuración del proyecto
+└── uv.lock                      # Archivo de bloqueo de UV
 ```
 
-### Desired Codebase Tree
+### Árbol Deseado de la Base de Código
 
 ```bash
 src/
 ├── prp_agent/
 │   ├── __init__.py
-│   ├── main.py                  # CLI entry point
-│   ├── agent.py                 # Core PydanticAI agent
+│   ├── main.py                  # Punto de entrada de la CLI
+│   ├── agent.py                 # Agente principal de PydanticAI
 │   ├── tests/
 │   │   ├── test_agent.py
 │   │   ├── test_models.py
 │   │   └── conftest.py
 │   ├── models/
 │   │   ├── __init__.py
-│   │   ├── prp_models.py        # Pydantic models for PRP structure
-│   │   ├── request_models.py    # Input validation models
+│   │   ├── prp_models.py        # Modelos de Pydantic para la estructura de PRP
+│   │   ├── request_models.py    # Modelos de validación de entrada
 │   │   └── tests/
 │   │       └── test_models.py
 │   ├── features/
 │   │   ├── research_coordinator/
 │   │   │   ├── __init__.py
-│   │   │   ├── coordinator.py   # Parallel research orchestration
+│   │   │   ├── coordinator.py   # Orquestación de la investigación paralela
 │   │   │   └── tests/
 │   │   │       └── test_coordinator.py
 │   │   ├── prp_generator/
 │   │   │   ├── __init__.py
-│   │   │   ├── generator.py     # PRP content generation
+│   │   │   ├── generator.py     # Generación de contenido de PRP
 │   │   │   └── tests/
 │   │   │       └── test_generator.py
 │   │   └── quality_validator/
 │   │       ├── __init__.py
-│   │       ├── validator.py     # Quality scoring and validation
+│   │       ├── validator.py     # Puntuación de calidad y validación
 │   │       └── tests/
 │   │           └── test_validator.py
 │   └── tools/
 │       ├── __init__.py
-│       ├── codebase_analyzer.py # Codebase pattern analysis
-│       ├── documentation_fetcher.py # External documentation research
-│       ├── file_manager.py      # PRP file operations
+│       ├── codebase_analyzer.py # Análisis de patrones de la base de código
+│       ├── documentation_fetcher.py # Investigación de documentación externa
+│       ├── file_manager.py      # Operaciones de archivo de PRP
 │       └── tests/
 │           └── test_tools.py
 ```
 
-### Known Gotchas & Library Quirks
+### Problemas Conocidos (Gotchas) y Peculiaridades de las Bibliotecas
 
 ```python
-# CRITICAL: PydanticAI requires Python 3.9+
-# CRITICAL: Set ALLOW_MODEL_REQUESTS = False in tests to prevent real API calls
-# CRITICAL: Use TestModel() for fast testing without LLM calls
-# CRITICAL: Async functions required for run() method
-# CRITICAL: Tool functions must be decorated with @agent.tool
-# CRITICAL: Event loop conflicts in Jupyter - use nest_asyncio.apply()
-# CRITICAL: UV package management - always use 'uv run' for commands
-# CRITICAL: Pydantic v2 syntax - use Field() for validation
-# CRITICAL: Claude Code tool allowlists - specify exact tools needed
-# CRITICAL: File operations must use absolute paths
-# CRITICAL: Tests must be co-located with code (per CLAUDE.md)
-# CRITICAL: Functions max 50 lines, files max 500 lines (per CLAUDE.md)
+# CRÍTICO: PydanticAI requiere Python 3.9+
+# CRÍTICO: Establecer ALLOW_MODEL_REQUESTS = False en las pruebas para evitar llamadas reales a la API.
+# CRÍTICO: Usar TestModel() para pruebas rápidas sin llamadas a LLM.
+# CRÍTICO: Se requieren funciones asíncronas para el método run().
+# CRÍTICO: Las funciones de herramientas deben estar decoradas con @agent.tool.
+# CRÍTICO: Conflictos del bucle de eventos en Jupyter - usar nest_asyncio.apply().
+# CRÍTICO: Gestión de paquetes con UV - usar siempre 'uv run' para los comandos.
+# CRÍTICO: Sintaxis de Pydantic v2 - usar Field() para la validación.
+# CRÍTICO: Listas de permisos de herramientas de Claude Code - especificar las herramientas exactas necesarias.
+# CRÍTICO: Las operaciones de archivo deben usar rutas absolutas.
+# CRÍTICO: Las pruebas deben estar ubicadas junto al código (según CLAUDE.md).
+# CRÍTICO: Funciones de máximo 50 líneas, archivos de máximo 500 líneas (según CLAUDE.md).
 ```
 
-## Implementation Blueprint
+## Plan de Implementación
 
-### Data Models and Structure
+### Modelos de Datos y Estructura
 
 ```python
-# Core Pydantic models for type safety and validation
+# Modelos principales de Pydantic para seguridad de tipos y validación
 from pydantic import BaseModel, Field, HttpUrl
 from typing import List, Optional, Dict, Any
 from enum import Enum
@@ -196,7 +196,7 @@ class ResearchType(str, Enum):
     DOCUMENTATION = "documentation"
 
 class PRPRequest(BaseModel):
-    """Input validation for PRP creation requests"""
+    """Validación de entrada para solicitudes de creación de PRP"""
     feature_description: str = Field(..., min_length=10, max_length=1000)
     context_requirements: List[str] = Field(default_factory=list)
     validation_level: str = Field(default="comprehensive", pattern="^(basic|standard|comprehensive)$")
@@ -204,7 +204,7 @@ class PRPRequest(BaseModel):
     output_format: str = Field(default="markdown", pattern="^(markdown|json|yaml)$")
 
 class ResearchResult(BaseModel):
-    """Structured research findings"""
+    """Hallazgos de investigación estructurados"""
     research_type: ResearchType
     findings: List[str]
     file_references: List[str] = Field(default_factory=list)
@@ -214,14 +214,14 @@ class ResearchResult(BaseModel):
     quality_score: int = Field(ge=1, le=10)
 
 class PRPSection(BaseModel):
-    """Individual PRP section structure"""
+    """Estructura de sección individual de PRP"""
     title: str
     content: str
     validation_commands: List[str] = Field(default_factory=list)
     references: List[str] = Field(default_factory=list)
 
 class PRPResult(BaseModel):
-    """Complete PRP output structure"""
+    """Estructura de salida completa de PRP"""
     title: str
     sections: List[PRPSection]
     quality_scores: Dict[str, int] = Field(default_factory=dict)
@@ -231,108 +231,108 @@ class PRPResult(BaseModel):
     research_summary: List[ResearchResult] = Field(default_factory=list)
 
     def overall_quality_score(self) -> float:
-        """Calculate overall quality score"""
+        """Calcula la puntuación de calidad general"""
         if not self.quality_scores:
             return 0.0
         return sum(self.quality_scores.values()) / len(self.quality_scores)
 ```
 
-### Task List (in order of completion)
+### Lista de Tareas (en orden de finalización)
 
 ```yaml
-Task 1: Setup Project Structure
-CREATE src/prp_agent/__init__.py:
-  - ESTABLISH package structure
-  - EXPORT main classes and functions
-  - FOLLOW vertical slice architecture pattern
+Tarea 1: Configurar la Estructura del Proyecto
+CREAR src/prp_agent/__init__.py:
+  - ESTABLECER la estructura del paquete
+  - EXPORTAR las clases y funciones principales
+  - SEGUIR el patrón de arquitectura de "vertical slice"
 
-CREATE src/prp_agent/models/prp_models.py:
-  - IMPLEMENT Pydantic models from blueprint above
-  - INCLUDE comprehensive field validation
-  - MIRROR existing validation patterns from codebase
+CREAR src/prp_agent/models/prp_models.py:
+  - IMPLEMENTAR los modelos de Pydantic del plan anterior
+  - INCLUIR validación de campos completa
+  - REPLICAR los patrones de validación existentes de la base de código
 
-CREATE src/prp_agent/models/tests/test_models.py:
-  - FOLLOW pytest patterns from CLAUDE.md
-  - TEST all validation scenarios
-  - ENSURE type safety verification
+CREAR src/prp_agent/models/tests/test_models.py:
+  - SEGUIR los patrones de pytest de CLAUDE.md
+  - PROBAR todos los escenarios de validación
+  - ASEGURAR la verificación de la seguridad de tipos
 
-Task 2: Core Agent Implementation
-CREATE src/prp_agent/agent.py:
-  - IMPLEMENT PydanticAI agent with tools
-  - CONFIGURE model providers (OpenAI, Anthropic)
-  - PATTERN: Use structured outputs with Pydantic models
-  - INCLUDE proper error handling and logging
+Tarea 2: Implementación del Agente Principal
+CREAR src/prp_agent/agent.py:
+  - IMPLEMENTAR el agente de PydanticAI con herramientas
+  - CONFIGURAR los proveedores de modelos (OpenAI, Anthropic)
+  - PATRÓN: Usar salidas estructuradas con modelos de Pydantic
+  - INCLUIR manejo de errores y registro adecuados
 
-CREATE src/prp_agent/tools/codebase_analyzer.py:
-  - IMPLEMENT @agent.tool decorated functions
-  - ANALYZE file patterns and existing implementations
-  - MIRROR search patterns from existing .claude/commands/
+CREAR src/prp_agent/tools/codebase_analyzer.py:
+  - IMPLEMENTAR funciones decoradas con @agent.tool
+  - ANALIZAR patrones de archivos e implementaciones existentes
+  - REPLICAR patrones de búsqueda de los .claude/commands/ existentes
 
-CREATE src/prp_agent/tools/documentation_fetcher.py:
-  - IMPLEMENT web search and documentation parsing
-  - INTEGRATE with WebFetch tool patterns
-  - HANDLE rate limiting and error cases
+CREAR src/prp_agent/tools/documentation_fetcher.py:
+  - IMPLEMENTAR búsqueda web y análisis de documentación
+  - INTEGRAR con los patrones de la herramienta WebFetch
+  - MANEJAR la limitación de velocidad y los casos de error
 
-Task 3: Parallel Research Coordination
-CREATE src/prp_agent/features/research_coordinator/coordinator.py:
-  - IMPLEMENT parallel agent execution pattern
-  - COORDINATE 4 research agents simultaneously
-  - PATTERN: Follow create-base-prp-parallel.md approach
-  - HANDLE agent failures and partial results
+Tarea 3: Coordinación de la Investigación Paralela
+CREAR src/prp_agent/features/research_coordinator/coordinator.py:
+  - IMPLEMENTAR el patrón de ejecución de agentes en paralelo
+  - COORDINAR 4 agentes de investigación simultáneamente
+  - PATRÓN: Seguir el enfoque de create-base-prp-parallel.md
+  - MANEJAR fallos de agentes y resultados parciales
 
-Task 4: PRP Generation Engine
-CREATE src/prp_agent/features/prp_generator/generator.py:
-  - IMPLEMENT PRP content generation
-  - USE prp_base.md template as foundation
-  - INTEGRATE research findings into structured output
-  - ENSURE template compliance and quality
+Tarea 4: Motor de Generación de PRP
+CREAR src/prp_agent/features/prp_generator/generator.py:
+  - IMPLEMENTAR la generación de contenido de PRP
+  - USAR la plantilla prp_base.md como base
+  - INTEGRAR los hallazgos de la investigación en una salida estructurada
+  - ASEGURAR el cumplimiento y la calidad de la plantilla
 
-Task 5: Quality Validation System
-CREATE src/prp_agent/features/quality_validator/validator.py:
-  - IMPLEMENT 4-metric quality scoring system
-  - VALIDATE PRP structure and completeness
-  - SCORE: Context richness, Implementation clarity, Validation completeness, Success probability
-  - PROVIDE actionable feedback for improvements
+Tarea 5: Sistema de Validación de Calidad
+CREAR src/prp_agent/features/quality_validator/validator.py:
+  - IMPLEMENTAR un sistema de puntuación de calidad de 4 métricas
+  - VALIDAR la estructura y completitud del PRP
+  - PUNTUAR: Riqueza del contexto, Claridad de la implementación, Completitud de la validación, Probabilidad de éxito
+  - PROPORCIONAR retroalimentación accionable para mejoras
 
-Task 6: CLI Interface
-CREATE src/prp_agent/main.py:
-  - IMPLEMENT command-line interface
-  - SUPPORT both interactive and headless modes
-  - PATTERN: Follow prp_runner.py structure
-  - INCLUDE progress indicators and streaming output
+Tarea 6: Interfaz de CLI
+CREAR src/prp_agent/main.py:
+  - IMPLEMENTAR la interfaz de línea de comandos
+  - SOPORTAR modos interactivo y sin supervisión
+  - PATRÓN: Seguir la estructura de prp_runner.py
+  - INCLUIR indicadores de progreso y salida en streaming
 
-Task 7: Integration with Claude Code
-MODIFY src/prp_agent/agent.py:
-  - INTEGRATE with Claude Code SDK
-  - SUPPORT tool allowlists and permissions
-  - ENABLE MCP server integration if needed
-  - ENSURE compatibility with existing workflows
+Tarea 7: Integración con Claude Code
+MODIFICAR src/prp_agent/agent.py:
+  - INTEGRAR con el SDK de Claude Code
+  - SOPORTAR listas de permisos de herramientas
+  - HABILITAR la integración con el servidor MCP si es necesario
+  - ASEGURAR la compatibilidad con los flujos de trabajo existentes
 
-Task 8: Testing and Validation
-CREATE comprehensive test suite:
-  - UNIT tests for all components
-  - INTEGRATION tests with real PRP generation
-  - PERFORMANCE benchmarks
-  - QUALITY validation against known good PRPs
+Tarea 8: Pruebas y Validación
+CREAR una suite de pruebas completa:
+  - Pruebas UNITARIAS para todos los componentes
+  - Pruebas de INTEGRACIÓN con generación real de PRP
+  - Benchmarks de RENDIMIENTO
+  - Validación de CALIDAD contra PRPs buenos conocidos
 ```
 
-### Pseudocode for Core Components
+### Pseudocódigo para Componentes Principales
 
 ```python
-# Core Agent Implementation
+# Implementación del Agente Principal
 async def create_prp_agent() -> Agent:
-    """Create and configure PydanticAI agent"""
+    """Crea y configura el agente de PydanticAI"""
 
-    # PATTERN: Follow existing model configuration patterns use proper prompting follow the /commands and prp templates for real examples
+    # PATRÓN: Seguir los patrones de configuración de modelos existentes, usar un prompting adecuado, seguir las plantillas de /commands y prp para ejemplos reales
     agent = Agent(
-        model='openai:gpt-4o-mini',  # Default model
-        output_type=PRPResult,       # Structured output with Pydantic
+        model='openai:gpt-4o-mini',  # Modelo por defecto
+        output_type=PRPResult,       # Salida estructurada con Pydantic
         instructions="""
-        You are a PRP creation agent. Generate comprehensive PRPs by:
-        1. Analyzing user requirements thoroughly
-        2. Conducting parallel research across multiple dimensions
-        3. Creating structured, actionable implementation plans
-        4. Ensuring quality and completeness validation
+        Eres un agente de creación de PRP. Genera PRPs completos mediante:
+        1. El análisis exhaustivo de los requisitos del usuario.
+        2. La realización de investigación paralela en múltiples dimensiones.
+        3. La creación de planes de implementación estructurados y accionables.
+        4. La garantía de la validación de calidad y completitud.
         """,
         tools=[
             codebase_analyzer_tool,
@@ -344,11 +344,11 @@ async def create_prp_agent() -> Agent:
 
     return agent
 
-# Parallel Research Coordination
+# Coordinación de la Investigación Paralela
 async def coordinate_research(request: PRPRequest) -> List[ResearchResult]:
-    """Coordinate parallel research agents"""
+    """Coordina los agentes de investigación en paralelo"""
 
-    # CRITICAL: Launch all agents simultaneously for efficiency
+    # CRÍTICO: Lanzar todos los agentes simultáneamente para mayor eficiencia
     research_tasks = [
         analyze_codebase_patterns(request.feature_description),
         fetch_external_documentation(request.feature_description),
@@ -356,30 +356,30 @@ async def coordinate_research(request: PRPRequest) -> List[ResearchResult]:
         gather_project_documentation(request.feature_description)
     ]
 
-    # PATTERN: Use asyncio.gather for parallel execution
+    # PATRÓN: Usar asyncio.gather para la ejecución en paralelo
     results = await asyncio.gather(*research_tasks, return_exceptions=True)
 
-    # GOTCHA: Handle partial failures gracefully
+    # GOTCHA: Manejar los fallos parciales con elegancia
     validated_results = []
     for result in results:
         if isinstance(result, Exception):
-            logger.warning(f"Research task failed: {result}")
+            logger.warning(f"La tarea de investigación falló: {result}")
             continue
         validated_results.append(result)
 
     return validated_results
 
-# PRP Generation with Quality Validation
+# Generación de PRP con Validación de Calidad
 async def generate_prp(request: PRPRequest, research: List[ResearchResult]) -> PRPResult:
-    """Generate complete PRP with quality validation"""
+    """Genera un PRP completo con validación de calidad"""
 
-    # PATTERN: Use structured prompts with research context
+    # PATRÓN: Usar prompts estructurados con contexto de investigación
     context = synthesize_research_context(research)
 
-    # CRITICAL: Use existing template structure
+    # CRÍTICO: Usar la estructura de la plantilla existente
     template = load_prp_template("prp_base.md")
 
-    # Generate sections iteratively with validation
+    # Generar secciones iterativamente con validación
     sections = []
     for section_name in template.sections:
         section = await generate_section(
@@ -388,15 +388,15 @@ async def generate_prp(request: PRPRequest, research: List[ResearchResult]) -> P
             request=request
         )
 
-        # VALIDATION: Check section quality before proceeding
+        # VALIDACIÓN: Comprobar la calidad de la sección antes de continuar
         quality_score = validate_section_quality(section)
         if quality_score < 7:
-            # PATTERN: Iterative refinement
+            # PATRÓN: Refinamiento iterativo
             section = await refine_section(section, quality_score)
 
         sections.append(section)
 
-    # FINAL: Comprehensive quality validation
+    # FINAL: Validación de calidad completa
     prp_result = PRPResult(
         title=f"PRP: {request.feature_description}",
         sections=sections,
@@ -404,7 +404,7 @@ async def generate_prp(request: PRPRequest, research: List[ResearchResult]) -> P
         generated_at=datetime.now().isoformat()
     )
 
-    # QUALITY GATES: Score all dimensions
+    # PUERTAS DE CALIDAD: Puntuar todas las dimensiones
     prp_result.quality_scores = {
         "context_richness": score_context_richness(prp_result),
         "implementation_clarity": score_implementation_clarity(prp_result),
@@ -414,12 +414,12 @@ async def generate_prp(request: PRPRequest, research: List[ResearchResult]) -> P
 
     return prp_result
 
-# Tool Integration Examples
+# Ejemplos de Integración de Herramientas
 @agent.tool
 async def analyze_codebase_patterns(feature_description: str) -> ResearchResult:
-    """Analyze codebase for relevant patterns"""
+    """Analiza la base de código en busca de patrones relevantes"""
 
-    # PATTERN: Use existing search tools
+    # PATRÓN: Usar herramientas de búsqueda existentes
     relevant_files = await search_codebase_patterns(feature_description)
     patterns = await extract_implementation_patterns(relevant_files)
 
@@ -432,10 +432,10 @@ async def analyze_codebase_patterns(feature_description: str) -> ResearchResult:
 
 @agent.tool
 async def fetch_external_documentation(feature_description: str) -> ResearchResult:
-    """Fetch and analyze external documentation"""
+    """Obtiene y analiza documentación externa"""
 
-    # PATTERN: Use WebFetch tool patterns
-    search_results = await web_search(f"{feature_description} documentation")
+    # PATRÓN: Usar patrones de la herramienta WebFetch
+    search_results = await web_search(f"documentación de {feature_description}")
     documentation = await fetch_documentation_urls(search_results)
 
     return ResearchResult(
@@ -446,93 +446,93 @@ async def fetch_external_documentation(feature_description: str) -> ResearchResu
     )
 ```
 
-### Integration Points
+### Puntos de Integración
 
 ```yaml
-DATABASE:
-  - table: "prp_generations"
-  - fields: "id, request_data, result_data, quality_scores, created_at"
-  - index: "CREATE INDEX idx_prp_quality ON prp_generations(quality_scores)"
+BASE DE DATOS:
+  - tabla: "prp_generations"
+  - campos: "id, request_data, result_data, quality_scores, created_at"
+  - índice: "CREATE INDEX idx_prp_quality ON prp_generations(quality_scores)"
 
-CONFIG:
-  - add to: src/prp_agent/config.py
-  - pattern: "OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')"
-  - pattern: "ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')"
-  - pattern: "PRP_OUTPUT_DIR = Path(os.getenv('PRP_OUTPUT_DIR', 'PRPs/generated'))"
+CONFIGURACIÓN:
+  - añadir a: src/prp_agent/config.py
+  - patrón: "OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')"
+  - patrón: "ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')"
+  - patrón: "PRP_OUTPUT_DIR = Path(os.getenv('PRP_OUTPUT_DIR', 'PRPs/generated'))"
 
 CLAUDE_CODE:
-  - integration: Claude Code SDK for tool access
-  - pattern: "from claude_code import Client"
-  - tools: "Agent,WebFetch,Read,Write,Glob,Grep,Bash"
-  - allowlist: Specific tools for PRP generation workflow
+  - integración: SDK de Claude Code para acceso a herramientas
+  - patrón: "from claude_code import Client"
+  - herramientas: "Agent,WebFetch,Read,Write,Glob,Grep,Bash"
+  - lista de permisos: Herramientas específicas para el flujo de trabajo de generación de PRP
 
 CLI:
-  - add to: pyproject.toml
-  - pattern: "[project.scripts]"
-  - pattern: "prp-agent = 'prp_agent.main:main'"
+  - añadir a: pyproject.toml
+  - patrón: "[project.scripts]"
+  - patrón: "prp-agent = 'prp_agent.main:main'"
 
-MCP_SERVER:
-  - optional: Create MCP server for external tool integration
-  - pattern: Follow cc_mcp.md for server configuration
-  - tools: Custom tools for specialized PRP operations
+SERVIDOR_MCP:
+  - opcional: Crear un servidor MCP para la integración de herramientas externas
+  - patrón: Seguir cc_mcp.md para la configuración del servidor
+  - herramientas: Herramientas personalizadas para operaciones especializadas de PRP
 ```
 
-## Validation Loop
+## Bucle de Validación
 
-### Level 1: Syntax & Style
+### Nivel 1: Sintaxis y Estilo
 
 ```bash
-# Run these FIRST - fix any errors before proceeding
+# Ejecutar estos PRIMERO - corregir cualquier error antes de continuar
 uv run ruff check src/prp_agent/ --fix
 uv run ruff format src/prp_agent/
 uv run mypy src/prp_agent/
 
-# Expected: No errors. If errors, READ the error and fix.
+# Esperado: Sin errores. Si hay errores, LEER el error y corregir.
 ```
 
-### Level 2: Unit Tests
+### Nivel 2: Pruebas Unitarias
 
 ```python
-# CREATE comprehensive test suite following pytest patterns
+# CREAR una suite de pruebas completa siguiendo los patrones de pytest
 def test_prp_request_validation():
-    """Test input validation for PRP requests"""
-    # Valid request
+    """Prueba la validación de entrada para las solicitudes de PRP"""
+    # Solicitud válida
     request = PRPRequest(
-        feature_description="Create user authentication system",
+        feature_description="Crear sistema de autenticación de usuarios",
         validation_level="comprehensive"
     )
-    assert request.feature_description == "Create user authentication system"
+    assert request.feature_description == "Crear sistema de autenticación de usuarios"
 
-    # Invalid request - too short
+    # Solicitud inválida - demasiado corta
     with pytest.raises(ValidationError):
         PRPRequest(feature_description="")
 
 async def test_parallel_research_coordination():
-    """Test parallel research agent coordination"""
-    request = PRPRequest(feature_description="Test feature")
+    """Prueba la coordinación de agentes de investigación en paralelo"""
+    request = PRPRequest(feature_description="Funcionalidad de prueba")
 
     with Agent.override(model=TestModel()):
         results = await coordinate_research(request)
 
-        assert len(results) == 4  # All research types
+        assert len(results) == 4  # Todos los tipos de investigación
         assert all(isinstance(r, ResearchResult) for r in results)
         assert all(r.quality_score >= 1 for r in results)
 
 async def test_prp_generation_quality():
-    """Test PRP generation meets quality standards"""
-    request = PRPRequest(feature_description="User authentication system")
+    """Prueba que la generación de PRP cumpla con los estándares de calidad"""
+    request = PRPRequest(feature_description="Sistema de autenticación de usuarios")
     research = [create_mock_research_result()]
 
     with Agent.override(model=TestModel()):
         prp = await generate_prp(request, research)
 
         assert prp.overall_quality_score() >= 8.0
-        assert len(prp.sections) >= 5  # Minimum sections
-        assert "Goal" in [s.title for s in prp.sections]
-        assert "Implementation Blueprint" in [s.title for s in prp.sections]
+        assert len(prp.sections) >= 5  # Mínimo de secciones
+        assert "Objetivo" in [s.title for s in prp.sections]
+        assert "Plan de Implementación" in [s.title for s in prp.sections]
 
 def test_quality_validation_metrics():
-    """Test quality validation scoring"""
+    """Prueba la puntuación de validación de calidad"""
     prp = create_mock_prp_result()
 
     context_score = score_context_richness(prp)
@@ -544,112 +544,112 @@ def test_quality_validation_metrics():
 ```
 
 ```bash
-# Run and iterate until passing:
+# Ejecutar e iterar hasta que pase:
 uv run pytest src/prp_agent/tests/ -v --cov=prp_agent
-# If failing: Read error, understand root cause, fix code, re-run
+# Si falla: Leer el error, entender la causa raíz, corregir el código, volver a ejecutar
 ```
 
-### Level 3: Integration Tests
+### Nivel 3: Pruebas de Integración
 
 ```bash
-# Test CLI interface
-uv run python -m prp_agent "Create a simple REST API with FastAPI"
+# Probar la interfaz de CLI
+uv run python -m prp_agent "Crear una API REST simple con FastAPI"
 
-# Expected output: Complete PRP file generated
-# Location: PRPs/generated/create-a-simple-rest-api-with-fastapi.md
-# Quality: Overall score >= 8.0
+# Salida esperada: Archivo PRP completo generado
+# Ubicación: PRPs/generated/crear-una-api-rest-simple-con-fastapi.md
+# Calidad: Puntuación general >= 8.0
 
-# Test with different models use the actual keys in the .env file and test real requests
-OPENAI_API_KEY="test-key" uv run python -m prp_agent "User authentication" --model="openai:gpt-4o-mini"
-ANTHROPIC_API_KEY="test-key" uv run python -m prp_agent "User authentication" --model="anthropic:claude-3-haiku-20240307"
+# Probar con diferentes modelos, usar las claves reales en el archivo .env y probar solicitudes reales
+OPENAI_API_KEY="clave-de-prueba" uv run python -m prp_agent "Autenticación de usuarios" --model="openai:gpt-4o-mini"
+ANTHROPIC_API_KEY="clave-de-prueba" uv run python -m prp_agent "Autenticación de usuarios" --model="anthropic:claude-3-haiku-20240307"
 
-# Test error handling
-uv run python -m prp_agent ""  # Should fail with validation error
-uv run python -m prp_agent "x" * 2000  # Should fail with length validation
+# Probar el manejo de errores
+uv run python -m prp_agent ""  # Debería fallar con un error de validación
+uv run python -m prp_agent "x" * 2000  # Debería fallar con validación de longitud
 ```
 
-### Level 4: Quality Validation
+### Nivel 4: Validación de Calidad
 
 ```bash
-# Generate test PRP and validate
-uv run python -m prp_agent "Create a user dashboard with charts" --output-dir="test_output"
+# Generar un PRP de prueba y validarlo
+uv run python -m prp_agent "Crear un panel de usuario con gráficos" --output-dir="test_output"
 
-# Validate generated PRP structure
+# Validar la estructura del PRP generado
 uv run python -c "
 from prp_agent.features.quality_validator import validate_prp_file
-result = validate_prp_file('test_output/create-a-user-dashboard-with-charts.md')
-print(f'Quality Score: {result.overall_quality_score():.1f}/10')
+result = validate_prp_file('test_output/crear-un-panel-de-usuario-con-graficos.md')
+print(f'Puntuación de Calidad: {result.overall_quality_score():.1f}/10')
 assert result.overall_quality_score() >= 8.0
 "
 
-# Test implementation success probability
+# Probar la probabilidad de éxito de la implementación
 uv run python -c "
 from prp_agent.features.quality_validator import predict_implementation_success
-prp_content = open('test_output/create-a-user-dashboard-with-charts.md').read()
+prp_content = open('test_output/crear-un-panel-de-usuario-con-graficos.md').read()
 probability = predict_implementation_success(prp_content)
-print(f'Implementation Success Probability: {probability:.1f}%')
+print(f'Probabilidad de Éxito de la Implementación: {probability:.1f}%')
 assert probability >= 80.0
 "
 ```
 
-## Final Validation Checklist
+## Lista de Verificación de Validación Final
 
-- [ ] All tests pass: `uv run pytest src/prp_agent/tests/ -v --cov=prp_agent`
-- [ ] No linting errors: `uv run ruff check src/prp_agent/`
-- [ ] No type errors: `uv run mypy src/prp_agent/`
-- [ ] CLI interface works: `uv run python -m prp_agent "Test feature"`
-- [ ] Generated PRPs score >= 8.0 on all quality metrics
-- [ ] Integration with Claude Code SDK successful
-- [ ] Performance benchmark: PRP generation < 2 minutes
-- [ ] Error cases handled gracefully with informative messages
-- [ ] Documentation generated and complete
-- [ ] MCP server integration (if implemented) works correctly
-- [ ] Test coverage >= 90%
-- [ ] Memory usage stable (no leaks during extended use)
-- [ ] Support for multiple model providers verified
+- [ ] Todas las pruebas pasan: `uv run pytest src/prp_agent/tests/ -v --cov=prp_agent`
+- [ ] Sin errores de linting: `uv run ruff check src/prp_agent/`
+- [ ] Sin errores de tipo: `uv run mypy src/prp_agent/`
+- [ ] La interfaz de CLI funciona: `uv run python -m prp_agent "Funcionalidad de prueba"`
+- [ ] Los PRPs generados tienen una puntuación >= 8.0 en todas las métricas de calidad.
+- [ ] La integración con el SDK de Claude Code es exitosa.
+- [ ] Benchmark de rendimiento: generación de PRP < 2 minutos.
+- [ ] Los casos de error se manejan con elegancia y con mensajes informativos.
+- [ ] La documentación se genera y está completa.
+- [ ] La integración con el servidor MCP (si se implementa) funciona correctamente.
+- [ ] Cobertura de pruebas >= 90%.
+- [ ] El uso de memoria es estable (sin fugas durante el uso prolongado).
+- [ ] Se verifica el soporte para múltiples proveedores de modelos.
 
 ---
 
-## Success Metrics Scoring
+## Puntuación de Métricas de Éxito
 
-### Context Richness (1-10)
+### Riqueza del Contexto (1-10)
 
-- **8-10**: Comprehensive research findings, specific file references, external documentation
-- **6-7**: Good research coverage, some missing context areas
-- **4-5**: Basic research, limited context
-- **1-3**: Minimal research, insufficient context
+- **8-10**: Hallazgos de investigación completos, referencias de archivos específicas, documentación externa.
+- **6-7**: Buena cobertura de investigación, algunas áreas de contexto faltantes.
+- **4-5**: Investigación básica, contexto limitado.
+- **1-3**: Investigación mínima, contexto insuficiente.
 
-### Implementation Clarity (1-10)
+### Claridad de la Implementación (1-10)
 
-- **8-10**: Clear step-by-step implementation, specific pseudocode, integration points
-- **6-7**: Good implementation guidance, some ambiguity
-- **4-5**: Basic implementation outline, missing details
-- **1-3**: Unclear implementation path, significant gaps
+- **8-10**: Implementación paso a paso clara, pseudocódigo específico, puntos de integración.
+- **6-7**: Buena guía de implementación, algo de ambigüedad.
+- **4-5**: Esquema de implementación básico, faltan detalles.
+- **1-3**: Ruta de implementación poco clara, lagunas significativas.
 
-### Validation Completeness (1-10)
+### Completitud de la Validación (1-10)
 
-- **8-10**: Comprehensive validation gates, executable commands, quality checks
-- **6-7**: Good validation coverage, some missing tests
-- **4-5**: Basic validation, limited testing
-- **1-3**: Minimal validation, insufficient quality gates
+- **8-10**: Puertas de validación completas, comandos ejecutables, controles de calidad.
+- **6-7**: Buena cobertura de validación, algunas pruebas faltantes.
+- **4-5**: Validación básica, pruebas limitadas.
+- **1-3**: Validación mínima, puertas de calidad insuficientes.
 
-### One-Pass Success Probability (1-10)
+### Probabilidad de Éxito en un Solo Intento (1-10)
 
-- **8-10**: High confidence in successful implementation without iterations
-- **6-7**: Good probability, may need minor adjustments
-- **4-5**: Moderate probability, some iterations expected
-- **1-3**: Low probability, significant iterations likely
+- **8-10**: Alta confianza en una implementación exitosa sin iteraciones.
+- **6-7**: Buena probabilidad, puede necesitar ajustes menores.
+- **4-5**: Probabilidad moderada, se esperan algunas iteraciones.
+- **1-3**: Baja probabilidad, es probable que se necesiten iteraciones significativas.
 
-**Target**: 8+ on all metrics through comprehensive parallel research and validation
+**Objetivo**: 8+ en todas las métricas a través de una investigación y validación paralelas exhaustivas.
 
-## Time Efficiency Benefits
+## Beneficios de Eficiencia de Tiempo
 
-This PydanticAI-based approach provides:
+Este enfoque basado en PydanticAI proporciona:
 
-- **10x faster PRP creation**: Automated vs manual research and writing
-- **Parallel research**: 4x faster than sequential research
-- **Quality consistency**: Standardized validation across all PRPs
-- **Reduced iterations**: Comprehensive upfront context reduces implementation cycles
-- **Scalable automation**: Handle multiple PRP requests simultaneously
+- **Creación de PRP 10 veces más rápida**: Investigación y escritura automatizadas vs. manuales.
+- **Investigación paralela**: 4 veces más rápida que la investigación secuencial.
+- **Consistencia de calidad**: Validación estandarizada en todos los PRPs.
+- **Reducción de iteraciones**: Un contexto inicial completo reduce los ciclos de implementación.
+- **Automatización escalable**: Manejar múltiples solicitudes de PRP simultáneamente.
 
-**Expected ROI**: 40+ hours saved per week for active development teams
+**ROI Esperado**: Más de 40 horas ahorradas por semana para equipos de desarrollo activos.

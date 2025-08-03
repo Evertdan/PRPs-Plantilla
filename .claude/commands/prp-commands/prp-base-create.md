@@ -1,108 +1,108 @@
-# Create BASE PRP
+# Crear PRP BASE
 
-## Feature: $ARGUMENTS
+## Funcionalidad: $ARGUMENTS
 
-## PRP Creation Mission
+## Misión de Creación de PRP
 
-Create a comprehensive PRP that enables **one-pass implementation success** through systematic research and context curation.
+Crear un PRP completo que permita el **éxito de la implementación en un solo intento** a través de la investigación sistemática y la curación de contexto.
 
-**Critical Understanding**: The executing AI agent only receives:
+**Comprensión Crítica**: El agente de IA que ejecuta solo recibe:
 
-- Start by reading and understanding the prp concepts PRPs/README.md
-- The PRP content you create
-- Its training data knowledge
-- Access to codebase files (but needs guidance on which ones)
+-   Comienza por leer y entender los conceptos de PRP en `PRPs/README.md`.
+-   El contenido del PRP que tú creas.
+-   Su conocimiento de datos de entrenamiento.
+-   Acceso a los archivos de la base de código (pero necesita orientación sobre cuáles).
 
-**Therefore**: Your research and context curation directly determines implementation success. Incomplete context = implementation failure.
+**Por lo tanto**: Tu investigación y curación de contexto determinan directamente el éxito de la implementación. Un contexto incompleto = fallo en la implementación.
 
-## Research Process
+## Proceso de Investigación
 
-> During the research process, create clear tasks and spawn as many agents and subagents as needed using the batch tools. The deeper research we do here the better the PRP will be. we optminize for chance of success and not for speed.
+> Durante el proceso de investigación, crea tareas claras y genera tantos agentes y subagentes como sea necesario usando las herramientas por lotes (batch tools). Cuanto más profunda sea la investigación que hagamos aquí, mejor será el PRP. Optimizamos por la probabilidad de éxito y no por la velocidad.
 
-1. **Codebase Analysis in depth**
-   - Create clear todos and spawn subagents to search the codebase for similar features/patterns Think hard and plan your approach
-   - Identify all the necessary files to reference in the PRP
-   - Note all existing conventions to follow
-   - Check existing test patterns for validation approach
-   - Use the batch tools to spawn subagents to search the codebase for similar features/patterns
+1.  **Análisis Profundo de la Base de Código**
+    -   Crea "todos" (tareas pendientes) claros y genera subagentes para buscar en la base de código características/patrones similares. Piensa detenidamente y planifica tu enfoque.
+    -   Identifica todos los archivos necesarios para referenciar en el PRP.
+    -   Anota todas las convenciones existentes a seguir.
+    -   Revisa los patrones de prueba existentes para el enfoque de validación.
+    -   Usa las herramientas por lotes para generar subagentes que busquen en la base de código características/patrones similares.
 
-2. **External Research at scale**
-   - Create clear todos and spawn with instructions subagents to do deep research for similar features/patterns online and include urls to documentation and examples
-   - Library documentation (include specific URLs)
-   - For critical pieces of documentation add a .md file to PRPs/ai_docs and reference it in the PRP with clear reasoning and instructions
-   - Implementation examples (GitHub/StackOverflow/blogs)
-   - Best practices and common pitfalls found during research
-   - Use the batch tools to spawn subagents to search for similar features/patterns online and include urls to documentation and examples
+2.  **Investigación Externa a Escala**
+    -   Crea "todos" claros y genera subagentes con instrucciones para hacer una investigación profunda de características/patrones similares en línea e incluye URLs a documentación y ejemplos.
+    -   Documentación de bibliotecas (incluye URLs específicas).
+    -   Para piezas críticas de documentación, añade un archivo `.md` a `PRPs/ai_docs` y referéncialo en el PRP con un razonamiento e instrucciones claras.
+    -   Ejemplos de implementación (GitHub/StackOverflow/blogs).
+    -   Mejores prácticas y errores comunes encontrados durante la investigación.
+    -   Usa las herramientas por lotes para generar subagentes que busquen características/patrones similares en línea e incluye URLs a documentación y ejemplos.
 
-3. **User Clarification**
-   - Ask for clarification if you need it
+3.  **Aclaración con el Usuario**
+    -   Pide aclaraciones si las necesitas.
 
-## PRP Generation Process
+## Proceso de Generación de PRP
 
-### Step 1: Choose Template
+### Paso 1: Elegir Plantilla
 
-Use `PRPs/templates/prp_base.md` as your template structure - it contains all necessary sections and formatting.
+Usa `PRPs/templates/prp_base.md` como tu estructura de plantilla - contiene todas las secciones y el formato necesarios.
 
-### Step 2: Context Completeness Validation
+### Paso 2: Validación de la Completitud del Contexto
 
-Before writing, apply the **"No Prior Knowledge" test** from the template:
-_"If someone knew nothing about this codebase, would they have everything needed to implement this successfully?"_
+Antes de escribir, aplica la **Prueba de "Sin Conocimiento Previo"** de la plantilla:
+_"Si alguien no supiera nada sobre esta base de código, ¿tendría todo lo necesario para implementar esto con éxito?"_
 
-### Step 3: Research Integration
+### Paso 3: Integración de la Investigación
 
-Transform your research findings into the template sections:
+Transforma los hallazgos de tu investigación en las secciones de la plantilla:
 
-**Goal Section**: Use research to define specific, measurable Feature Goal and concrete Deliverable
-**Context Section**: Populate YAML structure with your research findings - specific URLs, file patterns, gotchas
-**Implementation Tasks**: Create dependency-ordered tasks using information-dense keywords from codebase analysis
-**Validation Gates**: Use project-specific validation commands that you've verified work in this codebase
+**Sección de Objetivo**: Usa la investigación para definir un Objetivo de Funcionalidad específico y medible, y un Entregable concreto.
+**Sección de Contexto**: Rellena la estructura YAML con los hallazgos de tu investigación - URLs específicas, patrones de archivos, problemas conocidos.
+**Tareas de Implementación**: Crea tareas ordenadas por dependencia usando palabras clave densas en información del análisis de la base de código.
+**Puertas de Validación**: Usa comandos de validación específicos del proyecto que hayas verificado que funcionan en esta base de código.
 
-### Step 4: Information Density Standards
+### Paso 4: Estándares de Densidad de Información
 
-Ensure every reference is **specific and actionable**:
+Asegúrate de que cada referencia sea **específica y accionable**:
 
-- URLs include section anchors, not just domain names
-- File references include specific patterns to follow, not generic mentions
-- Task specifications include exact naming conventions and placement
-- Validation commands are project-specific and executable
+-   Las URLs incluyen anclas de sección, no solo nombres de dominio.
+-   Las referencias a archivos incluyen patrones específicos a seguir, no menciones genéricas.
+-   Las especificaciones de tareas incluyen convenciones de nomenclatura y ubicación exactas.
+-   Los comandos de validación son específicos del proyecto y ejecutables.
 
-### Step 5: ULTRATHINK Before Writing
+### Paso 5: ULTRAPENSAR Antes de Escribir
 
-After research completion, create comprehensive PRP writing plan using TodoWrite tool:
+Después de completar la investigación, crea un plan de escritura de PRP completo usando la herramienta TodoWrite:
 
-- Plan how to structure each template section with your research findings
-- Identify gaps that need additional research
-- Create systematic approach to filling template with actionable context
+-   Planifica cómo estructurar cada sección de la plantilla con los hallazgos de tu investigación.
+-   Identifica lagunas que necesiten investigación adicional.
+-   Crea un enfoque sistemático para rellenar la plantilla con contexto accionable.
 
-## Output
+## Resultado
 
-Save as: `PRPs/{feature-name}.md`
+Guardar como: `PRPs/{nombre-de-la-funcionalidad}.md`
 
-## PRP Quality Gates
+## Puertas de Calidad del PRP
 
-### Context Completeness Check
+### Verificación de Completitud del Contexto
 
-- [ ] Passes "No Prior Knowledge" test from template
-- [ ] All YAML references are specific and accessible
-- [ ] Implementation tasks include exact naming and placement guidance
-- [ ] Validation commands are project-specific and verified working
+-   [ ] Pasa la prueba de "Sin Conocimiento Previo" de la plantilla.
+-   [ ] Todas las referencias YAML son específicas y accesibles.
+-   [ ] Las tareas de implementación incluyen una guía exacta de nomenclatura y ubicación.
+-   [ ] Los comandos de validación son específicos del proyecto y se ha verificado que funcionan.
 
-### Template Structure Compliance
+### Cumplimiento de la Estructura de la Plantilla
 
-- [ ] All required template sections completed
-- [ ] Goal section has specific Feature Goal, Deliverable, Success Definition
-- [ ] Implementation Tasks follow dependency ordering
-- [ ] Final Validation Checklist is comprehensive
+-   [ ] Todas las secciones requeridas de la plantilla están completas.
+-   [ ] La sección de Objetivo tiene un Objetivo de Funcionalidad, Entregable y Definición de Éxito específicos.
+-   [ ] Las Tareas de Implementación siguen un orden de dependencia.
+-   [ ] La Lista de Verificación de Validación Final es completa.
 
-### Information Density Standards
+### Estándares de Densidad de Información
 
-- [ ] No generic references - all are specific and actionable
-- [ ] File patterns point at specific examples to follow
-- [ ] URLs include section anchors for exact guidance
-- [ ] Task specifications use information-dense keywords from codebase
+-   [ ] No hay referencias genéricas - todas son específicas y accionables.
+-   [ ] Los patrones de archivo apuntan a ejemplos específicos a seguir.
+-   [ ] Las URLs incluyen anclas de sección para una guía exacta.
+-   [ ] Las especificaciones de tareas usan palabras clave densas en información de la base de código.
 
-## Success Metrics
+## Métricas de Éxito
 
-**Confidence Score**: Rate 1-10 for one-pass implementation success likelihood
+**Puntuación de Confianza**: Califica de 1 a 10 la probabilidad de éxito de la implementación en un solo intento.
 
-**Validation**: The completed PRP should enable an AI agent unfamiliar with the codebase to implement the feature successfully using only the PRP content and codebase access.
+**Validación**: El PRP completado debe permitir a un agente de IA no familiarizado con la base de código implementar la funcionalidad con éxito usando solo el contenido del PRP y el acceso a la base de código.

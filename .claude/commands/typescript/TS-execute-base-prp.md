@@ -1,48 +1,48 @@
-# Execute BASE PRP
+# Ejecutar PRP BASE
 
-Implement a TypeScript/JavaScript feature using the PRP file.
+Implementa una funcionalidad de TypeScript/JavaScript utilizando el archivo PRP.
 
-## PRP File: $ARGUMENTS
+## Archivo PRP: $ARGUMENTS
 
-## Execution Process
+## Proceso de Ejecución
 
-1. **Load PRP**
-   - Read the specified PRP file
-   - Understand all context and requirements
-   - Follow all instructions in the PRP and extend the research if needed
-   - Ensure you have all needed context to implement the PRP fully
-   - Do more web searches and codebase exploration as needed
+1.  **Cargar PRP**
+    -   Leer el archivo PRP especificado.
+    -   Entender todo el contexto y los requisitos.
+    -   Seguir todas las instrucciones en el PRP y ampliar la investigación si es necesario.
+    -   Asegurarte de tener todo el contexto necesario para implementar el PRP completamente.
+    -   Realizar más búsquedas web y exploración de la base de código según sea necesario.
 
-2. **ULTRATHINK**
-   - Ultrathink before you execute the plan. Create a comprehensive plan addressing all requirements.
-   - Break down the PRP into clear todos using the TodoWrite tool.
-   - Use agents subagents and batchtool to enhance the process.
-   - **Important** YOU MUST ENSURE YOU HAVE EXTREMELY CLEAR TASKS FOR SUBAGENTS AND REFERENCE CONTEXT AND MAKE SURE EACH SUBAGENT READS THE PRP AND UNDERSTANDS ITS CONTEXT.
-   - Identify implementation patterns from existing code to follow.
-   - Never guess about imports, file names function names etc, ALWAYS be based in reality and real context gathering
+2.  **ULTRAPENSAR**
+    -   Ultrapensar antes de ejecutar el plan. Crea un plan completo que aborde todos los requisitos.
+    -   Desglosa el PRP en "todos" (tareas pendientes) claros utilizando la herramienta TodoWrite.
+    -   Usa agentes, subagentes y la herramienta por lotes (batchtool) para mejorar el proceso.
+    -   **Importante** DEBES ASEGURARTE DE TENER TAREAS EXTREMADAMENTE CLARAS PARA LOS SUBAGENTES, REFERENCIAR EL CONTEXTO Y ASEGURARTE DE QUE CADA SUBAGENTE LEA EL PRP Y ENTIENDA SU CONTEXTO.
+    -   Identifica patrones de implementación del código existente para seguirlos.
+    -   Nunca adivines sobre importaciones, nombres de archivos, nombres de funciones, etc. SIEMPRE básate en la realidad y en la recopilación de contexto real.
 
-3. ## **Execute the plan**
+3.  ## **Ejecutar el plan**
 
-   ## Execute the PRP step by step
-   - Implement all the code
-   - Follow TypeScript/JavaScript best practices
-   - Ensure proper type safety and error handling
-   - Follow existing codebase patterns and conventions
+    ## Ejecutar el PRP paso a paso
+    -   Implementar todo el código.
+    -   Seguir las mejores prácticas de TypeScript/JavaScript.
+    -   Asegurar la seguridad de tipos y el manejo de errores adecuados.
+    -   Seguir los patrones y convenciones existentes de la base de código.
 
-4. **Validate**
-   - Run each validation command from the PRP
-   - The better validation that is done, the more confident we can be that the implementation is correct.
-   - Fix any failures (type errors, linting issues, test failures)
-   - Re-run until all pass
-   - Always re-read the PRP to validate and review the implementation to ensure it meets the requirements
+4.  **Validar**
+    -   Ejecutar cada comando de validación del PRP.
+    -   Cuanto mejor sea la validación que se haga, más seguros podremos estar de que la implementación es correcta.
+    -   Corregir cualquier fallo (errores de tipo, problemas de linting, fallos en las pruebas).
+    -   Volver a ejecutar hasta que todo pase.
+    -   Siempre releer el PRP para validar y revisar la implementación para asegurar que cumple con los requisitos.
 
-5. **Complete**
-   - Ensure all checklist items done
-   - Run final validation suite
-   - Report completion status
-   - Read the PRP again to ensure you have implemented everything
+5.  **Completar**
+    -   Asegurarse de que todos los elementos de la lista de verificación estén hechos.
+    -   Ejecutar la suite de validación final.
+    -   Informar el estado de finalización.
+    -   Leer el PRP de nuevo para asegurarse de haber implementado todo.
 
-6. **Reference the PRP**
-   - You can always reference the PRP again if needed
+6.  **Referenciar el PRP**
+    -   Siempre puedes referenciar el PRP de nuevo si es necesario.
 
-Note: If validation fails, use error patterns in PRP to fix and retry.
+Nota: Si la validación falla, usa los patrones de error en el PRP para corregir e intentar de nuevo.

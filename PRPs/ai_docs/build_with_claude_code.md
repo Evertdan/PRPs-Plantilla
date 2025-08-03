@@ -1,56 +1,56 @@
-# Claude Code SDK
+# SDK de Claude Code
 
-> Learn about programmatically integrating Claude Code into your applications with the Claude Code SDK.
+> Aprende a integrar Claude Code de forma programática en tus aplicaciones con el SDK de Claude Code.
 
-The Claude Code SDK enables running Claude Code as a subprocess, providing a way to build AI-powered coding assistants and tools that leverage Claude's capabilities.
+El SDK de Claude Code permite ejecutar Claude Code como un subproceso, proporcionando una forma de construir asistentes de codificación y herramientas impulsadas por IA que aprovechan las capacidades de Claude.
 
-The SDK is available for command line, TypeScript, and Python usage.
+El SDK está disponible para uso en línea de comandos, TypeScript y Python.
 
-## Authentication
+## Autenticación
 
-The Claude Code SDK supports multiple authentication methods:
+El SDK de Claude Code admite múltiples métodos de autenticación:
 
-### Anthropic API key
+### Clave de API de Anthropic
 
-To use the Claude Code SDK directly with Anthropic's API, we recommend creating a dedicated API key:
+Para usar el SDK de Claude Code directamente con la API de Anthropic, recomendamos crear una clave de API dedicada:
 
-1. Create an Anthropic API key in the [Anthropic Console](https://console.anthropic.com/)
-2. Then, set the `ANTHROPIC_API_KEY` environment variable. We recommend storing this key securely (e.g., using a Github [secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions))
+1.  Crea una clave de API de Anthropic en la [Consola de Anthropic](https://console.anthropic.com/).
+2.  Luego, establece la variable de entorno `ANTHROPIC_API_KEY`. Recomendamos almacenar esta clave de forma segura (p. ej., usando un [secreto](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions) de Github).
 
-### Third-Party API credentials
+### Credenciales de API de terceros
 
-The SDK also supports third-party API providers:
+El SDK también admite proveedores de API de terceros:
 
-- **Amazon Bedrock**: Set `CLAUDE_CODE_USE_BEDROCK=1` environment variable and configure AWS credentials
-- **Google Vertex AI**: Set `CLAUDE_CODE_USE_VERTEX=1` environment variable and configure Google Cloud credentials
+-   **Amazon Bedrock**: Establece la variable de entorno `CLAUDE_CODE_USE_BEDROCK=1` y configura las credenciales de AWS.
+-   **Google Vertex AI**: Establece la variable de entorno `CLAUDE_CODE_USE_VERTEX=1` y configura las credenciales de Google Cloud.
 
-For detailed configuration instructions for third-party providers, see the [Amazon Bedrock](/en/docs/claude-code/amazon-bedrock) and [Google Vertex AI](/en/docs/claude-code/google-vertex-ai) documentation.
+Para obtener instrucciones de configuración detalladas para proveedores de terceros, consulta la documentación de [Amazon Bedrock](/en/docs/claude-code/amazon-bedrock) y [Google Vertex AI](/en/docs/claude-code/google-vertex-ai).
 
-## Basic SDK usage
+## Uso básico del SDK
 
-The Claude Code SDK allows you to use Claude Code in non-interactive mode from your applications.
+El SDK de Claude Code te permite usar Claude Code en modo no interactivo desde tus aplicaciones.
 
-### Command line
+### Línea de comandos
 
-Here are a few basic examples for the command line SDK:
+Aquí hay algunos ejemplos básicos para el SDK de línea de comandos:
 
 ```bash
-# Run a single prompt and exit (print mode)
-$ claude -p "Write a function to calculate Fibonacci numbers"
+# Ejecutar un solo prompt y salir (modo de impresión)
+$ claude -p "Escribe una función para calcular los números de Fibonacci"
 
-# Using a pipe to provide stdin
-$ echo "Explain this code" | claude -p
+# Usando una tubería para proporcionar stdin
+$ echo "Explica este código" | claude -p
 
-# Output in JSON format with metadata
-$ claude -p "Generate a hello world function" --output-format json
+# Salida en formato JSON con metadatos
+$ claude -p "Genera una función de hola mundo" --output-format json
 
-# Stream JSON output as it arrives
-$ claude -p "Build a React component" --output-format stream-json
+# Transmitir la salida JSON a medida que llega
+$ claude -p "Construye un componente de React" --output-format stream-json
 ```
 
 ### TypeScript
 
-The TypeScript SDK is included in the main [`@anthropic-ai/claude-code`](https://www.npmjs.com/package/@anthropic-ai/claude-code) package on NPM:
+El SDK de TypeScript está incluido en el paquete principal [`@anthropic-ai/claude-code`](https://www.npmjs.com/package/@anthropic-ai/claude-code) en NPM:
 
 ```ts
 import { query, type SDKMessage } from "@anthropic-ai/claude-code";
@@ -58,7 +58,7 @@ import { query, type SDKMessage } from "@anthropic-ai/claude-code";
 const messages: SDKMessage[] = [];
 
 for await (const message of query({
-  prompt: "Write a haiku about foo.py",
+  prompt: "Escribe un haiku sobre foo.py",
   abortController: new AbortController(),
   options: {
     maxTurns: 3,
@@ -70,31 +70,31 @@ for await (const message of query({
 console.log(messages);
 ```
 
-The TypeScript SDK accepts all arguments supported by the command line SDK, as well as:
+El SDK de TypeScript acepta todos los argumentos admitidos por el SDK de línea de comandos, así como:
 
-| Argument                     | Description                         | Default                                                       |
-| :--------------------------- | :---------------------------------- | :------------------------------------------------------------ |
-| `abortController`            | Abort controller                    | `new AbortController()`                                       |
-| `cwd`                        | Current working directory           | `process.cwd()`                                               |
-| `executable`                 | Which JavaScript runtime to use     | `node` when running with Node.js, `bun` when running with Bun |
-| `executableArgs`             | Arguments to pass to the executable | `[]`                                                          |
-| `pathToClaudeCodeExecutable` | Path to the Claude Code executable  | Executable that ships with `@anthropic-ai/claude-code`        |
+| Argumento | Descripción | Valor por defecto |
+| :--- | :--- | :--- |
+| `abortController` | Controlador de aborto | `new AbortController()` |
+| `cwd` | Directorio de trabajo actual | `process.cwd()` |
+| `executable` | Qué tiempo de ejecución de JavaScript usar | `node` al ejecutar con Node.js, `bun` al ejecutar con Bun |
+| `executableArgs` | Argumentos para pasar al ejecutable | `[]` |
+| `pathToClaudeCodeExecutable` | Ruta al ejecutable de Claude Code | Ejecutable que se envía con `@anthropic-ai/claude-code` |
 
 ### Python
 
-The Python SDK is available as [`claude-code-sdk`](https://github.com/anthropics/claude-code-sdk-python) on PyPI:
+El SDK de Python está disponible como [`claude-code-sdk`](https://github.com/anthropics/claude-code-sdk-python) en PyPI:
 
 ```bash
 pip install claude-code-sdk
 ```
 
-**Prerequisites:**
+**Prerrequisitos:**
 
-- Python 3.10+
-- Node.js
-- Claude Code CLI: `npm install -g @anthropic-ai/claude-code`
+-   Python 3.10+
+-   Node.js
+-   CLI de Claude Code: `npm install -g @anthropic-ai/claude-code`
 
-Basic usage:
+Uso básico:
 
 ```python
 import anyio
@@ -104,7 +104,7 @@ async def main():
     messages: list[Message] = []
 
     async for message in query(
-        prompt="Write a haiku about foo.py",
+        prompt="Escribe un haiku sobre foo.py",
         options=ClaudeCodeOptions(max_turns=3)
     ):
         messages.append(message)
@@ -114,7 +114,7 @@ async def main():
 anyio.run(main)
 ```
 
-The Python SDK accepts all arguments supported by the command line SDK through the `ClaudeCodeOptions` class:
+El SDK de Python acepta todos los argumentos admitidos por el SDK de línea de comandos a través de la clase `ClaudeCodeOptions`:
 
 ```python
 from claude_code_sdk import query, ClaudeCodeOptions
@@ -122,65 +122,65 @@ from pathlib import Path
 
 options = ClaudeCodeOptions(
     max_turns=3,
-    system_prompt="You are a helpful assistant",
-    cwd=Path("/path/to/project"),  # Can be string or Path
+    system_prompt="Eres un asistente útil",
+    cwd=Path("/ruta/a/proyecto"),  # Puede ser una cadena o un Path
     allowed_tools=["Read", "Write", "Bash"],
     permission_mode="acceptEdits"
 )
 
-async for message in query(prompt="Hello", options=options):
+async for message in query(prompt="Hola", options=options):
     print(message)
 ```
 
-## Advanced usage
+## Uso avanzado
 
-The documentation below uses the command line SDK as an example, but can also be used with the TypeScript and Python SDKs.
+La documentación a continuación utiliza el SDK de línea de comandos como ejemplo, pero también se puede usar con los SDK de TypeScript y Python.
 
-### Multi-turn conversations
+### Conversaciones de múltiples turnos
 
-For multi-turn conversations, you can resume conversations or continue from the most recent session:
+Para conversaciones de múltiples turnos, puedes reanudar conversaciones o continuar desde la sesión más reciente:
 
 ```bash
-# Continue the most recent conversation
+# Continuar la conversación más reciente
 $ claude --continue
 
-# Continue and provide a new prompt
-$ claude --continue "Now refactor this for better performance"
+# Continuar y proporcionar un nuevo prompt
+$ claude --continue "Ahora refactoriza esto para un mejor rendimiento"
 
-# Resume a specific conversation by session ID
+# Reanudar una conversación específica por ID de sesión
 $ claude --resume 550e8400-e29b-41d4-a716-446655440000
 
-# Resume in print mode (non-interactive)
-$ claude -p --resume 550e8400-e29b-41d4-a716-446655440000 "Update the tests"
+# Reanudar en modo de impresión (no interactivo)
+$ claude -p --resume 550e8400-e29b-41d4-a716-446655440000 "Actualiza las pruebas"
 
-# Continue in print mode (non-interactive)
-$ claude -p --continue "Add error handling"
+# Continuar en modo de impresión (no interactivo)
+$ claude -p --continue "Añade manejo de errores"
 ```
 
-### Custom system prompts
+### Prompts de sistema personalizados
 
-You can provide custom system prompts to guide Claude's behavior:
+Puedes proporcionar prompts de sistema personalizados para guiar el comportamiento de Claude:
 
 ```bash
-# Override system prompt (only works with --print)
-$ claude -p "Build a REST API" --system-prompt "You are a senior backend engineer. Focus on security, performance, and maintainability."
+# Sobrescribir el prompt del sistema (solo funciona con --print)
+$ claude -p "Construye una API REST" --system-prompt "Eres un ingeniero de backend senior. Céntrate en la seguridad, el rendimiento y la mantenibilidad."
 
-# System prompt with specific requirements
-$ claude -p "Create a database schema" --system-prompt "You are a database architect. Use PostgreSQL best practices and include proper indexing."
+# Prompt del sistema con requisitos específicos
+$ claude -p "Crea un esquema de base de datos" --system-prompt "Eres un arquitecto de bases de datos. Usa las mejores prácticas de PostgreSQL e incluye una indexación adecuada."
 ```
 
-You can also append instructions to the default system prompt:
+También puedes añadir instrucciones al prompt del sistema por defecto:
 
 ```bash
-# Append system prompt (only works with --print)
-$ claude -p "Build a REST API" --append-system-prompt "After writing code, be sure to code review yourself."
+# Añadir al prompt del sistema (solo funciona con --print)
+$ claude -p "Construye una API REST" --append-system-prompt "Después de escribir el código, asegúrate de revisarlo tú mismo."
 ```
 
-### MCP Configuration
+### Configuración de MCP
 
-The Model Context Protocol (MCP) allows you to extend Claude Code with additional tools and resources from external servers. Using the `--mcp-config` flag, you can load MCP servers that provide specialized capabilities like database access, API integrations, or custom tooling.
+El Protocolo de Contexto del Modelo (MCP) te permite extender Claude Code con herramientas y recursos adicionales de servidores externos. Usando la bandera `--mcp-config`, puedes cargar servidores MCP que proporcionan capacidades especializadas como acceso a bases de datos, integraciones de API o herramientas personalizadas.
 
-Create a JSON configuration file with your MCP servers:
+Crea un archivo de configuración JSON con tus servidores MCP:
 
 ```json
 {
@@ -190,95 +190,96 @@ Create a JSON configuration file with your MCP servers:
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/path/to/allowed/files"
+        "/ruta/a/archivos/permitidos"
       ]
     },
     "github": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
-        "GITHUB_TOKEN": "your-github-token"
+        "GITHUB_TOKEN": "tu-token-de-github"
       }
     }
   }
 }
 ```
 
-Then use it with Claude Code:
+Luego úsalo con Claude Code:
 
 ```bash
-# Load MCP servers from configuration
-$ claude -p "List all files in the project" --mcp-config mcp-servers.json
+# Cargar servidores MCP desde la configuración
+$ claude -p "Lista todos los archivos en el proyecto" --mcp-config mcp-servers.json
 
-# Important: MCP tools must be explicitly allowed using --allowedTools
-# MCP tools follow the format: mcp__$serverName__$toolName
-$ claude -p "Search for TODO comments" \
+# Importante: Las herramientas MCP deben permitirse explícitamente usando --allowedTools
+# Las herramientas MCP siguen el formato: mcp__$nombreServidor__$nombreHerramienta
+$ claude -p "Busca comentarios TODO" \
   --mcp-config mcp-servers.json \
   --allowedTools "mcp__filesystem__read_file,mcp__filesystem__list_directory"
 
-# Use an MCP tool for handling permission prompts in non-interactive mode
-$ claude -p "Deploy the application" \
+# Usa una herramienta MCP para manejar las solicitudes de permiso en modo no interactivo
+$ claude -p "Despliega la aplicación" \
   --mcp-config mcp-servers.json \
   --allowedTools "mcp__permissions__approve" \
   --permission-prompt-tool mcp__permissions__approve
 ```
 
 <Note>
-  When using MCP tools, you must explicitly allow them using the `--allowedTools` flag. MCP tool names follow the pattern `mcp__<serverName>__<toolName>` where:
+  Al usar herramientas MCP, debes permitirlas explícitamente usando la bandera `--allowedTools`. Los nombres de las herramientas MCP siguen el patrón `mcp__<nombreServidor>__<nombreHerramienta>` donde:
 
-- `serverName` is the key from your MCP configuration file
-- `toolName` is the specific tool provided by that server
+- `nombreServidor` es la clave de tu archivo de configuración MCP.
+- `nombreHerramienta` es la herramienta específica proporcionada por ese servidor.
 
-This security measure ensures that MCP tools are only used when explicitly permitted.
+Esta medida de seguridad asegura que las herramientas MCP solo se usen cuando se permitan explícitamente.
 
-If you specify just the server name (i.e., `mcp__<serverName>`), all tools from that server will be allowed.
+Si especificas solo el nombre del servidor (es decir, `mcp__<nombreServidor>`), se permitirán todas las herramientas de ese servidor.
 
-Glob patterns (e.g., `mcp__go*`) are not supported.
+No se admiten patrones globales (glob) (p. ej., `mcp__go*`).
 </Note>
 
-### Custom permission prompt tool
+### Herramienta de solicitud de permiso personalizada
 
-Optionally, use `--permission-prompt-tool` to pass in an MCP tool that we will use to check whether or not the user grants the model permissions to invoke a given tool. When the model invokes a tool the following happens:
+Opcionalmente, usa `--permission-prompt-tool` para pasar una herramienta MCP que usaremos para verificar si el usuario otorga o no permisos al modelo para invocar una herramienta determinada. Cuando el modelo invoca una herramienta, sucede lo siguiente:
 
-1. We first check permission settings: all [settings.json files](/en/docs/claude-code/settings), as well as `--allowedTools` and `--disallowedTools` passed into the SDK; if one of these allows or denies the tool call, we proceed with the tool call
-2. Otherwise, we invoke the MCP tool you provided in `--permission-prompt-tool`
+1.  Primero verificamos la configuración de permisos: todos los [archivos settings.json](/en/docs/claude-code/settings), así como `--allowedTools` y `--disallowedTools` pasados al SDK; si uno de estos permite o deniega la llamada a la herramienta, procedemos con la llamada a la herramienta.
+2.  De lo contrario, invocamos la herramienta MCP que proporcionaste en `--permission-prompt-tool`.
 
-The `--permission-prompt-tool` MCP tool is passed the tool name and input, and must return a JSON-stringified payload with the result. The payload must be one of:
+A la herramienta MCP `--permission-prompt-tool` se le pasa el nombre de la herramienta y la entrada, y debe devolver una carga útil en formato de cadena JSON con el resultado. La carga útil debe ser una de las siguientes:
 
 ```ts
-// tool call is allowed
+// la llamada a la herramienta está permitida
 {
   "behavior": "allow",
-  "updatedInput": {...}, // updated input, or just return back the original input
+  "updatedInput": {...}, // entrada actualizada, o simplemente devuelve la entrada original
 }
 
-// tool call is denied
+// la llamada a la herramienta es denegada
 {
   "behavior": "deny",
-  "message": "..." // human-readable string explaining why the permission was denied
+  "message": "..." // cadena legible por humanos que explica por qué se denegó el permiso
 }
 ```
 
-For example, a TypeScript MCP permission prompt tool implementation might look like this:
+Por ejemplo, una implementación de herramienta de solicitud de permiso MCP en TypeScript podría verse así:
 
 ```ts
 const server = new McpServer({
-  name: "Test permission prompt MCP Server",
+  name: "Servidor MCP de solicitud de permiso de prueba",
   version: "0.0.1",
 });
 
 server.tool(
   "approval_prompt",
-  'Simulate a permission check - approve if the input contains "allow", otherwise deny',
+  'Simula una verificación de permiso - aprueba si la entrada contiene "allow", de lo contrario deniega',
   {
     tool_name: z
       .string()
-      .describe("The name of the tool requesting permission"),
-    input: z.object({}).passthrough().describe("The input for the tool"),
-    tool_use_id: z
-      .string()
-      .optional()
-      .describe("The unique tool use request ID"),
+      .describe("El nombre de la herramienta que solicita permiso"),
+    input: z.object({}).passthrough().describe("La entrada para la herramienta"),
+    tool_use_id:
+      z
+        .string()
+        .optional()
+        .describe("El ID único de la solicitud de uso de la herramienta"),
   },
   async ({ tool_name, input }) => {
     return {
@@ -293,7 +294,7 @@ server.tool(
                 }
               : {
                   behavior: "deny",
-                  message: "Permission denied by test approval_prompt tool",
+                  message: "Permiso denegado por la herramienta de prueba approval_prompt",
                 },
           ),
         },
@@ -303,7 +304,7 @@ server.tool(
 );
 ```
 
-To use this tool, add your MCP server (eg. with `--mcp-config`), then invoke the SDK like so:
+Para usar esta herramienta, añade tu servidor MCP (p. ej., con `--mcp-config`), luego invoca el SDK así:
 
 ```sh
 claude -p "..." \
@@ -311,54 +312,54 @@ claude -p "..." \
   --mcp-config my-config.json
 ```
 
-Usage notes:
+Notas de uso:
 
-- Use `updatedInput` to tell the model that the permission prompt mutated its input; otherwise, set `updatedInput` to the original input, as in the example above. For example, if the tool shows a file edit diff to the user and lets them edit the diff manually, the permission prompt tool should return that updated edit.
-- The payload must be JSON-stringified
+-   Usa `updatedInput` para decirle al modelo que la solicitud de permiso modificó su entrada; de lo contrario, establece `updatedInput` en la entrada original, como en el ejemplo anterior. Por ejemplo, si la herramienta muestra una diferencia de edición de archivo al usuario y le permite editar la diferencia manualmente, la herramienta de solicitud de permiso debe devolver esa edición actualizada.
+-   La carga útil debe ser una cadena JSON.
 
-## Available CLI options
+## Opciones de CLI disponibles
 
-The SDK leverages all the CLI options available in Claude Code. Here are the key ones for SDK usage:
+El SDK aprovecha todas las opciones de CLI disponibles en Claude Code. Aquí están las clave para el uso del SDK:
 
-| Flag                       | Description                                                                                            | Example                                                                                                                   |
-| :------------------------- | :----------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| `--print`, `-p`            | Run in non-interactive mode                                                                            | `claude -p "query"`                                                                                                       |
-| `--output-format`          | Specify output format (`text`, `json`, `stream-json`)                                                  | `claude -p --output-format json`                                                                                          |
-| `--resume`, `-r`           | Resume a conversation by session ID                                                                    | `claude --resume abc123`                                                                                                  |
-| `--continue`, `-c`         | Continue the most recent conversation                                                                  | `claude --continue`                                                                                                       |
-| `--verbose`                | Enable verbose logging                                                                                 | `claude --verbose`                                                                                                        |
-| `--max-turns`              | Limit agentic turns in non-interactive mode                                                            | `claude --max-turns 3`                                                                                                    |
-| `--system-prompt`          | Override system prompt (only with `--print`)                                                           | `claude --system-prompt "Custom instruction"`                                                                             |
-| `--append-system-prompt`   | Append to system prompt (only with `--print`)                                                          | `claude --append-system-prompt "Custom instruction"`                                                                      |
-| `--allowedTools`           | Space-separated list of allowed tools, or <br /><br /> string of comma-separated list of allowed tools | `claude --allowedTools mcp__slack mcp__filesystem`<br /><br />`claude --allowedTools "Bash(npm install),mcp__filesystem"` |
-| `--disallowedTools`        | Space-separated list of denied tools, or <br /><br /> string of comma-separated list of denied tools   | `claude --disallowedTools mcp__splunk mcp__github`<br /><br />`claude --disallowedTools "Bash(git commit),mcp__github"`   |
-| `--mcp-config`             | Load MCP servers from a JSON file                                                                      | `claude --mcp-config servers.json`                                                                                        |
-| `--permission-prompt-tool` | MCP tool for handling permission prompts (only with `--print`)                                         | `claude --permission-prompt-tool mcp__auth__prompt`                                                                       |
+| Bandera | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `--print`, `-p` | Ejecutar en modo no interactivo | `claude -p "consulta"` |
+| `--output-format` | Especificar formato de salida (`text`, `json`, `stream-json`) | `claude -p --output-format json` |
+| `--resume`, `-r` | Reanudar una conversación por ID de sesión | `claude --resume abc123` |
+| `--continue`, `-c` | Continuar la conversación más reciente | `claude --continue` |
+| `--verbose` | Habilitar registro detallado | `claude --verbose` |
+| `--max-turns` | Limitar los turnos agénticos en modo no interactivo | `claude --max-turns 3` |
+| `--system-prompt` | Sobrescribir el prompt del sistema (solo con `--print`) | `claude --system-prompt "Instrucción personalizada"` |
+| `--append-system-prompt` | Añadir al prompt del sistema (solo con `--print`) | `claude --append-system-prompt "Instrucción personalizada"` |
+| `--allowedTools` | Lista de herramientas permitidas separadas por espacios, o <br /><br /> cadena de lista de herramientas permitidas separadas por comas | `claude --allowedTools mcp__slack mcp__filesystem`<br /><br />`claude --allowedTools "Bash(npm install),mcp__filesystem"` |
+| `--disallowedTools` | Lista de herramientas denegadas separadas por espacios, o <br /><br /> cadena de lista de herramientas denegadas separadas por comas | `claude --disallowedTools mcp__splunk mcp__github`<br /><br />`claude --disallowedTools "Bash(git commit),mcp__github"` |
+| `--mcp-config` | Cargar servidores MCP desde un archivo JSON | `claude --mcp-config servers.json` |
+| `--permission-prompt-tool` | Herramienta MCP para manejar solicitudes de permiso (solo con `--print`) | `claude --permission-prompt-tool mcp__auth__prompt` |
 
-For a complete list of CLI options and features, see the [CLI reference](/en/docs/claude-code/cli-reference) documentation.
+Para una lista completa de opciones y características de la CLI, consulta la [referencia de la CLI](/en/docs/claude-code/cli-reference).
 
-## Output formats
+## Formatos de salida
 
-The SDK supports multiple output formats:
+El SDK admite múltiples formatos de salida:
 
-### Text output (default)
+### Salida de texto (por defecto)
 
-Returns just the response text:
-
-```bash
-$ claude -p "Explain file src/components/Header.tsx"
-# Output: This is a React component showing...
-```
-
-### JSON output
-
-Returns structured data including metadata:
+Devuelve solo el texto de la respuesta:
 
 ```bash
-$ claude -p "How does the data layer work?" --output-format json
+$ claude -p "Explica el archivo src/components/Header.tsx"
+# Salida: Este es un componente de React que muestra...
 ```
 
-Response format:
+### Salida JSON
+
+Devuelve datos estructurados que incluyen metadatos:
+
+```bash
+$ claude -p "¿Cómo funciona la capa de datos?" --output-format json
+```
+
+Formato de respuesta:
 
 ```json
 {
@@ -369,42 +370,42 @@ Response format:
   "duration_ms": 1234,
   "duration_api_ms": 800,
   "num_turns": 6,
-  "result": "The response text here...",
+  "result": "El texto de la respuesta aquí...",
   "session_id": "abc123"
 }
 ```
 
-### Streaming JSON output
+### Salida JSON en streaming
 
-Streams each message as it is received:
+Transmite cada mensaje a medida que se recibe:
 
 ```bash
-$ claude -p "Build an application" --output-format stream-json
+$ claude -p "Construye una aplicación" --output-format stream-json
 ```
 
-Each conversation begins with an initial `init` system message, followed by a list of user and assistant messages, followed by a final `result` system message with stats. Each message is emitted as a separate JSON object.
+Cada conversación comienza con un mensaje de sistema `init` inicial, seguido de una lista de mensajes de usuario y asistente, y finaliza con un mensaje de sistema `result` con estadísticas. Cada mensaje se emite como un objeto JSON separado.
 
-## Message schema
+## Esquema de mensajes
 
-Messages returned from the JSON API are strictly typed according to the following schema:
+Los mensajes devueltos por la API JSON están estrictamente tipados según el siguiente esquema:
 
 ```ts
 type SDKMessage =
-  // An assistant message
+  // Un mensaje del asistente
   | {
       type: "assistant";
-      message: Message; // from Anthropic SDK
+      message: Message; // del SDK de Anthropic
       session_id: string;
     }
 
-  // A user message
+  // Un mensaje del usuario
   | {
       type: "user";
-      message: MessageParam; // from Anthropic SDK
+      message: MessageParam; // del SDK de Anthropic
       session_id: string;
     }
 
-  // Emitted as the last message
+  // Emitido como el último mensaje
   | {
       type: "result";
       subtype: "success";
@@ -417,7 +418,7 @@ type SDKMessage =
       total_cost_usd: float;
     }
 
-  // Emitted as the last message, when we've reached the maximum number of turns
+  // Emitido como el último mensaje, cuando hemos alcanzado el número máximo de turnos
   | {
       type: "result";
       subtype: "error_max_turns" | "error_during_execution";
@@ -429,7 +430,7 @@ type SDKMessage =
       total_cost_usd: float;
     }
 
-  // Emitted as the first message at the start of a conversation
+  // Emitido como el primer mensaje al inicio de una conversación
   | {
       type: "system";
       subtype: "init";
@@ -446,130 +447,130 @@ type SDKMessage =
     };
 ```
 
-We will soon publish these types in a JSONSchema-compatible format. We use semantic versioning for the main Claude Code package to communicate breaking changes to this format.
+Pronto publicaremos estos tipos en un formato compatible con JSONSchema. Usamos versionado semántico para el paquete principal de Claude Code para comunicar cambios importantes en este formato.
 
-`Message` and `MessageParam` types are available in Anthropic SDKs. For example, see the Anthropic [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript) and [Python](https://github.com/anthropics/anthropic-sdk-python/) SDKs.
+Los tipos `Message` y `MessageParam` están disponibles en los SDK de Anthropic. Por ejemplo, consulta los SDK de [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript) y [Python](https://github.com/anthropics/anthropic-sdk-python/) de Anthropic.
 
-## Input formats
+## Formatos de entrada
 
-The SDK supports multiple input formats:
+El SDK admite múltiples formatos de entrada:
 
-### Text input (default)
+### Entrada de texto (por defecto)
 
-Input text can be provided as an argument:
-
-```bash
-$ claude -p "Explain this code"
-```
-
-Or input text can be piped via stdin:
+El texto de entrada se puede proporcionar como un argumento:
 
 ```bash
-$ echo "Explain this code" | claude -p
+$ claude -p "Explica este código"
 ```
 
-### Streaming JSON input
-
-A stream of messages provided via `stdin` where each message represents a user turn. This allows multiple turns of a conversation without re-launching the `claude` binary and allows providing guidance to the model while it is processing a request.
-
-Each message is a JSON 'User message' object, following the same format as the output message schema. Messages are formatted using the [jsonl](https://jsonlines.org/) format where each line of input is a complete JSON object. Streaming JSON input requires `-p` and `--output-format stream-json`.
-
-Currently this is limited to text-only user messages.
+O el texto de entrada se puede canalizar a través de stdin:
 
 ```bash
-$ echo '{"type":"user","message":{"role":"user","content":[{"type":"text","text":"Explain this code"}]}}' | claude -p --output-format=stream-json --input-format=stream-json --verbose
+$ echo "Explica este código" | claude -p
 ```
 
-## Examples
+### Entrada JSON en streaming
 
-### Simple script integration
+Un flujo de mensajes proporcionado a través de `stdin` donde cada mensaje representa un turno del usuario. Esto permite múltiples turnos de una conversación sin relanzar el binario `claude` y permite proporcionar orientación al modelo mientras procesa una solicitud.
+
+Cada mensaje es un objeto JSON de 'Mensaje de usuario', siguiendo el mismo formato que el esquema de mensajes de salida. Los mensajes se formatean usando el formato [jsonl](https://jsonlines.org/) donde cada línea de entrada es un objeto JSON completo. La entrada JSON en streaming requiere `-p` y `--output-format stream-json`.
+
+Actualmente, esto se limita a mensajes de usuario de solo texto.
+
+```bash
+$ echo '{"type":"user","message":{"role":"user","content":[{"type":"text","text":"Explica este código"}]}}' | claude -p --output-format=stream-json --input-format=stream-json --verbose
+```
+
+## Ejemplos
+
+### Integración de script simple
 
 ```bash
 #!/bin/bash
 
-# Simple function to run Claude and check exit code
+# Función simple para ejecutar Claude y verificar el código de salida
 run_claude() {
     local prompt="$1"
     local output_format="${2:-text}"
 
     if claude -p "$prompt" --output-format "$output_format"; then
-        echo "Success!"
+        echo "¡Éxito!"
     else
-        echo "Error: Claude failed with exit code $?" >&2
+        echo "Error: Claude falló con el código de salida $?" >&2
         return 1
     fi
 }
 
-# Usage examples
-run_claude "Write a Python function to read CSV files"
-run_claude "Optimize this database query" "json"
+# Ejemplos de uso
+run_claude "Escribe una función de Python para leer archivos CSV"
+run_claude "Optimiza esta consulta de base de datos" "json"
 ```
 
-### Processing files with Claude
+### Procesamiento de archivos con Claude
 
 ```bash
-# Process a file through Claude
-$ cat mycode.py | claude -p "Review this code for bugs"
+# Procesar un archivo a través de Claude
+$ cat mycode.py | claude -p "Revisa este código en busca de errores"
 
-# Process multiple files
+# Procesar múltiples archivos
 $ for file in *.js; do
-    echo "Processing $file..."
-    claude -p "Add JSDoc comments to this file:" < "$file" > "${file}.documented"
+    echo "Procesando $file..."
+    claude -p "Añade comentarios JSDoc a este archivo:" < "$file" > "${file}.documented"
 done
 
-# Use Claude in a pipeline
+# Usar Claude en una tubería
 $ grep -l "TODO" *.py | while read file; do
-    claude -p "Fix all TODO items in this file" < "$file"
+    claude -p "Corrige todos los elementos TODO en este archivo" < "$file"
 done
 ```
 
-### Session management
+### Gestión de sesiones
 
 ```bash
-# Start a session and capture the session ID
-$ claude -p "Initialize a new project" --output-format json | jq -r '.session_id' > session.txt
+# Iniciar una sesión y capturar el ID de la sesión
+$ claude -p "Inicializa un nuevo proyecto" --output-format json | jq -r '.session_id' > session.txt
 
-# Continue with the same session
-$ claude -p --resume "$(cat session.txt)" "Add unit tests"
+# Continuar con la misma sesión
+$ claude -p --resume "$(cat session.txt)" "Añade pruebas unitarias"
 ```
 
-## Best practices
+## Mejores prácticas
 
-1. **Use JSON output format** for programmatic parsing of responses:
+1.  **Usa el formato de salida JSON** para el análisis programático de las respuestas:
 
-   ```bash
-   # Parse JSON response with jq
-   result=$(claude -p "Generate code" --output-format json)
-   code=$(echo "$result" | jq -r '.result')
-   cost=$(echo "$result" | jq -r '.cost_usd')
-   ```
+    ```bash
+    # Analizar la respuesta JSON con jq
+    result=$(claude -p "Genera código" --output-format json)
+    code=$(echo "$result" | jq -r '.result')
+    cost=$(echo "$result" | jq -r '.cost_usd')
+    ```
 
-2. **Handle errors gracefully** - check exit codes and stderr:
+2.  **Maneja los errores con elegancia** - verifica los códigos de salida y stderr:
 
-   ```bash
-   if ! claude -p "$prompt" 2>error.log; then
-       echo "Error occurred:" >&2
-       cat error.log >&2
-       exit 1
-   fi
-   ```
+    ```bash
+    if ! claude -p "$prompt" 2>error.log; then
+        echo "Ocurrió un error:" >&2
+        cat error.log >&2
+        exit 1
+    fi
+    ```
 
-3. **Use session management** for maintaining context in multi-turn conversations
+3.  **Usa la gestión de sesiones** para mantener el contexto en conversaciones de múltiples turnos.
 
-4. **Consider timeouts** for long-running operations:
+4.  **Considera los tiempos de espera** para operaciones de larga duración:
 
-   ```bash
-   timeout 300 claude -p "$complex_prompt" || echo "Timed out after 5 minutes"
-   ```
+    ```bash
+    timeout 300 claude -p "$complex_prompt" || echo "Tiempo de espera agotado después de 5 minutos"
+    ```
 
-5. **Respect rate limits** when making multiple requests by adding delays between calls
+5.  **Respeta los límites de velocidad** al realizar múltiples solicitudes añadiendo retrasos entre llamadas.
 
-## Real-world applications
+## Aplicaciones del mundo real
 
-The Claude Code SDK enables powerful integrations with your development workflow. One notable example is the [Claude Code GitHub Actions](/en/docs/claude-code/github-actions), which uses the SDK to provide automated code review, PR creation, and issue triage capabilities directly in your GitHub workflow.
+El SDK de Claude Code permite integraciones potentes con tu flujo de trabajo de desarrollo. Un ejemplo notable son las [Acciones de GitHub de Claude Code](/en/docs/claude-code/github-actions), que utilizan el SDK para proporcionar capacidades automatizadas de revisión de código, creación de PR y triaje de problemas directamente en tu flujo de trabajo de GitHub.
 
-## Related resources
+## Recursos relacionados
 
-- [CLI usage and controls](/en/docs/claude-code/cli-reference) - Complete CLI documentation
-- [GitHub Actions integration](/en/docs/claude-code/github-actions) - Automate your GitHub workflow with Claude
-- [Common workflows](/en/docs/claude-code/common-workflows) - Step-by-step guides for common use cases
+-   [Uso y controles de la CLI](/en/docs/claude-code/cli-reference) - Documentación completa de la CLI
+-   [Integración con Acciones de GitHub](/en/docs/claude-code/github-actions) - Automatiza tu flujo de trabajo de GitHub con Claude
+-   [Flujos de trabajo comunes](/en/docs/claude-code/common-workflows) - Guías paso a paso para casos de uso comunes

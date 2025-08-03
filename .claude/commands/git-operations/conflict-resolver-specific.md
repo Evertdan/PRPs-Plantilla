@@ -1,29 +1,29 @@
-You are an expert at resolving Git merge conflicts. $ARGUMENTS
+Eres un experto en resolver conflictos de fusión de Git. $ARGUMENTS
 
-## Resolution strategy based on arguments:
+## Estrategia de resolución basada en los argumentos:
 
-- If "safe" is mentioned: Only auto-resolve obvious conflicts, ask for guidance on complex ones
-- If "aggressive" is mentioned: Make best judgment calls on all conflicts
-- If "test" is mentioned: Run tests after each resolution
-- If "ours" is mentioned: Prefer our changes when in doubt
-- If "theirs" is mentioned: Prefer their changes when in doubt
-- If specific files are mentioned: Only resolve those files
+-   Si se menciona "seguro" (safe): Solo resuelve automáticamente conflictos obvios, pide orientación en los complejos.
+-   Si se menciona "agresivo" (aggressive): Toma las mejores decisiones a tu juicio en todos los conflictos.
+-   Si se menciona "probar" (test): Ejecuta las pruebas después de cada resolución.
+-   Si se menciona "nuestro" (ours): Prefiere nuestros cambios en caso de duda.
+-   Si se menciona "de ellos" (theirs): Prefiere sus cambios en caso de duda.
+-   Si se mencionan archivos específicos: Solo resuelve esos archivos.
 
-## Process:
+## Proceso:
 
-1. Check git status and identify conflicts
-2. use the github cli to check the PRs and understand the context
-3. Think hard about your findings and plan accordingly
-4. Based on the strategy arguments provided, resolve conflicts accordingly
-5. For each resolution, document what decision was made and why
-6. If "test" was specified, run tests after each file resolution
-7. Provide detailed summary of all resolutions
+1.  Revisa el estado de git e identifica los conflictos.
+2.  Usa la CLI de GitHub para revisar los PRs y entender el contexto.
+3.  Piensa detenidamente sobre tus hallazgos y planifica en consecuencia.
+4.  Basado en los argumentos de estrategia proporcionados, resuelve los conflictos correspondientemente.
+5.  Para cada resolución, documenta qué decisión se tomó y por qué.
+6.  Si se especificó "probar", ejecuta las pruebas después de la resolución de cada archivo.
+7.  Proporciona un resumen detallado de todas las resoluciones.
 
-## Special handling:
+## Manejo especial:
 
-- package-lock.json / yarn.lock: Usually regenerate these files
-- Migration files: Be extra careful, might need to create new migration
-- Schema files: Ensure compatibility is maintained
-- API files: Check for breaking changes
+-   `package-lock.json` / `yarn.lock`: Generalmente, regenera estos archivos.
+-   Archivos de migración: Ten mucho cuidado, podría ser necesario crear una nueva migración.
+-   Archivos de esquema (schema): Asegúrate de que se mantenga la compatibilidad.
+-   Archivos de API: Revisa si hay cambios que rompan la compatibilidad (breaking changes).
 
-Start by running git status to see all conflicts.
+Comienza ejecutando `git status` para ver todos los conflictos.

@@ -1,152 +1,152 @@
-# CLI reference
+# Referencia de la CLI
 
-> Complete reference for Claude Code command-line interface, including commands and flags.
+> Referencia completa para la interfaz de línea de comandos de Claude Code, incluyendo comandos y banderas.
 
-## CLI commands
+## Comandos de la CLI
 
-| Command                            | Description                                    | Example                                                            |
+| Comando                            | Descripción                                    | Ejemplo                                                            |
 | :--------------------------------- | :--------------------------------------------- | :----------------------------------------------------------------- |
-| `claude`                           | Start interactive REPL                         | `claude`                                                           |
-| `claude "query"`                   | Start REPL with initial prompt                 | `claude "explain this project"`                                    |
-| `claude -p "query"`                | Query via SDK, then exit                       | `claude -p "explain this function"`                                |
-| `cat file \| claude -p "query"`    | Process piped content                          | `cat logs.txt \| claude -p "explain"`                              |
-| `claude -c`                        | Continue most recent conversation              | `claude -c`                                                        |
-| `claude -c -p "query"`             | Continue via SDK                               | `claude -c -p "Check for type errors"`                             |
-| `claude -r "<session-id>" "query"` | Resume session by ID                           | `claude -r "abc123" "Finish this PR"`                              |
-| `claude update`                    | Update to latest version                       | `claude update`                                                    |
-| `claude mcp`                       | Configure Model Context Protocol (MCP) servers | See the [Claude Code MCP documentation](/en/docs/claude-code/mcp). |
+| `claude`                           | Iniciar REPL interactivo                         | `claude`                                                           |
+| `claude "consulta"`                   | Iniciar REPL con un prompt inicial                 | `claude "explica este proyecto"`                                    |
+| `claude -p "consulta"`                   | Consultar a través del SDK, luego salir                       | `claude -p "explica esta función"`                                | |
+| `cat archivo | claude -p "consulta"`    | Procesar contenido de una tubería (pipe)                          | `cat logs.txt | claude -p "explica"`                              |
+| `claude -c`                        | Continuar la conversación más reciente                       | `claude -c`                                                        |
+| `claude -c -p "consulta"`             | Continuar a través del SDK                               | `claude -c -p "Verifica errores de tipo"`                             |
+| `claude -r "<id-sesion>" "consulta"` | Reanudar sesión por ID                           | `claude -r "abc123" "Termina este PR"`                              |
+| `claude update`                    | Actualizar a la última versión                       | `claude update`                                                    |
+| `claude mcp`                       | Configurar servidores del Protocolo de Contexto del Modelo (MCP) | Consulta la [documentación de MCP de Claude Code](/en/docs/claude-code/mcp). |
 
-## CLI flags
+## Banderas de la CLI
 
-Customize Claude Code's behavior with these command-line flags:
+Personaliza el comportamiento de Claude Code con estas banderas de línea de comandos:
 
-| Flag                             | Description                                                                                                                                              | Example                                                     |
-| :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
-| `--add-dir`                      | Add additional working directories for Claude to access (validates each path exists as a directory)                                                      | `claude --add-dir ../apps ../lib`                           |
-| `--allowedTools`                 | A list of tools that should be allowed without prompting the user for permission, in addition to [settings.json files](/en/docs/claude-code/settings)    | `"Bash(git log:*)" "Bash(git diff:*)" "Read"`               |
-| `--disallowedTools`              | A list of tools that should be disallowed without prompting the user for permission, in addition to [settings.json files](/en/docs/claude-code/settings) | `"Bash(git log:*)" "Bash(git diff:*)" "Edit"`               |
-| `--print`, `-p`                  | Print response without interactive mode (see [SDK documentation](/en/docs/claude-code/sdk) for programmatic usage details)                               | `claude -p "query"`                                         |
-| `--output-format`                | Specify output format for print mode (options: `text`, `json`, `stream-json`)                                                                            | `claude -p "query" --output-format json`                    |
-| `--input-format`                 | Specify input format for print mode (options: `text`, `stream-json`)                                                                                     | `claude -p --output-format json --input-format stream-json` |
-| `--verbose`                      | Enable verbose logging, shows full turn-by-turn output (helpful for debugging in both print and interactive modes)                                       | `claude --verbose`                                          |
-| `--max-turns`                    | Limit the number of agentic turns in non-interactive mode                                                                                                | `claude -p --max-turns 3 "query"`                           |
-| `--model`                        | Sets the model for the current session with an alias for the latest model (`sonnet` or `opus`) or a model's full name                                    | `claude --model claude-sonnet-4-20250514`                   |
-| `--permission-mode`              | Begin in a specified [permission mode](iam#permission-modes)                                                                                             | `claude --permission-mode plan`                             |
-| `--permission-prompt-tool`       | Specify an MCP tool to handle permission prompts in non-interactive mode                                                                                 | `claude -p --permission-prompt-tool mcp_auth_tool "query"`  |
-| `--resume`                       | Resume a specific session by ID, or by choosing in interactive mode                                                                                      | `claude --resume abc123 "query"`                            |
-| `--continue`                     | Load the most recent conversation in the current directory                                                                                               | `claude --continue`                                         |
-| `--dangerously-skip-permissions` | Skip permission prompts (use with caution)                                                                                                               | `claude --dangerously-skip-permissions`                     |
-
-<Tip>
-  The `--output-format json` flag is particularly useful for scripting and
-  automation, allowing you to parse Claude's responses programmatically.
-</Tip>
-
-For detailed information about print mode (`-p`) including output formats,
-streaming, verbose logging, and programmatic usage, see the
-[SDK documentation](/en/docs/claude-code/sdk).
-
-## See also
-
-- [Interactive mode](/en/docs/claude-code/interactive-mode) - Shortcuts, input modes, and interactive features
-- [Slash commands](/en/docs/claude-code/slash-commands) - Interactive session commands
-- [Quickstart guide](/en/docs/claude-code/quickstart) - Getting started with Claude Code
-- [Common workflows](/en/docs/claude-code/common-workflows) - Advanced workflows and patterns
-- [Settings](/en/docs/claude-code/settings) - Configuration options
-- [SDK documentation](/en/docs/claude-code/sdk) - Programmatic usage and integrations
-
-# Interactive mode
-
-> Complete reference for keyboard shortcuts, input modes, and interactive features in Claude Code sessions.
-
-## Keyboard shortcuts
-
-### General controls
-
-| Shortcut         | Description                        | Context                    |
-| :--------------- | :--------------------------------- | :------------------------- |
-| `Ctrl+C`         | Cancel current input or generation | Standard interrupt         |
-| `Ctrl+D`         | Exit Claude Code session           | EOF signal                 |
-| `Ctrl+L`         | Clear terminal screen              | Keeps conversation history |
-| `Up/Down arrows` | Navigate command history           | Recall previous inputs     |
-| `Esc` + `Esc`    | Edit previous message              | Double-escape to modify    |
-
-### Multiline input
-
-| Method         | Shortcut       | Context                 |
-| :------------- | :------------- | :---------------------- |
-| Quick escape   | `\` + `Enter`  | Works in all terminals  |
-| macOS default  | `Option+Enter` | Default on macOS        |
-| Terminal setup | `Shift+Enter`  | After `/terminal-setup` |
-| Paste mode     | Paste directly | For code blocks, logs   |
-
-### Quick commands
-
-| Shortcut     | Description                        | Notes                                                     |
-| :----------- | :--------------------------------- | :-------------------------------------------------------- |
-| `#` at start | Memory shortcut - add to CLAUDE.md | Prompts for file selection                                |
-| `/` at start | Slash command                      | See [slash commands](/en/docs/claude-code/slash-commands) |
-
-## Vim mode
-
-Enable vim-style editing with `/vim` command or configure permanently via `/config`.
-
-### Mode switching
-
-| Command | Action                      | From mode |
-| :------ | :-------------------------- | :-------- |
-| `Esc`   | Enter NORMAL mode           | INSERT    |
-| `i`     | Insert before cursor        | NORMAL    |
-| `I`     | Insert at beginning of line | NORMAL    |
-| `a`     | Insert after cursor         | NORMAL    |
-| `A`     | Insert at end of line       | NORMAL    |
-| `o`     | Open line below             | NORMAL    |
-| `O`     | Open line above             | NORMAL    |
-
-### Navigation (NORMAL mode)
-
-| Command         | Action                    |
-| :-------------- | :------------------------ |
-| `h`/`j`/`k`/`l` | Move left/down/up/right   |
-| `w`             | Next word                 |
-| `e`             | End of word               |
-| `b`             | Previous word             |
-| `0`             | Beginning of line         |
-| `$`             | End of line               |
-| `^`             | First non-blank character |
-| `gg`            | Beginning of input        |
-| `G`             | End of input              |
-
-### Editing (NORMAL mode)
-
-| Command        | Action                  |
-| :------------- | :---------------------- |
-| `x`            | Delete character        |
-| `dd`           | Delete line             |
-| `D`            | Delete to end of line   |
-| `dw`/`de`/`db` | Delete word/to end/back |
-| `cc`           | Change line             |
-| `C`            | Change to end of line   |
-| `cw`/`ce`/`cb` | Change word/to end/back |
-| `.`            | Repeat last change      |
+| Bandera                             | Descripción                                                                                                                                              | Ejemplo                                                     |
+| :--------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
+| `--add-dir`                      | Añadir directorios de trabajo adicionales para que Claude acceda (valida que cada ruta exista como un directorio)                                                      | `claude --add-dir ../apps ../lib`                           |
+| `--allowedTools`                 | Una lista de herramientas que deben permitirse sin pedir permiso al usuario, además de los [archivos settings.json](/en/docs/claude-code/settings)    | `"Bash(git log:*)" "Bash(git diff:*)" "Read"`               |
+| `--disallowedTools`              | Una lista de herramientas que deben denegarse sin pedir permiso al usuario, además de los [archivos settings.json](/en/docs/claude-code/settings) | `"Bash(git log:*)" "Bash(git diff:*)" "Edit"`               |
+| `--print`, `-p`                  | Imprimir respuesta sin modo interactivo (consulta la [documentación del SDK](/en/docs/claude-code/sdk) para detalles de uso programático)                               | `claude -p "consulta"`                                         |
+| `--output-format`                | Especificar el formato de salida para el modo de impresión (opciones: `text`, `json`, `stream-json`)                                                                            | `claude -p "consulta" --output-format json`                    |
+| `--input-format`                 | Especificar el formato de entrada para el modo de impresión (opciones: `text`, `stream-json`)                                                                                     | `claude -p --output-format json --input-format stream-json` |
+| `--verbose`                      | Habilitar registro detallado, muestra la salida completa turno por turno (útil para depurar en modos de impresión e interactivo)                                       | `claude --verbose`                                          |
+| `--max-turns`                    | Limitar el número de turnos agénticos en modo no interactivo                                                                                                | `claude -p --max-turns 3 "consulta"`                           |
+| `--model`                        | Establece el modelo para la sesión actual con un alias para el último modelo (`sonnet` u `opus`) o el nombre completo de un modelo                                    | `claude --model claude-sonnet-4-20250514`                   |
+| `--permission-mode`              | Iniciar en un [modo de permiso](iam#permission-modes) especificado                                                                                             | `claude --permission-mode plan`                             |
+| `--permission-prompt-tool`       | Especificar una herramienta MCP para manejar las solicitudes de permiso en modo no interactivo                                                                                 | `claude -p --permission-prompt-tool mcp_auth_tool "consulta"`  |
+| `--resume`                       | Reanudar una sesión específica por ID, o eligiendo en modo interactivo                                                                                      | `claude --resume abc123 "consulta"`                              |
+| `--continue`                     | Cargar la conversación más reciente en el directorio actual                                                                                               | `claude --continue`                                         |
+| `--dangerously-skip-permissions` | Omitir las solicitudes de permiso (usar con precaución)                                                                                                               | `claude --dangerously-skip-permissions`                     |
 
 <Tip>
-  Configure your preferred line break behavior in terminal settings. Run `/terminal-setup` to install Shift+Enter binding for iTerm2 and VS Code terminals.
+  La bandera `--output-format json` es particularmente útil para scripting y
+  automatización, permitiéndote analizar las respuestas de Claude de forma programática.
 </Tip>
 
-## Command history
+Para información detallada sobre el modo de impresión (`-p`), incluyendo formatos de salida,
+streaming, registro detallado y uso programático, consulta la
+[documentación del SDK](/en/docs/claude-code/sdk).
 
-Claude Code maintains command history for the current session:
+## Ver también
 
-- History is stored per working directory
-- Cleared with `/clear` command
-- Use Up/Down arrows to navigate (see keyboard shortcuts above)
-- **Ctrl+R**: Reverse search through history (if supported by terminal)
-- **Note**: History expansion (`!`) is disabled by default
+- [Modo interactivo](/en/docs/claude-code/interactive-mode) - Atajos, modos de entrada y características interactivas
+- [Comandos de barra diagonal](/en/docs/claude-code/slash-commands) - Comandos de sesión interactiva
+- [Guía de inicio rápido](/en/docs/claude-code/quickstart) - Empezando con Claude Code
+- [Flujos de trabajo comunes](/en/docs/claude-code/common-workflows) - Flujos de trabajo y patrones avanzados
+- [Configuración](/en/docs/claude-code/settings) - Opciones de configuración
+- [Documentación del SDK](/en/docs/claude-code/sdk) - Uso programático e integraciones
 
-## See also
+# Modo interactivo
 
-- [Slash commands](/en/docs/claude-code/slash-commands) - Interactive session commands
-- [CLI reference](/en/docs/claude-code/cli-reference) - Command-line flags and options
-- [Settings](/en/docs/claude-code/settings) - Configuration options
-- [Memory management](/en/docs/claude-code/memory) - Managing CLAUDE.md files
+> Referencia completa de atajos de teclado, modos de entrada y características interactivas en las sesiones de Claude Code.
+
+## Atajos de teclado
+
+### Controles generales
+
+| Atajo | Descripción | Contexto |
+| :--- | :--- | :--- |
+| `Ctrl+C` | Cancelar entrada o generación actual | Interrupción estándar |
+| `Ctrl+D` | Salir de la sesión de Claude Code | Señal de EOF |
+| `Ctrl+L` | Limpiar la pantalla del terminal | Mantiene el historial de la conversación |
+| `Flechas Arriba/Abajo` | Navegar por el historial de comandos | Recordar entradas anteriores |
+| `Esc` + `Esc` | Editar mensaje anterior | Doble escape para modificar |
+
+### Entrada multilínea
+
+| Método | Atajo | Contexto |
+| :--- | :--- | :--- |
+| Escape rápido | `\` + `Enter` | Funciona en todos los terminales |
+| Por defecto en macOS | `Opción+Enter` | Por defecto en macOS |
+| Configuración del terminal | `Shift+Enter` | Después de `/terminal-setup` |
+| Modo de pegado | Pegar directamente | Para bloques de código, registros |
+
+### Comandos rápidos
+
+| Atajo | Descripción | Notas |
+| :--- | :--- | :--- |
+| `#` al inicio | Atajo de memoria - añadir a CLAUDE.md | Pide seleccionar un archivo |
+| `/` al inicio | Comando de barra diagonal | Ver [comandos de barra diagonal](/en/docs/claude-code/slash-commands) |
+
+## Modo Vim
+
+Habilita la edición estilo vim con el comando `/vim` o configúralo permanentemente a través de `/config`.
+
+### Cambio de modo
+
+| Comando | Acción | Desde el modo |
+| :--- | :--- | :--- |
+| `Esc` | Entrar en modo NORMAL | INSERTAR |
+| `i` | Insertar antes del cursor | NORMAL |
+| `I` | Insertar al principio de la línea | NORMAL |
+| `a` | Insertar después del cursor | NORMAL |
+| `A` | Insertar al final de la línea | NORMAL |
+| `o` | Abrir línea debajo | NORMAL |
+| `O` | Abrir línea arriba | NORMAL |
+
+### Navegación (modo NORMAL)
+
+| Comando | Acción |
+| :--- | :--- |
+| `h`/`j`/`k`/`l` | Mover izquierda/abajo/arriba/derecha |
+| `w` | Siguiente palabra |
+| `e` | Fin de palabra |
+| `b` | Palabra anterior |
+| `0` | Principio de línea |
+| `$` | Fin de línea |
+| `^` | Primer carácter no en blanco |
+| `gg` | Principio de la entrada |
+| `G` | Fin de la entrada |
+
+### Edición (modo NORMAL)
+
+| Comando | Acción |
+| :--- | :--- |
+| `x` | Eliminar carácter |
+| `dd` | Eliminar línea |
+| `D` | Eliminar hasta el final de la línea |
+| `dw`/`de`/`db` | Eliminar palabra/hasta el final/hacia atrás |
+| `cc` | Cambiar línea |
+| `C` | Cambiar hasta el final de la línea |
+| `cw`/`ce`/`cb` | Cambiar palabra/hasta el final/hacia atrás |
+| `.` | Repetir último cambio |
+
+<Tip>
+  Configura tu comportamiento preferido para el salto de línea en la configuración de tu terminal. Ejecuta `/terminal-setup` para instalar el atajo Shift+Enter para los terminales de iTerm2 y VS Code.
+</Tip>
+
+## Historial de comandos
+
+Claude Code mantiene un historial de comandos para la sesión actual:
+
+- El historial se almacena por directorio de trabajo.
+- Se borra con el comando `/clear`.
+- Usa las flechas Arriba/Abajo para navegar (ver atajos de teclado arriba).
+- **Ctrl+R**: Búsqueda inversa a través del historial (si es compatible con el terminal).
+- **Nota**: La expansión del historial (`!`) está deshabilitada por defecto.
+
+## Ver también
+
+- [Comandos de barra diagonal](/en/docs/claude-code/slash-commands) - Comandos de sesión interactiva
+- [Referencia de la CLI](/en/docs/claude-code/cli-reference) - Banderas y opciones de línea de comandos
+- [Configuración](/en/docs/claude-code/settings) - Opciones de configuración
+- [Gestión de la memoria](/en/docs/claude-code/memory) - Gestionando los archivos CLAUDE.md

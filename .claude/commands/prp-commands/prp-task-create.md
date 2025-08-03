@@ -1,108 +1,108 @@
-# Create TASK PRP (Advanced)
+# Crear PRP de TAREA (Avanzado)
 
-Generate a comprehensive task list for focused changes with validation.
+Genera una lista de tareas completa para cambios enfocados con validación.
 
-## Task: $ARGUMENTS
+## Tarea: $ARGUMENTS
 
-## Analysis Process
+## Proceso de Análisis
 
-1. **Scope Definition**
-   - Identify all affected files
-   - Map dependencies
-   - Check for side effects
-   - Note test coverage
+1.  **Definición del Alcance**
+    -   Identificar todos los archivos afectados.
+    -   Mapear dependencias.
+    -   Verificar efectos secundarios.
+    -   Anotar la cobertura de pruebas.
 
-2. **Pattern Research**
-   - Find similar changes in history
-   - Identify conventions to follow
-   - Check for helper functions
-   - Review test patterns
+2.  **Investigación de Patrones**
+    -   Encontrar cambios similares en el historial.
+    -   Identificar convenciones a seguir.
+    -   Buscar funciones de ayuda (helper functions).
+    -   Revisar patrones de prueba.
 
-3. **User Clarification**
-   - Confirm change scope
-   - Verify acceptance criteria
-   - Check deployment considerations
-   - Identify blockers
+3.  **Aclaración con el Usuario**
+    -   Confirmar el alcance del cambio.
+    -   Verificar los criterios de aceptación.
+    -   Revisar consideraciones de despliegue.
+    -   Identificar bloqueadores.
 
-## PRP Generation
+## Generación de PRP
 
-**READ**
-Using TASK_PRP/PRPs/prp_task.md format:
+**LEER**
+Usando el formato de `TASK_PRP/PRPs/prp_task.md`:
 
-### Context Section
+### Sección de Contexto
 
 ```yaml
-context:
+contexto:
   docs:
-    - url: [API documentation]
-      focus: [specific methods]
+    - url: [documentación de la API]
+      enfoque: [métodos específicos]
 
-  patterns:
-    - file: existing/example.py
-      copy: [pattern to follow]
+  patrones:
+    - archivo: ejemplo/existente.py
+      copiar: [patrón a seguir]
 
-  gotchas:
-    - issue: "Library requires X"
-      fix: "Always do Y first"
+  problemas_conocidos:
+    - problema: "La biblioteca requiere X"
+      solucion: "Siempre hacer Y primero"
 ```
 
-### Task Structure
+### Estructura de la Tarea
 
 ```
-ACTION path/to/file:
-  - OPERATION: [specific change]
-  - VALIDATE: [test command]
-  - IF_FAIL: [debug strategy]
-  - ROLLBACK: [undo approach]
+ACCIÓN ruta/al/archivo:
+  - OPERACIÓN: [cambio específico]
+  - VALIDAR: [comando de prueba]
+  - SI_FALLA: [estrategia de depuración]
+  - RETROCEDER: [enfoque para deshacer]
 ```
 
-### Task Sequencing
+### Secuenciación de Tareas
 
-1. **Setup Tasks**: Prerequisites
-2. **Core Changes**: Main modifications
-3. **Integration**: Connect components
-4. **Validation**: Comprehensive tests
-5. **Cleanup**: Remove temp code
+1.  **Tareas de Configuración**: Prerrequisitos.
+2.  **Cambios Principales**: Modificaciones centrales.
+3.  **Integración**: Conectar componentes.
+4.  **Validación**: Pruebas exhaustivas.
+5.  **Limpieza**: Eliminar código temporal.
 
-### Validation Strategy
+### Estrategia de Validación
 
-- Unit test after each change
-- Integration test after groups
-- Performance check if relevant
-- Security scan for sensitive areas
+-   Prueba unitaria después de cada cambio.
+-   Prueba de integración después de grupos de cambios.
+-   Verificación de rendimiento si es relevante.
+-   Escaneo de seguridad para áreas sensibles.
 
-## User Interaction Points
+## Puntos de Interacción con el Usuario
 
-1. **Task Review**
-   - Confirm task breakdown
-   - Validate sequencing
-   - Check completeness
+1.  **Revisión de Tareas**
+    -   Confirmar el desglose de tareas.
+    -   Validar la secuenciación.
+    -   Verificar que esté completo.
 
-2. **Risk Assessment**
-   - Review potential impacts
-   - Confirm rollback approach
-   - Set success criteria
+2.  **Evaluación de Riesgos**
+    -   Revisar los impactos potenciales.
+    -   Confirmar el enfoque de retroceso (rollback).
+    -   Establecer criterios de éxito.
 
-## Critical Elements
+## Elementos Críticos
 
-- Include debug patterns
-- Add performance checks
-- Note security concerns
-- Document assumptions
+-   Incluir patrones de depuración.
+-   Añadir verificaciones de rendimiento.
+-   Anotar preocupaciones de seguridad.
+-   Documentar suposiciones.
 
-## Output
+## Resultado
 
-Save as: `TASK_PRP/PRPs/{task-name}.md`
+Guardar como: `TASK_PRP/PRPs/{nombre-de-la-tarea}.md`
 
-## Quality Checklist
+## Lista de Verificación de Calidad
 
-- [ ] All changes identified
-- [ ] Dependencies mapped
-- [ ] Each task has validation
-- [ ] Rollback steps included
-- [ ] Debug strategies provided
-- [ ] Performance impact noted
-- [ ] Security checked
-- [ ] No missing edge cases
+-   [ ] Todos los cambios identificados.
+-   [ ] Dependencias mapeadas.
+-   [ ] Cada tarea tiene validación.
+-   [ ] Pasos de retroceso (rollback) incluidos.
+-   [ ] Estrategias de depuración proporcionadas.
+-   [ ] Impacto en el rendimiento anotado.
+-   [ ] Seguridad verificada.
+-   [ ] No faltan casos borde.
 
-Remember: Small, focused changes with immediate validation.
+Recuerda: Cambios pequeños y enfocados con validación inmediata.

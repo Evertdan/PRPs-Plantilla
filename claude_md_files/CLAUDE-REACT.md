@@ -1,159 +1,159 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working with React 19 applications.
+Este archivo proporciona orientación a Claude Code cuando se trabaja con aplicaciones React 19.
 
-## Core Development Philosophy
+## Filosofía de Desarrollo Principal
 
-### KISS (Keep It Simple, Stupid)
+### KISS (Keep It Simple, Stupid - Mantenlo Simple, Estúpido)
 
-Simplicity should be a key goal in design. Choose straightforward solutions over complex ones whenever possible. Simple solutions are easier to understand, maintain, and debug.
+La simplicidad debe ser un objetivo clave en el diseño. Elige soluciones sencillas sobre las complejas siempre que sea posible. Las soluciones simples son más fáciles de entender, mantener y depurar.
 
-### YAGNI (You Aren't Gonna Need It)
+### YAGNI (You Aren't Gonna Need It - No lo vas a necesitar)
 
-Avoid building functionality on speculation. Implement features only when they are needed, not when you anticipate they might be useful in the future.
+Evita construir funcionalidades por especulación. Implementa características solo cuando sean necesarias, no cuando anticipes que podrían ser útiles en el futuro.
 
-### Component-First Architecture
+### Arquitectura Basada en Componentes
 
-Build with reusable, composable components. Each component should have a single, clear responsibility and be self-contained with its own styles, tests, and logic co-located.
+Construye con componentes reutilizables y componibles. Cada componente debe tener una responsabilidad única y clara, y ser autocontenido con sus propios estilos, pruebas y lógica co-ubicados.
 
-### Performance by Default
+### Rendimiento por Defecto
 
-With React 19's compiler, manual optimizations are largely unnecessary. Focus on clean, readable code and let the compiler handle performance optimizations.
+Con el compilador de React 19, las optimizaciones manuales son en gran medida innecesarias. Céntrate en un código limpio y legible y deja que el compilador se encargue de las optimizaciones de rendimiento.
 
-### Design Principles (MUST FOLLOW)
+### Principios de Diseño (DEBEN SEGUIRSE)
 
-- **Vertical Slice Architecture**: MUST organize by features, not layers
-- **Composition Over Inheritance**: MUST use React's composition model
-- **Fail Fast**: MUST validate inputs early with Zod, throw errors immediately
+- **Arquitectura de "Vertical Slice"**: DEBE organizarse por características, no por capas.
+- **Composición sobre Herencia**: DEBE usar el modelo de composición de React.
+- **Fallar Rápido**: DEBE validar las entradas temprano con Zod, lanzar errores inmediatamente.
 
-## 🤖 AI Assistant Guidelines
+## 🤖 Directrices para el Asistente de IA
 
-### Context Awareness
+### Conciencia del Contexto
 
-- When implementing features, always check existing patterns first
-- Prefer composition over inheritance in all designs
-- Use existing utilities before creating new ones
-- Check for similar functionality in other domains/features
+- Al implementar características, siempre revisa primero los patrones existentes.
+- Prefiere la composición sobre la herencia en todos los diseños.
+- Usa utilidades existentes antes de crear nuevas.
+- Revisa si hay funcionalidades similares en otros dominios/características.
 
-### Common Pitfalls to Avoid
+### Errores Comunes a Evitar
 
-- Creating duplicate functionality
-- Overwriting existing tests
-- Modifying core frameworks without explicit instruction
-- Adding dependencies without checking existing alternatives
+- Crear funcionalidades duplicadas.
+- Sobrescribir pruebas existentes.
+- Modificar frameworks principales sin instrucción explícita.
+- Añadir dependencias sin revisar alternativas existentes.
 
-### Workflow Patterns
+### Patrones de Flujo de Trabajo
 
-- Prefferably create tests BEFORE implementation (TDD)
-- Use "think hard" for architecture decisions
-- Break complex tasks into smaller, testable units
-- Validate understanding before implementation
+- Preferiblemente, crea pruebas ANTES de la implementación (TDD).
+- Usa "pensar detenidamente" para las decisiones de arquitectura.
+- Descompón tareas complejas en unidades más pequeñas y comprobables.
+- Valida la comprensión antes de la implementación.
 
-### Search Command Requirements
+### Requisitos del Comando de Búsqueda
 
-**CRITICAL**: Always use `rg` (ripgrep) instead of traditional `grep` and `find` commands:
+**CRÍTICO**: Siempre usa `rg` (ripgrep) en lugar de los comandos tradicionales `grep` y `find`:
 
 ```bash
-# ❌ Don't use grep
-grep -r "pattern" .
+# ❌ No uses grep
+grep -r "patron" .
 
-# ✅ Use rg instead
-rg "pattern"
+# ✅ Usa rg en su lugar
+rg "patron"
 
-# ❌ Don't use find with name
+# ❌ No uses find con name
 find . -name "*.tsx"
 
-# ✅ Use rg with file filtering
+# ✅ Usa rg con filtrado de archivos
 rg --files | rg "\.tsx$"
-# or
+# o
 rg --files -g "*.tsx"
 ```
 
-**Enforcement Rules:**
+**Reglas de Aplicación:**
 
 ```
 (
     r"^grep\b(?!.*\|)",
-    "Use 'rg' (ripgrep) instead of 'grep' for better performance and features",
+    "Usa 'rg' (ripgrep) en lugar de 'grep' para un mejor rendimiento y características",
 ),
 (
     r"^find\s+\S+\s+-name\b",
-    "Use 'rg --files | rg pattern' or 'rg --files -g pattern' instead of 'find -name' for better performance",
+    "Usa 'rg --files | rg patron' o 'rg --files -g patron' en lugar de 'find -name' para un mejor rendimiento",
 ),
 ```
 
-## 🚀 React 19 Key Features
+## 🚀 Características Clave de React 19
 
-### Automatic Optimizations
+### Optimizaciones Automáticas
 
-- **React Compiler**: Eliminates need for `useMemo`, `useCallback`, and `React.memo`
-- Let the compiler handle performance - write clean, readable code
+- **Compilador de React**: Elimina la necesidad de `useMemo`, `useCallback` y `React.memo`.
+- Deja que el compilador se encargue del rendimiento - escribe código limpio y legible.
 
-### Core Features
+### Características Principales
 
-- **Server Components**: Use for data fetching and static content
-- **Actions**: Handle async operations with built-in pending states
-- **use() API**: Simplified data fetching and context consumption
-- **Document Metadata**: Native support for SEO tags
-- **Enhanced Suspense**: Better loading states and error boundaries
+- **Server Components**: Úsalos para la obtención de datos y contenido estático.
+- **Actions**: Maneja operaciones asíncronas con estados pendientes incorporados.
+- **API `use()`**: Obtención de datos y consumo de contexto simplificados.
+- **Metadatos del Documento**: Soporte nativo para etiquetas de SEO.
+- **Suspense Mejorado**: Mejores estados de carga y límites de error.
 
-### React 19 TypeScript Integration (MANDATORY)
+### Integración con TypeScript en React 19 (OBLIGATORIO)
 
-- **MUST use `ReactElement` instead of `JSX.Element`** for return types
-- **MUST import `ReactElement` from 'react'** explicitly
-- **NEVER use `JSX.Element` namespace** - use React types directly
+- **DEBE usar `ReactElement` en lugar de `JSX.Element`** para los tipos de retorno.
+- **DEBE importar `ReactElement` de 'react'** explícitamente.
+- **NUNCA use el espacio de nombres `JSX.Element`** - use los tipos de React directamente.
 
 ```typescript
-// ✅ CORRECT: Modern React 19 typing
+// ✅ CORRECTO: Tipado moderno de React 19
 import { ReactElement } from 'react';
 
 function MyComponent(): ReactElement {
-  return <div>Content</div>;
+  return <div>Contenido</div>;
 }
 
 const renderHelper = (): ReactElement | null => {
-  return condition ? <span>Helper</span> : null;
+  return condition ? <span>Ayudante</span> : null;
 };
 
-// ❌ FORBIDDEN: Legacy JSX namespace
-function MyComponent(): JSX.Element {  // Cannot find namespace 'JSX'
-  return <div>Content</div>;
+// ❌ PROHIBIDO: Espacio de nombres JSX heredado
+function MyComponent(): JSX.Element {  // No se puede encontrar el espacio de nombres 'JSX'
+  return <div>Contenido</div>;
 }
 ```
 
-### Actions Example (WITH MANDATORY DOCUMENTATION)
+### Ejemplo de Actions (CON DOCUMENTACIÓN OBLIGATORIA)
 
 ````typescript
 /**
- * @fileoverview Contact form using React 19 Actions API
+ * @fileoverview Formulario de contacto usando la API de Actions de React 19
  * @module features/contact/components/ContactForm
  */
 
 import { useActionState, ReactElement } from 'react';
 
 /**
- * Contact form component using React 19 Actions.
+ * Componente de formulario de contacto usando Actions de React 19.
  *
- * Leverages the Actions API for automatic pending state management
- * and error handling. Form data is validated with Zod before submission.
+ * Aprovecha la API de Actions para la gestión automática del estado pendiente
+ * y el manejo de errores. Los datos del formulario se validan con Zod antes del envío.
  *
  * @component
  * @example
  * ```tsx
- * <ContactForm onSuccess={() => router.push('/thank-you')} />
+ * <ContactForm onSuccess={() => router.push('/gracias')} />
  * ```
  */
 function ContactForm(): ReactElement {
   /**
-   * Form action handler with built-in state management.
+   * Manejador de la acción del formulario con gestión de estado incorporada.
    *
-   * @param previousState - Previous form state (unused in this implementation)
-   * @param formData - Raw form data from submission
-   * @returns Promise resolving to success or error state
+   * @param previousState - Estado anterior del formulario (no utilizado en esta implementación)
+   * @param formData - Datos brutos del formulario del envío
+   * @returns Promesa que se resuelve con un estado de éxito o error
    */
   const [state, submitAction, isPending] = useActionState(
     async (previousState: any, formData: FormData) => {
-      // Extract and validate form data
+      // Extraer y validar los datos del formulario
       const result = contactSchema.safeParse({
         email: formData.get('email'),
         message: formData.get('message'),
@@ -163,7 +163,7 @@ function ContactForm(): ReactElement {
         return { error: result.error.flatten() };
       }
 
-      // Process validated data
+      // Procesar datos validados
       await sendEmail(result.data);
       return { success: true };
     },
@@ -173,37 +173,37 @@ function ContactForm(): ReactElement {
   return (
     <form action={submitAction}>
       <button disabled={isPending}>
-        {isPending ? 'Sending...' : 'Send'}
+        {isPending ? 'Enviando...' : 'Enviar'}
       </button>
     </form>
   );
 }
 ````
 
-## 🏗️ Project Structure (Vertical Slice Architecture)
+## 🏗️ Estructura del Proyecto (Arquitectura de "Vertical Slice")
 
 ```
 src/
-├── features/              # Feature-based modules
+├── features/              # Módulos basados en características
 │   └── [feature]/
-│       ├── __tests__/     # Co-located tests (MUST be documented)
-│       ├── components/    # Feature components (MUST have JSDoc)
-│       ├── hooks/         # Feature-specific hooks (MUST have JSDoc)
-│       ├── api/           # API integration (MUST document endpoints)
-│       ├── schemas/       # Zod validation schemas (MUST document validation rules)
-│       ├── types/         # TypeScript types (MUST document complex types)
-│       └── index.ts       # Public API (MUST have @module documentation)
+│       ├── __tests__/     # Pruebas co-ubicadas (DEBEN estar documentadas)
+│       ├── components/    # Componentes de la característica (DEBEN tener JSDoc)
+│       ├── hooks/         # Hooks específicos de la característica (DEBEN tener JSDoc)
+│       ├── api/           # Integración de API (DEBE documentar endpoints)
+│       ├── schemas/       # Esquemas de validación de Zod (DEBE documentar reglas de validación)
+│       ├── types/         # Tipos de TypeScript (DEBE documentar tipos complejos)
+│       └── index.ts       # API pública (DEBE tener documentación @module)
 ├── shared/
-│   ├── components/        # Shared UI components (MUST have prop documentation)
-│   ├── hooks/            # Shared custom hooks (MUST have usage examples)
-│   ├── utils/            # Helper functions (MUST have JSDoc with examples)
-│   └── types/            # Shared TypeScript types
-└── test/                 # Test utilities and setup
+│   ├── components/        # Componentes de UI compartidos (DEBEN tener documentación de props)
+│   ├── hooks/            # Hooks personalizados compartidos (DEBEN tener ejemplos de uso)
+│   ├── utils/            # Funciones de utilidad (DEBEN tener JSDoc con ejemplos)
+│   └── types/            # Tipos de TypeScript compartidos
+└── test/                 # Utilidades y configuración de pruebas
 ```
 
-## 🎯 TypeScript Configuration (STRICT REQUIREMENTS) Assume strict requirements even if project settings are looser
+## 🎯 Configuración de TypeScript (REQUISITOS ESTRICTOS) Asume requisitos estrictos incluso si la configuración del proyecto es más laxa
 
-### MUST follow These Compiler Options
+### DEBE seguir Estas Opciones del Compilador
 
 ```json
 {
@@ -221,84 +221,84 @@ src/
 }
 ```
 
-### MANDATORY Type Requirements
+### Requisitos de Tipado OBLIGATORIOS
 
-- **NEVER use `any` type** - use `unknown` if type is truly unknown
-- **MUST have explicit return types** for all functions and components
-- **MUST use proper generic constraints** for reusable components
-- **MUST use type inference from Zod schemas** using `z.infer<typeof schema>`
-- **NEVER use `@ts-ignore`** or `@ts-expect-error` - fix the type issue properly
+- **NUNCA uses el tipo `any`** - usa `unknown` si el tipo es verdaderamente desconocido.
+- **DEBE tener tipos de retorno explícitos** para todas las funciones y componentes.
+- **DEBE usar restricciones genéricas adecuadas** para componentes reutilizables.
+- **DEBE usar la inferencia de tipos de los esquemas de Zod** usando `z.infer<typeof schema>`.
+- **NUNCA use `@ts-ignore`** o `@ts-expect-error` - corrige el problema de tipo adecuadamente.
 
-### Type Safety Hierarchy (STRICT ORDER)
+### Jerarquía de Seguridad de Tipos (ORDEN ESTRICTO)
 
-1. **Specific Types**: Always prefer specific types when possible
-2. **Generic Constraints**: Use generic constraints for reusable code
-3. **Unknown**: Use `unknown` for truly unknown data that will be validated
-4. **Never `any`**: The only exception is library declaration merging (must be commented)
+1. **Tipos Específicos**: Siempre prefiere tipos específicos cuando sea posible.
+2. **Restricciones Genéricas**: Usa restricciones genéricas para código reutilizable.
+3. **Unknown**: Usa `unknown` para datos verdaderamente desconocidos que serán validados.
+4. **Nunca `any`**: La única excepción es la fusión de declaraciones de bibliotecas (debe estar comentada).
 
-### TypeScript Project Structure (MANDATORY)
+### Estructura del Proyecto TypeScript (OBLIGATORIO)
 
-- **App Code**: `tsconfig.app.json` - covers src/ directory
-- **Node Config**: `tsconfig.node.json` - MUST include vite.config.ts, vitest.config.ts
-- **ESLint Integration**: MUST reference both in parserOptions.project
+- **Código de la Aplicación**: `tsconfig.app.json` - cubre el directorio `src/`.
+- **Configuración de Node**: `tsconfig.node.json` - DEBE incluir `vite.config.ts`, `vitest.config.ts`.
+- **Integración con ESLint**: DEBE hacer referencia a ambos en `parserOptions.project`.
 
-### Branded Type Safety (MANDATORY)
+### Seguridad de Tipos "Brandeados" (OBLIGATORIO)
 
-- **MUST use Schema.parse() to convert plain types to branded types**
-- **NEVER assume external data matches branded types**
-- **Always validate at system boundaries**
+- **DEBE usar `Schema.parse()` para convertir tipos simples a tipos "brandeados"**.
+- **NUNCA asuma que los datos externos coinciden con los tipos "brandeados"**.
+- **Siempre valide en los límites del sistema**.
 
 ```typescript
-// ✅ CORRECT: Convert plain types to branded types
+// ✅ CORRECTO: Convertir tipos simples a tipos "brandeados"
 const cvId = CVIdSchema.parse(numericId);
 
-// ❌ FORBIDDEN: Assuming type without validation
-const cvId: CVId = numericId; // Type assertion without validation
+// ❌ PROHIBIDO: Asumir el tipo sin validación
+const cvId: CVId = numericId; // Aserción de tipo sin validación
 ```
 
-### ExactOptionalPropertyTypes Compliance (MANDATORY)
+### Cumplimiento de `exactOptionalPropertyTypes` (OBLIGATORIO)
 
-- **MUST handle `undefined` vs `null` properly** in API interfaces
-- **MUST use conditional spreads** instead of passing `undefined` to optional props
-- **MUST convert `undefined` to `null`** for API body types
+- **DEBE manejar `undefined` vs `null` adecuadamente** en las interfaces de API.
+- **DEBE usar "spreads" condicionales** en lugar de pasar `undefined` a props opcionales.
+- **DEBE convertir `undefined` a `null`** para los tipos de cuerpo de API.
 
 ```typescript
-// ✅ CORRECT: Handle exactOptionalPropertyTypes properly
+// ✅ CORRECTO: Manejar exactOptionalPropertyTypes adecuadamente
 const apiCall = async (data?: string) => {
   return fetch('/api', {
     method: 'POST',
-    body: data ? JSON.stringify({ data }) : null,  // null, not undefined
+    body: data ? JSON.stringify({ data }) : null,  // null, no undefined
   });
 };
 
-// Conditional prop spreading for optional properties
+// "Spreading" de props condicional para propiedades opcionales
 <Input
-  label="Email"
+  label="Correo electrónico"
   error={errors.email?.message}
-  {...(showHelper ? { helperText: "Enter valid email" } : {})}  // Conditional spread
+  {...(showHelper ? { helperText: "Introduce un correo válido" } : {})}
 />
 
-// ❌ FORBIDDEN: Passing undefined to optional properties
+// ❌ PROHIBIDO: Pasar undefined a propiedades opcionales
 <Input
-  label="Email"
+  label="Correo electrónico"
   error={errors.email?.message}
-  helperText={showHelper ? "Enter valid email" : undefined}  // undefined not allowed
+  helperText={showHelper ? "Introduce un correo válido" : undefined}  // undefined no permitido
 />
 ```
 
-## ⚡ React 19 Power Features
+## ⚡ Características Potentes de React 19
 
-### Instant UI Patterns
+### Patrones de UI Instantáneos
 
-- Use Suspense boundaries for ALL async operations
-- Leverage Server Components for data fetching
-- Use the new Actions API for form handling
-- Let React Compiler handle optimization
+- Usa límites de `Suspense` para TODAS las operaciones asíncronas.
+- Aprovecha los `Server Components` para la obtención de datos.
+- Usa la nueva API de `Actions` para el manejo de formularios.
+- Deja que el Compilador de React se encargue de la optimización.
 
-### Component Templates
+### Plantillas de Componentes
 
 ````typescript
-// Quick component with all states
+// Componente rápido con todos los estados
 export function FeatureComponent(): ReactElement {
   const { data, isLoading, error } = useQuery({
     queryKey: ['feature'],
@@ -311,26 +311,27 @@ export function FeatureComponent(): ReactElement {
 
   return <FeatureContent data={data} />;
 }
+````
 
-## 🛡️ Data Validation with Zod (MANDATORY FOR ALL EXTERNAL DATA)
+## 🛡️ Validación de Datos con Zod (OBLIGATORIO PARA TODOS LOS DATOS EXTERNOS)
 
-### MUST Follow These Validation Rules
-- **MUST validate ALL external data**: API responses, form inputs, URL params, environment variables
-- **MUST use branded types**: For all IDs and domain-specific values
-- **MUST fail fast**: Validate at system boundaries, throw errors immediately
-- **MUST use type inference**: Always derive TypeScript types from Zod schemas
-- **NEVER trust external data** without validation
-- **MUST validate before using** any data from outside the application
+### DEBE Seguir Estas Reglas de Validación
+- **DEBE validar TODOS los datos externos**: respuestas de API, entradas de formularios, parámetros de URL, variables de entorno.
+- **DEBE usar tipos "brandeados" (branded types)**: para todos los IDs y valores específicos del dominio.
+- **DEBE fallar rápido**: valida en los límites del sistema, lanza errores inmediatamente.
+- **DEBE usar inferencia de tipos**: siempre deriva los tipos de TypeScript de los esquemas de Zod.
+- **NUNCA confíe en datos externos** sin validación.
+- **DEBE validar antes de usar** cualquier dato de fuera de la aplicación.
 
-### Schema Example (MANDATORY PATTERNS)
+### Ejemplo de Esquema (PATRONES OBLIGATORIOS)
 ```typescript
 import { z } from 'zod';
 
-// MUST use branded types for ALL IDs
+// DEBE usar tipos "brandeados" para TODOS los IDs
 const UserIdSchema = z.string().uuid().brand<'UserId'>();
 type UserId = z.infer<typeof UserIdSchema>;
 
-// MUST include validation for ALL fields
+// DEBE incluir validación para TODOS los campos
 export const userSchema = z.object({
   id: UserIdSchema,
   email: z.string().email(),
@@ -348,7 +349,7 @@ export const userSchema = z.object({
 
 export type User = z.infer<typeof userSchema>;
 
-// MUST validate ALL API responses
+// DEBE validar TODAS las respuestas de la API
 export const apiResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
   z.object({
     success: z.boolean(),
@@ -358,7 +359,7 @@ export const apiResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
   });
 ````
 
-### Form Validation with React Hook Form
+### Validación de Formularios con React Hook Form
 
 ```typescript
 import { useForm } from 'react-hook-form';
@@ -375,42 +376,42 @@ function UserForm(): JSX.Element {
   });
 
   const onSubmit = async (data: User): Promise<void> => {
-    // Handle validated data
+    // Manejar datos validados
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/* Form fields */}
+      {/* Campos del formulario */}
     </form>
   );
 }
 ```
 
-## 🧪 Testing Strategy (MANDATORY REQUIREMENTS)
+## 🧪 Estrategia de Pruebas (REQUISITOS OBLIGATORIOS)
 
-### MUST Meet These Testing Standards
+### DEBE Cumplir Estos Estándares de Pruebas
 
-- **MINIMUM 80% code coverage** - NO EXCEPTIONS
-- **MUST co-locate tests** with components in `__tests__` folders
-- **MUST use React Testing Library** for all component tests
-- **MUST test user behavior** not implementation details
-- **MUST mock external dependencies** appropriately
-- **NEVER skip tests** for new features or bug fixes
+- **MÍNIMO 80% de cobertura de código** - SIN EXCEPCIONES
+- **DEBE co-ubicar las pruebas** con los componentes en carpetas `__tests__`.
+- **DEBE usar React Testing Library** para todas las pruebas de componentes.
+- **DEBE probar el comportamiento del usuario**, no los detalles de implementación.
+- **DEBE simular (mock) las dependencias externas** apropiadamente.
+- **NUNCA omita las pruebas** para nuevas características o correcciones de errores.
 
-### SonarQube Quality Gates (MUST PASS ALL)
+### Puertas de Calidad de SonarQube (DEBEN PASAR TODAS)
 
-- **Cognitive Complexity**: MAXIMUM 15 per function
-- **Cyclomatic Complexity**: MAXIMUM 10 per function
-- **Duplicated Lines**: MAXIMUM 3%
-- **Technical Debt Ratio**: MAXIMUM 5%
-- **ZERO tolerance** for critical/blocker issues
-- **ALL new code** must have 80%+ coverage
+- **Complejidad Cognitiva**: MÁXIMO 15 por función.
+- **Complejidad Ciclomática**: MÁXIMO 10 por función.
+- **Líneas Duplicadas**: MÁXIMO 3%.
+- **Ratio de Deuda Técnica**: MÁXIMO 5%.
+- **TOLERANCIA CERO** para problemas críticos/bloqueadores.
+- **TODO el código nuevo** debe tener más del 80% de cobertura.
 
-### Test Example (WITH MANDATORY DOCUMENTATION)
+### Ejemplo de Prueba (CON DOCUMENTACIÓN OBLIGATORIA)
 
 ```typescript
 /**
- * @fileoverview Tests for UserProfile component
+ * @fileoverview Pruebas para el componente UserProfile
  * @module features/user/__tests__/UserProfile.test
  */
 
@@ -418,33 +419,33 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, userEvent } from '@testing-library/react';
 
 /**
- * Test suite for UserProfile component.
+ * Suite de pruebas para el componente UserProfile.
  *
- * Tests user interactions, state management, and error handling.
- * Mocks external dependencies to ensure isolated unit tests.
+ * Prueba las interacciones del usuario, la gestión del estado y el manejo de errores.
+ * Simula las dependencias externas para asegurar pruebas unitarias aisladas.
  */
 describe('UserProfile', () => {
   /**
-   * Tests that user name updates correctly on form submission.
+   * Prueba que el nombre de usuario se actualiza correctamente al enviar el formulario.
    *
-   * Verifies:
-   * - Form renders with correct input fields
-   * - User can type in the name field
-   * - Submit button triggers update with correct data
+   * Verifica:
+   * - El formulario se renderiza con los campos de entrada correctos.
+   * - El usuario puede escribir en el campo de nombre.
+   * - El botón de envío activa la actualización con los datos correctos.
    */
-  it('should update user name on form submission', async () => {
-    // Arrange: Set up user event and mock handler
+  it('debería actualizar el nombre de usuario al enviar el formulario', async () => {
+    // Arrange: Configurar el evento de usuario y el manejador simulado
     const user = userEvent.setup();
     const onUpdate = vi.fn();
 
-    // Act: Render component and interact with form
+    // Act: Renderizar el componente e interactuar con el formulario
     render(<UserProfile onUpdate={onUpdate} />);
 
-    const input = screen.getByLabelText(/name/i);
+    const input = screen.getByLabelText(/nombre/i);
     await user.type(input, 'John Doe');
-    await user.click(screen.getByRole('button', { name: /save/i }));
+    await user.click(screen.getByRole('button', { name: /guardar/i }));
 
-    // Assert: Verify handler called with correct data
+    // Assert: Verificar que el manejador fue llamado con los datos correctos
     expect(onUpdate).toHaveBeenCalledWith(
       expect.objectContaining({ name: 'John Doe' })
     );
@@ -452,79 +453,79 @@ describe('UserProfile', () => {
 });
 ```
 
-## 🧪 Testing Exceptions (LIMITED SCOPE)
+## 🧪 Excepciones de Pruebas (ALCANCE LIMITADO)
 
-### MANDATORY Test File Rules
+### Reglas de Archivos de Prueba OBLIGATORIAS
 
-- **MUST use `unknown` instead of `any`** in Vitest interface declarations
-- **MUST disable React refresh warnings** in test utilities with explicit comments
-- **MUST include test config files** in appropriate TypeScript projects
-- **MUST use `globalThis` instead of `global`** for cross-platform compatibility
+- **DEBE usar `unknown` en lugar de `any`** en las declaraciones de interfaz de Vitest.
+- **DEBE deshabilitar las advertencias de actualización de React** en las utilidades de prueba con comentarios explícitos.
+- **DEBE incluir archivos de configuración de pruebas** en los proyectos de TypeScript apropiados.
+- **DEBE usar `globalThis` en lugar de `global`** para compatibilidad multiplataforma.
 
-### Acceptable Test File Patterns
+### Patrones de Archivos de Prueba Aceptables
 
 ```typescript
-// ✅ ACCEPTABLE: Library interface declaration merging
+// ✅ ACEPTABLE: Fusión de declaraciones de interfaz de biblioteca
 declare module "vitest" {
   interface Assertion {
-    toCustomMatcher(): void; // void return, not generic T
+    toCustomMatcher(): void; // retorno void, no genérico T
   }
   interface AsymmetricMatchersContaining {
-    toCustomMatcher(): unknown; // unknown, not any
+    toCustomMatcher(): unknown; // unknown, no any
   }
 }
 
-// ✅ ACCEPTABLE: Test utility with React refresh disable
+// ✅ ACEPTABLE: Utilidad de prueba con desactivación de actualización de React
 // eslint-disable-next-line react-refresh/only-export-components
 export * from "@testing-library/react";
 
-// ✅ ACCEPTABLE: Cross-platform global object access
-globalThis.fetch = vi.fn(); // Not global.fetch
+// ✅ ACEPTABLE: Acceso a objeto global multiplataforma
+globalThis.fetch = vi.fn(); // No global.fetch
 
-// ✅ ACCEPTABLE: Vite environment variables in tests
+// ✅ ACEPTABLE: Variables de entorno de Vite en pruebas
 Object.defineProperty(import.meta, "env", {
   value: { MODE: "test", DEV: false },
   writable: true,
 });
 ```
 
-### Test Configuration Requirements
+### Requisitos de Configuración de Pruebas
 
 ```json
-// tsconfig.node.json MUST include ALL Node.js config files
+// tsconfig.node.json DEBE incluir TODOS los archivos de configuración de Node.js
 {
   "include": ["vite.config.ts", "vitest.config.ts", "eslint.config.js"]
 }
 
-// eslint.config.js MUST reference ALL TypeScript projects
+// eslint.config.js DEBE hacer referencia a TODOS los proyectos de TypeScript
 {
   "parserOptions": {
     "project": ["./tsconfig.app.json", "./tsconfig.node.json"]
   }
 }
 
-// vite-env.d.ts MUST include vitest globals
+// vite-env.d.ts DEBE incluir los globales de vitest
 /// <reference types="vite/client" />
 /// <reference types="vitest/globals" />
 ```
 
-## 💅 Code Style & Quality
+## 💅 Estilo y Calidad del Código
 
-### Linting Stack (MANDATORY)
+### Pila de Linting (OBLIGATORIA)
 
-- **ESLint 9.x** with TypeScript plugin
-- **Prettier 3.x** for formatting
-- **eslint-plugin-sonarjs** for code quality
-- **Pre-commit validation** must pass before any commit
+- **ESLint 9.x** con plugin de TypeScript.
+- **Prettier 3.x** para el formato.
+- **eslint-plugin-sonarjs** para la calidad del código.
+- La validación pre-commit debe pasar antes de cualquier commit.
 
-### ESLint TypeScript Integration (MANDATORY)
+### Integración de ESLint con TypeScript (OBLIGATORIA)
 
-- **Project References**: MUST include ALL .ts/.tsx files in parserOptions.project
-- **Config Files**: Node.js config files (vite.config.ts, vitest.config.ts) belong in tsconfig.node.json
-- **Zero Warnings**: `--max-warnings 0` is MANDATORY - no exceptions
-- **Complete Coverage**: Every TypeScript file MUST be parseable by ESLint
+- **Referencias de Proyecto**: DEBE incluir TODOS los archivos .ts/.tsx en `parserOptions.project`.
+- **Archivos de Configuración**: Los archivos de configuración de Node.js (`vite.config.ts`, `vitest.config.ts`) pertenecen a `tsconfig.node.json`.
+- **Cero Advertencias**: `--max-warnings 0` es OBLIGATORIO - sin excepciones.
+- **Cobertura Completa**: Cada archivo de TypeScript DEBE ser analizable por ESLint.
 
-### MUST Follow These Rules
+### DEBE Seguir Estas Reglas
 
 ```javascript
 {
@@ -541,24 +542,24 @@ Object.defineProperty(import.meta, "env", {
 }
 ```
 
-## 🎨 Component Guidelines (STRICT REQUIREMENTS)
+## 🎨 Directrices de Componentes (REQUISITOS ESTRICTOS)
 
-### MANDATORY JSDoc Documentation
+### Documentación JSDoc OBLIGATORIA
 
-**MUST document ALL exported functions, classes, and complex logic following Google JSDoc standards**
+**DEBE documentar TODAS las funciones, clases y lógica compleja exportadas siguiendo los estándares de JSDoc de Google**
 
 ````typescript
 /**
- * Calculates the discount price for a product.
+ * Calcula el precio con descuento de un producto.
  *
- * This method applies a percentage discount to the original price,
- * ensuring the final price doesn't go below the minimum threshold.
+ * Este método aplica un descuento porcentual al precio original,
+ * asegurando que el precio final no sea inferior al umbral mínimo.
  *
- * @param originalPrice - The original price of the product in cents (must be positive)
- * @param discountPercent - The discount percentage (0-100)
- * @param minPrice - The minimum allowed price after discount in cents
- * @returns The calculated discount price in cents
- * @throws {ValidationError} If any parameter is invalid
+ * @param originalPrice - El precio original del producto en céntimos (debe ser positivo).
+ * @param discountPercent - El porcentaje de descuento (0-100).
+ * @param minPrice - El precio mínimo permitido después del descuento en céntimos.
+ * @returns El precio con descuento calculado en céntimos.
+ * @throws {ValidationError} Si algún parámetro es inválido.
  *
  * @example
  * ```typescript
@@ -571,28 +572,28 @@ export function calculateDiscount(
   discountPercent: number,
   minPrice: number,
 ): number {
-  // Validate inputs
+  // Validar entradas
   if (originalPrice <= 0) {
-    throw new ValidationError("Original price must be positive");
+    throw new ValidationError("El precio original debe ser positivo");
   }
 
-  // Calculate discount
+  // Calcular descuento
   const discountAmount = originalPrice * (discountPercent / 100);
   const discountedPrice = originalPrice - discountAmount;
 
-  // Ensure price doesn't go below minimum
+  // Asegurar que el precio no baje del mínimo
   return Math.max(discountedPrice, minPrice);
 }
 ````
 
-### MANDATORY Component Documentation
+### Documentación de Componentes OBLIGATORIA
 
 ````typescript
 /**
- * Button component with multiple variants and sizes.
+ * Componente de botón con múltiples variantes y tamaños.
  *
- * Provides a reusable button with consistent styling and behavior
- * across the application. Supports keyboard navigation and screen readers.
+ * Proporciona un botón reutilizable con un estilo y comportamiento consistentes
+ * en toda la aplicación. Admite navegación por teclado y lectores de pantalla.
  *
  * @component
  * @example
@@ -602,24 +603,24 @@ export function calculateDiscount(
  *   size="medium"
  *   onClick={handleSubmit}
  * >
- *   Submit Form
+ *   Enviar Formulario
  * </Button>
  * ```
  */
 interface ButtonProps {
-  /** Visual style variant of the button */
+  /** Variante de estilo visual del botón */
   variant: "primary" | "secondary";
 
-  /** Size of the button @default 'medium' */
+  /** Tamaño del botón @default 'medium' */
   size?: "small" | "medium" | "large";
 
-  /** Click handler for the button */
+  /** Manejador de clic para el botón */
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 
-  /** Content to be rendered inside the button */
+  /** Contenido a renderizar dentro del botón */
   children: React.ReactNode;
 
-  /** Whether the button is disabled @default false */
+  /** Si el botón está deshabilitado @default false */
   disabled?: boolean;
 }
 
@@ -628,63 +629,63 @@ const Button: React.FC<ButtonProps> = (
     /* props */
   },
 ) => {
-  // Implementation
+  // Implementación
 };
 ````
 
-### MANDATORY Code Comment Standards
+### Estándares de Comentarios de Código OBLIGATORIOS
 
 ```typescript
-// MUST use these comment patterns:
+// DEBE usar estos patrones de comentarios:
 
-// 1. File headers (REQUIRED for all files)
+// 1. Cabeceras de archivo (REQUERIDO para todos los archivos)
 /**
- * @fileoverview User authentication service handling login, logout, and session management.
+ * @fileoverview Servicio de autenticación de usuarios que maneja el inicio de sesión, cierre de sesión y gestión de sesiones.
  * @module features/auth/services/authService
  */
 
-// 2. Complex logic (REQUIRED when cognitive complexity > 5)
+// 2. Lógica compleja (REQUERIDO cuando la complejidad cognitiva > 5)
 /**
- * Validates user permissions against required roles.
+ * Valida los permisos del usuario contra los roles requeridos.
  *
- * Uses a hierarchical role system where admin > editor > viewer.
- * Checks are performed using bitwise operations for performance.
+ * Usa un sistema de roles jerárquico donde admin > editor > viewer.
+ * Las comprobaciones se realizan mediante operaciones a nivel de bits para el rendimiento.
  */
 function checkPermissions(userRole: Role, requiredRole: Role): boolean {
-  // Admin can access everything
+  // El administrador puede acceder a todo
   if (userRole === Role.Admin) return true;
 
-  // Check hierarchical permissions
+  // Comprobar permisos jerárquicos
   return (userRole & requiredRole) === requiredRole;
 }
 
-// 3. TODOs (MUST include issue number)
-// TODO(#123): Implement rate limiting for login attempts
+// 3. TODOs (DEBE incluir el número de issue)
+// TODO(#123): Implementar la limitación de velocidad para los intentos de inicio de sesión
 
-// 4. Inline explanations (REQUIRED for non-obvious code)
-// Use exponential backoff with jitter to prevent thundering herd
+// 4. Explicaciones en línea (REQUERIDO para código no obvio)
+// Usar retroceso exponencial con fluctuación (jitter) para evitar la estampida (thundering herd)
 const delay = Math.min(
   1000 * Math.pow(2, retryCount) + Math.random() * 1000,
   30000,
 );
 ```
 
-### MANDATORY JSDoc Rules
+### Reglas de JSDoc OBLIGATORIAS
 
-- **MUST document ALL exported functions** with full JSDoc
-- **MUST include @param** for every parameter with description
-- **MUST include @returns** with description (unless void)
-- **MUST include @throws** for any thrown errors
-- **MUST include @example** for complex functions
-- **MUST use @deprecated** with migration path when deprecating
-- **MUST document component props** with descriptions
-- **MUST add file-level @fileoverview** for each module
-- **NEVER use single-line comments** for documentation (// is only for inline explanations)
+- **DEBE documentar TODAS las funciones exportadas** con JSDoc completo.
+- **DEBE incluir `@param`** para cada parámetro con descripción.
+- **DEBE incluir `@returns`** con descripción (a menos que sea void).
+- **DEBE incluir `@throws`** para cualquier error lanzado.
+- **DEBE incluir `@example`** para funciones complejas.
+- **DEBE usar `@deprecated`** con una ruta de migración al depreciar.
+- **DEBE documentar las props de los componentes** con descripciones.
+- **DEBE añadir un `@fileoverview` a nivel de archivo** para cada módulo.
+- **NUNCA use comentarios de una sola línea** para la documentación (`//` es solo para explicaciones en línea).
 
-### MANDATORY TypeScript Requirements
+### Requisitos de TypeScript OBLIGATORIOS
 
 ```typescript
-// ✅ REQUIRED: Explicit types, clear props
+// ✅ REQUERIDO: Tipos explícitos, props claras
 interface ButtonProps {
   variant: "primary" | "secondary";
   size?: "small" | "medium" | "large";
@@ -700,24 +701,24 @@ const Button: React.FC<ButtonProps> = ({
   children,
   disabled = false,
 }) => {
-  // Implementation
+  // Implementación
 };
 
-// ❌ FORBIDDEN: Implicit types, loose typing
+// ❌ PROHIBIDO: Tipos implícitos, tipado laxo
 const Button = ({ variant, onClick, children }: any) => {
-  // Implementation
+  // Implementación
 };
 ```
 
-### Component Integration (STRICT REQUIREMENTS)
+### Integración de Componentes (REQUISITOS ESTRICTOS)
 
-- **MUST verify actual prop names** before using components
-- **MUST use exact callback parameter types** from component interfaces
-- **NEVER assume prop names match semantic expectations**
-- **MUST import proper types** for callback parameters
+- **DEBE verificar los nombres reales de las props** antes de usar los componentes.
+- **DEBE usar los tipos de parámetros de callback exactos** de las interfaces de los componentes.
+- **NUNCA asuma que los nombres de las props coinciden con las expectativas semánticas**.
+- **DEBE importar los tipos adecuados** para los parámetros de callback.
 
 ```typescript
-// ✅ CORRECT: Verify component interface and use exact prop names
+// ✅ CORRECTO: Verificar la interfaz del componente y usar los nombres de prop exactos
 import { EducationList } from './EducationList';
 import { EducationSummary } from './schemas';
 
@@ -725,57 +726,57 @@ import { EducationSummary } from './schemas';
   cvId={cvId}
   onSelectEducation={(education: EducationSummary) => handleEdit(education.id)}
   onCreateEducation={() => handleCreate()}
-  showCreateButton={showActions}  // Not showAddButton
+  showCreateButton={showActions}  // No showAddButton
   showActions={showActions}
 />
 
-// ❌ FORBIDDEN: Assuming prop names without verification
+// ❌ PROHIBIDO: Asumir nombres de prop sin verificación
 <EducationList
   cvId={cvId}
-  onEditEducation={(education) => handleEdit(education.id)}  // Wrong prop name
-  onAddEducation={() => handleCreate()}  // Wrong prop name
-  showAddButton={showActions}  // Wrong prop name
+  onEditEducation={(education) => handleEdit(education.id)}  // Nombre de prop incorrecto
+  onAddEducation={() => handleCreate()}  // Nombre de prop incorrecto
+  showAddButton={showActions}  // Nombre de prop incorrecto
 />
 ```
 
-### MUST Follow Component Best Practices
+### DEBE Seguir las Mejores Prácticas de Componentes
 
-- **MAXIMUM 200 lines** per component file
-- **MUST follow single responsibility** principle
-- **MUST validate props** with Zod when accepting external data
-- **MUST implement error boundaries** for all feature modules
-- **MUST handle ALL states**: loading, error, empty, and success
-- **NEVER return null** without explicit empty state handling
-- **MUST include ARIA labels** for accessibility
+- **MÁXIMO 200 líneas** por archivo de componente.
+- **DEBE seguir el principio de responsabilidad única**.
+- **DEBE validar las props** con Zod al aceptar datos externos.
+- **DEBE implementar límites de error** para todos los módulos de características.
+- **DEBE manejar TODOS los estados**: carga, error, vacío y éxito.
+- **NUNCA devuelva `null`** sin un manejo explícito del estado vacío.
+- **DEBE incluir etiquetas ARIA** para la accesibilidad.
 
-## 🔄 State Management (STRICT HIERARCHY)
+## 🔄 Gestión de Estado (JERARQUÍA ESTRICTA)
 
-### MUST Follow This State Hierarchy
+### DEBE Seguir Esta Jerarquía de Estado
 
-1. **Local State**: `useState` ONLY for component-specific state
-2. **Context**: For cross-component state within a single feature
-3. **Server State**: MUST use TanStack Query for ALL API data
-4. **Global State**: Zustand ONLY when truly needed app-wide
-5. **URL State**: MUST use search params for shareable state
+1. **Estado Local**: `useState` SOLO para estado específico del componente.
+2. **Contexto**: para estado entre componentes dentro de una sola característica.
+3. **Estado del Servidor**: DEBE usar TanStack Query para TODOS los datos de la API.
+4. **Estado Global**: Zustand SOLO cuando sea verdaderamente necesario en toda la aplicación.
+5. **Estado de la URL**: DEBE usar parámetros de búsqueda para estado compartible.
 
-### MANDATORY Server State Pattern
+### Patrón de Estado del Servidor OBLIGATORIO
 
 ````typescript
 /**
- * @fileoverview User data fetching hook with caching
+ * @fileoverview Hook de obtención de datos de usuario con caché
  * @module features/user/hooks/useUser
  */
 
 import { useQuery, useMutation } from "@tanstack/react-query";
 
 /**
- * Custom hook for fetching and managing user data.
+ * Hook personalizado para obtener y gestionar los datos del usuario.
  *
- * Implements caching, automatic refetching, and optimistic updates.
- * All API responses are validated with Zod schemas before use.
+ * Implementa caché, re-obtención automática y actualizaciones optimistas.
+ * Todas las respuestas de la API se validan con esquemas de Zod antes de su uso.
  *
- * @param id - The unique identifier of the user to fetch
- * @returns Query result object with user data, loading, and error states
+ * @param id - El identificador único del usuario a obtener.
+ * @returns Objeto de consulta con los datos del usuario, estados de carga y error.
  *
  * @example
  * ```tsx
@@ -792,52 +793,52 @@ function useUser(id: UserId) {
     queryFn: async () => {
       const response = await fetch(`/api/users/${id}`);
 
-      // Handle HTTP errors
+      // Manejar errores HTTP
       if (!response.ok) {
-        throw new ApiError("Failed to fetch user", response.status);
+        throw new ApiError("No se pudo obtener el usuario", response.status);
       }
 
       const data = await response.json();
 
-      // MUST validate with Zod - this is non-negotiable
+      // DEBE validar con Zod - esto no es negociable
       return userSchema.parse(data);
     },
-    staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
-    retry: 3, // Retry failed requests 3 times
+    staleTime: 5 * 60 * 1000, // Considerar los datos frescos durante 5 minutos
+    retry: 3, // Reintentar las solicitudes fallidas 3 veces
   });
 }
 ````
 
-## 🔐 Security Requirements (MANDATORY)
+## 🔐 Requisitos de Seguridad (OBLIGATORIO)
 
-### Input Validation (MUST IMPLEMENT ALL)
+### Validación de Entradas (DEBE IMPLEMENTARSE TODO)
 
-- **MUST sanitize ALL user inputs** with Zod before processing
-- **MUST validate file uploads**: type, size, and content
-- **MUST prevent XSS** with proper escaping
-- **MUST implement CSP headers** in production
-- **NEVER use dangerouslySetInnerHTML** without sanitization
+- **DEBE sanear TODAS las entradas del usuario** con Zod antes de procesarlas.
+- **DEBE validar las subidas de archivos**: tipo, tamaño y contenido.
+- **DEBE prevenir XSS** con un escapado adecuado.
+- **DEBE implementar cabeceras CSP** en producción.
+- **NUNCA use dangerouslySetInnerHTML** sin sanitización.
 
-### API Security
+### Seguridad de la API
 
-- **MUST validate ALL API responses** with Zod schemas
-- **MUST handle errors gracefully** without exposing internals
-- **NEVER log sensitive data** (passwords, tokens, PII)
+- **DEBE validar TODAS las respuestas de la API** con esquemas de Zod.
+- **DEBE manejar los errores con elegancia** sin exponer detalles internos.
+- **NUNCA registre datos sensibles** (contraseñas, tokens, PII).
 
-## 🚀 Performance Guidelines
+## 🚀 Directrices de Rendimiento
 
-### React 19 Optimizations
+### Optimizaciones de React 19
 
-- **Trust the compiler** - avoid manual memoization
-- **Use Suspense** for data fetching boundaries
-- **Implement code splitting** at route level
-- **Lazy load** heavy components
+- **Confía en el compilador** - evita la memoización manual.
+- **Usa `Suspense`** para los límites de obtención de datos.
+- **Implementa la división de código** a nivel de ruta.
+- **Carga diferida (lazy load)** de componentes pesados.
 
-### Bundle Optimization (WITH DOCUMENTATION)
+### Optimización del Paquete (Bundle) (CON DOCUMENTACIÓN)
 
 ```typescript
 /**
- * @fileoverview Vite configuration for optimized production builds
+ * @fileoverview Configuración de Vite para compilaciones de producción optimizadas
  * @module vite.config
  */
 
@@ -847,16 +848,16 @@ export default defineConfig({
     rollupOptions: {
       output: {
         /**
-         * Manual chunk strategy for optimal loading performance.
-         * Separates vendor libraries from application code to maximize
-         * browser caching effectiveness.
+         * Estrategia de fragmentación manual para un rendimiento de carga óptimo.
+         * Separa las bibliotecas de proveedores del código de la aplicación para maximizar
+         * la eficacia del almacenamiento en caché del navegador.
          */
         manualChunks: {
-          // React core libraries - rarely change
+          // Bibliotecas principales de React - rara vez cambian
           "react-vendor": ["react", "react-dom"],
-          // Data fetching libraries - moderate change frequency
+          // Bibliotecas de obtención de datos - frecuencia de cambio moderada
           "query-vendor": ["@tanstack/react-query"],
-          // Form handling libraries - moderate change frequency
+          // Bibliotecas de manejo de formularios - frecuencia de cambio moderada
           "form-vendor": ["react-hook-form", "zod"],
         },
       },
@@ -865,21 +866,21 @@ export default defineConfig({
 });
 ```
 
-## ⚠️ CRITICAL GUIDELINES (MUST FOLLOW ALL)
+## ⚠️ DIRECTRICES CRÍTICAS (DEBEN SEGUIRSE TODAS)
 
-1. **ENFORCE strict TypeScript** - ZERO compromises on type safety
-2. **VALIDATE everything with Zod** - As much as possible
-3. **MINIMUM 80% test coverage** - NO EXCEPTIONS
-4. **MUST pass ALL SonarQube quality gates** - No merging without passing
-5. **MUST co-locate related files** - Tests MUST be in `__tests__` folders
-6. **MAXIMUM 200 lines per component** - Split if larger
-7. **MAXIMUM cognitive complexity of 15** - Refactor if higher
-8. **MUST handle ALL states** - Loading, error, empty, and success
-9. **MUST use semantic commits** - feat:, fix:, docs:, refactor:, test:
-10. **MUST write complete JSDoc** - ALL exports must be documented
-11. **MUST pass ALL automated checks** - Before ANY merge
+1. **APLICAR TypeScript estricto** - CERO compromisos en la seguridad de tipos.
+2. **VALIDAR todo con Zod** - Tanto como sea posible.
+3. **MÍNIMO 80% de cobertura de pruebas** - SIN EXCEPCIONES.
+4. **DEBE pasar TODAS las puertas de calidad de SonarQube** - No fusionar sin pasar.
+5. **DEBE co-ubicar los archivos relacionados** - Las pruebas DEBEN estar en carpetas `__tests__`.
+6. **MÁXIMO 200 líneas por componente** - Dividir si es más grande.
+7. **MÁXIMA complejidad cognitiva de 15** - Refactorizar si es mayor.
+8. **DEBE manejar TODOS los estados** - Carga, error, vacío y éxito.
+9. **DEBE usar commits semánticos** - feat:, fix:, docs:, refactor:, test:.
+10. **DEBE escribir JSDoc completo** - TODAS las exportaciones deben estar documentadas.
+11. **DEBE pasar TODAS las comprobaciones automatizadas** - Antes de CUALQUIER fusión.
 
-## 📦 npm Scripts
+## 📦 Scripts de npm
 
 ```json
 {
@@ -896,58 +897,58 @@ export default defineConfig({
 }
 ```
 
-## 📋 Pre-commit Checklist (MUST COMPLETE ALL)
+## 📋 Lista de Verificación Pre-commit (DEBEN COMPLETARSE TODAS)
 
-- [ ] TypeScript compiles with ZERO errors
-- [ ] Zod schemas validate ALL external data
-- [ ] Tests written and passing (MINIMUM 80% coverage)
-- [ ] ESLint passes with ZERO warnings
-- [ ] SonarQube quality gate PASSED
-- [ ] ALL states handled (loading, error, empty, success)
-- [ ] Accessibility requirements met (ARIA labels, keyboard nav)
-- [ ] ZERO console.log statements
-- [ ] ALL functions have complete JSDoc documentation
-- [ ] Component props are fully documented
-- [ ] Complex logic has explanatory comments
-- [ ] File-level @fileoverview is present
-- [ ] TODOs include issue numbers
-- [ ] Component files under 200 lines
-- [ ] Cognitive complexity under 15 for all functions
+- [ ] TypeScript compila con CERO errores.
+- [ ] Los esquemas de Zod validan TODOS los datos externos.
+- [ ] Pruebas escritas y pasando (MÍNIMO 80% de cobertura).
+- [ ] ESLint pasa con CERO advertencias.
+- [ ] La puerta de calidad de SonarQube PASÓ.
+- [ ] TODOS los estados manejados (carga, error, vacío, éxito).
+- [ ] Requisitos de accesibilidad cumplidos (etiquetas ARIA, navegación por teclado).
+- [ ] CERO sentencias `console.log`.
+- [ ] TODAS las funciones tienen documentación JSDoc completa.
+- [ ] Las props de los componentes están completamente documentadas.
+- [ ] La lógica compleja tiene comentarios explicativos.
+- [ ] `@fileoverview` a nivel de archivo está presente.
+- [ ] Los TODOs incluyen números de issue.
+- [ ] Archivos de componentes de menos de 200 líneas.
+- [ ] Complejidad cognitiva por debajo de 15 para todas las funciones.
 
-### FORBIDDEN Practices
+### Prácticas PROHIBIDAS
 
-- **NEVER use `any` type** (except library declaration merging with comments)
-- **NEVER skip tests**
-- **NEVER ignore TypeScript errors**
-- **NEVER trust external data without validation**
-- **NEVER exceed complexity limits**
-- **NEVER skip documentation**
-- **NEVER use undocumented code**
-- **NEVER use `JSX.Element`** - use `ReactElement` instead
-- **NEVER pass `undefined` to optional props** - use conditional spreads
-- **NEVER assume component prop names** - verify interfaces first
-- **NEVER use `global`** - use `globalThis` for cross-platform compatibility
-- **NEVER omit config files from TypeScript projects** - include ALL .ts files
-
----
-
-## 📝 Recent Updates
-
-### June 2025 - TypeScript Strict Compliance Update
-
-Added comprehensive guidance based on real-world troubleshooting of 54+ TypeScript/ESLint errors:
-
-- **Testing Framework Integration**: Vitest globals, React refresh exceptions, cross-platform compatibility
-- **React 19 TypeScript Patterns**: JSX.Element → ReactElement migration, modern import patterns
-- **ExactOptionalPropertyTypes**: Undefined vs null handling, conditional spreads, API body types
-- **Branded Type Safety**: Schema.parse() patterns, system boundary validation
-- **Component Integration**: Prop name verification, callback type accuracy, interface consistency
-- **Project Configuration**: Complete TypeScript project references, ESLint coverage requirements
-
-These additions ensure zero TypeScript errors and complete IDE/CLI alignment in strict mode.
+- **NUNCA use el tipo `any`** (excepto para la fusión de declaraciones de bibliotecas con comentarios).
+- **NUNCA omita las pruebas**.
+- **NUNCA ignore los errores de TypeScript**.
+- **NUNCA confíe en datos externos sin validación**.
+- **NUNCA exceda los límites de complejidad**.
+- **NUNCA omita la documentación**.
+- **NUNCA use código no documentado**.
+- **NUNCA use `JSX.Element`** - use `ReactElement` en su lugar.
+- **NUNCA pase `undefined` a props opcionales** - use "spreads" condicionales.
+- **NUNCA asuma los nombres de las props de los componentes** - verifique las interfaces primero.
+- **NUNCA use `global`** - use `globalThis` para compatibilidad multiplataforma.
+- **NUNCA omita los archivos de configuración de los proyectos de TypeScript** - incluya TODOS los archivos .ts.
 
 ---
 
-_This guide is a living document. Update it as new patterns emerge and tools evolve._
-_Focus on quality over speed, maintainability over cleverness._
-_Last updated: December 2024_
+## 📝 Actualizaciones Recientes
+
+### Junio de 2025 - Actualización de Cumplimiento Estricto de TypeScript
+
+Se añadió una guía completa basada en la solución de problemas del mundo real de más de 54 errores de TypeScript/ESLint:
+
+- **Integración del Framework de Pruebas**: Globales de Vitest, excepciones de actualización de React, compatibilidad multiplataforma.
+- **Patrones de TypeScript de React 19**: Migración de `JSX.Element` a `ReactElement`, patrones de importación modernos.
+- **`exactOptionalPropertyTypes`**: Manejo de `undefined` vs `null`, "spreads" condicionales, tipos de cuerpo de API.
+- **Seguridad de Tipos "Brandeados"**: Patrones de `Schema.parse()`, validación en los límites del sistema.
+- **Integración de Componentes**: Verificación de nombres de props, precisión del tipo de callback, consistencia de la interfaz.
+- **Configuración del Proyecto**: Referencias completas de proyectos de TypeScript, requisitos de cobertura de ESLint.
+
+Estas adiciones aseguran cero errores de TypeScript y una alineación completa de IDE/CLI en modo estricto.
+
+---
+
+_Esta guía es un documento vivo. Actualízala a medida que surjan nuevos patrones y evolucionen las herramientas._
+_Enfócate en la calidad sobre la velocidad, la mantenibilidad sobre la astucia._
+_Última actualización: Diciembre de 2024_

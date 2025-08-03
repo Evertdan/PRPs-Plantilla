@@ -1,30 +1,30 @@
-# Execute SPEC PRP
+# Ejecutar PRP de ESPECIFICACIÓN
 
-Implement a specification using an existing SPEC PRP.
+Implementa una especificación utilizando un PRP de ESPECIFICACIÓN existente.
 
-## PRP File: $ARGUMENTS
+## Archivo PRP: $ARGUMENTS
 
-## Execution Process
+## Proceso de Ejecución
 
-1. **Understand Spec**
-   - Current state analysis
-   - Desired state goals
-   - Task dependencies
+1.  **Entender la Especificación**
+    -   Análisis del estado actual.
+    -   Objetivos del estado deseado.
+    -   Dependencias de las tareas.
 
-2. **ULTRATHINK**
-   - Think hard before you execute the plan. Create a comprehensive plan addressing all requirements.
-   - Break down complex tasks into smaller, manageable steps using your todos tools.
-   - Use the TodoWrite tool to create and track your implementation plan.
-   - Identify implementation patterns from existing code to follow.
+2.  **ULTRAPENSAR**
+    -   Piensa detenidamente antes de ejecutar el plan. Crea un plan completo que aborde todos los requisitos.
+    -   Desglosa las tareas complejas en pasos más pequeños y manejables utilizando tus herramientas de "todos" (tareas pendientes).
+    -   Usa la herramienta TodoWrite para crear y seguir tu plan de implementación.
+    -   Identifica patrones de implementación del código existente para seguirlos.
 
-3. **Execute Tasks**
-   - Follow task order
-   - Run validation after each
-   - Fix failures before proceeding
+3.  **Ejecutar Tareas**
+    -   Seguir el orden de las tareas.
+    -   Ejecutar la validación después de cada una.
+    -   Corregir los fallos antes de continuar.
 
-4. **Verify Transformation**
-   - Confirm desired state achieved
-   - Run all validation gates
-   - Test integration
+4.  **Verificar la Transformación**
+    -   Confirmar que se ha alcanzado el estado deseado.
+    -   Ejecutar todas las puertas de validación.
+    -   Probar la integración.
 
-Progress through each objective systematically.
+Avanza a través de cada objetivo de manera sistemática.

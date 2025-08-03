@@ -1,230 +1,227 @@
-# Slash commands
+# Comandos de Barra Diagonal
 
-> Control Claude's behavior during an interactive session with slash commands.
+> Controla el comportamiento de Claude durante una sesión interactiva con comandos de barra diagonal.
 
-## Built-in slash commands
+## Comandos de barra diagonal incorporados
 
-| Command                   | Purpose                                                                        |
-| :------------------------ | :----------------------------------------------------------------------------- |
-| `/add-dir`                | Add additional working directories                                             |
-| `/agents`                 | Manage custom AI subagents for specialized tasks                               |
-| `/bug`                    | Report bugs (sends conversation to Anthropic)                                  |
-| `/clear`                  | Clear conversation history                                                     |
-| `/compact [instructions]` | Compact conversation with optional focus instructions                          |
-| `/config`                 | View/modify configuration                                                      |
-| `/cost`                   | Show token usage statistics                                                    |
-| `/doctor`                 | Checks the health of your Claude Code installation                             |
-| `/help`                   | Get usage help                                                                 |
-| `/init`                   | Initialize project with CLAUDE.md guide                                        |
-| `/login`                  | Switch Anthropic accounts                                                      |
-| `/logout`                 | Sign out from your Anthropic account                                           |
-| `/mcp`                    | Manage MCP server connections and OAuth authentication                         |
-| `/memory`                 | Edit CLAUDE.md memory files                                                    |
-| `/model`                  | Select or change the AI model                                                  |
-| `/permissions`            | View or update [permissions](/en/docs/claude-code/iam#configuring-permissions) |
-| `/pr_comments`            | View pull request comments                                                     |
-| `/review`                 | Request code review                                                            |
-| `/status`                 | View account and system statuses                                               |
-| `/terminal-setup`         | Install Shift+Enter key binding for newlines (iTerm2 and VSCode only)          |
-| `/vim`                    | Enter vim mode for alternating insert and command modes                        |
+| Comando | Propósito |
+| :--- | :--- |
+| `/add-dir` | Añadir directorios de trabajo adicionales |
+| `/agents` | Gestionar subagentes de IA personalizados para tareas especializadas |
+| `/bug` | Informar de errores (envía la conversación a Anthropic) |
+| `/clear` | Limpiar el historial de la conversación |
+| `/compact [instrucciones]` | Compactar la conversación con instrucciones de enfoque opcionales |
+| `/config` | Ver/modificar la configuración |
+| `/cost` | Mostrar estadísticas de uso de tokens |
+| `/doctor` | Comprueba la salud de tu instalación de Claude Code |
+| `/help` | Obtener ayuda sobre el uso |
+| `/init` | Inicializar el proyecto con la guía CLAUDE.md |
+| `/login` | Cambiar de cuenta de Anthropic |
+| `/logout` | Cerrar sesión de tu cuenta de Anthropic |
+| `/mcp` | Gestionar conexiones de servidor MCP y autenticación OAuth |
+| `/memory` | Editar archivos de memoria CLAUDE.md |
+| `/model` | Seleccionar o cambiar el modelo de IA |
+| `/permissions` | Ver o actualizar [permisos](/en/docs/claude-code/iam#configuring-permissions) |
+| `/pr_comments` | Ver comentarios de pull request |
+| `/review` | Solicitar revisión de código |
+| `/status` | Ver estados de la cuenta y del sistema |
+| `/terminal-setup` | Instalar el atajo de teclado Shift+Enter para nuevas líneas (solo iTerm2 y VSCode) |
+| `/vim` | Entrar en modo vim para alternar entre los modos de inserción y comando |
 
-## Custom slash commands
+## Comandos de barra diagonal personalizados
 
-Custom slash commands allow you to define frequently-used prompts as Markdown files that Claude Code can execute. Commands are organized by scope (project-specific or personal) and support namespacing through directory structures.
+Los comandos de barra diagonal personalizados te permiten definir prompts de uso frecuente como archivos Markdown que Claude Code puede ejecutar. Los comandos se organizan por ámbito (específicos del proyecto o personales) y admiten espacios de nombres a través de estructuras de directorios.
 
-### Syntax
+### Sintaxis
 
 ```
-/<command-name> [arguments]
+/<nombre-comando> [argumentos]
 ```
 
-#### Parameters
+#### Parámetros
 
-| Parameter        | Description                                                       |
-| :--------------- | :---------------------------------------------------------------- |
-| `<command-name>` | Name derived from the Markdown filename (without `.md` extension) |
-| `[arguments]`    | Optional arguments passed to the command                          |
+| Parámetro | Descripción |
+| :--- | :--- |
+| `<nombre-comando>` | Nombre derivado del nombre del archivo Markdown (sin la extensión `.md`) |
+| `[argumentos]` | Argumentos opcionales pasados al comando |
 
-### Command types
+### Tipos de comando
 
-#### Project commands
+#### Comandos de proyecto
 
-Commands stored in your repository and shared with your team. When listed in `/help`, these commands show "(project)" after their description.
+Comandos almacenados en tu repositorio y compartidos con tu equipo. Cuando se listan en `/help`, estos comandos muestran "(proyecto)" después de su descripción.
 
-**Location**: `.claude/commands/`
+**Ubicación**: `.claude/commands/`
 
-In the following example, we create the `/optimize` command:
+En el siguiente ejemplo, creamos el comando `/optimize`:
 
 ```bash
-# Create a project command
+# Crear un comando de proyecto
 mkdir -p .claude/commands
-echo "Analyze this code for performance issues and suggest optimizations:" > .claude/commands/optimize.md
+echo "Analiza este código en busca de problemas de rendimiento y sugiere optimizaciones:" > .claude/commands/optimize.md
 ```
 
-#### Personal commands
+#### Comandos personales
 
-Commands available across all your projects. When listed in `/help`, these commands show "(user)" after their description.
+Comandos disponibles en todos tus proyectos. Cuando se listan en `/help`, estos comandos muestran "(usuario)" después de su descripción.
 
-**Location**: `~/.claude/commands/`
+**Ubicación**: `~/.claude/commands/`
 
-In the following example, we create the `/security-review` command:
+En el siguiente ejemplo, creamos el comando `/security-review`:
 
 ```bash
-# Create a personal command
+# Crear un comando personal
 mkdir -p ~/.claude/commands
-echo "Review this code for security vulnerabilities:" > ~/.claude/commands/security-review.md
+echo "Revisa este código en busca de vulnerabilidades de seguridad:" > ~/.claude/commands/security-review.md
 ```
 
-### Features
+### Características
 
-#### Namespacing
+#### Espacios de nombres (Namespacing)
 
-Organize commands in subdirectories. The subdirectories determine the command's
-full name. The description will show whether the command comes from the project
-directory (`.claude/commands`) or the user-level directory (`~/.claude/commands`).
+Organiza los comandos en subdirectorios. Los subdirectorios determinan el nombre completo del comando. La descripción mostrará si el comando proviene del directorio del proyecto (`.claude/commands`) o del directorio a nivel de usuario (`~/.claude/commands`).
 
-Conflicts between user and project level commands are not supported. Otherwise,
-multiple commands with the same base file name can coexist.
+No se admiten conflictos entre comandos a nivel de usuario y de proyecto. Por lo demás, pueden coexistir múltiples comandos con el mismo nombre de archivo base.
 
-For example, a file at `.claude/commands/frontend/component.md` creates the command `/frontend:component` with description showing "(project)".
-Meanwhile, a file at `~/.claude/commands/component.md` creates the command `/component` with description showing "(user)".
+Por ejemplo, un archivo en `.claude/commands/frontend/component.md` crea el comando `/frontend:component` con una descripción que muestra "(proyecto)".
+Mientras tanto, un archivo en `~/.claude/commands/component.md` crea el comando `/component` con una descripción que muestra "(usuario)".
 
-#### Arguments
+#### Argumentos
 
-Pass dynamic values to commands using the `$ARGUMENTS` placeholder.
+Pasa valores dinámicos a los comandos usando el marcador de posición `$ARGUMENTS`.
 
-For example:
+Por ejemplo:
 
 ```bash
-# Command definition
-echo 'Fix issue #$ARGUMENTS following our coding standards' > .claude/commands/fix-issue.md
+# Definición del comando
+echo 'Arregla el issue #$ARGUMENTS siguiendo nuestros estándares de codificación' > .claude/commands/fix-issue.md
 
-# Usage
+# Uso
 > /fix-issue 123
 ```
 
-#### Bash command execution
+#### Ejecución de comandos Bash
 
-Execute bash commands before the slash command runs using the `!` prefix. The output is included in the command context. You _must_ include `allowed-tools` with the `Bash` tool, but you can choose the specific bash commands to allow.
+Ejecuta comandos bash antes de que se ejecute el comando de barra diagonal usando el prefijo `!`. La salida se incluye en el contexto del comando. _Debes_ incluir `allowed-tools` con la herramienta `Bash`, pero puedes elegir los comandos bash específicos a permitir.
 
-For example:
+Por ejemplo:
 
 ```markdown
 ---
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)
-description: Create a git commit
+description: Crear un commit de git
 ---
 
-## Context
+## Contexto
 
-- Current git status: !`git status`
-- Current git diff (staged and unstaged changes): !`git diff HEAD`
-- Current branch: !`git branch --show-current`
-- Recent commits: !`git log --oneline -10`
+- Estado actual de git: !`git status`
+- Diferencia actual de git (cambios preparados y no preparados): !`git diff HEAD`
+- Rama actual: !`git branch --show-current`
+- Commits recientes: !`git log --oneline -10`
 
-## Your task
+## Tu tarea
 
-Based on the above changes, create a single git commit.
+Basado en los cambios anteriores, crea un único commit de git.
 ```
 
-#### File references
+#### Referencias de archivos
 
-Include file contents in commands using the `@` prefix to [reference files](/en/docs/claude-code/common-workflows#reference-files-and-directories).
+Incluye el contenido de los archivos en los comandos usando el prefijo `@` para [referenciar archivos](/en/docs/claude-code/common-workflows#reference-files-and-directories).
 
-For example:
+Por ejemplo:
 
 ```markdown
-# Reference a specific file
+# Referenciar un archivo específico
 
-Review the implementation in @src/utils/helpers.js
+Revisa la implementación en @src/utils/helpers.js
 
-# Reference multiple files
+# Referenciar múltiples archivos
 
-Compare @src/old-version.js with @src/new-version.js
+Compara @src/old-version.js con @src/new-version.js
 ```
 
-#### Thinking mode
+#### Modo de pensamiento
 
-Slash commands can trigger extended thinking by including [extended thinking keywords](/en/docs/claude-code/common-workflows#use-extended-thinking).
+Los comandos de barra diagonal pueden activar un pensamiento extendido al incluir [palabras clave de pensamiento extendido](/en/docs/claude-code/common-workflows#use-extended-thinking).
 
 ### Frontmatter
 
-Command files support frontmatter, useful for specifying metadata about the command:
+Los archivos de comando admiten frontmatter, útil para especificar metadatos sobre el comando:
 
-\| Frontmatter | Purpose | Default |
-\| :-------------- | :--------------------------------------------------------------------------------- | :---------------------------------- | ----------------------------------------------------------------------------- | ---- |
-\| `allowed-tools` | List of tools the command can use | Inherits from the conversation |
-\| `argument-hint` | The arguments expected for the slash command. Example: `argument-hint: add [tagId] | remove [tagId]                      | list`. This hint is shown to the user when auto-completing the slash command. | None |
-\| `description` | Brief description of the command | Uses the first line from the prompt |
-\| `model` | `opus`, `sonnet`, `haiku`, or a specific model string | Inherits from the conversation |
+\| Frontmatter | Propósito | Por defecto |
+\| :--- | :--- | :--- |
+\| `allowed-tools` | Lista de herramientas que el comando puede usar | Hereda de la conversación |
+\| `argument-hint` | Los argumentos esperados para el comando de barra diagonal. Ejemplo: `argument-hint: add [tagId] | remove [tagId]                      | list`. Esta pista se muestra al usuario al autocompletar el comando de barra diagonal. | Ninguno |
+\| `description` | Breve descripción del comando | Usa la primera línea del prompt |
+\| `model` | `opus`, `sonnet`, `haiku`, o una cadena de modelo específica | Hereda de la conversación |
 
-For example:
+Por ejemplo:
 
 ```markdown
 ---
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)
-argument-hint: [message]
-description: Create a git commit
+argument-hint: [mensaje]
+description: Crear un commit de git
 model: haiku
 ---
 
-An example command
+Un comando de ejemplo
 ```
 
-## MCP slash commands
+## Comandos de barra diagonal de MCP
 
-MCP servers can expose prompts as slash commands that become available in Claude Code. These commands are dynamically discovered from connected MCP servers.
+Los servidores MCP pueden exponer prompts como comandos de barra diagonal que se vuelven disponibles en Claude Code. Estos comandos se descubren dinámicamente desde los servidores MCP conectados.
 
-### Command format
+### Formato del comando
 
-MCP commands follow the pattern:
-
-```
-/mcp__<server-name>__<prompt-name> [arguments]
-```
-
-### Features
-
-#### Dynamic discovery
-
-MCP commands are automatically available when:
-
-- An MCP server is connected and active
-- The server exposes prompts through the MCP protocol
-- The prompts are successfully retrieved during connection
-
-#### Arguments
-
-MCP prompts can accept arguments defined by the server:
+Los comandos de MCP siguen el patrón:
 
 ```
-# Without arguments
+/mcp__<nombre-servidor>__<nombre-prompt> [argumentos]
+```
+
+### Características
+
+#### Descubrimiento dinámico
+
+Los comandos de MCP están disponibles automáticamente cuando:
+
+- Un servidor MCP está conectado y activo.
+- El servidor expone prompts a través del protocolo MCP.
+- Los prompts se recuperan con éxito durante la conexión.
+
+#### Argumentos
+
+Los prompts de MCP pueden aceptar argumentos definidos por el servidor:
+
+```
+# Sin argumentos
 > /mcp__github__list_prs
 
-# With arguments
+# Con argumentos
 > /mcp__github__pr_review 456
-> /mcp__jira__create_issue "Bug title" high
+> /mcp__jira__create_issue "Título del bug" alta
 ```
 
-#### Naming conventions
+#### Convenciones de nomenclatura
 
-- Server and prompt names are normalized
-- Spaces and special characters become underscores
-- Names are lowercased for consistency
+- Los nombres de servidores y prompts se normalizan.
+- Los espacios y caracteres especiales se convierten en guiones bajos.
+- Los nombres se convierten a minúsculas por consistencia.
 
-### Managing MCP connections
+### Gestión de conexiones MCP
 
-Use the `/mcp` command to:
+Usa el comando `/mcp` para:
 
-- View all configured MCP servers
-- Check connection status
-- Authenticate with OAuth-enabled servers
-- Clear authentication tokens
-- View available tools and prompts from each server
+- Ver todos los servidores MCP configurados.
+- Comprobar el estado de la conexión.
+- Autenticarse con servidores habilitados para OAuth.
+- Limpiar los tokens de autenticación.
+- Ver las herramientas y prompts disponibles de cada servidor.
 
-## See also
+## Ver también
 
-- [Interactive mode](/en/docs/claude-code/interactive-mode) - Shortcuts, input modes, and interactive features
-- [CLI reference](/en/docs/claude-code/cli-reference) - Command-line flags and options
-- [Settings](/en/docs/claude-code/settings) - Configuration options
-- [Memory management](/en/docs/claude-code/memory) - Managing Claude's memory across sessions
+- [Modo interactivo](/en/docs/claude-code/interactive-mode) - Atajos, modos de entrada y características interactivas
+- [Referencia de la CLI](/en/docs/claude-code/cli-reference) - Banderas y opciones de línea de comandos
+- [Configuración](/en/docs/claude-code/settings) - Opciones de configuración
+- [Gestión de la memoria](/en/docs/claude-code/memory) - Gestionando la memoria de Claude entre sesiones

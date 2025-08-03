@@ -1,129 +1,129 @@
-# Define API Contract Between Backend and Frontend
+# Definir Contrato de API Entre Backend y Frontend
 
-Feature: $ARGUMENTS
+Funcionalidad: $ARGUMENTS
 
-## Task: Create detailed API contract specification for backend/frontend coordination
+## Tarea: Crear una especificación detallada del contrato de API para la coordinación entre backend y frontend
 
-1. **Define RESTful endpoints**:
+1.  **Definir endpoints RESTful**:
 
-   ```yaml
-   Base URL: /api/v1/{feature}
+    ```yaml
+    URL Base: /api/v1/{funcionalidad}
 
-   Endpoints:
-   - GET /api/v1/{features}
-     Query params: page, size, sort, filter
-     Response: Page<{Feature}Response>
+    Endpoints:
+    - GET /api/v1/{funcionalidades}
+      Parámetros de consulta: page, size, sort, filter
+      Respuesta: Page<{Funcionalidad}Response>
 
-   - GET /api/v1/{features}/{id}
-     Path param: id (Long)
-     Response: {Feature}Response
+    - GET /api/v1/{funcionalidades}/{id}
+      Parámetro de ruta: id (Long)
+      Respuesta: {Funcionalidad}Response
 
-   - POST /api/v1/{features}
-     Body: {Feature}Request
-     Response: {Feature}Response (201 Created)
+    - POST /api/v1/{funcionalidades}
+      Cuerpo: {Funcionalidad}Request
+      Respuesta: {Funcionalidad}Response (201 Created)
 
-   - PUT /api/v1/{features}/{id}
-     Path param: id (Long)
-     Body: {Feature}Request
-     Response: {Feature}Response
+    - PUT /api/v1/{funcionalidades}/{id}
+      Parámetro de ruta: id (Long)
+      Cuerpo: {Funcionalidad}Request
+      Respuesta: {Funcionalidad}Response
 
-   - DELETE /api/v1/{features}/{id}
-     Path param: id (Long)
-     Response: 204 No Content
-   ```
+    - DELETE /api/v1/{funcionalidades}/{id}
+      Parámetro de ruta: id (Long)
+      Respuesta: 204 No Content
+    ```
 
-2. **Define request/response DTOs**:
+2.  **Definir DTOs (Data Transfer Objects) de solicitud/respuesta**:
 
-   ```typescript
-   // Request DTO (for POST/PUT)
-   interface {Feature}Request {
-     name: string;        // min: 2, max: 100
-     description?: string; // max: 1000
-     // Add domain-specific fields
-   }
+    ```typescript
+    // DTO de Solicitud (para POST/PUT)
+    interface {Funcionalidad}Request {
+      nombre: string;        // min: 2, max: 100
+      descripcion?: string; // max: 1000
+      // Añadir campos específicos del dominio
+    }
 
-   // Response DTO (for GET)
-   interface {Feature}Response {
-     id: number;
-     name: string;
-     description?: string;
-     createdAt: string;   // ISO 8601
-     updatedAt: string;   // ISO 8601
-     // Add computed fields
-   }
+    // DTO de Respuesta (para GET)
+    interface {Funcionalidad}Response {
+      id: number;
+      nombre: string;
+      descripcion?: string;
+      createdAt: string;   // ISO 8601
+      updatedAt: string;   // ISO 8601
+      // Añadir campos calculados
+    }
 
-   // Page response wrapper
-   interface Page<T> {
-     content: T[];
-     totalElements: number;
-     totalPages: number;
-     size: number;
-     number: number;
-   }
-   ```
+    // Envoltorio de respuesta de página
+    interface Page<T> {
+      content: T[];
+      totalElements: number;
+      totalPages: number;
+      size: number;
+      number: number;
+    }
+    ```
 
-3. **Define error responses**:
+3.  **Definir respuestas de error**:
 
-   ```json
-   {
-     "timestamp": "2024-01-20T10:30:00Z",
-     "status": 400,
-     "error": "Bad Request",
-     "message": "Validation failed",
-     "path": "/api/v1/{features}",
-     "errors": [
-       {
-         "field": "name",
-         "message": "Name is required"
-       }
-     ]
-   }
-   ```
+    ```json
+    {
+      "timestamp": "2024-01-20T10:30:00Z",
+      "status": 400,
+      "error": "Bad Request",
+      "message": "Falló la validación",
+      "path": "/api/v1/{funcionalidades}",
+      "errors": [
+        {
+          "field": "nombre",
+          "message": "El nombre es obligatorio"
+        }
+      ]
+    }
+    ```
 
-4. **Define validation rules**:
-   - Backend: Bean Validation annotations
-   - Frontend: Matching Zod schemas
+4.  **Definir reglas de validación**:
+    -   Backend: Anotaciones de Bean Validation.
+    -   Frontend: Esquemas de Zod correspondientes.
 
-   ```
-   name: required, 2-100 chars
-   description: optional, max 1000 chars
-   email: valid email format
-   date: ISO 8601 format
-   ```
+    ```
+    nombre: obligatorio, 2-100 caracteres
+    descripcion: opcional, max 1000 caracteres
+    email: formato de email válido
+    fecha: formato ISO 8601
+    ```
 
-5. **Define status codes**:
-   - 200: OK (GET, PUT)
-   - 201: Created (POST)
-   - 204: No Content (DELETE)
-   - 400: Bad Request (validation)
-   - 404: Not Found
-   - 409: Conflict (duplicate)
-   - 500: Internal Server Error
+5.  **Definir códigos de estado**:
+    -   200: OK (GET, PUT)
+    -   201: Created (POST)
+    -   204: No Content (DELETE)
+    -   400: Bad Request (validación)
+    -   404: Not Found
+    -   409: Conflict (duplicado)
+    -   500: Internal Server Error
 
-6. **Integration requirements**:
-   - CORS: Allow frontend origin
-   - Content-Type: application/json
-   - Authentication: Bearer token (if needed)
-   - Pagination: Spring Pageable format
-   - Sorting: field,direction (e.g., "name,asc")
+6.  **Requisitos de integración**:
+    -   CORS: Permitir el origen del frontend.
+    -   Content-Type: application/json
+    -   Autenticación: Bearer token (si es necesario).
+    -   Paginación: Formato de Spring Pageable.
+    -   Ordenación: campo,direccion (ej., "nombre,asc").
 
-7. **Backend implementation notes**:
+7.  **Notas de implementación para el Backend**:
 
-   ```java
-   // Entity fields match response DTO
-   // Use MapStruct for DTO mapping
-   // Repository method naming conventions
-   // Service layer validation
-   ```
+    ```java
+    // Los campos de la entidad coinciden con el DTO de respuesta
+    // Usar MapStruct para el mapeo de DTOs
+    // Convenciones de nomenclatura de métodos del repositorio
+    // Validación en la capa de servicio
+    ```
 
-8. **Frontend implementation notes**:
-   ```typescript
-   // Zod schemas match validation rules
-   // API client with base configuration
-   // TanStack Query hooks
-   // Error handling utilities
-   ```
+8.  **Notas de implementación para el Frontend**:
+    ```typescript
+    // Los esquemas de Zod coinciden con las reglas de validación
+    // Cliente de API con configuración base
+    // Hooks de TanStack Query
+    // Utilidades de manejo de errores
+    ```
 
-Save this contract as: `PRPs/contracts/{feature}-api-contract.md`
+Guarda este contrato como: `PRPs/contracts/{funcionalidad}-api-contract.md`
 
-Share this file between backend and frontend teams for alignment.
+Comparte este archivo entre los equipos de backend y frontend para la alineación.

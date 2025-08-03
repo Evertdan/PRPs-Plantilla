@@ -1,27 +1,25 @@
-# Claude Code settings
+# Configuración de Claude Code
 
-> Configure Claude Code with global and project-level settings, and environment variables.
+> Configura Claude Code con ajustes globales y a nivel de proyecto, y variables de entorno.
 
-Claude Code offers a variety of settings to configure its behavior to meet your needs. You can configure Claude Code by running the `/config` command when using the interactive REPL.
+Claude Code ofrece una variedad de ajustes para configurar su comportamiento y satisfacer tus necesidades. Puedes configurar Claude Code ejecutando el comando `/config` cuando usas el REPL interactivo.
 
-## Settings files
+## Archivos de configuración
 
-The `settings.json` file is our official mechanism for configuring Claude
-Code through hierarchical settings:
+El archivo `settings.json` es nuestro mecanismo oficial para configurar Claude
+Code a través de ajustes jerárquicos:
 
-- **User settings** are defined in `~/.claude/settings.json` and apply to all
-  projects.
-- **Project settings** are saved in your project directory:
-  - `.claude/settings.json` for settings that are checked into source control and shared with your team
-  - `.claude/settings.local.json` for settings that are not checked in, useful for personal preferences and experimentation. Claude Code will configure git to ignore `.claude/settings.local.json` when it is created.
-- For enterprise deployments of Claude Code, we also support **enterprise
-  managed policy settings**. These take precedence over user and project
-  settings. System administrators can deploy policies to:
+- **Ajustes de usuario** se definen en `~/.claude/settings.json` y se aplican a todos
+  los proyectos.
+- **Ajustes de proyecto** se guardan en el directorio de tu proyecto:
+  - `.claude/settings.json` para ajustes que se registran en el control de versiones y se comparten con tu equipo.
+  - `.claude/settings.local.json` para ajustes que no se registran, útil para preferencias personales y experimentación. Claude Code configurará git para ignorar `.claude/settings.local.json` cuando se cree.
+- Para despliegues empresariales de Claude Code, también admitimos **ajustes de políticas gestionadas por la empresa**. Estos tienen prioridad sobre los ajustes de usuario y de proyecto. Los administradores de sistemas pueden desplegar políticas en:
   - macOS: `/Library/Application Support/ClaudeCode/managed-settings.json`
-  - Linux and WSL: `/etc/claude-code/managed-settings.json`
+  - Linux y WSL: `/etc/claude-code/managed-settings.json`
   - Windows: `C:\ProgramData\ClaudeCode\managed-settings.json`
 
-```JSON Example settings.json
+```JSON Ejemplo de settings.json
 {
   "permissions": {
     "allow": [
@@ -40,443 +38,346 @@ Code through hierarchical settings:
 }
 ```
 
-### Available settings
+### Ajustes disponibles
 
-`settings.json` supports a number of options:
+`settings.json` admite varias opciones:
 
-| Key                          | Description                                                                                                                                                           | Example                                                 |
-| :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------ |
-| `apiKeyHelper`               | Custom script, to be executed in `/bin/sh`, to generate an auth value. This value will be sent as `X-Api-Key` and `Authorization: Bearer` headers for model requests  | `/bin/generate_temp_api_key.sh`                         |
-| `cleanupPeriodDays`          | How long to locally retain chat transcripts (default: 30 days)                                                                                                        | `20`                                                    |
-| `env`                        | Environment variables that will be applied to every session                                                                                                           | `{"FOO": "bar"}`                                        |
-| `includeCoAuthoredBy`        | Whether to include the `co-authored-by Claude` byline in git commits and pull requests (default: `true`)                                                              | `false`                                                 |
-| `permissions`                | See table below for structure of permissions.                                                                                                                         |                                                         |
-| `hooks`                      | Configure custom commands to run before or after tool executions. See [hooks documentation](hooks)                                                                    | `{"PreToolUse": {"Bash": "echo 'Running command...'"}}` |
-| `model`                      | Override the default model to use for Claude Code                                                                                                                     | `"claude-3-5-sonnet-20241022"`                          |
-| `forceLoginMethod`           | Use `claudeai` to restrict login to Claude.ai accounts, `console` to restrict login to Anthropic Console (API usage billing) accounts                                 | `claudeai`                                              |
-| `enableAllProjectMcpServers` | Automatically approve all MCP servers defined in project `.mcp.json` files                                                                                            | `true`                                                  |
-| `enabledMcpjsonServers`      | List of specific MCP servers from `.mcp.json` files to approve                                                                                                        | `["memory", "github"]`                                  |
-| `disabledMcpjsonServers`     | List of specific MCP servers from `.mcp.json` files to reject                                                                                                         | `["filesystem"]`                                        |
-| `awsAuthRefresh`             | Custom script that modifies the `.aws` directory (see [advanced credential configuration](/en/docs/claude-code/amazon-bedrock#advanced-credential-configuration))     | `aws sso login --profile myprofile`                     |
-| `awsCredentialExport`        | Custom script that outputs JSON with AWS credentials (see [advanced credential configuration](/en/docs/claude-code/amazon-bedrock#advanced-credential-configuration)) | `/bin/generate_aws_grant.sh`                            |
+| Clave | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `apiKeyHelper` | Script personalizado, a ejecutar en `/bin/sh`, para generar un valor de autenticación. Este valor se enviará como cabeceras `X-Api-Key` y `Authorization: Bearer` para las solicitudes del modelo. | `/bin/generate_temp_api_key.sh` |
+| `cleanupPeriodDays` | Cuánto tiempo retener localmente las transcripciones de chat (por defecto: 30 días). | `20` |
+| `env` | Variables de entorno que se aplicarán a cada sesión. | `{"FOO": "bar"}` |
+| `includeCoAuthoredBy` | Si se debe incluir la línea `co-authored-by Claude` en los commits de git y pull requests (por defecto: `true`). | `false` |
+| `permissions` | Consulta la tabla a continuación para la estructura de los permisos. | |
+| `hooks` | Configura comandos personalizados para ejecutar antes o después de las ejecuciones de herramientas. Consulta la [documentación de hooks](hooks). | `{"PreToolUse": {"Bash": "echo 'Ejecutando comando...'"}}` |
+| `model` | Sobrescribe el modelo por defecto a usar para Claude Code. | `"claude-3-5-sonnet-20241022"` |
+| `forceLoginMethod` | Usa `claudeai` para restringir el inicio de sesión a cuentas de Claude.ai, `console` para restringir el inicio de sesión a cuentas de la Consola de Anthropic (facturación por uso de API). | `claudeai` |
+| `enableAllProjectMcpServers` | Aprobar automáticamente todos los servidores MCP definidos en los archivos `.mcp.json` del proyecto. | `true` |
+| `enabledMcpjsonServers` | Lista de servidores MCP específicos de los archivos `.mcp.json` para aprobar. | `["memory", "github"]` |
+| `disabledMcpjsonServers` | Lista de servidores MCP específicos de los archivos `.mcp.json` para rechazar. | `["filesystem"]` |
+| `awsAuthRefresh` | Script personalizado que modifica el directorio `.aws` (consulta la [configuración avanzada de credenciales](/en/docs/claude-code/amazon-bedrock#advanced-credential-configuration)). | `aws sso login --profile myprofile` |
+| `awsCredentialExport` | Script personalizado que devuelve JSON con credenciales de AWS (consulta la [configuración avanzada de credenciales](/en/docs/claude-code/amazon-bedrock#advanced-credential-configuration)). | `/bin/generate_aws_grant.sh` |
 
-### Permission settings
+### Ajustes de permisos
 
-| Keys                           | Description                                                                                                                                        | Example                          |
-| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------- |
-| `allow`                        | Array of [permission rules](/en/docs/claude-code/iam#configuring-permissions) to allow tool use                                                    | `[ "Bash(git diff:*)" ]`         |
-| `deny`                         | Array of [permission rules](/en/docs/claude-code/iam#configuring-permissions) to deny tool use                                                     | `[ "WebFetch", "Bash(curl:*)" ]` |
-| `additionalDirectories`        | Additional [working directories](iam#working-directories) that Claude has access to                                                                | `[ "../docs/" ]`                 |
-| `defaultMode`                  | Default [permission mode](iam#permission-modes) when opening Claude Code                                                                           | `"acceptEdits"`                  |
-| `disableBypassPermissionsMode` | Set to `"disable"` to prevent `bypassPermissions` mode from being activated. See [managed policy settings](iam#enterprise-managed-policy-settings) | `"disable"`                      |
+| Claves | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `allow` | Array de [reglas de permiso](/en/docs/claude-code/iam#configuring-permissions) para permitir el uso de herramientas. | `[ "Bash(git diff:*)" ]` |
+| `deny` | Array de [reglas de permiso](/en/docs/claude-code/iam#configuring-permissions) para denegar el uso de herramientas. | `[ "WebFetch", "Bash(curl:*)" ]` |
+| `additionalDirectories` | [Directorios de trabajo](/en/docs/claude-code/iam#working-directories) adicionales a los que Claude tiene acceso. | `[ "../docs/" ]` |
+| `defaultMode` | [Modo de permiso](/en/docs/claude-code/iam#permission-modes) por defecto al abrir Claude Code. | `"acceptEdits"` |
+| `disableBypassPermissionsMode` | Establece en `"disable"` para evitar que se active el modo `bypassPermissions`. Consulta los [ajustes de políticas gestionadas](iam#enterprise-managed-policy-settings). | `"disable"` |
 
-### Settings precedence
+### Precedencia de los ajustes
 
-Settings are applied in order of precedence:
+Los ajustes se aplican en orden de precedencia:
 
-1. Enterprise policies (see [IAM documentation](/en/docs/claude-code/iam#enterprise-managed-policy-settings))
-2. Command line arguments
-3. Local project settings
-4. Shared project settings
-5. User settings
+1. Políticas empresariales (consulta la [documentación de IAM](/en/docs/claude-code/iam#enterprise-managed-policy-settings))
+2. Argumentos de la línea de comandos
+3. Ajustes locales del proyecto
+4. Ajustes compartidos del proyecto
+5. Ajustes de usuario
 
-## Subagent configuration
+## Configuración de subagentes
 
-Claude Code supports custom AI subagents that can be configured at both user and project levels. These subagents are stored as Markdown files with YAML frontmatter:
+Claude Code admite subagentes de IA personalizados que se pueden configurar tanto a nivel de usuario como de proyecto. Estos subagentes se almacenan como archivos Markdown con frontmatter YAML:
 
-- **User subagents**: `~/.claude/agents/` - Available across all your projects
-- **Project subagents**: `.claude/agents/` - Specific to your project and can be shared with your team
+- **Subagentes de usuario**: `~/.claude/agents/` - Disponibles en todos tus proyectos.
+- **Subagentes de proyecto**: `.claude/agents/` - Específicos de tu proyecto y se pueden compartir con tu equipo.
 
-Subagent files define specialized AI assistants with custom prompts and tool permissions. Learn more about creating and using subagents in the [subagents documentation](/en/docs/claude-code/sub-agents).
+Los archivos de subagentes definen asistentes de IA especializados con prompts personalizados y permisos de herramientas. Aprende más sobre cómo crear y usar subagentes en la [documentación de subagentes](/en/docs/claude-code/sub-agents).
 
-## Environment variables
+## Variables de entorno
 
-Claude Code supports the following environment variables to control its behavior:
+Claude Code admite las siguientes variables de entorno para controlar su comportamiento:
 
 <Note>
-  All environment variables can also be configured in [`settings.json`](#available-settings). This is useful as a way to automatically set environment variables for each session, or to roll out a set of environment variables for your whole team or organization.
+  Todas las variables de entorno también se pueden configurar en [`settings.json`](#available-settings). Esto es útil como una forma de establecer automáticamente variables de entorno para cada sesión, o para implementar un conjunto de variables de entorno para todo tu equipo u organización.
 </Note>
 
-| Variable                                   | Purpose                                                                                                                                                            |
-| :----------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ANTHROPIC_API_KEY`                        | API key sent as `X-Api-Key` header, typically for the Claude SDK (for interactive usage, run `/login`)                                                             |
-| `ANTHROPIC_AUTH_TOKEN`                     | Custom value for the `Authorization` header (the value you set here will be prefixed with `Bearer `)                                                               |
-| `ANTHROPIC_CUSTOM_HEADERS`                 | Custom headers you want to add to the request (in `Name: Value` format)                                                                                            |
-| `ANTHROPIC_MODEL`                          | Name of custom model to use (see [Model Configuration](/en/docs/claude-code/bedrock-vertex-proxies#model-configuration))                                           |
-| `ANTHROPIC_SMALL_FAST_MODEL`               | Name of [Haiku-class model for background tasks](/en/docs/claude-code/costs)                                                                                       |
-| `ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION`    | Override AWS region for the small/fast model when using Bedrock                                                                                                    |
-| `AWS_BEARER_TOKEN_BEDROCK`                 | Bedrock API key for authentication (see [Bedrock API keys](https://aws.amazon.com/blogs/machine-learning/accelerate-ai-development-with-amazon-bedrock-api-keys/)) |
-| `BASH_DEFAULT_TIMEOUT_MS`                  | Default timeout for long-running bash commands                                                                                                                     |
-| `BASH_MAX_TIMEOUT_MS`                      | Maximum timeout the model can set for long-running bash commands                                                                                                   |
-| `BASH_MAX_OUTPUT_LENGTH`                   | Maximum number of characters in bash outputs before they are middle-truncated                                                                                      |
-| `CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR` | Return to the original working directory after each Bash command                                                                                                   |
-| `CLAUDE_CODE_API_KEY_HELPER_TTL_MS`        | Interval in milliseconds at which credentials should be refreshed (when using `apiKeyHelper`)                                                                      |
-| `CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL`        | Skip auto-installation of IDE extensions                                                                                                                           |
-| `CLAUDE_CODE_MAX_OUTPUT_TOKENS`            | Set the maximum number of output tokens for most requests                                                                                                          |
-| `CLAUDE_CODE_USE_BEDROCK`                  | Use [Bedrock](/en/docs/claude-code/amazon-bedrock)                                                                                                                 |
-| `CLAUDE_CODE_USE_VERTEX`                   | Use [Vertex](/en/docs/claude-code/google-vertex-ai)                                                                                                                |
-| `CLAUDE_CODE_SKIP_BEDROCK_AUTH`            | Skip AWS authentication for Bedrock (e.g. when using an LLM gateway)                                                                                               |
-| `CLAUDE_CODE_SKIP_VERTEX_AUTH`             | Skip Google authentication for Vertex (e.g. when using an LLM gateway)                                                                                             |
-| `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Equivalent of setting `DISABLE_AUTOUPDATER`, `DISABLE_BUG_COMMAND`, `DISABLE_ERROR_REPORTING`, and `DISABLE_TELEMETRY`                                             |
-| `CLAUDE_CODE_DISABLE_TERMINAL_TITLE`       | Set to `1` to disable automatic terminal title updates based on conversation context                                                                               |
-| `DISABLE_AUTOUPDATER`                      | Set to `1` to disable automatic updates. This takes precedence over the `autoUpdates` configuration setting.                                                       |
-| `DISABLE_BUG_COMMAND`                      | Set to `1` to disable the `/bug` command                                                                                                                           |
-| `DISABLE_COST_WARNINGS`                    | Set to `1` to disable cost warning messages                                                                                                                        |
-| `DISABLE_ERROR_REPORTING`                  | Set to `1` to opt out of Sentry error reporting                                                                                                                    |
-| `DISABLE_NON_ESSENTIAL_MODEL_CALLS`        | Set to `1` to disable model calls for non-critical paths like flavor text                                                                                          |
-| `DISABLE_TELEMETRY`                        | Set to `1` to opt out of Statsig telemetry (note that Statsig events do not include user data like code, file paths, or bash commands)                             |
-| `HTTP_PROXY`                               | Specify HTTP proxy server for network connections                                                                                                                  |
-| `HTTPS_PROXY`                              | Specify HTTPS proxy server for network connections                                                                                                                 |
-| `MAX_THINKING_TOKENS`                      | Force a thinking for the model budget                                                                                                                              |
-| `MCP_TIMEOUT`                              | Timeout in milliseconds for MCP server startup                                                                                                                     |
-| `MCP_TOOL_TIMEOUT`                         | Timeout in milliseconds for MCP tool execution                                                                                                                     |
-| `MAX_MCP_OUTPUT_TOKENS`                    | Maximum number of tokens allowed in MCP tool responses (default: 25000)                                                                                            |
-| `VERTEX_REGION_CLAUDE_3_5_HAIKU`           | Override region for Claude 3.5 Haiku when using Vertex AI                                                                                                          |
-| `VERTEX_REGION_CLAUDE_3_5_SONNET`          | Override region for Claude 3.5 Sonnet when using Vertex AI                                                                                                         |
-| `VERTEX_REGION_CLAUDE_3_7_SONNET`          | Override region for Claude 3.7 Sonnet when using Vertex AI                                                                                                         |
-| `VERTEX_REGION_CLAUDE_4_0_OPUS`            | Override region for Claude 4.0 Opus when using Vertex AI                                                                                                           |
-| `VERTEX_REGION_CLAUDE_4_0_SONNET`          | Override region for Claude 4.0 Sonnet when using Vertex AI                                                                                                         |
+| Variable | Propósito |
+| :--- | :--- |
+| `ANTHROPIC_API_KEY` | Clave de API enviada como cabecera `X-Api-Key`, típicamente para el SDK de Claude (para uso interactivo, ejecuta `/login`). |
+| `ANTHROPIC_AUTH_TOKEN` | Valor personalizado para la cabecera `Authorization` (el valor que establezcas aquí tendrá el prefijo `Bearer `). |
+| `ANTHROPIC_CUSTOM_HEADERS` | Cabeceras personalizadas que quieres añadir a la solicitud (en formato `Nombre: Valor`). |
+| `ANTHROPIC_MODEL` | Nombre del modelo personalizado a usar (consulta la [Configuración del Modelo](/en/docs/claude-code/bedrock-vertex-proxies#model-configuration)). |
+| `ANTHROPIC_SMALL_FAST_MODEL` | Nombre del [modelo de clase Haiku para tareas en segundo plano](/en/docs/claude-code/costs). |
+| `ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION` | Sobrescribe la región de AWS para el modelo pequeño/rápido cuando se usa Bedrock. |
+| `AWS_BEARER_TOKEN_BEDROCK` | Clave de API de Bedrock para autenticación (consulta las [claves de API de Bedrock](https://aws.amazon.com/blogs/machine-learning/accelerate-ai-development-with-amazon-bedrock-api-keys/)). |
+| `BASH_DEFAULT_TIMEOUT_MS` | Tiempo de espera por defecto para comandos bash de larga duración. |
+| `BASH_MAX_TIMEOUT_MS` | Tiempo de espera máximo que el modelo puede establecer para comandos bash de larga duración. |
+| `BASH_MAX_OUTPUT_LENGTH` | Número máximo de caracteres en las salidas de bash antes de que se trunquen por el medio. |
+| `CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR` | Volver al directorio de trabajo original después de cada comando Bash. |
+| `CLAUDE_CODE_API_KEY_HELPER_TTL_MS` | Intervalo en milisegundos en el que se deben actualizar las credenciales (cuando se usa `apiKeyHelper`). |
+| `CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL` | Omitir la autoinstalación de extensiones de IDE. |
+| `CLAUDE_CODE_MAX_OUTPUT_TOKENS` | Establecer el número máximo de tokens de salida para la mayoría de las solicitudes. |
+| `CLAUDE_CODE_USE_BEDROCK` | Usar [Bedrock](/en/docs/claude-code/amazon-bedrock). |
+| `CLAUDE_CODE_USE_VERTEX` | Usar [Vertex](/en/docs/claude-code/google-vertex-ai). |
+| `CLAUDE_CODE_SKIP_BEDROCK_AUTH` | Omitir la autenticación de AWS para Bedrock (p. ej., cuando se usa un gateway de LLM). |
+| `CLAUDE_CODE_SKIP_VERTEX_AUTH` | Omitir la autenticación de Google para Vertex (p. ej., cuando se usa un gateway de LLM). |
+| `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Equivalente a establecer `DISABLE_AUTOUPDATER`, `DISABLE_BUG_COMMAND`, `DISABLE_ERROR_REPORTING` y `DISABLE_TELEMETRY`. |
+| `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` | Establece en `1` para deshabilitar las actualizaciones automáticas del título del terminal basadas en el contexto de la conversación. |
+| `DISABLE_AUTOUPDATER` | Establece en `1` para deshabilitar las actualizaciones automáticas. Esto tiene prioridad sobre el ajuste de configuración `autoUpdates`. |
+| `DISABLE_BUG_COMMAND` | Establece en `1` para deshabilitar el comando `/bug`. |
+| `DISABLE_COST_WARNINGS` | Establece en `1` para deshabilitar los mensajes de advertencia de costos. |
+| `DISABLE_ERROR_REPORTING` | Establece en `1` para optar por no participar en el informe de errores de Sentry. |
+| `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Establece en `1` para deshabilitar las llamadas al modelo para rutas no críticas como el texto de ambientación. |
+| `DISABLE_TELEMETRY` | Establece en `1` para optar por no participar en la telemetría de Statsig (ten en cuenta que los eventos de Statsig no incluyen datos del usuario como código, rutas de archivos o comandos bash). |
+| `HTTP_PROXY` | Especificar el servidor proxy HTTP para las conexiones de red. |
+| `HTTPS_PROXY` | Especificar el servidor proxy HTTPS para las conexiones de red. |
+| `MAX_THINKING_TOKENS` | Forzar un presupuesto de pensamiento para el modelo. |
+| `MCP_TIMEOUT` | Tiempo de espera en milisegundos para el inicio del servidor MCP. |
+| `MCP_TOOL_TIMEOUT` | Tiempo de espera en milisegundos para la ejecución de la herramienta MCP. |
+| `MAX_MCP_OUTPUT_TOKENS` | Número máximo de tokens permitidos en las respuestas de la herramienta MCP (por defecto: 25000). |
+| `VERTEX_REGION_CLAUDE_3_5_HAIKU` | Sobrescribe la región para Claude 3.5 Haiku cuando se usa Vertex AI. |
+| `VERTEX_REGION_CLAUDE_3_5_SONNET` | Sobrescribe la región para Claude 3.5 Sonnet cuando se usa Vertex AI. |
+| `VERTEX_REGION_CLAUDE_3_7_SONNET` | Sobrescribe la región para Claude 3.7 Sonnet cuando se usa Vertex AI. |
+| `VERTEX_REGION_CLAUDE_4_0_OPUS` | Sobrescribe la región para Claude 4.0 Opus cuando se usa Vertex AI. |
+| `VERTEX_REGION_CLAUDE_4_0_SONNET` | Sobrescribe la región para Claude 4.0 Sonnet cuando se usa Vertex AI. |
 
-## Configuration options
+## Opciones de configuración
 
-To manage your configurations, use the following commands:
+Para gestionar tus configuraciones, usa los siguientes comandos:
 
-- List settings: `claude config list`
-- See a setting: `claude config get <key>`
-- Change a setting: `claude config set <key> <value>`
-- Push to a setting (for lists): `claude config add <key> <value>`
-- Remove from a setting (for lists): `claude config remove <key> <value>`
+- Listar ajustes: `claude config list`
+- Ver un ajuste: `claude config get <clave>`
+- Cambiar un ajuste: `claude config set <clave> <valor>`
+- Añadir a un ajuste (para listas): `claude config add <clave> <valor>`
+- Eliminar de un ajuste (para listas): `claude config remove <clave> <valor>`
 
-By default `config` changes your project configuration. To manage your global configuration, use the `--global` (or `-g`) flag.
+Por defecto, `config` cambia la configuración de tu proyecto. Para gestionar tu configuración global, usa la bandera `--global` (o `-g`).
 
-### Global configuration
+### Configuración global
 
-To set a global configuration, use `claude config set -g <key> <value>`:
+Para establecer una configuración global, usa `claude config set -g <clave> <valor>`:
 
-| Key                     | Description                                                                                                                                                                                        | Example                                                                    |
-| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------- |
-| `autoUpdates`           | Whether to enable automatic updates (default: `true`). When enabled, Claude Code automatically downloads and installs updates in the background. Updates are applied when you restart Claude Code. | `false`                                                                    |
-| `preferredNotifChannel` | Where you want to receive notifications (default: `iterm2`)                                                                                                                                        | `iterm2`, `iterm2_with_bell`, `terminal_bell`, or `notifications_disabled` |
-| `theme`                 | Color theme                                                                                                                                                                                        | `dark`, `light`, `light-daltonized`, or `dark-daltonized`                  |
-| `verbose`               | Whether to show full bash and command outputs (default: `false`)                                                                                                                                   | `true`                                                                     |
+| Clave | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `autoUpdates` | Si se habilitan las actualizaciones automáticas (por defecto: `true`). Cuando está habilitado, Claude Code descarga e instala automáticamente las actualizaciones en segundo plano. Las actualizaciones se aplican la próxima vez que reinicies Claude Code. | `false` |
+| `preferredNotifChannel` | Dónde quieres recibir las notificaciones (por defecto: `iterm2`). | `iterm2`, `iterm2_with_bell`, `terminal_bell`, o `notifications_disabled` |
+| `theme` | Tema de color. | `dark`, `light`, `light-daltonized`, o `dark-daltonized` |
+| `verbose` | Si se muestran las salidas completas de bash y comandos (por defecto: `false`). | `true` |
 
-## Tools available to Claude
+## Herramientas disponibles para Claude
 
-Claude Code has access to a set of powerful tools that help it understand and modify your codebase:
+Claude Code tiene acceso a un conjunto de herramientas potentes que le ayudan a entender y modificar tu base de código:
 
-| Tool             | Description                                          | Permission Required |
-| :--------------- | :--------------------------------------------------- | :------------------ |
-| **Bash**         | Executes shell commands in your environment          | Yes                 |
-| **Edit**         | Makes targeted edits to specific files               | Yes                 |
-| **Glob**         | Finds files based on pattern matching                | No                  |
-| **Grep**         | Searches for patterns in file contents               | No                  |
-| **LS**           | Lists files and directories                          | No                  |
-| **MultiEdit**    | Performs multiple edits on a single file atomically  | Yes                 |
-| **NotebookEdit** | Modifies Jupyter notebook cells                      | Yes                 |
-| **NotebookRead** | Reads and displays Jupyter notebook contents         | No                  |
-| **Read**         | Reads the contents of files                          | No                  |
-| **Task**         | Runs a sub-agent to handle complex, multi-step tasks | No                  |
-| **TodoWrite**    | Creates and manages structured task lists            | No                  |
-| **WebFetch**     | Fetches content from a specified URL                 | Yes                 |
-| **WebSearch**    | Performs web searches with domain filtering          | Yes                 |
-| **Write**        | Creates or overwrites files                          | Yes                 |
+| Herramienta | Descripción | Permiso Requerido |
+| :--- | :--- | :--- |
+| **Bash** | Ejecuta comandos de shell en tu entorno. | Sí |
+| **Edit** | Realiza ediciones específicas en archivos concretos. | Sí |
+| **Glob** | Encuentra archivos basados en la coincidencia de patrones. | No |
+| **Grep** | Busca patrones en el contenido de los archivos. | No |
+| **LS** | Lista archivos y directorios. | No |
+| **MultiEdit** | Realiza múltiples ediciones en un solo archivo de forma atómica. | Sí |
+| **NotebookEdit** | Modifica celdas de cuadernos de Jupyter. | Sí |
+| **NotebookRead** | Lee y muestra el contenido de cuadernos de Jupyter. | No |
+| **Read** | Lee el contenido de los archivos. | No |
+| **Task** | Ejecuta un subagente para manejar tareas complejas de varios pasos. | No |
+| **TodoWrite** | Crea y gestiona listas de tareas estructuradas. | No |
+| **WebFetch** | Obtiene contenido de una URL especificada. | Sí |
+| **WebSearch** | Realiza búsquedas web con filtrado de dominios. | Sí |
+| **Write** | Crea o sobrescribe archivos. | Sí |
 
-Permission rules can be configured using `/allowed-tools` or in [permission settings](/en/docs/claude-code/settings#available-settings).
+Las reglas de permiso se pueden configurar usando `/allowed-tools` o en los [ajustes de permisos](/en/docs/claude-code/settings#available-settings).
 
-### Extending tools with hooks
+### Ampliación de herramientas con hooks
 
-You can run custom commands before or after any tool executes using
-[Claude Code hooks](/en/docs/claude-code/hooks-guide).
+Puedes ejecutar comandos personalizados antes o después de que se ejecute cualquier herramienta usando los
+[hooks de Claude Code](/en/docs/claude-code/hooks-guide).
 
-For example, you could automatically run a Python formatter after Claude
-modifies Python files, or prevent modifications to production configuration
-files by blocking Write operations to certain paths.
+Por ejemplo, podrías ejecutar automáticamente un formateador de Python después de que Claude
+modifique archivos de Python, o evitar modificaciones en los archivos de configuración de producción
+bloqueando las operaciones de escritura en ciertas rutas.
 
-## See also
+## Ver también
 
-- [Identity and Access Management](/en/docs/claude-code/iam#configuring-permissions) - Learn about Claude Code's permission system
-- [IAM and access control](/en/docs/claude-code/iam#enterprise-managed-policy-settings) - Enterprise policy management
-- [Troubleshooting](/en/docs/claude-code/troubleshooting#auto-updater-issues) - Solutions for common configuration issues
+- [Gestión de Identidad y Acceso](/en/docs/claude-code/iam#configuring-permissions) - Aprende sobre el sistema de permisos de Claude Code.
+- [IAM y control de acceso](/en/docs/claude-code/iam#enterprise-managed-policy-settings) - Gestión de políticas empresariales.
+- [Solución de problemas](/en/docs/claude-code/troubleshooting#auto-updater-issues) - Soluciones para problemas de configuración comunes.
 
-# Add Claude Code to your IDE
+# Añadir Claude Code a tu IDE
 
-> Learn how to add Claude Code to your favorite IDE
+> Aprende a añadir Claude Code a tu IDE favorito.
 
-Claude Code works great with any Integrated Development Environment (IDE) that has a terminal. Just run `claude`, and you're ready to go.
+Claude Code funciona genial con cualquier Entorno de Desarrollo Integrado (IDE) que tenga un terminal. Simplemente ejecuta `claude`, y estarás listo para empezar.
 
-In addition, Claude Code provides dedicated integrations for popular IDEs, which provide features like interactive diff viewing, selection context sharing, and more. These integrations currently exist for:
+Además, Claude Code proporciona integraciones dedicadas para los IDEs más populares, que ofrecen características como la visualización interactiva de diferencias (diff), el uso compartido del contexto de selección y más. Estas integraciones existen actualmente para:
 
-- **Visual Studio Code** (including popular forks like Cursor, Windsurf, and VSCodium)
-- **JetBrains IDEs** (including IntelliJ, PyCharm, Android Studio, WebStorm, PhpStorm and GoLand)
+- **Visual Studio Code** (incluyendo forks populares como Cursor, Windsurf y VSCodium)
+- **IDEs de JetBrains** (incluyendo IntelliJ, PyCharm, Android Studio, WebStorm, PhpStorm y GoLand)
 
-## Features
+## Características
 
-- **Quick launch**: Use `Cmd+Esc` (Mac) or `Ctrl+Esc` (Windows/Linux) to open
-  Claude Code directly from your editor, or click the Claude Code button in the
-  UI
-- **Diff viewing**: Code changes can be displayed directly in the IDE diff
-  viewer instead of the terminal. You can configure this in `/config`
-- **Selection context**: The current selection/tab in the IDE is automatically
-  shared with Claude Code
-- **File reference shortcuts**: Use `Cmd+Option+K` (Mac) or `Alt+Ctrl+K`
-  (Linux/Windows) to insert file references (e.g., @File#L1-99)
-- **Diagnostic sharing**: Diagnostic errors (lint, syntax, etc.) from the IDE
-  are automatically shared with Claude as you work
+- **Lanzamiento rápido**: Usa `Cmd+Esc` (Mac) o `Ctrl+Esc` (Windows/Linux) para abrir
+  Claude Code directamente desde tu editor, o haz clic en el botón de Claude Code en la
+  interfaz de usuario.
+- **Visualización de diferencias (diff)**: Los cambios en el código se pueden mostrar directamente en el visor de diferencias del IDE
+  en lugar del terminal. Puedes configurar esto en `/config`.
+- **Contexto de selección**: La selección/pestaña actual en el IDE se comparte automáticamente
+  con Claude Code.
+- **Atajos para referencias de archivos**: Usa `Cmd+Opción+K` (Mac) o `Alt+Ctrl+K`
+  (Linux/Windows) para insertar referencias de archivos (p. ej., @Archivo#L1-99).
+- **Uso compartido de diagnósticos**: Los errores de diagnóstico (lint, sintaxis, etc.) del IDE
+  se comparten automáticamente con Claude mientras trabajas.
 
-## Installation
+## Instalación
 
 <Tabs>
   <Tab title="VS Code+">
-    To install Claude Code on VS Code and popular forks like Cursor, Windsurf, and VSCodium:
+    Para instalar Claude Code en VS Code y forks populares como Cursor, Windsurf y VSCodium:
 
-    1. Open VS Code
-    2. Open the integrated terminal
-    3. Run `claude` - the extension will auto-install
+    1. Abre VS Code.
+    2. Abre el terminal integrado.
+    3. Ejecuta `claude` - la extensión se autoinstalará.
 
   </Tab>
 
   <Tab title="JetBrains">
-    To install Claude Code on JetBrains IDEs like IntelliJ, PyCharm, Android Studio, WebStorm, PhpStorm and GoLand, find and install the [Claude Code plugin](https://docs.anthropic.com/s/claude-code-jetbrains) from the marketplace and restart your IDE.
+    Para instalar Claude Code en IDEs de JetBrains como IntelliJ, PyCharm, Android Studio, WebStorm, PhpStorm y GoLand, busca e instala el [plugin de Claude Code](https://docs.anthropic.com/s/claude-code-jetbrains) desde el marketplace y reinicia tu IDE.
 
     <Note>
-      The plugin may also be auto-installed when you run `claude` in the integrated terminal. The IDE must be restarted completely to take effect.
+      El plugin también puede autoinstalarse cuando ejecutas `claude` en el terminal integrado. El IDE debe reiniciarse por completo para que surta efecto.
     </Note>
 
     <Warning>
-      **Remote Development Limitations**: When using JetBrains Remote Development, you must install the plugin in the remote host via `Settings > Plugin (Host)`.
+      **Limitaciones del Desarrollo Remoto**: Cuando uses el Desarrollo Remoto de JetBrains, debes instalar el plugin en el host remoto a través de `Settings > Plugin (Host)`.
     </Warning>
 
   </Tab>
 </Tabs>
 
-## Usage
+## Uso
 
-### From your IDE
+### Desde tu IDE
 
-Run `claude` from your IDE's integrated terminal, and all features will be active.
+Ejecuta `claude` desde el terminal integrado de tu IDE, y todas las características estarán activas.
 
-### From external terminals
+### Desde terminales externos
 
-Use the `/ide` command in any external terminal to connect Claude Code to your IDE and activate all features.
+Usa el comando `/ide` en cualquier terminal externo para conectar Claude Code a tu IDE y activar todas las características.
 
-If you want Claude to have access to the same files as your IDE, start Claude Code from the same directory as your IDE project root.
+Si quieres que Claude tenga acceso a los mismos archivos que tu IDE, inicia Claude Code desde el mismo directorio que la raíz de tu proyecto de IDE.
 
-## Configuration
+## Configuración
 
-IDE integrations work with Claude Code's configuration system:
+Las integraciones de IDE funcionan con el sistema de configuración de Claude Code:
 
-1. Run `claude`
-2. Enter the `/config` command
-3. Adjust your preferences. Setting the diff tool to `auto` will enable automatic IDE detection
+1. Ejecuta `claude`.
+2. Introduce el comando `/config`.
+3. Ajusta tus preferencias. Establecer la herramienta de diferencias (diff) en `auto` habilitará la detección automática del IDE.
 
-## Troubleshooting
+## Solución de problemas
 
-### VS Code extension not installing
+### La extensión de VS Code no se instala
 
-- Ensure you're running Claude Code from VS Code's integrated terminal
-- Ensure that the CLI corresponding to your IDE is installed:
-  - For VS Code: `code` command should be available
-  - For Cursor: `cursor` command should be available
-  - For Windsurf: `windsurf` command should be available
-  - For VSCodium: `codium` command should be available
-  - If not installed, use `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
-    and search for "Shell Command: Install 'code' command in PATH" (or the
-    equivalent for your IDE)
-- Check that VS Code has permission to install extensions
+- Asegúrate de que estás ejecutando Claude Code desde el terminal integrado de VS Code.
+- Asegúrate de que la CLI correspondiente a tu IDE esté instalada:
+  - Para VS Code: el comando `code` debe estar disponible.
+  - Para Cursor: el comando `cursor` debe estar disponible.
+  - Para Windsurf: el comando `windsurf` debe estar disponible.
+  - Para VSCodium: el comando `codium` debe estar disponible.
+  - Si no está instalado, usa `Cmd+Shift+P` (Mac) o `Ctrl+Shift+P` (Windows/Linux)
+    y busca "Shell Command: Install 'code' command in PATH" (o el
+    equivalente para tu IDE).
+- Comprueba que VS Code tenga permiso para instalar extensiones.
 
-### JetBrains plugin not working
+### El plugin de JetBrains no funciona
 
-- Ensure you're running Claude Code from the project root directory
-- Check that the JetBrains plugin is enabled in the IDE settings
-- Completely restart the IDE. You may need to do this multiple times
-- For JetBrains Remote Development, ensure that the Claude Code plugin is
-  installed in the remote host and not locally on the client
+- Asegúrate de que estás ejecutando Claude Code desde el directorio raíz del proyecto.
+- Comprueba que el plugin de JetBrains esté habilitado en la configuración del IDE.
+- Reinicia el IDE por completo. Es posible que necesites hacerlo varias veces.
+- Para el Desarrollo Remoto de JetBrains, asegúrate de que el plugin de Claude Code esté
+  instalado en el host remoto y no localmente en el cliente.
 
-For additional help, refer to our
-[troubleshooting guide](/en/docs/claude-code/troubleshooting).
+Para obtener ayuda adicional, consulta nuestra
+[guía de solución de problemas](/en/docs/claude-code/troubleshooting).
 
-# Add Claude Code to your IDE
+# Gestionar la memoria de Claude
 
-> Learn how to add Claude Code to your favorite IDE
+> Aprende a gestionar la memoria de Claude Code entre sesiones con diferentes ubicaciones de memoria y mejores prácticas.
 
-Claude Code works great with any Integrated Development Environment (IDE) that has a terminal. Just run `claude`, and you're ready to go.
+Claude Code puede recordar tus preferencias entre sesiones, como las directrices de estilo y los comandos comunes en tu flujo de trabajo.
 
-In addition, Claude Code provides dedicated integrations for popular IDEs, which provide features like interactive diff viewing, selection context sharing, and more. These integrations currently exist for:
+## Determinar el tipo de memoria
 
-- **Visual Studio Code** (including popular forks like Cursor, Windsurf, and VSCodium)
-- **JetBrains IDEs** (including IntelliJ, PyCharm, Android Studio, WebStorm, PhpStorm and GoLand)
+Claude Code ofrece tres ubicaciones de memoria, cada una con un propósito diferente:
 
-## Features
+| Tipo de Memoria | Ubicación | Propósito | Ejemplos de Casos de Uso |
+| --- | --- | --- | --- |
+| **Memoria de proyecto** | `./CLAUDE.md` | Instrucciones compartidas por el equipo para el proyecto | Arquitectura del proyecto, estándares de codificación, flujos de trabajo comunes |
+| **Memoria de usuario** | `~/.claude/CLAUDE.md` | Preferencias personales para todos los proyectos | Preferencias de estilo de código, atajos de herramientas personales |
+| **Memoria de proyecto (local)** | `./CLAUDE.local.md` | Preferencias personales específicas del proyecto | _(Obsoleto, ver abajo)_ Tus URLs de sandbox, datos de prueba preferidos |
 
-- **Quick launch**: Use `Cmd+Esc` (Mac) or `Ctrl+Esc` (Windows/Linux) to open
-  Claude Code directly from your editor, or click the Claude Code button in the
-  UI
-- **Diff viewing**: Code changes can be displayed directly in the IDE diff
-  viewer instead of the terminal. You can configure this in `/config`
-- **Selection context**: The current selection/tab in the IDE is automatically
-  shared with Claude Code
-- **File reference shortcuts**: Use `Cmd+Option+K` (Mac) or `Alt+Ctrl+K`
-  (Linux/Windows) to insert file references (e.g., @File#L1-99)
-- **Diagnostic sharing**: Diagnostic errors (lint, syntax, etc.) from the IDE
-  are automatically shared with Claude as you work
+Todos los archivos de memoria se cargan automáticamente en el contexto de Claude Code al iniciarse.
 
-## Installation
+## Importaciones de CLAUDE.md
 
-<Tabs>
-  <Tab title="VS Code+">
-    To install Claude Code on VS Code and popular forks like Cursor, Windsurf, and VSCodium:
-
-    1. Open VS Code
-    2. Open the integrated terminal
-    3. Run `claude` - the extension will auto-install
-
-  </Tab>
-
-  <Tab title="JetBrains">
-    To install Claude Code on JetBrains IDEs like IntelliJ, PyCharm, Android Studio, WebStorm, PhpStorm and GoLand, find and install the [Claude Code plugin](https://docs.anthropic.com/s/claude-code-jetbrains) from the marketplace and restart your IDE.
-
-    <Note>
-      The plugin may also be auto-installed when you run `claude` in the integrated terminal. The IDE must be restarted completely to take effect.
-    </Note>
-
-    <Warning>
-      **Remote Development Limitations**: When using JetBrains Remote Development, you must install the plugin in the remote host via `Settings > Plugin (Host)`.
-    </Warning>
-
-  </Tab>
-</Tabs>
-
-## Usage
-
-### From your IDE
-
-Run `claude` from your IDE's integrated terminal, and all features will be active.
-
-### From external terminals
-
-Use the `/ide` command in any external terminal to connect Claude Code to your IDE and activate all features.
-
-If you want Claude to have access to the same files as your IDE, start Claude Code from the same directory as your IDE project root.
-
-## Configuration
-
-IDE integrations work with Claude Code's configuration system:
-
-1. Run `claude`
-2. Enter the `/config` command
-3. Adjust your preferences. Setting the diff tool to `auto` will enable automatic IDE detection
-
-## Troubleshooting
-
-### VS Code extension not installing
-
-- Ensure you're running Claude Code from VS Code's integrated terminal
-- Ensure that the CLI corresponding to your IDE is installed:
-  - For VS Code: `code` command should be available
-  - For Cursor: `cursor` command should be available
-  - For Windsurf: `windsurf` command should be available
-  - For VSCodium: `codium` command should be available
-  - If not installed, use `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
-    and search for "Shell Command: Install 'code' command in PATH" (or the
-    equivalent for your IDE)
-- Check that VS Code has permission to install extensions
-
-### JetBrains plugin not working
-
-- Ensure you're running Claude Code from the project root directory
-- Check that the JetBrains plugin is enabled in the IDE settings
-- Completely restart the IDE. You may need to do this multiple times
-- For JetBrains Remote Development, ensure that the Claude Code plugin is
-  installed in the remote host and not locally on the client
-
-For additional help, refer to our
-[troubleshooting guide](/en/docs/claude-code/troubleshooting).
-
-# Manage Claude's memory
-
-> Learn how to manage Claude Code's memory across sessions with different memory locations and best practices.
-
-Claude Code can remember your preferences across sessions, like style guidelines and common commands in your workflow.
-
-## Determine memory type
-
-Claude Code offers three memory locations, each serving a different purpose:
-
-| Memory Type                | Location              | Purpose                                  | Use Case Examples                                                |
-| -------------------------- | --------------------- | ---------------------------------------- | ---------------------------------------------------------------- |
-| **Project memory**         | `./CLAUDE.md`         | Team-shared instructions for the project | Project architecture, coding standards, common workflows         |
-| **User memory**            | `~/.claude/CLAUDE.md` | Personal preferences for all projects    | Code styling preferences, personal tooling shortcuts             |
-| **Project memory (local)** | `./CLAUDE.local.md`   | Personal project-specific preferences    | _(Deprecated, see below)_ Your sandbox URLs, preferred test data |
-
-All memory files are automatically loaded into Claude Code's context when launched.
-
-## CLAUDE.md imports
-
-CLAUDE.md files can import additional files using `@path/to/import` syntax. The following example imports 3 files:
+Los archivos CLAUDE.md pueden importar archivos adicionales usando la sintaxis `@ruta/al/archivo`. El siguiente ejemplo importa 3 archivos:
 
 ```
-See @README for project overview and @package.json for available npm commands for this project.
+Consulta @README para una visión general del proyecto y @package.json para los comandos npm disponibles para este proyecto.
 
-# Additional Instructions
-- git workflow @docs/git-instructions.md
+# Instrucciones Adicionales
+- flujo de trabajo de git @docs/git-instructions.md
 ```
 
-Both relative and absolute paths are allowed. In particular, importing files in user's home dir is a convenient way for your team members to provide individual instructions that are not checked into the repository. Previously CLAUDE.local.md served a similar purpose, but is now deprecated in favor of imports since they work better across multiple git worktrees.
+Se permiten tanto rutas relativas como absolutas. En particular, importar archivos en el directorio de inicio del usuario es una forma conveniente para que los miembros de tu equipo proporcionen instrucciones individuales que no se registran en el repositorio. Anteriormente, CLAUDE.local.md cumplía un propósito similar, pero ahora está obsoleto en favor de las importaciones, ya que funcionan mejor en múltiples árboles de trabajo de git.
 
 ```
-# Individual Preferences
+# Preferencias Individuales
 - @~/.claude/my-project-instructions.md
 ```
 
-To avoid potential collisions, imports are not evaluated inside markdown code spans and code blocks.
+Para evitar posibles colisiones, las importaciones no se evalúan dentro de los `code spans` y bloques de código de markdown.
 
 ```
-This code span will not be treated as an import: `@anthropic-ai/claude-code`
+Este `code span` no se tratará como una importación: `@anthropic-ai/claude-code`
 ```
 
-Imported files can recursively import additional files, with a max-depth of 5 hops. You can see what memory files are loaded by running `/memory` command.
+Los archivos importados pueden importar recursivamente archivos adicionales, con una profundidad máxima de 5 saltos. Puedes ver qué archivos de memoria se cargan ejecutando el comando `/memory`.
 
-## How Claude looks up memories
+## Cómo Claude busca las memorias
 
-Claude Code reads memories recursively: starting in the cwd, Claude Code recurses up to (but not including) the root directory _/_ and reads any CLAUDE.md or CLAUDE.local.md files it finds. This is especially convenient when working in large repositories where you run Claude Code in _foo/bar/_, and have memories in both _foo/CLAUDE.md_ and _foo/bar/CLAUDE.md_.
+Claude Code lee las memorias de forma recursiva: comenzando en el `cwd`, Claude Code recurre hacia arriba hasta (pero sin incluir) el directorio raíz _/_ y lee cualquier archivo CLAUDE.md o CLAUDE.local.md que encuentre. Esto es especialmente conveniente cuando se trabaja en repositorios grandes donde ejecutas Claude Code en _foo/bar/_, y tienes memorias tanto en _foo/CLAUDE.md_ como en _foo/bar/CLAUDE.md_.
 
-Claude will also discover CLAUDE.md nested in subtrees under your current working directory. Instead of loading them at launch, they are only included when Claude reads files in those subtrees.
+Claude también descubrirá CLAUDE.md anidados en subárboles bajo tu directorio de trabajo actual. En lugar de cargarlos al inicio, solo se incluyen cuando Claude lee archivos en esos subárboles.
 
-## Quickly add memories with the `#` shortcut
+## Añade memorias rápidamente con el atajo `#`
 
-The fastest way to add a memory is to start your input with the `#` character:
+La forma más rápida de añadir una memoria es comenzar tu entrada con el carácter `#`:
 
 ```
-# Always use descriptive variable names
+# Usar siempre nombres de variables descriptivos
 ```
 
-You'll be prompted to select which memory file to store this in.
+Se te pedirá que selecciones en qué archivo de memoria guardarlo.
 
-## Directly edit memories with `/memory`
+## Edita memorias directamente con `/memory`
 
-Use the `/memory` slash command during a session to open any memory file in your system editor for more extensive additions or organization.
+Usa el comando de barra diagonal `/memory` durante una sesión para abrir cualquier archivo de memoria en tu editor de sistema para adiciones u organización más extensas.
 
-## Set up project memory
+## Configurar la memoria del proyecto
 
-Suppose you want to set up a CLAUDE.md file to store important project information, conventions, and frequently used commands.
+Supongamos que quieres configurar un archivo CLAUDE.md para almacenar información importante del proyecto, convenciones y comandos de uso frecuente.
 
-Bootstrap a CLAUDE.md for your codebase with the following command:
+Inicia un CLAUDE.md para tu base de código con el siguiente comando:
 
 ```
 > /init
 ```
 
 <Tip>
-  Tips:
+  Consejos:
 
-- Include frequently used commands (build, test, lint) to avoid repeated searches
-- Document code style preferences and naming conventions
-- Add important architectural patterns specific to your project
-- CLAUDE.md memories can be used for both instructions shared with your team and for your individual preferences.
+- Incluye comandos de uso frecuente (compilar, probar, lint) para evitar búsquedas repetidas.
+- Documenta las preferencias de estilo de código y las convenciones de nomenclatura.
+- Añade patrones arquitectónicos importantes específicos de tu proyecto.
+- Las memorias de CLAUDE.md se pueden usar tanto para instrucciones compartidas con tu equipo como para tus preferencias individuales.
   </Tip>
 
-## Memory best practices
+## Mejores prácticas de memoria
 
-- **Be specific**: "Use 2-space indentation" is better than "Format code properly".
-- **Use structure to organize**: Format each individual memory as a bullet point and group related memories under descriptive markdown headings.
-- **Review periodically**: Update memories as your project evolves to ensure Claude is always using the most up to date information and context.
+- **Sé específico**: "Usar indentación de 2 espacios" es mejor que "Formatear el código correctamente".
+- **Usa la estructura para organizar**: Formatea cada memoria individual como un punto de viñeta y agrupa las memorias relacionadas bajo encabezados de markdown descriptivos.
+- **Revisa periódicamente**: Actualiza las memorias a medida que tu proyecto evoluciona para asegurar que Claude siempre esté usando la información y el contexto más actualizados.

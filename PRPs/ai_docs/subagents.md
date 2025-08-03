@@ -1,47 +1,47 @@
-# Subagents
+# Subagentes
 
-> Create and use specialized AI subagents in Claude Code for task-specific workflows and improved context management.
+> Crea y utiliza subagentes de IA especializados en Claude Code para flujos de trabajo específicos de tareas y una mejor gestión del contexto.
 
-Custom subagents in Claude Code are specialized AI assistants that can be invoked to handle specific types of tasks. They enable more efficient problem-solving by providing task-specific configurations with customized system prompts, tools and a separate context window.
+Los subagentes personalizados en Claude Code son asistentes de IA especializados que pueden ser invocados para manejar tipos específicos de tareas. Permiten una resolución de problemas más eficiente al proporcionar configuraciones específicas para cada tarea con prompts de sistema personalizados, herramientas y una ventana de contexto separada.
 
-## What are subagents?
+## ¿Qué son los subagentes?
 
-Subagents are pre-configured AI personalities that Claude Code can delegate tasks to. Each subagent:
+Los subagentes son personalidades de IA preconfiguradas a las que Claude Code puede delegar tareas. Cada subagente:
 
-- Has a specific purpose and expertise area
-- Uses its own context window separate from the main conversation
-- Can be configured with specific tools it's allowed to use
-- Includes a custom system prompt that guides its behavior
+- Tiene un propósito y un área de especialización específicos.
+- Utiliza su propia ventana de contexto, separada de la conversación principal.
+- Puede configurarse con herramientas específicas que tiene permitido usar.
+- Incluye un prompt de sistema personalizado que guía su comportamiento.
 
-When Claude Code encounters a task that matches a subagent's expertise, it can delegate that task to the specialized subagent, which works independently and returns results.
+Cuando Claude Code encuentra una tarea que coincide con la especialización de un subagente, puede delegar esa tarea al subagente especializado, que trabaja de forma independiente y devuelve los resultados.
 
-## Key benefits
+## Beneficios clave
 
 <CardGroup cols={2}>
-  <Card title="Context preservation" icon="layer-group">
-    Each subagent operates in its own context, preventing pollution of the main conversation and keeping it focused on high-level objectives.
+  <Card title="Preservación del contexto" icon="layer-group">
+    Cada subagente opera en su propio contexto, evitando la contaminación de la conversación principal y manteniéndola enfocada en objetivos de alto nivel.
   </Card>
 
-  <Card title="Specialized expertise" icon="brain">
-    Subagents can be fine-tuned with detailed instructions for specific domains, leading to higher success rates on designated tasks.
+  <Card title="Experiencia especializada" icon="brain">
+    Los subagentes pueden ser afinados con instrucciones detalladas para dominios específicos, lo que conduce a tasas de éxito más altas en las tareas designadas.
   </Card>
 
-  <Card title="Reusability" icon="rotate">
-    Once created, subagents can be used across different projects and shared with your team for consistent workflows.
+  <Card title="Reutilización" icon="rotate">
+    Una vez creados, los subagentes pueden ser utilizados en diferentes proyectos y compartidos con tu equipo para flujos de trabajo consistentes.
   </Card>
 
-  <Card title="Flexible permissions" icon="shield-check">
-    Each subagent can have different tool access levels, allowing you to limit powerful tools to specific subagent types.
+  <Card title="Permisos flexibles" icon="shield-check">
+    Cada subagente puede tener diferentes niveles de acceso a las herramientas, lo que te permite limitar herramientas potentes a tipos de subagentes específicos.
   </Card>
 </CardGroup>
 
-## Quick start
+## Inicio rápido
 
-To create your first subagent:
+Para crear tu primer subagente:
 
 <Steps>
-  <Step title="Open the subagents interface">
-    Run the following command:
+  <Step title="Abre la interfaz de subagentes">
+    Ejecuta el siguiente comando:
 
     ```
     /agents
@@ -49,292 +49,292 @@ To create your first subagent:
 
   </Step>
 
-  <Step title="Select 'Create New Agent'">
-    Choose whether to create a project-level or user-level subagent
+  <Step title="Selecciona 'Crear Nuevo Agente'">
+    Elige si quieres crear un subagente a nivel de proyecto o de usuario.
   </Step>
 
-  <Step title="Define the subagent">
-    * **Recommended**: Generate with Claude first, then customize to make it yours
-    * Describe your subagent in detail and when it should be used
-    * Select the tools you want to grant access to (or leave blank to inherit all tools)
-    * The interface shows all available tools, making selection easy
-    * If you're generating with Claude, you can also edit the system prompt in your own editor by pressing `e`
+  <Step title="Define el subagente">
+    * **Recomendado**: Genera primero con Claude y luego personalízalo para hacerlo tuyo.
+    * Describe tu subagente en detalle y cuándo debe ser utilizado.
+    * Selecciona las herramientas a las que quieres dar acceso (o déjalo en blanco para heredar todas las herramientas).
+    * La interfaz muestra todas las herramientas disponibles, facilitando la selección.
+    * Si estás generando con Claude, también puedes editar el prompt del sistema en tu propio editor presionando `e`.
   </Step>
 
-  <Step title="Save and use">
-    Your subagent is now available! Claude will use it automatically when appropriate, or you can invoke it explicitly:
+  <Step title="Guarda y utiliza">
+    ¡Tu subagente ya está disponible! Claude lo usará automáticamente cuando sea apropiado, o puedes invocarlo explícitamente:
 
     ```
-    > Use the code-reviewer subagent to check my recent changes
+    > Usa el subagente revisor-de-código para revisar mis cambios recientes
     ```
 
   </Step>
 </Steps>
 
-## Subagent configuration
+## Configuración de subagentes
 
-### File locations
+### Ubicaciones de los archivos
 
-Subagents are stored as Markdown files with YAML frontmatter in two possible locations:
+Los subagentes se almacenan como archivos Markdown con frontmatter YAML en dos ubicaciones posibles:
 
-| Type                  | Location            | Scope                         | Priority |
-| :-------------------- | :------------------ | :---------------------------- | :------- |
-| **Project subagents** | `.claude/agents/`   | Available in current project  | Highest  |
-| **User subagents**    | `~/.claude/agents/` | Available across all projects | Lower    |
+| Tipo | Ubicación | Ámbito | Prioridad |
+| :--- | :--- | :--- | :--- |
+| **Subagentes de proyecto** | `.claude/agents/` | Disponible en el proyecto actual | Máxima |
+| **Subagentes de usuario** | `~/.claude/agents/` | Disponible en todos los proyectos | Menor |
 
-When subagent names conflict, project-level subagents take precedence over user-level subagents.
+Cuando los nombres de los subagentes entran en conflicto, los subagentes a nivel de proyecto tienen prioridad sobre los subagentes a nivel de usuario.
 
-### File format
+### Formato de archivo
 
-Each subagent is defined in a Markdown file with this structure:
+Cada subagente se define en un archivo Markdown con esta estructura:
 
 ```markdown
 ---
-name: your-sub-agent-name
-description: Description of when this subagent should be invoked
-tools: tool1, tool2, tool3 # Optional - inherits all tools if omitted
+name: tu-nombre-de-subagente
+description: Descripción de cuándo debe ser invocado este subagente
+tools: herramienta1, herramienta2, herramienta3 # Opcional - hereda todas las herramientas si se omite
 ---
 
-Your subagent's system prompt goes here. This can be multiple paragraphs
-and should clearly define the subagent's role, capabilities, and approach
-to solving problems.
+El prompt de sistema de tu subagente va aquí. Puede tener múltiples párrafos
+y debe definir claramente el rol, las capacidades y el enfoque del subagente
+para resolver problemas.
 
-Include specific instructions, best practices, and any constraints
-the subagent should follow.
+Incluye instrucciones específicas, mejores prácticas y cualquier restricción
+que el subagente deba seguir.
 ```
 
-#### Configuration fields
+#### Campos de configuración
 
-| Field         | Required | Description                                                                                 |
-| :------------ | :------- | :------------------------------------------------------------------------------------------ |
-| `name`        | Yes      | Unique identifier using lowercase letters and hyphens                                       |
-| `description` | Yes      | Natural language description of the subagent's purpose                                      |
-| `tools`       | No       | Comma-separated list of specific tools. If omitted, inherits all tools from the main thread |
+| Campo | Requerido | Descripción |
+| :--- | :--- | :--- |
+| `name` | Sí | Identificador único usando letras minúsculas y guiones. |
+| `description` | Sí | Descripción en lenguaje natural del propósito del subagente. |
+| `tools` | No | Lista de herramientas específicas separadas por comas. Si se omite, hereda todas las herramientas del hilo principal. |
 
-### Available tools
+### Herramientas disponibles
 
-Subagents can be granted access to any of Claude Code's internal tools. See the [tools documentation](/en/docs/claude-code/settings#tools-available-to-claude) for a complete list of available tools.
+A los subagentes se les puede conceder acceso a cualquiera de las herramientas internas de Claude Code. Consulta la [documentación de herramientas](/en/docs/claude-code/settings#tools-available-to-claude) para una lista completa de las herramientas disponibles.
 
 <Tip>
-  **Recommended:** Use the `/agents` command to modify tool access - it provides an interactive interface that lists all available tools, including any connected MCP server tools, making it easier to select the ones you need.
+  **Recomendado:** Usa el comando `/agents` para modificar el acceso a las herramientas - proporciona una interfaz interactiva que lista todas las herramientas disponibles, incluyendo cualquier herramienta de servidor MCP conectada, facilitando la selección de las que necesitas.
 </Tip>
 
-You have two options for configuring tools:
+Tienes dos opciones para configurar las herramientas:
 
-- **Omit the `tools` field** to inherit all tools from the main thread (default), including MCP tools
-- **Specify individual tools** as a comma-separated list for more granular control (can be edited manually or via `/agents`)
+- **Omitir el campo `tools`** para heredar todas las herramientas del hilo principal (por defecto), incluyendo las herramientas MCP.
+- **Especificar herramientas individuales** como una lista separada por comas para un control más granular (se puede editar manualmente o a través de `/agents`).
 
-**MCP Tools**: Subagents can access MCP tools from configured MCP servers. When the `tools` field is omitted, subagents inherit all MCP tools available to the main thread.
+**Herramientas MCP**: Los subagentes pueden acceder a las herramientas MCP desde los servidores MCP configurados. Cuando se omite el campo `tools`, los subagentes heredan todas las herramientas MCP disponibles para el hilo principal.
 
-## Managing subagents
+## Gestionando subagentes
 
-### Using the /agents command (Recommended)
+### Usando el comando /agents (Recomendado)
 
-The `/agents` command provides a comprehensive interface for subagent management:
+El comando `/agents` proporciona una interfaz completa para la gestión de subagentes:
 
 ```
 /agents
 ```
 
-This opens an interactive menu where you can:
+Esto abre un menú interactivo donde puedes:
 
-- View all available subagents (built-in, user, and project)
-- Create new subagents with guided setup
-- Edit existing custom subagents, including their tool access
-- Delete custom subagents
-- See which subagents are active when duplicates exist
-- **Easily manage tool permissions** with a complete list of available tools
+- Ver todos los subagentes disponibles (incorporados, de usuario y de proyecto).
+- Crear nuevos subagentes con una configuración guiada.
+- Editar subagentes personalizados existentes, incluyendo su acceso a herramientas.
+- Eliminar subagentes personalizados.
+- Ver qué subagentes están activos cuando existen duplicados.
+- **Gestionar fácilmente los permisos de las herramientas** con una lista completa de las herramientas disponibles.
 
-### Direct file management
+### Gestión directa de archivos
 
-You can also manage subagents by working directly with their files:
+También puedes gestionar los subagentes trabajando directamente con sus archivos:
 
 ```bash
-# Create a project subagent
+# Crear un subagente de proyecto
 mkdir -p .claude/agents
 echo '---
-name: test-runner
-description: Use proactively to run tests and fix failures
+name: ejecutor-de-pruebas
+description: Usar proactivamente para ejecutar pruebas y corregir fallos
 ---
 
-You are a test automation expert. When you see code changes, proactively run the appropriate tests. If tests fail, analyze the failures and fix them while preserving the original test intent.' > .claude/agents/test-runner.md
+Eres un experto en automatización de pruebas. Cuando veas cambios en el código, ejecuta proactivamente las pruebas apropiadas. Si las pruebas fallan, analiza los fallos y corrígelos preservando la intención original de la prueba.' > .claude/agents/test-runner.md
 
-# Create a user subagent
+# Crear un subagente de usuario
 mkdir -p ~/.claude/agents
-# ... create subagent file
+# ... crear archivo de subagente
 ```
 
-## Using subagents effectively
+## Usando subagentes eficazmente
 
-### Automatic delegation
+### Delegación automática
 
-Claude Code proactively delegates tasks based on:
+Claude Code delega tareas proactivamente basándose en:
 
-- The task description in your request
-- The `description` field in subagent configurations
-- Current context and available tools
+- La descripción de la tarea en tu solicitud.
+- El campo `description` en las configuraciones de los subagentes.
+- El contexto actual y las herramientas disponibles.
 
 <Tip>
-  To encourage more proactive subagent use, include phrases like "use PROACTIVELY" or "MUST BE USED" in your `description` field.
+  Para fomentar un uso más proactivo de los subagentes, incluye frases como "USAR PROACTIVAMENTE" o "DEBE SER USADO" en tu campo `description`.
 </Tip>
 
-### Explicit invocation
+### Invocación explícita
 
-Request a specific subagent by mentioning it in your command:
+Solicita un subagente específico mencionándolo en tu comando:
 
 ```
-> Use the test-runner subagent to fix failing tests
-> Have the code-reviewer subagent look at my recent changes
-> Ask the debugger subagent to investigate this error
+> Usa el subagente ejecutor-de-pruebas para corregir las pruebas que fallan
+> Haz que el subagente revisor-de-código revise mis cambios recientes
+> Pide al subagente depurador que investigue este error
 ```
 
-## Example subagents
+## Subagentes de ejemplo
 
-### Code reviewer
+### Revisor de código
 
 ```markdown
 ---
-name: code-reviewer
-description: Expert code review specialist. Proactively reviews code for quality, security, and maintainability. Use immediately after writing or modifying code.
+name: revisor-de-código
+description: Especialista experto en revisión de código. Revisa proactivamente el código en busca de calidad, seguridad y mantenibilidad. Usar inmediatamente después de escribir o modificar código.
 tools: Read, Grep, Glob, Bash
 ---
 
-You are a senior code reviewer ensuring high standards of code quality and security.
+Eres un revisor de código senior que asegura altos estándares de calidad y seguridad del código.
 
-When invoked:
+Cuando seas invocado:
 
-1. Run git diff to see recent changes
-2. Focus on modified files
-3. Begin review immediately
+1. Ejecuta `git diff` para ver los cambios recientes.
+2. Céntrate en los archivos modificados.
+3. Comienza la revisión inmediatamente.
 
-Review checklist:
+Lista de verificación de la revisión:
 
-- Code is simple and readable
-- Functions and variables are well-named
-- No duplicated code
-- Proper error handling
-- No exposed secrets or API keys
-- Input validation implemented
-- Good test coverage
-- Performance considerations addressed
+- El código es simple y legible.
+- Las funciones y variables tienen nombres adecuados.
+- No hay código duplicado.
+- Manejo de errores adecuado.
+- No hay secretos o claves de API expuestas.
+- Implementación de la validación de entradas.
+- Buena cobertura de pruebas.
+- Se han considerado los aspectos de rendimiento.
 
-Provide feedback organized by priority:
+Proporciona retroalimentación organizada por prioridad:
 
-- Critical issues (must fix)
-- Warnings (should fix)
-- Suggestions (consider improving)
+- Problemas críticos (deben corregirse).
+- Advertencias (deberían corregirse).
+- Sugerencias (considerar mejorar).
 
-Include specific examples of how to fix issues.
+Incluye ejemplos específicos de cómo solucionar los problemas.
 ```
 
-### Debugger
+### Depurador
 
 ```markdown
 ---
-name: debugger
-description: Debugging specialist for errors, test failures, and unexpected behavior. Use proactively when encountering any issues.
+name: depurador
+description: Especialista en depuración de errores, fallos de pruebas y comportamiento inesperado. Usar proactivamente al encontrar cualquier problema.
 tools: Read, Edit, Bash, Grep, Glob
 ---
 
-You are an expert debugger specializing in root cause analysis.
+Eres un depurador experto especializado en el análisis de la causa raíz.
 
-When invoked:
+Cuando seas invocado:
 
-1. Capture error message and stack trace
-2. Identify reproduction steps
-3. Isolate the failure location
-4. Implement minimal fix
-5. Verify solution works
+1. Captura el mensaje de error y el stack trace.
+2. Identifica los pasos para reproducir el error.
+3. Aísla la ubicación del fallo.
+4. Implementa una solución mínima.
+5. Verifica que la solución funcione.
 
-Debugging process:
+Proceso de depuración:
 
-- Analyze error messages and logs
-- Check recent code changes
-- Form and test hypotheses
-- Add strategic debug logging
-- Inspect variable states
+- Analiza los mensajes de error y los registros.
+- Revisa los cambios recientes en el código.
+- Formula y prueba hipótesis.
+- Añade registros de depuración estratégicos.
+- Inspecciona los estados de las variables.
 
-For each issue, provide:
+Para cada problema, proporciona:
 
-- Root cause explanation
-- Evidence supporting the diagnosis
-- Specific code fix
-- Testing approach
-- Prevention recommendations
+- Explicación de la causa raíz.
+- Evidencia que respalde el diagnóstico.
+- Solución de código específica.
+- Enfoque de prueba.
+- Recomendaciones de prevención.
 
-Focus on fixing the underlying issue, not just symptoms.
+Céntrate en solucionar el problema subyacente, no solo los síntomas.
 ```
 
-### Data scientist
+### Científico de datos
 
 ```markdown
 ---
-name: data-scientist
-description: Data analysis expert for SQL queries, BigQuery operations, and data insights. Use proactively for data analysis tasks and queries.
+name: cientifico-de-datos
+description: Experto en análisis de datos para consultas SQL, operaciones de BigQuery y obtención de información de datos. Usar proactivamente para tareas de análisis de datos y consultas.
 tools: Bash, Read, Write
 ---
 
-You are a data scientist specializing in SQL and BigQuery analysis.
+Eres un científico de datos especializado en análisis con SQL y BigQuery.
 
-When invoked:
+Cuando seas invocado:
 
-1. Understand the data analysis requirement
-2. Write efficient SQL queries
-3. Use BigQuery command line tools (bq) when appropriate
-4. Analyze and summarize results
-5. Present findings clearly
+1. Entiende el requisito de análisis de datos.
+2. Escribe consultas SQL eficientes.
+3. Usa las herramientas de línea de comandos de BigQuery (bq) cuando sea apropiado.
+4. Analiza y resume los resultados.
+5. Presenta los hallazgos de forma clara.
 
-Key practices:
+Prácticas clave:
 
-- Write optimized SQL queries with proper filters
-- Use appropriate aggregations and joins
-- Include comments explaining complex logic
-- Format results for readability
-- Provide data-driven recommendations
+- Escribe consultas SQL optimizadas con los filtros adecuados.
+- Usa las agregaciones y uniones apropiadas.
+- Incluye comentarios que expliquen la lógica compleja.
+- Formatea los resultados para facilitar la lectura.
+- Proporciona recomendaciones basadas en datos.
 
-For each analysis:
+Para cada análisis:
 
-- Explain the query approach
-- Document any assumptions
-- Highlight key findings
-- Suggest next steps based on data
+- Explica el enfoque de la consulta.
+- Documenta cualquier suposición.
+- Destaca los hallazgos clave.
+- Sugiere los siguientes pasos basados en los datos.
 
-Always ensure queries are efficient and cost-effective.
+Asegúrate siempre de que las consultas sean eficientes y rentables.
 ```
 
-## Best practices
+## Mejores prácticas
 
-- **Start with Claude-generated agents**: We highly recommend generating your initial subagent with Claude and then iterating on it to make it personally yours. This approach gives you the best results - a solid foundation that you can customize to your specific needs.
+- **Comienza con agentes generados por Claude**: Recomendamos encarecidamente generar tu subagente inicial con Claude y luego iterar sobre él para hacerlo tuyo. Este enfoque te da los mejores resultados: una base sólida que puedes personalizar según tus necesidades específicas.
 
-- **Design focused subagents**: Create subagents with single, clear responsibilities rather than trying to make one subagent do everything. This improves performance and makes subagents more predictable.
+- **Diseña subagentes enfocados**: Crea subagentes con responsabilidades únicas y claras en lugar de intentar que un subagente lo haga todo. Esto mejora el rendimiento y hace que los subagentes sean más predecibles.
 
-- **Write detailed prompts**: Include specific instructions, examples, and constraints in your system prompts. The more guidance you provide, the better the subagent will perform.
+- **Escribe prompts detallados**: Incluye instrucciones específicas, ejemplos y restricciones en tus prompts de sistema. Cuanta más orientación proporciones, mejor se desempeñará el subagente.
 
-- **Limit tool access**: Only grant tools that are necessary for the subagent's purpose. This improves security and helps the subagent focus on relevant actions.
+- **Limita el acceso a las herramientas**: Concede solo las herramientas que sean necesarias para el propósito del subagente. Esto mejora la seguridad y ayuda al subagente a centrarse en acciones relevantes.
 
-- **Version control**: Check project subagents into version control so your team can benefit from and improve them collaboratively.
+- **Control de versiones**: Registra los subagentes del proyecto en el control de versiones para que tu equipo pueda beneficiarse de ellos y mejorarlos de forma colaborativa.
 
-## Advanced usage
+## Uso avanzado
 
-### Chaining subagents
+### Encadenamiento de subagentes
 
-For complex workflows, you can chain multiple subagents:
+Para flujos de trabajo complejos, puedes encadenar múltiples subagentes:
 
 ```
-> First use the code-analyzer subagent to find performance issues, then use the optimizer subagent to fix them
+> Primero usa el subagente analizador-de-código para encontrar problemas de rendimiento, luego usa el subagente optimizador para solucionarlos
 ```
 
-### Dynamic subagent selection
+### Selección dinámica de subagentes
 
-Claude Code intelligently selects subagents based on context. Make your `description` fields specific and action-oriented for best results.
+Claude Code selecciona subagentes de forma inteligente basándose en el contexto. Haz que tus campos `description` sean específicos y orientados a la acción para obtener los mejores resultados.
 
-## Performance considerations
+## Consideraciones de rendimiento
 
-- **Context efficiency**: Agents help preserve main context, enabling longer overall sessions
-- **Latency**: Subagents start off with a clean slate each time they are invoked and may add latency as they gather context that they require to do their job effectively.
+- **Eficiencia del contexto**: Los agentes ayudan a preservar el contexto principal, permitiendo sesiones generales más largas.
+- **Latencia**: Los subagentes comienzan desde cero cada vez que son invocados y pueden añadir latencia mientras recopilan el contexto que necesitan para hacer su trabajo eficazmente.
 
-## Related documentation
+## Documentación relacionada
 
-- [Slash commands](/en/docs/claude-code/slash-commands) - Learn about other built-in commands
-- [Settings](/en/docs/claude-code/settings) - Configure Claude Code behavior
-- [Hooks](/en/docs/claude-code/hooks) - Automate workflows with event handlers
+- [Comandos de barra diagonal](/en/docs/claude-code/slash-commands) - Aprende sobre otros comandos incorporados.
+- [Configuración](/en/docs/claude-code/settings) - Configura el comportamiento de Claude Code.
+- [Hooks](/en/docs/claude-code/hooks) - Automatiza flujos de trabajo con manejadores de eventos.

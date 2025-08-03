@@ -1,360 +1,360 @@
-# Claude Code GitHub Actions
+# Acciones de GitHub de Claude Code
 
-> Learn about integrating Claude Code into your development workflow with Claude Code GitHub Actions
+> Aprende a integrar Claude Code en tu flujo de trabajo de desarrollo con las Acciones de GitHub de Claude Code.
 
-Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow. With a simple `@claude` mention in any PR or issue, Claude can analyze your code, create pull requests, implement features, and fix bugs - all while following your project's standards.
+Las Acciones de GitHub de Claude Code llevan la automatización impulsada por IA a tu flujo de trabajo de GitHub. Con una simple mención de `@claude` en cualquier PR o issue, Claude puede analizar tu código, crear pull requests, implementar funcionalidades y corregir errores, todo mientras sigue los estándares de tu proyecto.
 
 <Info>
-  Claude Code GitHub Actions is currently in beta. Features and functionality may evolve as we refine the experience.
+  Las Acciones de GitHub de Claude Code están actualmente en beta. Las características y funcionalidades pueden evolucionar a medida que refinamos la experiencia.
 </Info>
 
 <Note>
-  Claude Code GitHub Actions is built on top of the [Claude Code SDK](/en/docs/claude-code/sdk), which enables programmatic integration of Claude Code into your applications. You can use the SDK to build custom automation workflows beyond GitHub Actions.
+  Las Acciones de GitHub de Claude Code se basan en el [SDK de Claude Code](/en/docs/claude-code/sdk), que permite la integración programática de Claude Code en tus aplicaciones. Puedes usar el SDK para construir flujos de trabajo de automatización personalizados más allá de las Acciones de GitHub.
 </Note>
 
-## Why use Claude Code GitHub Actions?
+## ¿Por qué usar las Acciones de GitHub de Claude Code?
 
-- **Instant PR creation**: Describe what you need, and Claude creates a complete PR with all necessary changes
-- **Automated code implementation**: Turn issues into working code with a single command
-- **Follows your standards**: Claude respects your `CLAUDE.md` guidelines and existing code patterns
-- **Simple setup**: Get started in minutes with our installer and API key
-- **Secure by default**: Your code stays on Github's runners
+- **Creación instantánea de PR**: Describe lo que necesitas y Claude crea un PR completo con todos los cambios necesarios.
+- **Implementación de código automatizada**: Convierte issues en código funcional con un solo comando.
+- **Sigue tus estándares**: Claude respeta tus directrices de `CLAUDE.md` y los patrones de código existentes.
+- **Configuración sencilla**: Empieza en minutos con nuestro instalador y clave de API.
+- **Seguro por defecto**: Tu código permanece en los ejecutores (runners) de GitHub.
 
-## What can Claude do?
+## ¿Qué puede hacer Claude?
 
-Claude Code provides powerful GitHub Actions that transform how you work with code:
+Claude Code proporciona potentes Acciones de GitHub que transforman tu forma de trabajar con el código:
 
-### Claude Code Action
+### Acción de Claude Code
 
-This GitHub Action allows you to run Claude Code within your GitHub Actions workflows. You can use this to build any custom workflow on top of Claude Code.
+Esta Acción de GitHub te permite ejecutar Claude Code dentro de tus flujos de trabajo de Acciones de GitHub. Puedes usar esto para construir cualquier flujo de trabajo personalizado sobre Claude Code.
 
-[View repository →](https://github.com/anthropics/claude-code-action)
+[Ver repositorio →](https://github.com/anthropics/claude-code-action)
 
-### Claude Code Action (Base)
+### Acción de Claude Code (Base)
 
-The foundation for building custom GitHub workflows with Claude. This extensible framework gives you full access to Claude's capabilities for creating tailored automation.
+La base para construir flujos de trabajo de GitHub personalizados con Claude. Este marco extensible te da acceso completo a las capacidades de Claude para crear automatización a medida.
 
-[View repository →](https://github.com/anthropics/claude-code-base-action)
+[Ver repositorio →](https://github.com/anthropics/claude-code-base-action)
 
-## Setup
+## Configuración
 
-## Quick setup
+## Configuración rápida
 
-The easiest way to set up this action is through Claude Code in the terminal. Just open claude and run `/install-github-app`.
+La forma más fácil de configurar esta acción es a través de Claude Code en el terminal. Simplemente abre claude y ejecuta `/install-github-app`.
 
-This command will guide you through setting up the GitHub app and required secrets.
+Este comando te guiará a través de la configuración de la aplicación de GitHub y los secretos requeridos.
 
 <Note>
-  * You must be a repository admin to install the GitHub app and add secrets
-  * This quickstart method is only available for direct Anthropic API users. If you're using AWS Bedrock or Google Vertex AI, please see the [Using with AWS Bedrock & Google Vertex AI](#using-with-aws-bedrock-%26-google-vertex-ai) section.
+  * Debes ser administrador del repositorio para instalar la aplicación de GitHub y añadir secretos.
+  * Este método de inicio rápido solo está disponible para usuarios directos de la API de Anthropic. Si estás usando AWS Bedrock o Google Vertex AI, consulta la sección [Uso con AWS Bedrock y Google Vertex AI](#using-with-aws-bedrock-%26-google-vertex-ai).
 </Note>
 
-## Manual setup
+## Configuración manual
 
-If the `/install-github-app` command fails or you prefer manual setup, please follow these manual setup instructions:
+Si el comando `/install-github-app` falla o prefieres la configuración manual, sigue estas instrucciones de configuración manual:
 
-1. **Install the Claude GitHub app** to your repository: [https://github.com/apps/claude](https://github.com/apps/claude)
-2. **Add ANTHROPIC_API_KEY** to your repository secrets ([Learn how to use secrets in GitHub Actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions))
-3. **Copy the workflow file** from [examples/claude.yml](https://github.com/anthropics/claude-code-action/blob/main/examples/claude.yml) into your repository's `.github/workflows/`
+1. **Instala la aplicación de GitHub de Claude** en tu repositorio: [https://github.com/apps/claude](https://github.com/apps/claude)
+2. **Añade ANTHROPIC_API_KEY** a los secretos de tu repositorio ([Aprende a usar secretos en las Acciones de GitHub](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions))
+3. **Copia el archivo de flujo de trabajo** de [examples/claude.yml](https://github.com/anthropics/claude-code-action/blob/main/examples/claude.yml) en el directorio `.github/workflows/` de tu repositorio.
 
 <Tip>
-  After completing either the quickstart or manual setup, test the action by tagging `@claude` in an issue or PR comment!
+  Después de completar la configuración rápida o manual, ¡prueba la acción etiquetando a `@claude` en un comentario de un issue o PR!
 </Tip>
 
-## Example use cases
+## Casos de uso de ejemplo
 
-Claude Code GitHub Actions can help you with a variety of tasks. For complete working examples, see the [examples directory](https://github.com/anthropics/claude-code-action/tree/main/examples).
+Las Acciones de GitHub de Claude Code pueden ayudarte con una variedad de tareas. Para ver ejemplos funcionales completos, consulta el [directorio de ejemplos](https://github.com/anthropics/claude-code-action/tree/main/examples).
 
-### Turn issues into PRs
+### Convertir issues en PRs
 
-In an issue comment:
-
-```
-@claude implement this feature based on the issue description
-```
-
-Claude will analyze the issue, write the code, and create a PR for review.
-
-### Get implementation help
-
-In a PR comment:
+En un comentario de un issue:
 
 ```
-@claude how should I implement user authentication for this endpoint?
+@claude implementa esta funcionalidad basada en la descripción del issue
 ```
 
-Claude will analyze your code and provide specific implementation guidance.
+Claude analizará el issue, escribirá el código y creará un PR para su revisión.
 
-### Fix bugs quickly
+### Obtener ayuda con la implementación
 
-In an issue:
+En un comentario de un PR:
+
+```
+@claude ¿cómo debería implementar la autenticación de usuario para este endpoint?
+```
+
+Claude analizará tu código y te proporcionará una guía de implementación específica.
+
+### Corregir errores rápidamente
+
+En un issue:
 
 ```yaml
-@claude fix the TypeError in the user dashboard component
+@claude corrige el TypeError en el componente del panel de usuario
 ```
 
-Claude will locate the bug, implement a fix, and create a PR.
+Claude localizará el error, implementará una solución y creará un PR.
 
-## Best practices
+## Mejores prácticas
 
-### CLAUDE.md configuration
+### Configuración de CLAUDE.md
 
-Create a `CLAUDE.md` file in your repository root to define code style guidelines, review criteria, project-specific rules, and preferred patterns. This file guides Claude's understanding of your project standards.
+Crea un archivo `CLAUDE.md` en la raíz de tu repositorio para definir directrices de estilo de código, criterios de revisión, reglas específicas del proyecto y patrones preferidos. Este archivo guía la comprensión de Claude sobre los estándares de tu proyecto.
 
-### Security considerations
+### Consideraciones de seguridad
 
 <Warning>
-  Never commit API keys directly to your repository!
+  ¡Nunca hagas commit de claves de API directamente en tu repositorio!
 </Warning>
 
-Always use GitHub Secrets for API keys:
+Usa siempre los Secretos de GitHub para las claves de API:
 
-- Add your API key as a repository secret named `ANTHROPIC_API_KEY`
-- Reference it in workflows: `anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}`
-- Limit action permissions to only what's necessary
-- Review Claude's suggestions before merging
+- Añade tu clave de API como un secreto del repositorio llamado `ANTHROPIC_API_KEY`.
+- Haz referencia a ella en los flujos de trabajo: `anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}`.
+- Limita los permisos de las acciones solo a lo necesario.
+- Revisa las sugerencias de Claude antes de fusionar.
 
-Always use GitHub Secrets (e.g., `${{ secrets.ANTHROPIC_API_KEY }}`) rather than hardcoding API keys directly in your workflow files.
+Usa siempre los Secretos de GitHub (p. ej., `${{ secrets.ANTHROPIC_API_KEY }}`) en lugar de codificar las claves de API directamente en tus archivos de flujo de trabajo.
 
-### Optimizing performance
+### Optimización del rendimiento
 
-Use issue templates to provide context, keep your `CLAUDE.md` concise and focused, and configure appropriate timeouts for your workflows.
+Usa plantillas de issues para proporcionar contexto, mantén tu `CLAUDE.md` conciso y enfocado, y configura tiempos de espera apropiados para tus flujos de trabajo.
 
-### CI costs
+### Costos de CI
 
-When using Claude Code GitHub Actions, be aware of the associated costs:
+Al usar las Acciones de GitHub de Claude Code, ten en cuenta los costos asociados:
 
-**GitHub Actions costs:**
+**Costos de las Acciones de GitHub:**
 
-- Claude Code runs on GitHub-hosted runners, which consume your GitHub Actions minutes
-- See [GitHub's billing documentation](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions/about-billing-for-github-actions) for detailed pricing and minute limits
+- Claude Code se ejecuta en ejecutores (runners) alojados en GitHub, que consumen tus minutos de Acciones de GitHub.
+- Consulta la [documentación de facturación de GitHub](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions/about-billing-for-github-actions) para precios detallados y límites de minutos.
 
-**API costs:**
+**Costos de la API:**
 
-- Each Claude interaction consumes API tokens based on the length of prompts and responses
-- Token usage varies by task complexity and codebase size
-- See [Claude's pricing page](https://www.anthropic.com/api) for current token rates
+- Cada interacción de Claude consume tokens de API según la longitud de los prompts y las respuestas.
+- El uso de tokens varía según la complejidad de la tarea y el tamaño de la base de código.
+- Consulta la [página de precios de Claude](https://www.anthropic.com/api) para las tarifas actuales de los tokens.
 
-**Cost optimization tips:**
+**Consejos para la optimización de costos:**
 
-- Use specific `@claude` commands to reduce unnecessary API calls
-- Configure appropriate `max_turns` limits to prevent excessive iterations
-- Set reasonable `timeout_minutes` to avoid runaway workflows
-- Consider using GitHub's concurrency controls to limit parallel runs
+- Usa comandos `@claude` específicos para reducir las llamadas innecesarias a la API.
+- Configura límites `max_turns` apropiados para evitar iteraciones excesivas.
+- Establece `timeout_minutes` razonables para evitar flujos de trabajo descontrolados.
+- Considera usar los controles de concurrencia de GitHub para limitar las ejecuciones paralelas.
 
-## Configuration examples
+## Ejemplos de configuración
 
-For ready-to-use workflow configurations for different use cases, including:
+Para configuraciones de flujo de trabajo listas para usar para diferentes casos de uso, incluyendo:
 
-- Basic workflow setup for issue and PR comments
-- Automated code reviews on pull requests
-- Custom implementations for specific needs
+- Configuración básica de flujo de trabajo para comentarios de issues y PRs.
+- Revisiones de código automatizadas en pull requests.
+- Implementaciones personalizadas para necesidades específicas.
 
-Visit the [examples directory](https://github.com/anthropics/claude-code-action/tree/main/examples) in the Claude Code Action repository.
+Visita el [directorio de ejemplos](https://github.com/anthropics/claude-code-action/tree/main/examples) en el repositorio de la Acción de Claude Code.
 
 <Tip>
-  The examples repository includes complete, tested workflows that you can copy directly into your `.github/workflows/` directory.
+  El repositorio de ejemplos incluye flujos de trabajo completos y probados que puedes copiar directamente en tu directorio `.github/workflows/`.
 </Tip>
 
-## Using with AWS Bedrock & Google Vertex AI
+## Uso con AWS Bedrock y Google Vertex AI
 
-For enterprise environments, you can use Claude Code GitHub Actions with your own cloud infrastructure. This approach gives you control over data residency and billing while maintaining the same functionality.
+Para entornos empresariales, puedes usar las Acciones de GitHub de Claude Code con tu propia infraestructura en la nube. Este enfoque te da control sobre la residencia de los datos y la facturación, manteniendo la misma funcionalidad.
 
-### Prerequisites
+### Prerrequisitos
 
-Before setting up Claude Code GitHub Actions with cloud providers, you need:
+Antes de configurar las Acciones de GitHub de Claude Code con proveedores en la nube, necesitas:
 
-#### For Google Cloud Vertex AI:
+#### Para Google Cloud Vertex AI:
 
-1. A Google Cloud Project with Vertex AI enabled
-2. Workload Identity Federation configured for GitHub Actions
-3. A service account with the required permissions
-4. A GitHub App (recommended) or use the default GITHUB_TOKEN
+1. Un Proyecto de Google Cloud con Vertex AI habilitado.
+2. Federación de Identidad de Carga de Trabajo configurada para las Acciones de GitHub.
+3. Una cuenta de servicio con los permisos requeridos.
+4. Una Aplicación de GitHub (recomendado) o usar el GITHUB_TOKEN por defecto.
 
-#### For AWS Bedrock:
+#### Para AWS Bedrock:
 
-1. An AWS account with Amazon Bedrock enabled
-2. GitHub OIDC Identity Provider configured in AWS
-3. An IAM role with Bedrock permissions
-4. A GitHub App (recommended) or use the default GITHUB_TOKEN
+1. Una cuenta de AWS con Amazon Bedrock habilitado.
+2. Proveedor de Identidad OIDC de GitHub configurado en AWS.
+3. Un rol de IAM con permisos de Bedrock.
+4. Una Aplicación de GitHub (recomendado) o usar el GITHUB_TOKEN por defecto.
 
 <Steps>
-  <Step title="Create a custom GitHub App (Recommended for 3P Providers)">
-    For best control and security when using 3P providers like Vertex AI or Bedrock, we recommend creating your own GitHub App:
+  <Step title="Crear una Aplicación de GitHub personalizada (Recomendado para Proveedores 3P)">
+    Para un mejor control y seguridad al usar proveedores 3P como Vertex AI o Bedrock, recomendamos crear tu propia Aplicación de GitHub:
 
-    1. Go to [https://github.com/settings/apps/new](https://github.com/settings/apps/new)
-    2. Fill in the basic information:
-       * **GitHub App name**: Choose a unique name (e.g., "YourOrg Claude Assistant")
-       * **Homepage URL**: Your organization's website or the repository URL
-    3. Configure the app settings:
-       * **Webhooks**: Uncheck "Active" (not needed for this integration)
-    4. Set the required permissions:
-       * **Repository permissions**:
-         * Contents: Read & Write
-         * Issues: Read & Write
-         * Pull requests: Read & Write
-    5. Click "Create GitHub App"
-    6. After creation, click "Generate a private key" and save the downloaded `.pem` file
-    7. Note your App ID from the app settings page
-    8. Install the app to your repository:
-       * From your app's settings page, click "Install App" in the left sidebar
-       * Select your account or organization
-       * Choose "Only select repositories" and select the specific repository
-       * Click "Install"
-    9. Add the private key as a secret to your repository:
-       * Go to your repository's Settings → Secrets and variables → Actions
-       * Create a new secret named `APP_PRIVATE_KEY` with the contents of the `.pem` file
-    10. Add the App ID as a secret:
+    1. Ve a [https://github.com/settings/apps/new](https://github.com/settings/apps/new)
+    2. Rellena la información básica:
+       * **Nombre de la Aplicación de GitHub**: Elige un nombre único (p. ej., "Asistente Claude de TuOrg")
+       * **URL de la página de inicio**: El sitio web de tu organización o la URL del repositorio.
+    3. Configura los ajustes de la aplicación:
+       * **Webhooks**: Desmarca "Activo" (no es necesario para esta integración).
+    4. Establece los permisos requeridos:
+       * **Permisos del repositorio**:
+         * Contenidos: Lectura y Escritura
+         * Issues: Lectura y Escritura
+         * Pull requests: Lectura y Escritura
+    5. Haz clic en "Crear Aplicación de GitHub".
+    6. Después de la creación, haz clic en "Generar una clave privada" y guarda el archivo `.pem` descargado.
+    7. Anota tu ID de Aplicación desde la página de configuración de la aplicación.
+    8. Instala la aplicación en tu repositorio:
+       * Desde la página de configuración de tu aplicación, haz clic en "Instalar Aplicación" en la barra lateral izquierda.
+       * Selecciona tu cuenta u organización.
+       * Elige "Solo repositorios seleccionados" y selecciona el repositorio específico.
+       * Haz clic en "Instalar".
+    9. Añade la clave privada como un secreto a tu repositorio:
+       * Ve a la Configuración de tu repositorio → Secretos y variables → Acciones.
+       * Crea un nuevo secreto llamado `APP_PRIVATE_KEY` con el contenido del archivo `.pem`.
+    10. Añade el ID de la Aplicación como un secreto:
 
-    * Create a new secret named `APP_ID` with your GitHub App's ID
+    * Crea un nuevo secreto llamado `APP_ID` con el ID de tu Aplicación de GitHub.
 
     <Note>
-      This app will be used with the [actions/create-github-app-token](https://github.com/actions/create-github-app-token) action to generate authentication tokens in your workflows.
+      Esta aplicación se usará con la acción [actions/create-github-app-token](https://github.com/actions/create-github-app-token) para generar tokens de autenticación en tus flujos de trabajo.
     </Note>
 
-    **Alternative for Anthropic API or if you don't want to setup your own Github app**: Use the official Anthropic app:
+    **Alternativa para la API de Anthropic o si no quieres configurar tu propia aplicación de Github**: Usa la aplicación oficial de Anthropic:
 
-    1. Install from: [https://github.com/apps/claude](https://github.com/apps/claude)
-    2. No additional configuration needed for authentication
+    1. Instala desde: [https://github.com/apps/claude](https://github.com/apps/claude)
+    2. No se necesita configuración adicional para la autenticación.
 
   </Step>
 
-  <Step title="Configure cloud provider authentication">
-    Choose your cloud provider and set up secure authentication:
+  <Step title="Configurar la autenticación del proveedor en la nube">
+    Elige tu proveedor en la nube y configura una autenticación segura:
 
     <AccordionGroup>
       <Accordion title="AWS Bedrock">
-        **Configure AWS to allow GitHub Actions to authenticate securely without storing credentials.**
+        **Configura AWS para permitir que las Acciones de GitHub se autentiquen de forma segura sin almacenar credenciales.**
 
-        > **Security Note**: Use repository-specific configurations and grant only the minimum required permissions.
+        > **Nota de Seguridad**: Usa configuraciones específicas del repositorio y concede solo los permisos mínimos requeridos.
 
-        **Required Setup**:
+        **Configuración Requerida**:
 
-        1. **Enable Amazon Bedrock**:
-           * Request access to Claude models in Amazon Bedrock
-           * For cross-region models, request access in all required regions
+        1. **Habilitar Amazon Bedrock**:
+           * Solicita acceso a los modelos de Claude en Amazon Bedrock.
+           * Para modelos multirregionales, solicita acceso en todas las regiones requeridas.
 
-        2. **Set up GitHub OIDC Identity Provider**:
-           * Provider URL: `https://token.actions.githubusercontent.com`
-           * Audience: `sts.amazonaws.com`
+        2. **Configurar el Proveedor de Identidad OIDC de GitHub**:
+           * URL del proveedor: `https://token.actions.githubusercontent.com`
+           * Audiencia: `sts.amazonaws.com`
 
-        3. **Create IAM Role for GitHub Actions**:
-           * Trusted entity type: Web identity
-           * Identity provider: `token.actions.githubusercontent.com`
-           * Permissions: `AmazonBedrockFullAccess` policy
-           * Configure trust policy for your specific repository
+        3. **Crear un Rol de IAM para las Acciones de GitHub**:
+           * Tipo de entidad de confianza: Identidad web
+           * Proveedor de identidad: `token.actions.githubusercontent.com`
+           * Permisos: política `AmazonBedrockFullAccess`
+           * Configura la política de confianza para tu repositorio específico.
 
-        **Required Values**:
+        **Valores Requeridos**:
 
-        After setup, you'll need:
+        Después de la configuración, necesitarás:
 
-        * **AWS\_ROLE\_TO\_ASSUME**: The ARN of the IAM role you created
+        * **AWS\_ROLE\_TO\_ASSUME**: El ARN del rol de IAM que creaste.
 
         <Tip>
-          OIDC is more secure than using static AWS access keys because credentials are temporary and automatically rotated.
+          OIDC es más seguro que usar claves de acceso estáticas de AWS porque las credenciales son temporales y se rotan automáticamente.
         </Tip>
 
-        See [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) for detailed OIDC setup instructions.
+        Consulta la [documentación de AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) para instrucciones detalladas de configuración de OIDC.
       </Accordion>
 
       <Accordion title="Google Vertex AI">
-        **Configure Google Cloud to allow GitHub Actions to authenticate securely without storing credentials.**
+        **Configura Google Cloud para permitir que las Acciones de GitHub se autentiquen de forma segura sin almacenar credenciales.**
 
-        > **Security Note**: Use repository-specific configurations and grant only the minimum required permissions.
+        > **Nota de Seguridad**: Usa configuraciones específicas del repositorio y concede solo los permisos mínimos requeridos.
 
-        **Required Setup**:
+        **Configuración Requerida**:
 
-        1. **Enable APIs** in your Google Cloud project:
-           * IAM Credentials API
-           * Security Token Service (STS) API
-           * Vertex AI API
+        1. **Habilitar APIs** en tu proyecto de Google Cloud:
+           * API de Credenciales de IAM
+           * API del Servicio de Tokens de Seguridad (STS)
+           * API de Vertex AI
 
-        2. **Create Workload Identity Federation resources**:
-           * Create a Workload Identity Pool
-           * Add a GitHub OIDC provider with:
-             * Issuer: `https://token.actions.githubusercontent.com`
-             * Attribute mappings for repository and owner
-             * **Security recommendation**: Use repository-specific attribute conditions
+        2. **Crear recursos de Federación de Identidad de Carga de Trabajo**:
+           * Crea un Grupo de Identidades de Carga de Trabajo.
+           * Añade un proveedor OIDC de GitHub con:
+             * Emisor: `https://token.actions.githubusercontent.com`
+             * Mapeos de atributos para el repositorio y el propietario.
+             * **Recomendación de seguridad**: Usa condiciones de atributos específicas del repositorio.
 
-        3. **Create a Service Account**:
-           * Grant only `Vertex AI User` role
-           * **Security recommendation**: Create a dedicated service account per repository
+        3. **Crear una Cuenta de Servicio**:
+           * Concede solo el rol de `Usuario de Vertex AI`.
+           * **Recomendación de seguridad**: Crea una cuenta de servicio dedicada por repositorio.
 
-        4. **Configure IAM bindings**:
-           * Allow the Workload Identity Pool to impersonate the service account
-           * **Security recommendation**: Use repository-specific principal sets
+        4. **Configurar enlaces de IAM**:
+           * Permite que el Grupo de Identidades de Carga de Trabajo suplante a la cuenta de servicio.
+           * **Recomendación de seguridad**: Usa conjuntos de principales específicos del repositorio.
 
-        **Required Values**:
+        **Valores Requeridos**:
 
-        After setup, you'll need:
+        Después de la configuración, necesitarás:
 
-        * **GCP\_WORKLOAD\_IDENTITY\_PROVIDER**: The full provider resource name
-        * **GCP\_SERVICE\_ACCOUNT**: The service account email address
+        * **GCP\_WORKLOAD\_IDENTITY\_PROVIDER**: El nombre completo del recurso del proveedor.
+        * **GCP\_SERVICE\_ACCOUNT**: El correo electrónico de la cuenta de servicio.
 
         <Tip>
-          Workload Identity Federation eliminates the need for downloadable service account keys, improving security.
+          La Federación de Identidad de Carga de Trabajo elimina la necesidad de claves de cuenta de servicio descargables, mejorando la seguridad.
         </Tip>
 
-        For detailed setup instructions, consult the [Google Cloud Workload Identity Federation documentation](https://cloud.google.com/iam/docs/workload-identity-federation).
+        Para instrucciones de configuración detalladas, consulta la [documentación de la Federación de Identidad de Carga de Trabajo de Google Cloud](https://cloud.google.com/iam/docs/workload-identity-federation).
       </Accordion>
     </AccordionGroup>
 
   </Step>
 
-  <Step title="Add Required Secrets">
-    Add the following secrets to your repository (Settings → Secrets and variables → Actions):
+  <Step title="Añadir Secretos Requeridos">
+    Añade los siguientes secretos a tu repositorio (Configuración → Secretos y variables → Acciones):
 
-    #### For Anthropic API (Direct):
+    #### Para la API de Anthropic (Directa):
 
-    1. **For API Authentication**:
-       * `ANTHROPIC_API_KEY`: Your Anthropic API key from [console.anthropic.com](https://console.anthropic.com)
+    1. **Para la Autenticación de la API**:
+       * `ANTHROPIC_API_KEY`: Tu clave de API de Anthropic de [console.anthropic.com](https://console.anthropic.com)
 
-    2. **For GitHub App (if using your own app)**:
-       * `APP_ID`: Your GitHub App's ID
-       * `APP_PRIVATE_KEY`: The private key (.pem) content
+    2. **Para la Aplicación de GitHub (si usas tu propia aplicación)**:
+       * `APP_ID`: El ID de tu Aplicación de GitHub.
+       * `APP_PRIVATE_KEY`: El contenido de la clave privada (.pem).
 
-    #### For Google Cloud Vertex AI
+    #### Para Google Cloud Vertex AI
 
-    1. **For GCP Authentication**:
+    1. **Para la Autenticación de GCP**:
        * `GCP_WORKLOAD_IDENTITY_PROVIDER`
        * `GCP_SERVICE_ACCOUNT`
 
-    2. **For GitHub App (if using your own app)**:
-       * `APP_ID`: Your GitHub App's ID
-       * `APP_PRIVATE_KEY`: The private key (.pem) content
+    2. **Para la Aplicación de GitHub (si usas tu propia aplicación)**:
+       * `APP_ID`: El ID de tu Aplicación de GitHub.
+       * `APP_PRIVATE_KEY`: El contenido de la clave privada (.pem).
 
-    #### For AWS Bedrock
+    #### Para AWS Bedrock
 
-    1. **For AWS Authentication**:
+    1. **Para la Autenticación de AWS**:
        * `AWS_ROLE_TO_ASSUME`
 
-    2. **For GitHub App (if using your own app)**:
-       * `APP_ID`: Your GitHub App's ID
-       * `APP_PRIVATE_KEY`: The private key (.pem) content
+    2. **Para la Aplicación de GitHub (si usas tu propia aplicación)**:
+       * `APP_ID`: El ID de tu Aplicación de GitHub.
+       * `APP_PRIVATE_KEY`: El contenido de la clave privada (.pem).
 
   </Step>
 
-  <Step title="Create workflow files">
-    Create GitHub Actions workflow files that integrate with your cloud provider. The examples below show complete configurations for both AWS Bedrock and Google Vertex AI:
+  <Step title="Crear archivos de flujo de trabajo">
+    Crea archivos de flujo de trabajo de Acciones de GitHub que se integren con tu proveedor en la nube. Los ejemplos a continuación muestran configuraciones completas tanto para AWS Bedrock como para Google Vertex AI:
 
     <AccordionGroup>
-      <Accordion title="AWS Bedrock workflow">
-        **Prerequisites:**
+      <Accordion title="Flujo de trabajo de AWS Bedrock">
+        **Prerrequisitos:**
 
-        * AWS Bedrock access enabled with Claude model permissions
-        * GitHub configured as an OIDC identity provider in AWS
-        * IAM role with Bedrock permissions that trusts GitHub Actions
+        * Acceso a AWS Bedrock habilitado con permisos para el modelo de Claude.
+        * GitHub configurado como un proveedor de identidad OIDC en AWS.
+        * Rol de IAM con permisos de Bedrock que confía en las Acciones de GitHub.
 
-        **Required GitHub secrets:**
+        **Secretos de GitHub requeridos:**
 
-        | Secret Name          | Description                                       |
-        | -------------------- | ------------------------------------------------- |
-        | `AWS_ROLE_TO_ASSUME` | ARN of the IAM role for Bedrock access            |
-        | `APP_ID`             | Your GitHub App ID (from app settings)            |
-        | `APP_PRIVATE_KEY`    | The private key you generated for your GitHub App |
+        | Nombre del Secreto | Descripción |
+        | --- | --- |
+        | `AWS_ROLE_TO_ASSUME` | ARN del rol de IAM para el acceso a Bedrock |
+        | `APP_ID` | El ID de tu Aplicación de GitHub (de la configuración de la aplicación) |
+        | `APP_PRIVATE_KEY` | La clave privada que generaste para tu Aplicación de GitHub |
 
         ```yaml
-        name: Claude PR Action
+        name: Acción de PR de Claude
 
         permissions:
           contents: write
@@ -380,17 +380,17 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
             env:
               AWS_REGION: us-west-2
             steps:
-              - name: Checkout repository
+              - name: Checkout del repositorio
                 uses: actions/checkout@v4
 
-              - name: Generate GitHub App token
+              - name: Generar token de la Aplicación de GitHub
                 id: app-token
                 uses: actions/create-github-app-token@v2
                 with:
                   app-id: ${{ secrets.APP_ID }}
                   private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-              - name: Configure AWS Credentials (OIDC)
+              - name: Configurar Credenciales de AWS (OIDC)
                 uses: aws-actions/configure-aws-credentials@v4
                 with:
                   role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
@@ -406,28 +406,28 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
         ```
 
         <Tip>
-          The model ID format for Bedrock includes the region prefix (e.g., `us.anthropic.claude...`) and version suffix.
+          El formato del ID del modelo para Bedrock incluye el prefijo de la región (p. ej., `us.anthropic.claude...`) y el sufijo de la versión.
         </Tip>
       </Accordion>
 
-      <Accordion title="Google Vertex AI workflow">
-        **Prerequisites:**
+      <Accordion title="Flujo de trabajo de Google Vertex AI">
+        **Prerrequisitos:**
 
-        * Vertex AI API enabled in your GCP project
-        * Workload Identity Federation configured for GitHub
-        * Service account with Vertex AI permissions
+        * API de Vertex AI habilitada en tu proyecto de GCP.
+        * Federación de Identidad de Carga de Trabajo configurada para GitHub.
+        * Cuenta de servicio con permisos de Vertex AI.
 
-        **Required GitHub secrets:**
+        **Secretos de GitHub requeridos:**
 
-        | Secret Name                      | Description                                       |
-        | -------------------------------- | ------------------------------------------------- |
-        | `GCP_WORKLOAD_IDENTITY_PROVIDER` | Workload identity provider resource name          |
-        | `GCP_SERVICE_ACCOUNT`            | Service account email with Vertex AI access       |
-        | `APP_ID`                         | Your GitHub App ID (from app settings)            |
-        | `APP_PRIVATE_KEY`                | The private key you generated for your GitHub App |
+        | Nombre del Secreto | Descripción |
+        | --- | --- |
+        | `GCP_WORKLOAD_IDENTITY_PROVIDER` | Nombre del recurso del proveedor de identidad de carga de trabajo |
+        | `GCP_SERVICE_ACCOUNT` | Correo electrónico de la cuenta de servicio con acceso a Vertex AI |
+        | `APP_ID` | El ID de tu Aplicación de GitHub (de la configuración de la aplicación) |
+        | `APP_PRIVATE_KEY` | La clave privada que generaste para tu Aplicación de GitHub |
 
         ```yaml
-        name: Claude PR Action
+        name: Acción de PR de Claude
 
         permissions:
           contents: write
@@ -451,17 +451,17 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
               (github.event_name == 'issues' && contains(github.event.issue.body, '@claude'))
             runs-on: ubuntu-latest
             steps:
-              - name: Checkout repository
+              - name: Checkout del repositorio
                 uses: actions/checkout@v4
 
-              - name: Generate GitHub App token
+              - name: Generar token de la Aplicación de GitHub
                 id: app-token
                 uses: actions/create-github-app-token@v2
                 with:
                   app-id: ${{ secrets.APP_ID }}
                   private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-              - name: Authenticate to Google Cloud
+              - name: Autenticar en Google Cloud
                 id: auth
                 uses: google-github-actions/auth@v2
                 with:
@@ -482,7 +482,7 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
         ```
 
         <Tip>
-          The project ID is automatically retrieved from the Google Cloud authentication step, so you don't need to hardcode it.
+          El ID del proyecto se recupera automáticamente del paso de autenticación de Google Cloud, por lo que no necesitas codificarlo.
         </Tip>
       </Accordion>
     </AccordionGroup>
@@ -490,52 +490,52 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
   </Step>
 </Steps>
 
-## Troubleshooting
+## Solución de problemas
 
-### Claude not responding to @claude commands
+### Claude no responde a los comandos @claude
 
-Verify the GitHub App is installed correctly, check that workflows are enabled, ensure API key is set in repository secrets, and confirm the comment contains `@claude` (not `/claude`).
+Verifica que la Aplicación de GitHub esté instalada correctamente, comprueba que los flujos de trabajo estén habilitados, asegúrate de que la clave de API esté configurada en los secretos del repositorio y confirma que el comentario contenga `@claude` (no `/claude`).
 
-### CI not running on Claude's commits
+### CI no se ejecuta en los commits de Claude
 
-Ensure you're using the GitHub App or custom app (not Actions user), check workflow triggers include the necessary events, and verify app permissions include CI triggers.
+Asegúrate de que estás usando la Aplicación de GitHub o una aplicación personalizada (no el usuario de Acciones), comprueba que los activadores del flujo de trabajo incluyan los eventos necesarios y verifica que los permisos de la aplicación incluyan los activadores de CI.
 
-### Authentication errors
+### Errores de autenticación
 
-Confirm API key is valid and has sufficient permissions. For Bedrock/Vertex, check credentials configuration and ensure secrets are named correctly in workflows.
+Confirma que la clave de API sea válida y tenga suficientes permisos. Para Bedrock/Vertex, comprueba la configuración de las credenciales y asegúrate de que los secretos estén nombrados correctamente en los flujos de trabajo.
 
-## Advanced configuration
+## Configuración avanzada
 
-### Action parameters
+### Parámetros de la acción
 
-The Claude Code Action supports these key parameters:
+La Acción de Claude Code admite estos parámetros clave:
 
-| Parameter           | Description                    | Required |
-| ------------------- | ------------------------------ | -------- |
-| `prompt`            | The prompt to send to Claude   | Yes\*    |
-| `prompt_file`       | Path to file containing prompt | Yes\*    |
-| `anthropic_api_key` | Anthropic API key              | Yes\*\*  |
-| `max_turns`         | Maximum conversation turns     | No       |
-| `timeout_minutes`   | Execution timeout              | No       |
+| Parámetro | Descripción | Requerido |
+| --- | --- | --- |
+| `prompt` | El prompt a enviar a Claude | Sí\* |
+| `prompt_file` | Ruta al archivo que contiene el prompt | Sí\* |
+| `anthropic_api_key` | Clave de API de Anthropic | Sí\*\* |
+| `max_turns` | Máximo de turnos de conversación | No |
+| `timeout_minutes` | Tiempo de espera de ejecución | No |
 
-\*Either `prompt` or `prompt_file` required\
-\*\*Required for direct Anthropic API, not for Bedrock/Vertex
+\*Se requiere `prompt` o `prompt_file`.
+\*\*Requerido para la API directa de Anthropic, no para Bedrock/Vertex.
 
-### Alternative integration methods
+### Métodos de integración alternativos
 
-While the `/install-github-app` command is the recommended approach, you can also:
+Aunque el comando `/install-github-app` es el enfoque recomendado, también puedes:
 
-- **Custom GitHub App**: For organizations needing branded usernames or custom authentication flows. Create your own GitHub App with required permissions (contents, issues, pull requests) and use the actions/create-github-app-token action to generate tokens in your workflows.
-- **Manual GitHub Actions**: Direct workflow configuration for maximum flexibility
-- **MCP Configuration**: Dynamic loading of Model Context Protocol servers
+- **Aplicación de GitHub personalizada**: Para organizaciones que necesitan nombres de usuario de marca o flujos de autenticación personalizados. Crea tu propia Aplicación de GitHub con los permisos requeridos (contenidos, issues, pull requests) y usa la acción `actions/create-github-app-token` para generar tokens en tus flujos de trabajo.
+- **Acciones de GitHub manuales**: Configuración directa del flujo de trabajo para una máxima flexibilidad.
+- **Configuración de MCP**: Carga dinámica de servidores del Protocolo de Contexto del Modelo.
 
-See the [Claude Code Action repository](https://github.com/anthropics/claude-code-action) for detailed documentation.
+Consulta el [repositorio de la Acción de Claude Code](https://github.com/anthropics/claude-code-action) para una documentación detallada.
 
-### Customizing Claude's behavior
+### Personalización del comportamiento de Claude
 
-You can configure Claude's behavior in two ways:
+Puedes configurar el comportamiento de Claude de dos maneras:
 
-1. **CLAUDE.md**: Define coding standards, review criteria, and project-specific rules in a `CLAUDE.md` file at the root of your repository. Claude will follow these guidelines when creating PRs and responding to requests. Check out our [Memory documentation](/en/docs/claude-code/memory) for more details.
-2. **Custom prompts**: Use the `prompt` parameter in the workflow file to provide workflow-specific instructions. This allows you to customize Claude's behavior for different workflows or tasks.
+1. **CLAUDE.md**: Define estándares de codificación, criterios de revisión y reglas específicas del proyecto en un archivo `CLAUDE.md` en la raíz de tu repositorio. Claude seguirá estas directrices al crear PRs y responder a las solicitudes. Consulta nuestra [documentación de Memoria](/en/docs/claude-code/memory) para más detalles.
+2. **Prompts personalizados**: Usa el parámetro `prompt` en el archivo de flujo de trabajo para proporcionar instrucciones específicas del flujo de trabajo. Esto te permite personalizar el comportamiento de Claude para diferentes flujos de trabajo o tareas.
 
-Claude will follow these guidelines when creating PRs and responding to requests.
+Claude seguirá estas directrices al crear PRs y responder a las solicitudes.

@@ -1,370 +1,370 @@
-# PRP (Product Requirement prompts)
+# PRP (Prompts de Requisitos de Producto)
 
-- A collection of prompts i use in my every day work
+- Una colección de prompts que uso en mi trabajo diario.
 
-## Video Walkthrough
+## Video Explicativo
 
 👉 https://www.youtube.com/watch?v=KVOZ9s1S9Gk&lc=UgzfwxvFjo6pKEyPo1R4AaABAg
 
-### ☕ Support This Work
+### ☕ Apoya Este Trabajo
 
-**Found value in these resources?**
+**¿Encontraste valor en estos recursos?**
 
-👉 **Buy me a coffee:** https://coff.ee/wirasm
+👉 **Invítame a un café:** https://coff.ee/wirasm
 
-I spent a considerable amount of time creating these resources and prompts. If you find value in this project, please consider buying me a coffee to support my work.
+Dediqué una cantidad considerable de tiempo a crear estos recursos y prompts. Si encuentras valor en este proyecto, por favor considera invitarme a un café para apoyar mi trabajo.
 
-That will help me maintain and improve the resources available for free
+Eso me ayudará a mantener y mejorar los recursos disponibles de forma gratuita.
 
 ---
 
-### 🎯 Transform Your Team with AI Engineering Workshops
+### 🎯 Transforma a Tu Equipo con Talleres de Ingeniería de IA
 
-**Ready to move beyond toy demos to production-ready AI systems?**
+**¿Listo para pasar de demos de juguete a sistemas de IA listos para producción?**
 
-👉 **Book a workshop:** https://www.rasmuswiding.com/
+👉 **Reserva un taller:** https://www.rasmuswiding.com/
 
-✅ **What you'll get:**
+✅ **Lo que obtendrás:**
 
-- Put your team on a path to become AI power users
-- Learn the exact PRP methodology used by top engineering teams
-- Hands-on training with Claude Code, PRPs, and real codebases
-- From beginner to advanced AI engineering workshops for teams and individuals
+-   Poner a tu equipo en el camino para convertirse en usuarios avanzados de IA.
+-   Aprender la metodología PRP exacta utilizada por los mejores equipos de ingeniería.
+-   Formación práctica con Claude Code, PRPs y bases de código reales.
+-   Talleres de ingeniería de IA desde principiantes hasta avanzados para equipos e individuos.
 
-💡 **Perfect for:** Engineering teams, Product teams, and developers who want AI that actually works in production
+💡 **Perfecto para:** Equipos de ingeniería, equipos de producto y desarrolladores que quieren una IA que realmente funcione en producción.
 
-Let's talk!
-Contact me directly at rasmus@widinglabs.com
+¡Hablemos!
+Contáctame directamente en rasmus@widinglabs.com
 
-# AI Engineering Resources for Claude Code
+# Recursos de Ingeniería de IA para Claude Code
 
-A comprehensive library of assets and context engineering for Agentic Engineering, optimized for Claude Code. This repository provides the Product Requirement Prompt (PRP) methodology, pre-configured commands, and extensive documentation to enable AI-assisted development that delivers production-ready code on the first pass.
+Una biblioteca completa de assets e ingeniería de contexto para la Ingeniería de Agentes (Agentic Engineering), optimizada para Claude Code. Este repositorio proporciona la metodología de Prompt de Requisito de Producto (PRP), comandos preconfigurados y una extensa documentación para permitir el desarrollo asistido por IA que entrega código listo para producción en el primer intento.
 
-## What is PRP?
+## ¿Qué es un PRP?
 
-Product Requirement Prompt (PRP)
+Prompt de Requisito de Producto (PRP)
 
-## In short
+## En resumen
 
-A PRP is PRD + curated codebase intelligence + agent/runbook—the minimum viable packet an AI needs to plausibly ship production-ready code on the first pass.
+Un PRP es un PRD (Documento de Requisitos de Producto) + inteligencia curada de la base de código + agente/manual de ejecución—el paquete mínimo viable que una IA necesita para poder entregar de manera plausible código listo para producción en el primer intento.
 
-Product Requirement Prompt (PRP) is a structured prompt methodology first established in summer 2024 with context engineering at heart. A PRP supplies an AI coding agent with everything it needs to deliver a vertical slice of working software—no more, no less.
+El Prompt de Requisito de Producto (PRP) es una metodología de prompt estructurado establecida por primera vez en el verano de 2024, con la ingeniería de contexto en su núcleo. Un PRP suministra a un agente de codificación de IA todo lo que necesita para entregar una porción vertical de software funcional—ni más, ni menos.
 
-### How PRP Differs from Traditional PRD
+### ¿Cómo se diferencia un PRP de un PRD tradicional?
 
-A traditional PRD clarifies what the product must do and why customers need it, but deliberately avoids how it will be built.
+Un PRD tradicional clarifica qué debe hacer el producto y por qué los clientes lo necesitan, pero evita deliberadamente cómo se construirá.
 
-A PRP keeps the goal and justification sections of a PRD yet adds three AI-critical layers:
+Un PRP mantiene las secciones de objetivo y justificación de un PRD, pero añade tres capas críticas para la IA:
 
-### Context
+### Contexto
 
-Precise file paths and content, library versions and library context, code snippets examples. LLMs generate higher-quality code when given direct, in-prompt references instead of broad descriptions. Usage of a ai_docs/ directory to pipe in library and other docs.
+Rutas y contenido de archivos precisos, versiones de bibliotecas y contexto de las mismas, ejemplos de fragmentos de código. Los LLMs generan código de mayor calidad cuando se les dan referencias directas en el prompt en lugar de descripciones amplias. Uso de un directorio `ai_docs/` para inyectar documentación de bibliotecas y otros documentos.
 
-## Getting Started
+## Cómo Empezar
 
-### Option 1: Copy Resources to Your Existing Project
+### Opción 1: Copiar Recursos a Tu Proyecto Existente
 
-1. **Copy the Claude commands** to your project:
+1.  **Copia los comandos de Claude** a tu proyecto:
 
-   ```bash
-   # From your project root
-   cp -r /path/to/PRPs-agentic-eng/.claude/commands .claude/
-   ```
+    ```bash
+    # Desde la raíz de tu proyecto
+    cp -r /ruta/a/PRPs-agentic-eng/.claude/commands .claude/
+    ```
 
-2. **Copy the PRP templates and runner**:
+2.  **Copia las plantillas de PRP y el ejecutor**:
 
-   ```bash
-   cp -r /path/to/PRPs-agentic-eng/PRPs/templates PRPs/
-   cp -r /path/to/PRPs-agentic-eng/PRPs/scripts PRPs/
-   cp /path/to/PRPs-agentic-eng/PRPs/README.md PRPs/
-   ```
+    ```bash
+    cp -r /ruta/a/PRPs-agentic-eng/PRPs/templates PRPs/
+    cp -r /ruta/a/PRPs-agentic-eng/PRPs/scripts PRPs/
+    cp /ruta/a/PRPs-agentic-eng/PRPs/README.md PRPs/
+    ```
 
-3. **Copy AI documentation** (optional but recommended):
-   ```bash
-   cp -r /path/to/PRPs-agentic-eng/PRPs/ai_docs PRPs/
-   ```
+3.  **Copia la documentación de IA** (opcional pero recomendado):
+    ```bash
+    cp -r /ruta/a/PRPs-agentic-eng/PRPs/ai_docs PRPs/
+    ```
 
-### Option 2: Clone and Start a New Project
+### Opción 2: Clonar y Empezar un Nuevo Proyecto
 
-1. **Clone this repository**:
+1.  **Clona este repositorio**:
 
-   ```bash
-   git clone https://github.com/Wirasm/PRPs-agentic-eng.git
-   cd PRPs-agentic-eng
-   ```
+    ```bash
+    git clone https://github.com/Wirasm/PRPs-agentic-eng.git
+    cd PRPs-agentic-eng
+    ```
 
-2. **Create your project structure**:
+2.  **Crea la estructura de tu proyecto**:
 
-   ```bash
-   # Example for a Python project
-   mkdir -p src/tests
-   touch src/__init__.py
-   touch pyproject.toml
-   touch CLAUDE.md
-   ```
+    ```bash
+    # Ejemplo para un proyecto en Python
+    mkdir -p src/tests
+    touch src/__init__.py
+    touch pyproject.toml
+    touch CLAUDE.md
+    ```
 
-3. **Initialize with UV** (for Python projects):
-   ```bash
-   uv venv
-   uv sync
-   ```
+3.  **Inicializa con UV** (para proyectos en Python):
+    ```bash
+    uv venv
+    uv sync
+    ```
 
-## Using Claude Commands
+## Usando los Comandos de Claude
 
-The `.claude/commands/` directory contains 12 pre-configured commands that appear as slash commands in Claude Code.
+El directorio `.claude/commands/` contiene 12 comandos preconfigurados que aparecen como comandos de barra diagonal (`/`) en Claude Code.
 
-### Available Commands
+### Comandos Disponibles
 
-1. **PRP Creation & Execution**:
-   - `/create-base-prp` - Generate comprehensive PRPs with research
-   - `/execute-base-prp` - Execute PRPs against codebase
-   - `/planning-create` - Create planning documents with diagrams
-   - `/spec-create-adv` - Advanced specification creation
-   - `/spec-execute` - Execute specifications
+1.  **Creación y Ejecución de PRP**:
+    -   `/create-base-prp` - Genera PRPs completos con investigación.
+    -   `/execute-base-prp` - Ejecuta PRPs contra la base de código.
+    -   `/planning-create` - Crea documentos de planificación con diagramas.
+    -   `/spec-create-adv` - Creación avanzada de especificaciones.
+    -   `/spec-execute` - Ejecuta especificaciones.
 
-2. **Code Review & Refactoring**:
-   - `/review-general` - General code review
-   - `/review-staged-unstaged` - Review git changes
-   - `/refactor-simple` - Simple refactoring tasks
+2.  **Revisión y Refactorización de Código**:
+    -   `/review-general` - Revisión general de código.
+    -   `/review-staged-unstaged` - Revisa cambios de git.
+    -   `/refactor-simple` - Tareas simples de refactorización.
 
-3. **Git & GitHub**:
-   - `/create-pr` - Create pull requests
+3.  **Git y GitHub**:
+    -   `/create-pr` - Crea pull requests.
 
-4. **Utilities**:
-   - `/prime-core` - Prime Claude with project context
-   - `/onboarding` - Onboarding process for new team members
-   - `/debug` - Debugging workflow
+4.  **Utilidades**:
+    -   `/prime-core` - Prepara a Claude con el contexto del proyecto.
+    -   `/onboarding` - Proceso de incorporación para nuevos miembros del equipo.
+    -   `/debug` - Flujo de trabajo de depuración.
 
-### How to Use Commands
+### Cómo Usar los Comandos
 
-1. **In Claude Code**, type `/` to see available commands
-2. **Select a command** and provide arguments when prompted
-3. **Example usage**:
-   ```
-   /create-base-prp user authentication system with OAuth2
-   ```
+1.  **En Claude Code**, escribe `/` para ver los comandos disponibles.
+2.  **Selecciona un comando** y proporciona los argumentos cuando se te solicite.
+3.  **Ejemplo de uso**:
+    ```
+    /create-base-prp sistema de autenticación de usuarios con OAuth2
+    ```
 
-## Using PRPs
+## Usando PRPs
 
-### Creating a PRP
+### Creando un PRP
 
-1. **Use the template** as a starting point:
+1.  **Usa la plantilla** como punto de partida:
 
-   ```bash
-   cp PRPs/templates/prp_base.md PRPs/my-feature.md
-   ```
+    ```bash
+    cp PRPs/templates/prp_base.md PRPs/mi-funcionalidad.md
+    ```
 
-2. **Fill in the sections**:
-   - Goal: What needs to be built
-   - Why: Business value and user impact
-   - Context: Documentation, code examples, gotchas
-   - Implementation Blueprint: Tasks and pseudocode
-   - Validation Loop: Executable tests
+2.  **Rellena las secciones**:
+    -   Objetivo: Qué se necesita construir.
+    -   Por qué: Valor de negocio e impacto para el usuario.
+    -   Contexto: Documentación, ejemplos de código, problemas conocidos.
+    -   Plan de Implementación: Tareas y pseudocódigo.
+    -   Bucle de Validación: Pruebas ejecutables.
 
-3. **Or use Claude to generate one**:
-   ```
-   /create-base-prp implement user authentication with JWT tokens
-   ```
+3.  **O usa Claude para generar uno**:
+    ```
+    /create-base-prp implementar autenticación de usuarios con tokens JWT
+    ```
 
-### Executing a PRP
+### Ejecutando un PRP
 
-1. **Using the runner script**:
+1.  **Usando el script ejecutor**:
 
-   ```bash
-   # Interactive mode (recommended for development)
-   uv run PRPs/scripts/prp_runner.py --prp my-feature --interactive
+    ```bash
+    # Modo interactivo (recomendado para desarrollo)
+    uv run PRPs/scripts/prp_runner.py --prp mi-funcionalidad --interactive
 
-   # Headless mode (for CI/CD)
-   uv run PRPs/scripts/prp_runner.py --prp my-feature --output-format json
+    # Modo sin supervisión (para CI/CD)
+    uv run PRPs/scripts/prp_runner.py --prp mi-funcionalidad --output-format json
 
-   # Streaming JSON (for real-time monitoring)
-   uv run PRPs/scripts/prp_runner.py --prp my-feature --output-format stream-json
-   ```
+    # JSON en streaming (para monitoreo en tiempo real)
+    uv run PRPs/scripts/prp_runner.py --prp mi-funcionalidad --output-format stream-json
+    ```
 
-2. **Using Claude commands**:
-   ```
-   /execute-base-prp PRPs/my-feature.md
-   ```
+2.  **Usando los comandos de Claude**:
+    ```
+    /execute-base-prp PRPs/mi-funcionalidad.md
+    ```
 
-### PRP Best Practices
+### Mejores Prácticas para PRPs
 
-1. **Context is King**: Include ALL necessary documentation, examples, and caveats
-2. **Validation Loops**: Provide executable tests/lints the AI can run and fix
-3. **Information Dense**: Use keywords and patterns from the codebase
-4. **Progressive Success**: Start simple, validate, then enhance
+1.  **El Contexto es Rey**: Incluye TODA la documentación, ejemplos y advertencias necesarias.
+2.  **Bucles de Validación**: Proporciona pruebas/linting ejecutables que la IA pueda correr y corregir.
+3.  **Denso en Información**: Usa palabras clave y patrones de la base de código.
+4.  **Éxito Progresivo**: Empieza simple, valida y luego mejora.
 
-### Example PRP Structure
+### Estructura de Ejemplo de un PRP
 
 ```markdown
-## Goal
+## Objetivo
 
-Implement user authentication with JWT tokens
+Implementar autenticación de usuarios con tokens JWT.
 
-## Why
+## Por qué
 
-- Enable secure user sessions
-- Support API authentication
-- Replace basic auth with industry standard
+-   Habilitar sesiones de usuario seguras.
+-   Soportar autenticación de API.
+-   Reemplazar la autenticación básica con un estándar de la industria.
 
-## What
+## Qué
 
-JWT-based authentication system with login, logout, and token refresh
+Sistema de autenticación basado en JWT con inicio de sesión, cierre de sesión y actualización de token.
 
-### Success Criteria
+### Criterios de Éxito
 
-- [ ] Users can login with email/password
-- [ ] JWT tokens expire after 24 hours
-- [ ] Refresh tokens work correctly
-- [ ] All endpoints properly secured
+-   [ ] Los usuarios pueden iniciar sesión con email/contraseña.
+-   [ ] Los tokens JWT expiran después de 24 horas.
+-   [ ] Los tokens de actualización funcionan correctamente.
+-   [ ] Todos los endpoints están debidamente asegurados.
 
-## All Needed Context
+## Todo el Contexto Necesario
 
-### Documentation & References
+### Documentación y Referencias
 
-- url: https://jwt.io/introduction/
-  why: JWT structure and best practices
+-   url: https://jwt.io/introduction/
+    why: Estructura y mejores prácticas de JWT.
 
-- file: src/auth/basic_auth.py
-  why: Current auth pattern to replace
+-   file: src/auth/basic_auth.py
+    why: Patrón de autenticación actual a reemplazar.
 
-- doc: https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/
-  section: OAuth2 with Password and JWT
+-   doc: https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/
+    section: OAuth2 con Contraseña y JWT.
 
-### Known Gotchas
+### Problemas Conocidos (Gotchas)
 
-# CRITICAL: Use RS256 algorithm for production
+# CRÍTICO: Usar el algoritmo RS256 para producción.
 
-# CRITICAL: Store refresh tokens in httpOnly cookies
+# CRÍTICO: Almacenar los tokens de actualización en cookies httpOnly.
 
-# CRITICAL: Implement token blacklist for logout
+# CRÍTICO: Implementar una lista negra de tokens para el cierre de sesión.
 
-## Implementation Blueprint
+## Plan de Implementación
 
-[... detailed implementation plan ...]
+[... plan de implementación detallado ...]
 
-## Validation Loop
+## Bucle de Validación
 
-### Level 1: Syntax & Style
+### Nivel 1: Sintaxis y Estilo
 
 ruff check src/ --fix
 mypy src/
 
-### Level 2: Unit Tests
+### Nivel 2: Pruebas Unitarias
 
 uv run pytest tests/test_auth.py -v
 
-### Level 3: Integration Test
+### Nivel 3: Prueba de Integración
 
 curl -X POST http://localhost:8000/auth/login \
  -H "Content-Type: application/json" \
  -d '{"email": "test@example.com", "password": "testpass"}'
 ```
 
-## Project Structure Recommendations
+## Recomendaciones de Estructura de Proyecto
 
 ```
-your-project/
+tu-proyecto/
 |-- .claude/
-|   |-- commands/          # Claude Code commands
-|   `-- settings.json      # Tool permissions
+|   |-- commands/          # Comandos de Claude Code
+|   `-- settings.json      # Permisos de herramientas
 |-- PRPs/
-|   |-- templates/         # PRP templates
-|   |-- scrips/           # PRP runner
-|   |-- ai_docs/          # Library documentation
-|   |-- completed/        # Finished PRPs
-|   `-- *.md              # Active PRPs
-|-- CLAUDE.md             # Project-specific guidelines
-|-- src/                  # Your source code
-`-- tests/                # Your tests
+|   |-- templates/         # Plantillas de PRP
+|   |-- scrips/           # Ejecutor de PRP
+|   |-- ai_docs/          # Documentación de bibliotecas
+|   |-- completed/        # PRPs finalizados
+|   `-- *.md              # PRPs activos
+|-- CLAUDE.md             # Directrices específicas del proyecto
+|-- src/                  # Tu código fuente
+`-- tests/                # Tus pruebas
 ```
 
-## Setting Up CLAUDE.md
+## Configurando CLAUDE.md
 
-Create a `CLAUDE.md` file in your project root with:
+Crea un archivo `CLAUDE.md` en la raíz de tu proyecto con:
 
-1. **Core Principles**: KISS, YAGNI, etc.
-2. **Code Structure**: File size limits, function length
-3. **Architecture**: How your project is organized
-4. **Testing**: Test patterns and requirements
-5. **Style Conventions**: Language-specific guidelines
-6. **Development Commands**: How to run tests, lint, etc.
+1.  **Principios Fundamentales**: KISS, YAGNI, etc.
+2.  **Estructura del Código**: Límites de tamaño de archivo, longitud de funciones.
+3.  **Arquitectura**: Cómo está organizado tu proyecto.
+4.  **Pruebas**: Patrones y requisitos de prueba.
+5.  **Convenciones de Estilo**: Directrices específicas del lenguaje.
+6.  **Comandos de Desarrollo**: Cómo ejecutar pruebas, linting, etc.
 
-See the example CLAUDE.md in this repository for a comprehensive template.
+Consulta el `CLAUDE.md` de ejemplo en este repositorio para una plantilla completa.
 
-## Advanced Usage
+## Uso Avanzado
 
-### Running Multiple Claude Sessions
+### Ejecutando Múltiples Sesiones de Claude
 
-Use Git worktrees for parallel development:
+Usa Git worktrees para desarrollo en paralelo:
 
 ```bash
 git worktree add -b feature-auth ../project-auth
 git worktree add -b feature-api ../project-api
 
-# Run Claude in each worktree
+# Ejecuta Claude en cada worktree
 cd ../project-auth && claude
 cd ../project-api && claude
 ```
 
-### CI/CD Integration
+### Integración con CI/CD
 
-Use the PRP runner in headless mode:
+Usa el ejecutor de PRP en modo sin supervisión:
 
 ```yaml
-# GitHub Actions example
-- name: Execute PRP
+# Ejemplo de GitHub Actions
+- name: Ejecutar PRP
   run: |
     uv run PRPs/scripts/prp_runner.py \
-      --prp implement-feature \
-      --output-format json > result.json
+      --prp implementar-funcionalidad \
+      --output-format json > resultado.json
 ```
 
-### Custom Commands
+### Comandos Personalizados
 
-Create your own commands in `.claude/commands/`:
+Crea tus propios comandos en `.claude/commands/`:
 
 ```markdown
-# .claude/commands/my-command.md
+# .claude/commands/mi-comando.md
 
-# My Custom Command
+# Mi Comando Personalizado
 
-Do something specific to my project.
+Hacer algo específico para mi proyecto.
 
-## Arguments: $ARGUMENTS
+## Argumentos: $ARGUMENTS
 
-[Your command implementation]
+[La implementación de tu comando]
 ```
 
-## Resources Included
+## Recursos Incluidos
 
-### Documentation (PRPs/ai_docs/)
+### Documentación (PRPs/ai_docs/)
 
-- `cc_base.md` - Core Claude Code documentation
-- `cc_actions_sdk.md` - GitHub Actions and SDK integration
-- `cc_best_practices.md` - Best practices guide
-- `cc_settings.md` - Configuration and security
-- `cc_tutorials.md` - Step-by-step tutorials
+-   `cc_base.md` - Documentación principal de Claude Code.
+-   `cc_actions_sdk.md` - Integración con GitHub Actions y SDK.
+-   `cc_best_practices.md` - Guía de mejores prácticas.
+-   `cc_settings.md` - Configuración y seguridad.
+-   `cc_tutorials.md` - Tutoriales paso a paso.
 
-### Templates (PRPs/templates/)
+### Plantillas (PRPs/templates/)
 
-- `prp_base.md` - Comprehensive PRP template with validation
-- `prp_spec.md` - Specification template
-- `prp_planning_base.md` - Planning template with diagrams
+-   `prp_base.md` - Plantilla completa de PRP con validación.
+-   `prp_spec.md` - Plantilla de especificación.
+-   `prp_planning_base.md` - Plantilla de planificación con diagramas.
 
-### Example PRP
+### PRP de Ejemplo
 
-- `example-from-workshop-mcp-crawl4ai-refactor-1.md` - Real-world refactoring example
+-   `example-from-workshop-mcp-crawl4ai-refactor-1.md` - Ejemplo de refactorización del mundo real.
 
-## License
+## Licencia
 
-MIT License
+Licencia MIT
 
-## Support
+## Soporte
 
-I spent a considerable amount of time creating these resources and prompts. If you find value in this project, please consider buying me a coffee to support my work.
+Dediqué una cantidad considerable de tiempo a crear estos recursos y prompts. Si encuentras valor en este proyecto, por favor considera invitarme a un café para apoyar mi trabajo.
 
-👉 **Buy me a coffee:** https://coff.ee/wirasm
+👉 **Invítame a un café:** https://coff.ee/wirasm
 
 ---
 
-Remember: The goal is one-pass implementation success through comprehensive context. Happy coding with Claude Code!
+Recuerda: El objetivo es el éxito de la implementación en un solo paso a través de un contexto completo. ¡Feliz codificación con Claude Code!

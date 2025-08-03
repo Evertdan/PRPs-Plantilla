@@ -1,135 +1,135 @@
-# Model Context Protocol (MCP)
+# Protocolo de Contexto del Modelo (MCP)
 
-> Learn how to set up MCP with Claude Code.
+> Aprende a configurar MCP con Claude Code.
 
-Model Context Protocol (MCP) is an open protocol that enables LLMs to access external tools and data sources. For more details about MCP, see the [MCP documentation](https://modelcontextprotocol.io/introduction).
+El Protocolo de Contexto del Modelo (MCP) es un protocolo abierto que permite a los LLMs acceder a herramientas y fuentes de datos externas. Para más detalles sobre MCP, consulta la [documentación de MCP](https://modelcontextprotocol.io/introduction).
 
 <Warning>
-  Use third party MCP servers at your own risk. Make sure you trust the MCP
-  servers, and be especially careful when using MCP servers that talk to the
-  internet, as these can expose you to prompt injection risk.
+  Usa servidores MCP de terceros bajo tu propio riesgo. Asegúrate de confiar en los
+  servidores MCP, y ten especial cuidado al usar servidores MCP que se comunican con
+  internet, ya que estos pueden exponerte a riesgos de inyección de prompts.
 </Warning>
 
-## Configure MCP servers
+## Configurar servidores MCP
 
 <Steps>
-  <Step title="Add an MCP stdio Server">
+  <Step title="Añadir un Servidor MCP stdio">
     ```bash
-    # Basic syntax
-    claude mcp add <name> <command> [args...]
+    # Sintaxis básica
+    claude mcp add <nombre> <comando> [args...]
 
-    # Example: Adding a local server
-    claude mcp add my-server -e API_KEY=123 -- /path/to/server arg1 arg2
-    # This creates: command="/path/to/server", args=["arg1", "arg2"]
+    # Ejemplo: Añadiendo un servidor local
+    claude mcp add mi-servidor -e API_KEY=123 -- /ruta/al/servidor arg1 arg2
+    # Esto crea: comando="/ruta/al/servidor", args=["arg1", "arg2"]
     ```
 
   </Step>
 
-  <Step title="Add an MCP SSE Server">
+  <Step title="Añadir un Servidor MCP SSE">
     ```bash
-    # Basic syntax
-    claude mcp add --transport sse <name> <url>
+    # Sintaxis básica
+    claude mcp add --transport sse <nombre> <url>
 
-    # Example: Adding an SSE server
-    claude mcp add --transport sse sse-server https://example.com/sse-endpoint
+    # Ejemplo: Añadiendo un servidor SSE
+    claude mcp add --transport sse servidor-sse https://ejemplo.com/endpoint-sse
 
-    # Example: Adding an SSE server with custom headers
-    claude mcp add --transport sse api-server https://api.example.com/mcp --header "X-API-Key: your-key"
+    # Ejemplo: Añadiendo un servidor SSE con cabeceras personalizadas
+    claude mcp add --transport sse servidor-api https://api.ejemplo.com/mcp --header "X-API-Key: tu-clave"
     ```
 
   </Step>
 
-  <Step title="Add an MCP HTTP Server">
+  <Step title="Añadir un Servidor MCP HTTP">
     ```bash
-    # Basic syntax
-    claude mcp add --transport http <name> <url>
+    # Sintaxis básica
+    claude mcp add --transport http <nombre> <url>
 
-    # Example: Adding a streamable HTTP server
-    claude mcp add --transport http http-server https://example.com/mcp
+    # Ejemplo: Añadiendo un servidor HTTP streamable
+    claude mcp add --transport http servidor-http https://ejemplo.com/mcp
 
-    # Example: Adding an HTTP server with authentication header
-    claude mcp add --transport http secure-server https://api.example.com/mcp --header "Authorization: Bearer your-token"
+    # Ejemplo: Añadiendo un servidor HTTP con cabecera de autenticación
+    claude mcp add --transport http servidor-seguro https://api.ejemplo.com/mcp --header "Authorization: Bearer tu-token"
     ```
 
   </Step>
 
-  <Step title="Manage your MCP servers">
+  <Step title="Gestionar tus servidores MCP">
     ```bash
-    # List all configured servers
+    # Listar todos los servidores configurados
     claude mcp list
 
-    # Get details for a specific server
-    claude mcp get my-server
+    # Obtener detalles de un servidor específico
+    claude mcp get mi-servidor
 
-    # Remove a server
-    claude mcp remove my-server
+    # Eliminar un servidor
+    claude mcp remove mi-servidor
     ```
 
   </Step>
 </Steps>
 
 <Tip>
-  Tips:
+  Consejos:
 
-- Use the `-s` or `--scope` flag to specify where the configuration is stored:
-  - `local` (default): Available only to you in the current project (was called `project` in older versions)
-  - `project`: Shared with everyone in the project via `.mcp.json` file
-  - `user`: Available to you across all projects (was called `global` in older versions)
-- Set environment variables with `-e` or `--env` flags (e.g., `-e KEY=value`)
-- Configure MCP server startup timeout using the MCP_TIMEOUT environment variable (e.g., `MCP_TIMEOUT=10000 claude` sets a 10-second timeout)
-- Check MCP server status any time using the `/mcp` command within Claude Code
-- MCP follows a client-server architecture where Claude Code (the client) can connect to multiple specialized servers
-- Claude Code supports SSE (Server-Sent Events) and streamable HTTP servers for real-time communication
-- Use `/mcp` to authenticate with remote servers that require OAuth 2.0 authentication
+- Usa la bandera `-s` o `--scope` para especificar dónde se almacena la configuración:
+  - `local` (por defecto): Disponible solo para ti en el proyecto actual (se llamaba `project` en versiones anteriores).
+  - `project`: Compartido con todos en el proyecto a través del archivo `.mcp.json`.
+  - `user`: Disponible para ti en todos los proyectos (se llamaba `global` en versiones anteriores).
+- Establece variables de entorno con las banderas `-e` o `--env` (p. ej., `-e CLAVE=valor`).
+- Configura el tiempo de espera de inicio del servidor MCP usando la variable de entorno MCP_TIMEOUT (p. ej., `MCP_TIMEOUT=10000 claude` establece un tiempo de espera de 10 segundos).
+- Comprueba el estado del servidor MCP en cualquier momento usando el comando `/mcp` dentro de Claude Code.
+- MCP sigue una arquitectura cliente-servidor donde Claude Code (el cliente) puede conectarse a múltiples servidores especializados.
+- Claude Code admite servidores SSE (Server-Sent Events) y HTTP streamable para comunicación en tiempo real.
+- Usa `/mcp` para autenticarte con servidores remotos que requieren autenticación OAuth 2.0.
   </Tip>
 
 <Warning>
-  **Windows Users**: On native Windows (not WSL), local MCP servers that use `npx` require the `cmd /c` wrapper to ensure proper execution.
+  **Usuarios de Windows**: En Windows nativo (no WSL), los servidores MCP locales que usan `npx` requieren el envoltorio `cmd /c` para asegurar una ejecución correcta.
 
 ```bash
-# This creates command="cmd" which Windows can execute
-claude mcp add my-server -- cmd /c npx -y @some/package
+# Esto crea el comando="cmd" que Windows puede ejecutar
+claude mcp add mi-servidor -- cmd /c npx -y @algun/paquete
 ```
 
-Without the `cmd /c` wrapper, you'll encounter "Connection closed" errors because Windows cannot directly execute `npx`.
+Sin el envoltorio `cmd /c`, encontrarás errores de "Conexión cerrada" porque Windows no puede ejecutar `npx` directamente.
 </Warning>
 
-## Understanding MCP server scopes
+## Entendiendo los ámbitos de los servidores MCP
 
-MCP servers can be configured at three different scope levels, each serving distinct purposes for managing server accessibility and sharing. Understanding these scopes helps you determine the best way to configure servers for your specific needs.
+Los servidores MCP pueden configurarse en tres niveles de ámbito diferentes, cada uno con propósitos distintos para gestionar la accesibilidad y el uso compartido de los servidores. Entender estos ámbitos te ayuda a determinar la mejor manera de configurar los servidores para tus necesidades específicas.
 
-### Scope hierarchy and precedence
+### Jerarquía y precedencia de ámbitos
 
-MCP server configurations follow a clear precedence hierarchy. When servers with the same name exist at multiple scopes, the system resolves conflicts by prioritizing local-scoped servers first, followed by project-scoped servers, and finally user-scoped servers. This design ensures that personal configurations can override shared ones when needed.
+Las configuraciones de los servidores MCP siguen una clara jerarquía de precedencia. Cuando existen servidores con el mismo nombre en múltiples ámbitos, el sistema resuelve los conflictos priorizando primero los servidores de ámbito local, seguidos por los de ámbito de proyecto y, finalmente, los de ámbito de usuario. Este diseño asegura que las configuraciones personales puedan anular las compartidas cuando sea necesario.
 
-### Local scope
+### Ámbito local
 
-Local-scoped servers represent the default configuration level and are stored in your project-specific user settings. These servers remain private to you and are only accessible when working within the current project directory. This scope is ideal for personal development servers, experimental configurations, or servers containing sensitive credentials that shouldn't be shared.
-
-```bash
-# Add a local-scoped server (default)
-claude mcp add my-private-server /path/to/server
-
-# Explicitly specify local scope
-claude mcp add my-private-server -s local /path/to/server
-```
-
-### Project scope
-
-Project-scoped servers enable team collaboration by storing configurations in a `.mcp.json` file at your project's root directory. This file is designed to be checked into version control, ensuring all team members have access to the same MCP tools and services. When you add a project-scoped server, Claude Code automatically creates or updates this file with the appropriate configuration structure.
+Los servidores de ámbito local representan el nivel de configuración por defecto y se almacenan en la configuración de usuario específica de tu proyecto. Estos servidores permanecen privados para ti y solo son accesibles cuando trabajas dentro del directorio del proyecto actual. Este ámbito es ideal para servidores de desarrollo personales, configuraciones experimentales o servidores que contienen credenciales sensibles que no deben compartirse.
 
 ```bash
-# Add a project-scoped server
-claude mcp add shared-server -s project /path/to/server
+# Añadir un servidor de ámbito local (por defecto)
+claude mcp add mi-servidor-privado /ruta/al/servidor
+
+# Especificar explícitamente el ámbito local
+claude mcp add mi-servidor-privado -s local /ruta/al/servidor
 ```
 
-The resulting `.mcp.json` file follows a standardized format:
+### Ámbito de proyecto
+
+Los servidores de ámbito de proyecto permiten la colaboración en equipo al almacenar las configuraciones en un archivo `.mcp.json` en el directorio raíz de tu proyecto. Este archivo está diseñado para ser versionado, asegurando que todos los miembros del equipo tengan acceso a las mismas herramientas y servicios MCP. Cuando añades un servidor de ámbito de proyecto, Claude Code crea o actualiza automáticamente este archivo con la estructura de configuración apropiada.
+
+```bash
+# Añadir un servidor de ámbito de proyecto
+claude mcp add servidor-compartido -s project /ruta/al/servidor
+```
+
+El archivo `.mcp.json` resultante sigue un formato estandarizado:
 
 ```json
 {
   "mcpServers": {
-    "shared-server": {
-      "command": "/path/to/server",
+    "servidor-compartido": {
+      "command": "/ruta/al/servidor",
       "args": [],
       "env": {}
     }
@@ -137,51 +137,51 @@ The resulting `.mcp.json` file follows a standardized format:
 }
 ```
 
-For security reasons, Claude Code prompts for approval before using project-scoped servers from `.mcp.json` files. If you need to reset these approval choices, use the `claude mcp reset-project-choices` command.
+Por razones de seguridad, Claude Code solicita aprobación antes de usar servidores de ámbito de proyecto de los archivos `.mcp.json`. Si necesitas restablecer estas elecciones de aprobación, usa el comando `claude mcp reset-project-choices`.
 
-### User scope
+### Ámbito de usuario
 
-User-scoped servers provide cross-project accessibility, making them available across all projects on your machine while remaining private to your user account. This scope works well for personal utility servers, development tools, or services you frequently use across different projects.
+Los servidores de ámbito de usuario proporcionan accesibilidad entre proyectos, haciéndolos disponibles en todos los proyectos de tu máquina mientras permanecen privados para tu cuenta de usuario. Este ámbito funciona bien para servidores de utilidad personal, herramientas de desarrollo o servicios que usas frecuentemente en diferentes proyectos.
 
 ```bash
-# Add a user server
-claude mcp add my-user-server -s user /path/to/server
+# Añadir un servidor de usuario
+claude mcp add mi-servidor-de-usuario -s user /ruta/al/servidor
 ```
 
-### Choosing the right scope
+### Eligiendo el ámbito correcto
 
-Select your scope based on:
+Selecciona tu ámbito basándote en:
 
-- **Local scope**: Personal servers, experimental configurations, or sensitive credentials specific to one project
-- **Project scope**: Team-shared servers, project-specific tools, or services required for collaboration
-- **User scope**: Personal utilities needed across multiple projects, development tools, or frequently-used services
+- **Ámbito local**: Servidores personales, configuraciones experimentales o credenciales sensibles específicas de un proyecto.
+- **Ámbito de proyecto**: Servidores compartidos por el equipo, herramientas específicas del proyecto o servicios requeridos para la colaboración.
+- **Ámbito de usuario**: Utilidades personales necesarias en múltiples proyectos, herramientas de desarrollo o servicios de uso frecuente.
 
-### Environment variable expansion in `.mcp.json`
+### Expansión de variables de entorno en `.mcp.json`
 
-Claude Code supports environment variable expansion in `.mcp.json` files, allowing teams to share configurations while maintaining flexibility for machine-specific paths and sensitive values like API keys.
+Claude Code admite la expansión de variables de entorno en los archivos `.mcp.json`, permitiendo a los equipos compartir configuraciones manteniendo la flexibilidad para rutas específicas de la máquina y valores sensibles como las claves de API.
 
-**Supported syntax:**
+**Sintaxis admitida:**
 
-- `${VAR}` - Expands to the value of environment variable `VAR`
-- `${VAR:-default}` - Expands to `VAR` if set, otherwise uses `default`
+- `${VAR}` - Se expande al valor de la variable de entorno `VAR`.
+- `${VAR:-default}` - Se expande a `VAR` si está definida, de lo contrario usa `default`.
 
-**Expansion locations:**
-Environment variables can be expanded in:
+**Ubicaciones de expansión:**
+Las variables de entorno pueden expandirse en:
 
-- `command` - The server executable path
-- `args` - Command-line arguments
-- `env` - Environment variables passed to the server
-- `url` - For SSE/HTTP server types
-- `headers` - For SSE/HTTP server authentication
+- `command` - La ruta del ejecutable del servidor.
+- `args` - Argumentos de la línea de comandos.
+- `env` - Variables de entorno pasadas al servidor.
+- `url` - Para tipos de servidor SSE/HTTP.
+- `headers` - Para la autenticación de servidores SSE/HTTP.
 
-**Example with variable expansion:**
+**Ejemplo con expansión de variables:**
 
 ```json
 {
   "mcpServers": {
-    "api-server": {
+    "servidor-api": {
       "type": "sse",
-      "url": "${API_BASE_URL:-https://api.example.com}/mcp",
+      "url": "${API_BASE_URL:-https://api.ejemplo.com}/mcp",
       "headers": {
         "Authorization": "Bearer ${API_KEY}"
       }
@@ -190,140 +190,140 @@ Environment variables can be expanded in:
 }
 ```
 
-If a required environment variable is not set and has no default value, Claude Code will fail to parse the config.
+Si una variable de entorno requerida no está definida y no tiene un valor por defecto, Claude Code fallará al analizar la configuración.
 
-## Authenticate with remote MCP servers
+## Autenticarse con servidores MCP remotos
 
-Many remote MCP servers require authentication. Claude Code supports OAuth 2.0 authentication flow for secure connection to these servers.
+Muchos servidores MCP remotos requieren autenticación. Claude Code admite el flujo de autenticación OAuth 2.0 para una conexión segura a estos servidores.
 
 <Steps>
-  <Step title="Add a remote server requiring authentication">
+  <Step title="Añadir un servidor remoto que requiere autenticación">
     ```bash
-    # Add an SSE or HTTP server that requires OAuth
-    claude mcp add --transport sse github-server https://api.github.com/mcp
+    # Añadir un servidor SSE o HTTP que requiere OAuth
+    claude mcp add --transport sse servidor-github https://api.github.com/mcp
     ```
   </Step>
 
-  <Step title="Authenticate using the /mcp command">
-    Within Claude Code, use the `/mcp` command to manage authentication:
+  <Step title="Autenticarse usando el comando /mcp">
+    Dentro de Claude Code, usa el comando `/mcp` para gestionar la autenticación:
 
     ```
     > /mcp
     ```
 
-    This opens an interactive menu where you can:
+    Esto abre un menú interactivo donde puedes:
 
-    * View connection status for all servers
-    * Authenticate with servers requiring OAuth
-    * Clear existing authentication
-    * View server capabilities
-
-  </Step>
-
-  <Step title="Complete the OAuth flow">
-    When you select "Authenticate" for a server:
-
-    1. Your browser opens automatically to the OAuth provider
-    2. Complete the authentication in your browser
-    3. Claude Code receives and securely stores the access token
-    4. The server connection becomes active
+    * Ver el estado de la conexión de todos los servidores.
+    * Autenticarte con servidores que requieren OAuth.
+    * Limpiar la autenticación existente.
+    * Ver las capacidades del servidor.
 
   </Step>
-</Steps>
 
-<Tip>
-  Tips:
+  <Step title="Completar el flujo de OAuth">
+    Cuando seleccionas "Autenticar" para un servidor:
 
-- Authentication tokens are stored securely and refreshed automatically
-- Use "Clear authentication" in the `/mcp` menu to revoke access
-- If your browser doesn't open automatically, copy the provided URL
-- OAuth authentication works with both SSE and HTTP transports
-  </Tip>
-
-## Connect to a Postgres MCP server
-
-Suppose you want to give Claude read-only access to a PostgreSQL database for querying and schema inspection.
-
-<Steps>
-  <Step title="Add the Postgres MCP server">
-    ```bash
-    claude mcp add postgres-server /path/to/postgres-mcp-server --connection-string "postgresql://user:pass@localhost:5432/mydb"
-    ```
-  </Step>
-
-  <Step title="Query your database with Claude">
-    ```
-    > describe the schema of our users table
-    ```
-
-    ```
-    > what are the most recent orders in the system?
-    ```
-
-    ```
-    > show me the relationship between customers and invoices
-    ```
+    1. Tu navegador se abre automáticamente en el proveedor de OAuth.
+    2. Completa la autenticación en tu navegador.
+    3. Claude Code recibe y almacena de forma segura el token de acceso.
+    4. La conexión del servidor se activa.
 
   </Step>
 </Steps>
 
 <Tip>
-  Tips:
+  Consejos:
 
-- The Postgres MCP server provides read-only access for safety
-- Claude can help you explore database structure and run analytical queries
-- You can use this to quickly understand database schemas in unfamiliar projects
-- Make sure your connection string uses appropriate credentials with minimum required permissions
+- Los tokens de autenticación se almacenan de forma segura y se actualizan automáticamente.
+- Usa "Limpiar autenticación" en el menú `/mcp` para revocar el acceso.
+- Si tu navegador no se abre automáticamente, copia la URL proporcionada.
+- La autenticación OAuth funciona con los transportes SSE y HTTP.
   </Tip>
 
-## Add MCP servers from JSON configuration
+## Conectarse a un servidor MCP de Postgres
 
-Suppose you have a JSON configuration for a single MCP server that you want to add to Claude Code.
+Supongamos que quieres dar a Claude acceso de solo lectura a una base de datos PostgreSQL para consultar e inspeccionar el esquema.
 
 <Steps>
-  <Step title="Add an MCP server from JSON">
+  <Step title="Añadir el servidor MCP de Postgres">
     ```bash
-    # Basic syntax
-    claude mcp add-json <name> '<json>'
+    claude mcp add servidor-postgres /ruta/al/servidor-mcp-postgres --connection-string "postgresql://usuario:contraseña@localhost:5432/mibd"
+    ```
+  </Step>
 
-    # Example: Adding a stdio server with JSON configuration
-    claude mcp add-json weather-api '{"type":"stdio","command":"/path/to/weather-cli","args":["--api-key","abc123"],"env":{"CACHE_DIR":"/tmp"}}'
+  <Step title="Consultar tu base de datos con Claude">
+    ```
+    > describe el esquema de nuestra tabla de usuarios
+    ```
+
+    ```
+    > ¿cuáles son los pedidos más recientes en el sistema?
+    ```
+
+    ```
+    > muéstrame la relación entre clientes y facturas
+    ```
+
+  </Step>
+</Steps>
+
+<Tip>
+  Consejos:
+
+- El servidor MCP de Postgres proporciona acceso de solo lectura por seguridad.
+- Claude puede ayudarte a explorar la estructura de la base de datos y ejecutar consultas analíticas.
+- Puedes usar esto para entender rápidamente los esquemas de bases de datos en proyectos desconocidos.
+- Asegúrate de que tu cadena de conexión use las credenciales apropiadas con los permisos mínimos requeridos.
+  </Tip>
+
+## Añadir servidores MCP desde una configuración JSON
+
+Supongamos que tienes una configuración JSON para un único servidor MCP que quieres añadir a Claude Code.
+
+<Steps>
+  <Step title="Añadir un servidor MCP desde JSON">
+    ```bash
+    # Sintaxis básica
+    claude mcp add-json <nombre> '<json>'
+
+    # Ejemplo: Añadiendo un servidor stdio con configuración JSON
+    claude mcp add-json api-tiempo '{"type":"stdio","command":"/ruta/a/weather-cli","args":["--api-key","abc123"],"env":{"CACHE_DIR":"/tmp"}}'
     ```
 
   </Step>
 
-  <Step title="Verify the server was added">
+  <Step title="Verificar que el servidor fue añadido">
     ```bash
-    claude mcp get weather-api
+    claude mcp get api-tiempo
     ```
   </Step>
 </Steps>
 
 <Tip>
-  Tips:
+  Consejos:
 
-- Make sure the JSON is properly escaped in your shell
-- The JSON must conform to the MCP server configuration schema
-- You can use `-s global` to add the server to your global configuration instead of the project-specific one
+- Asegúrate de que el JSON esté correctamente escapado en tu shell.
+- El JSON debe cumplir con el esquema de configuración del servidor MCP.
+- Puedes usar `-s global` para añadir el servidor a tu configuración global en lugar de la específica del proyecto.
   </Tip>
 
-## Import MCP servers from Claude Desktop
+## Importar servidores MCP desde Claude Desktop
 
-Suppose you have already configured MCP servers in Claude Desktop and want to use the same servers in Claude Code without manually reconfiguring them.
+Supongamos que ya has configurado servidores MCP en Claude Desktop y quieres usar los mismos servidores en Claude Code sin reconfigurarlos manualmente.
 
 <Steps>
-  <Step title="Import servers from Claude Desktop">
+  <Step title="Importar servidores desde Claude Desktop">
     ```bash
-    # Basic syntax
+    # Sintaxis básica
     claude mcp add-from-claude-desktop
     ```
   </Step>
 
-  <Step title="Select which servers to import">
-    After running the command, you'll see an interactive dialog that allows you to select which servers you want to import.
+  <Step title="Seleccionar qué servidores importar">
+    Después de ejecutar el comando, verás un diálogo interactivo que te permite seleccionar qué servidores quieres importar.
   </Step>
 
-  <Step title="Verify the servers were imported">
+  <Step title="Verificar que los servidores fueron importados">
     ```bash
     claude mcp list
     ```
@@ -331,29 +331,29 @@ Suppose you have already configured MCP servers in Claude Desktop and want to us
 </Steps>
 
 <Tip>
-  Tips:
+  Consejos:
 
-- This feature only works on macOS and Windows Subsystem for Linux (WSL)
-- It reads the Claude Desktop configuration file from its standard location on those platforms
-- Use the `-s global` flag to add servers to your global configuration
-- Imported servers will have the same names as in Claude Desktop
-- If servers with the same names already exist, they will get a numerical suffix (e.g., `server_1`)
+- Esta característica solo funciona en macOS y Windows Subsystem for Linux (WSL).
+- Lee el archivo de configuración de Claude Desktop desde su ubicación estándar en esas plataformas.
+- Usa la bandera `-s global` para añadir servidores a tu configuración global.
+- Los servidores importados tendrán los mismos nombres que en Claude Desktop.
+- Si ya existen servidores con los mismos nombres, obtendrán un sufijo numérico (p. ej., `servidor_1`).
   </Tip>
 
-## Use Claude Code as an MCP server
+## Usar Claude Code como un servidor MCP
 
-Suppose you want to use Claude Code itself as an MCP server that other applications can connect to, providing them with Claude's tools and capabilities.
+Supongamos que quieres usar Claude Code como un servidor MCP al que otras aplicaciones puedan conectarse, proporcionándoles las herramientas y capacidades de Claude.
 
 <Steps>
-  <Step title="Start Claude as an MCP server">
+  <Step title="Iniciar Claude como un servidor MCP">
     ```bash
-    # Basic syntax
+    # Sintaxis básica
     claude mcp serve
     ```
   </Step>
 
-  <Step title="Connect from another application">
-    You can connect to Claude Code MCP server from any MCP client, such as Claude Desktop. If you're using Claude Desktop, you can add the Claude Code MCP server using this configuration:
+  <Step title="Conectarse desde otra aplicación">
+    Puedes conectarte al servidor MCP de Claude Code desde cualquier cliente MCP, como Claude Desktop. Si estás usando Claude Desktop, puedes añadir el servidor MCP de Claude Code usando esta configuración:
 
     ```json
     {
@@ -367,92 +367,92 @@ Suppose you want to use Claude Code itself as an MCP server that other applicati
 </Steps>
 
 <Tip>
-  Tips:
+  Consejos:
 
-- The server provides access to Claude's tools like View, Edit, LS, etc.
-- In Claude Desktop, try asking Claude to read files in a directory, make edits, and more.
-- Note that this MCP server is simply exposing Claude Code's tools to your MCP client, so your own client is responsible for implementing user confirmation for individual tool calls.
+- El servidor proporciona acceso a las herramientas de Claude como Ver, Editar, LS, etc.
+- En Claude Desktop, intenta pedirle a Claude que lea archivos en un directorio, haga ediciones y más.
+- Ten en cuenta que este servidor MCP simplemente expone las herramientas de Claude Code a tu cliente MCP, por lo que tu propio cliente es responsable de implementar la confirmación del usuario para las llamadas a herramientas individuales.
   </Tip>
 
-## Use MCP resources
+## Usar recursos MCP
 
-MCP servers can expose resources that you can reference using @ mentions, similar to how you reference files.
+Los servidores MCP pueden exponer recursos a los que puedes hacer referencia usando menciones @, de forma similar a como haces referencia a los archivos.
 
-### Reference MCP resources
+### Referenciar recursos MCP
 
 <Steps>
-  <Step title="List available resources">
-    Type `@` in your prompt to see available resources from all connected MCP servers. Resources appear alongside files in the autocomplete menu.
+  <Step title="Listar recursos disponibles">
+    Escribe `@` en tu prompt para ver los recursos disponibles de todos los servidores MCP conectados. Los recursos aparecen junto a los archivos en el menú de autocompletar.
   </Step>
 
-  <Step title="Reference a specific resource">
-    Use the format `@server:protocol://resource/path` to reference a resource:
+  <Step title="Referenciar un recurso específico">
+    Usa el formato `@servidor:protocolo://recurso/ruta` para referenciar un recurso:
 
     ```
-    > Can you analyze @github:issue://123 and suggest a fix?
+    > ¿Puedes analizar @github:issue://123 y sugerir una solución?
     ```
 
     ```
-    > Please review the API documentation at @docs:file://api/authentication
+    > Por favor, revisa la documentación de la API en @docs:file://api/authentication
     ```
 
   </Step>
 
-  <Step title="Multiple resource references">
-    You can reference multiple resources in a single prompt:
+  <Step title="Múltiples referencias de recursos">
+    Puedes referenciar múltiples recursos en un solo prompt:
 
     ```
-    > Compare @postgres:schema://users with @docs:file://database/user-model
+    > Compara @postgres:schema://users con @docs:file://database/user-model
     ```
 
   </Step>
 </Steps>
 
 <Tip>
-  Tips:
+  Consejos:
 
-- Resources are automatically fetched and included as attachments when referenced
-- Resource paths are fuzzy-searchable in the @ mention autocomplete
-- Claude Code automatically provides tools to list and read MCP resources when servers support them
-- Resources can contain any type of content that the MCP server provides (text, JSON, structured data, etc.)
+- Los recursos se obtienen automáticamente y se incluyen como adjuntos cuando se referencian.
+- Las rutas de los recursos se pueden buscar de forma difusa en el autocompletado de menciones @.
+- Claude Code proporciona automáticamente herramientas para listar y leer recursos MCP cuando los servidores las admiten.
+- Los recursos pueden contener cualquier tipo de contenido que el servidor MCP proporcione (texto, JSON, datos estructurados, etc.).
   </Tip>
 
-## Use MCP prompts as slash commands
+## Usar prompts de MCP como comandos de barra diagonal
 
-MCP servers can expose prompts that become available as slash commands in Claude Code.
+Los servidores MCP pueden exponer prompts que se convierten en comandos de barra diagonal disponibles en Claude Code.
 
-### Execute MCP prompts
+### Ejecutar prompts de MCP
 
 <Steps>
-  <Step title="Discover available prompts">
-    Type `/` to see all available commands, including those from MCP servers. MCP prompts appear with the format `/mcp__servername__promptname`.
+  <Step title="Descubrir prompts disponibles">
+    Escribe `/` para ver todos los comandos disponibles, incluidos los de los servidores MCP. Los prompts de MCP aparecen con el formato `/mcp__nombreservidor__nombreprompt`.
   </Step>
 
-  <Step title="Execute a prompt without arguments">
+  <Step title="Ejecutar un prompt sin argumentos">
     ```
     > /mcp__github__list_prs
     ```
   </Step>
 
-  <Step title="Execute a prompt with arguments">
-    Many prompts accept arguments. Pass them space-separated after the command:
+  <Step title="Ejecutar un prompt con argumentos">
+    Muchos prompts aceptan argumentos. Pásalos separados por espacios después del comando:
 
     ```
     > /mcp__github__pr_review 456
     ```
 
     ```
-    > /mcp__jira__create_issue "Bug in login flow" high
+    > /mcp__jira__create_issue "Error en el flujo de inicio de sesión" alta
     ```
 
   </Step>
 </Steps>
 
 <Tip>
-  Tips:
+  Consejos:
 
-- MCP prompts are dynamically discovered from connected servers
-- Arguments are parsed based on the prompt's defined parameters
-- Prompt results are injected directly into the conversation
-- Server and prompt names are normalized (spaces become underscores)
+- Los prompts de MCP se descubren dinámicamente desde los servidores conectados.
+- Los argumentos se analizan en función de los parámetros definidos por el prompt.
+- Los resultados del prompt se inyectan directamente en la conversación.
+- Los nombres de los servidores y los prompts se normalizan (los espacios se convierten en guiones bajos).
   </Tip>

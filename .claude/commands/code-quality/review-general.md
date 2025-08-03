@@ -1,92 +1,92 @@
-# Code Review
+# Revisión de Código
 
-Please perform a comprehensive code review of the current changes or specified files.
+Por favor, realiza una revisión de código exhaustiva de los cambios actuales o de los archivos especificados.
 
-## Review Scope
+## Alcance de la Revisión
 $ARGUMENTS
 
-## Review Process
+## Proceso de Revisión
 
-1. **Understand Changes**
-   - If reviewing staged changes: `git diff --staged`
-   - If reviewing specific files: Read the specified files
-   - If reviewing a PR: `gh pr view $ARGUMENTS --json files,additions,deletions`
-   - If reviewing a local directory: `git diff $ARGUMENTS`
-   - If reviewing the entire codebase: `git diff origin/main`
+1.  **Entender los Cambios**
+    -   Si se revisan cambios en el área de "staging": `git diff --staged`
+    -   Si se revisan archivos específicos: Leer los archivos especificados.
+    -   Si se revisa un PR (Pull Request): `gh pr view $ARGUMENTS --json files,additions,deletions`
+    -   Si se revisa un directorio local: `git diff $ARGUMENTS`
+    -   Si se revisa toda la base de código: `git diff origin/main`
 
-## Review Focus Areas
+## Áreas de Enfoque de la Revisión
 
-1. **Code Quality**
-   - Type hints on all functions and classes
-   - Pydantic v2 models for data validation
-   - No print() statements (use logging)
-   - Proper error handling
-   - Following PEP 8
-   - Docstrings following google style python docstrings
+1.  **Calidad del Código**
+    -   Anotaciones de tipo (type hints) en todas las funciones y clases.
+    -   Modelos de Pydantic v2 para la validación de datos.
+    -   No usar sentencias `print()` (usar logging).
+    -   Manejo adecuado de errores.
+    -   Seguir el estándar PEP 8.
+    -   Docstrings siguiendo el estilo de docstrings de Python de Google.
 
-2. **Pydantic v2 Patterns**
-   - Using ConfigDict not class Config
-   - field_validator not @validator
-   - model_dump() not dict()
-   - Proper use of Annotated types
+2.  **Patrones de Pydantic v2**
+    -   Usar `ConfigDict` en lugar de `class Config`.
+    -   Usar `field_validator` en lugar de `@validator`.
+    -   Usar `model_dump()` en lugar de `dict()`.
+    -   Uso adecuado de tipos `Annotated`.
 
-3. **Security**
-   - Input validation on all endpoints
-   - No SQL injection vulnerabilities
-   - Passwords properly hashed
-   - No hardcoded secrets
+3.  **Seguridad**
+    -   Validación de entradas en todos los endpoints.
+    -   Sin vulnerabilidades de inyección SQL.
+    -   Contraseñas debidamente hasheadas.
+    -   No tener secretos (secrets) hardcodeados.
 
-4. **Structure**
-   - Unit tests are co-located with the code they test in tests/ folders
-   - Each feature is self-contained with its own models, service, and tools
-   - Shared components are only things used by multiple features
-   - Future improvements (like multiple AI providers) would go in src/shared/ai_providers/ when implemented
-   - Integration tests remain at the root level in tests/integration/
+4.  **Estructura**
+    -   Las pruebas unitarias están ubicadas junto al código que prueban en carpetas `tests/`.
+    -   Cada funcionalidad es autocontenida con sus propios modelos, servicios y herramientas.
+    -   Los componentes compartidos son solo aquellos utilizados por múltiples funcionalidades.
+    -   Mejoras futuras (como múltiples proveedores de IA) irían en `src/shared/ai_providers/` cuando se implementen.
+    -   Las pruebas de integración permanecen en el nivel raíz en `tests/integration/`.
 
-5. **Linting**
-   - ruff check --fix
-   - mypy
+5.  **Linting**
+    -   `ruff check --fix`
+    -   `mypy`
 
-6. **Testing**
-   - New code has tests
-   - Edge cases covered
-   - Mocking external dependencies
+6.  **Pruebas (Testing)**
+    -   El código nuevo tiene pruebas.
+    -   Casos borde cubiertos.
+    -   Simulación (mocking) de dependencias externas.
 
-7. **Performance**
-   - No N+1 queries
-   - Efficient algorithms
-   - Proper async usage
+7.  **Rendimiento**
+    -   Sin consultas N+1.
+    -   Algoritmos eficientes.
+    -   Uso adecuado de `async`.
 
-8. **Documentation**
-   - Clear README with setup instructions
-   - CLAUDE.md is up to date with any new important utils, dependencies etc for future cluade code instances
+8.  **Documentación**
+    -   `README` claro con instrucciones de configuración.
+    -   `CLAUDE.md` está actualizado con cualquier nueva utilidad, dependencia, etc., importante para futuras instancias de Claude Code.
 
-## Review Output
+## Resultado de la Revisión
 
-Create a concise review report with:
+Crea un informe de revisión conciso con:
 
 ```markdown
-# Code Review #[number]
+# Revisión de Código #[número]
 
-## Summary
-[2-3 sentence overview]
+## Resumen
+[Vistazo general de 2-3 frases]
 
-## Issues Found
+## Problemas Encontrados
 
-### 🔴 Critical (Must Fix)
-- [Issue with file:line and suggested fix]
+### 🔴 Crítico (Debe solucionarse)
+- [Problema con archivo:línea y solución sugerida]
 
-### 🟡 Important (Should Fix)
-- [Issue with file:line and suggested fix]
+### 🟡 Importante (Debería solucionarse)
+- [Problema con archivo:línea y solución sugerida]
 
-### 🟢 Minor (Consider)
-- [Improvement suggestions]
+### 🟢 Menor (A considerar)
+- [Sugerencias de mejora]
 
-## Good Practices
-- [What was done well]
+## Buenas Prácticas
+- [Qué se hizo bien]
 
-## Test Coverage
-Current: X% | Required: 80%
-Missing tests: [list]
-Save report to PRPs/code_reviews/review[#].md (check existing files first)
-
+## Cobertura de Pruebas
+Actual: X% | Requerido: 80%
+Pruebas faltantes: [lista]
+Guardar informe en PRPs/revisiones_de_codigo/revision[#].md (revisar archivos existentes primero)
+```

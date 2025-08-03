@@ -1,650 +1,655 @@
-# Analyze PRP Results
+# Analizar Resultados de PRP
 
-## PRP File: $ARGUMENTS
+## Archivo PRP: $ARGUMENTS
 
-Post-execution analysis of a PRP implementation to capture lessons learned, success metrics, and template improvements.
+Análisis posterior a la ejecución de una implementación de PRP para capturar lecciones aprendidas, métricas de éxito y mejoras en la plantilla.
 
-## Analysis Process
+## Proceso de Análisis
 
-1. **Execution Metrics Collection**
-   - Measure actual vs estimated token usage
-   - Track implementation time and iterations
-   - Document test failures and fixes
-   - Analyze code quality metrics
+1.  **Recopilación de Métricas de Ejecución**
+    -   Medir el uso de tokens real vs. estimado.
+    -   Rastrear el tiempo de implementación y las iteraciones.
+    -   Documentar los fallos de las pruebas y sus correcciones.
+    -   Analizar las métricas de calidad del código.
 
-2. **Success Pattern Analysis**
-   - Identify what worked well
-   - Extract reusable patterns
-   - Document effective context elements
-   - Capture successful validation strategies
+2.  **Análisis de Patrones de Éxito**
+    -   Identificar qué funcionó bien.
+    -   Extraer patrones reutilizables.
+    -   Documentar elementos de contexto efectivos.
+    -   Capturar estrategias de validación exitosas.
 
-3. **Failure Pattern Learning**
-   - Document encountered issues
-   - Analyze root causes
-   - Create prevention strategies
-   - Update known gotchas database
+3.  **Aprendizaje de Patrones de Fallo**
+    -   Documentar los problemas encontrados.
+    -   Analizar las causas raíz.
+    -   Crear estrategias de prevención.
+    -   Actualizar la base de datos de problemas conocidos (gotchas).
 
-4. **Template Improvement Recommendations**
-   - Identify context gaps
-   - Suggest validation enhancements
-   - Recommend documentation updates
-   - Propose new anti-patterns
+4.  **Recomendaciones de Mejora de la Plantilla**
+    -   Identificar lagunas de contexto.
+    -   Sugerir mejoras en la validación.
+    -   Recomendar actualizaciones de la documentación.
+    -   Proponer nuevos anti-patrones.
 
-5. **Knowledge Base Updates**
-   - Add new failure patterns to database
-   - Update success metrics
-   - Enhance similar feature detection
-   - Improve confidence scoring
+5.  **Actualizaciones de la Base de Conocimiento**
+    -   Añadir nuevos patrones de fallo a la base de datos.
+    -   Actualizar las métricas de éxito.
+    -   Mejorar la detección de funcionalidades similares.
+    -   Mejorar la puntuación de confianza.
 
-## Analysis Framework
+## Marco de Análisis
 
-### Metrics Collection
+### Recopilación de Métricas
 
 ```bash
-# Collect implementation metrics
-echo "Collecting execution metrics..."
+# Recopilar métricas de implementación
+echo "Recopilando métricas de ejecución..."
 
-# Get git statistics
-COMMITS_DURING_IMPL=$(git rev-list --count HEAD --since="2 hours ago")
-FILES_CHANGED=$(git diff --name-only HEAD~$COMMITS_DURING_IMPL HEAD | wc -l)
-LINES_ADDED=$(git diff --shortstat HEAD~$COMMITS_DURING_IMPL HEAD | grep -o '[0-9]* insertion' | grep -o '[0-9]*' || echo 0)
-LINES_DELETED=$(git diff --shortstat HEAD~$COMMITS_DURING_IMPL HEAD | grep -o '[0-9]* deletion' | grep -o '[0-9]*' || echo 0)
+# Obtener estadísticas de git
+COMMITS_DURANTE_IMPL=$(git rev-list --count HEAD --since="2 hours ago")
+ARCHIVOS_CAMBIADOS=$(git diff --name-only HEAD~$COMMITS_DURANTE_IMPL HEAD | wc -l)
+LINEAS_AÑADIDAS=$(git diff --shortstat HEAD~$COMMITS_DURANTE_IMPL HEAD | grep -o '[0-9]* insertion' | grep -o '[0-9]*' || echo 0)
+LINEAS_ELIMINADAS=$(git diff --shortstat HEAD~$COMMITS_DURANTE_IMPL HEAD | grep -o '[0-9]* deletion' | grep -o '[0-9]*' || echo 0)
 
-# Get test results
-TEST_RESULTS=$(pytest tests/ --tb=no -q 2>&1 | tail -n 1)
-TEST_COUNT=$(echo "$TEST_RESULTS" | grep -o '[0-9]* passed' | grep -o '[0-9]*' || echo 0)
-TEST_FAILURES=$(echo "$TEST_RESULTS" | grep -o '[0-9]* failed' | grep -o '[0-9]*' || echo 0)
+# Obtener resultados de las pruebas
+RESULTADOS_PRUEBAS=$(pytest tests/ --tb=no -q 2>&1 | tail -n 1)
+PRUEBAS_PASADAS=$(echo "$RESULTADOS_PRUEBAS" | grep -o '[0-9]* passed' | grep -o '[0-9]*' || echo 0)
+PRUEBAS_FALLIDAS=$(echo "$RESULTADOS_PRUEBAS" | grep -o '[0-9]* failed' | grep -o '[0-9]*' || echo 0)
 
-# Get code quality metrics
-RUFF_ISSUES=$(ruff check . 2>&1 | grep -c "error\|warning" || echo 0)
-MYPY_ERRORS=$(mypy . 2>&1 | grep -c "error:" || echo 0)
+# Obtener métricas de calidad del código
+PROBLEMAS_RUFF=$(ruff check . 2>&1 | grep -c "error\|warning" || echo 0)
+ERRORES_MYPY=$(mypy . 2>&1 | grep -c "error:" || echo 0)
 
-echo "📊 Implementation Metrics:"
-echo "- Commits: $COMMITS_DURING_IMPL"
-echo "- Files changed: $FILES_CHANGED"
-echo "- Lines added: $LINES_ADDED"
-echo "- Lines deleted: $LINES_DELETED"
-echo "- Tests passing: $TEST_COUNT"
-echo "- Tests failing: $TEST_FAILURES"
-echo "- Ruff issues: $RUFF_ISSUES"
-echo "- MyPy errors: $MYPY_ERRORS"
+echo "📊 Métricas de Implementación:"
+echo "- Commits: $COMMITS_DURANTE_IMPL"
+echo "- Archivos cambiados: $ARCHIVOS_CAMBIADOS"
+echo "- Líneas añadidas: $LINEAS_AÑADIDAS"
+echo "- Líneas eliminadas: $LINEAS_ELIMINADAS"
+echo "- Pruebas pasadas: $PRUEBAS_PASADAS"
+echo "- Pruebas fallidas: $PRUEBAS_FALLIDAS"
+echo "- Problemas de Ruff: $PROBLEMAS_RUFF"
+echo "- Errores de MyPy: $ERRORES_MYPY"
 ```
 
-### Context Effectiveness Analysis
+### Análisis de la Efectividad del Contexto
 
 ```python
-# Analyze which context elements were most valuable
-def analyze_context_effectiveness(prp_file):
-    """Analyze which parts of the PRP were most effective."""
+# Analizar qué elementos del contexto fueron más valiosos
+def analizar_efectividad_contexto(archivo_prp):
+    """Analiza qué partes del PRP fueron más efectivas."""
 
-    # Read the PRP file
-    with open(prp_file, 'r') as f:
-        prp_content = f.read()
+    # Leer el archivo PRP
+    with open(archivo_prp, 'r') as f:
+        contenido_prp = f.read()
 
-    # Extract context elements
-    context_elements = {
-        'documentation_urls': re.findall(r'url: (https?://[^\s]+)', prp_content),
-        'file_references': re.findall(r'file: ([^\s]+)', prp_content),
-        'gotchas': re.findall(r'# CRITICAL: ([^\n]+)', prp_content),
-        'patterns': re.findall(r'# PATTERN: ([^\n]+)', prp_content),
-        'examples': re.findall(r'examples/([^\s]+)', prp_content)
+    # Extraer elementos del contexto
+    elementos_contexto = {
+        'urls_documentacion': re.findall(r'url: (https?://[^
+]+)', contenido_prp),
+        'referencias_archivos': re.findall(r'file: ([^
+]+)', contenido_prp),
+        'problemas_conocidos': re.findall(r'# CRITICAL: ([^
+]+)', contenido_prp),
+        'patrones': re.findall(r'# PATTERN: ([^
+]+)', contenido_prp),
+        'ejemplos': re.findall(r'examples/([^
+]+)', contenido_prp)
     }
 
-    # Analyze git history to see which files were actually referenced
-    git_files = subprocess.check_output(['git', 'log', '--name-only', '--pretty=format:', '--since=2 hours ago']).decode().strip().split('\n')
+    # Analizar el historial de git para ver qué archivos fueron realmente referenciados
+    archivos_git = subprocess.check_output(['git', 'log', '--name-only', '--pretty=format:', '--since=2 hours ago']).decode().strip().split('\n')
 
-    # Calculate effectiveness scores
-    effectiveness_scores = {}
-    for category, elements in context_elements.items():
-        if elements:
-            referenced_count = sum(1 for element in elements if any(element in git_file for git_file in git_files))
-            effectiveness_scores[category] = referenced_count / len(elements) * 100
+    # Calcular puntuaciones de efectividad
+    puntuaciones_efectividad = {}
+    for categoria, elementos in elementos_contexto.items():
+        if elementos:
+            contador_referenciados = sum(1 for elemento in elementos if any(elemento in archivo_git for archivo_git in archivos_git))
+            puntuaciones_efectividad[categoria] = contador_referenciados / len(elementos) * 100
         else:
-            effectiveness_scores[category] = 0
+            puntuaciones_efectividad[categoria] = 0
 
-    return effectiveness_scores
+    return puntuaciones_efectividad
 ```
 
-### Failure Pattern Detection
+### Detección de Patrones de Fallo
 
 ```python
-# Extract failure patterns from implementation
-def extract_failure_patterns():
-    """Extract new failure patterns from the implementation."""
+# Extraer patrones de fallo de la implementación
+def extraer_patrones_fallo():
+    """Extrae nuevos patrones de fallo de la implementación."""
 
-    patterns = []
+    patrones = []
 
-    # Check git commit messages for failure indicators
-    commit_messages = subprocess.check_output(['git', 'log', '--oneline', '--since=2 hours ago']).decode().strip().split('\n')
+    # Revisar los mensajes de commit de git en busca de indicadores de fallo
+    mensajes_commit = subprocess.check_output(['git', 'log', '--oneline', '--since=2 hours ago']).decode().strip().split('\n')
 
-    failure_indicators = ['fix', 'error', 'bug', 'issue', 'problem', 'typo', 'mistake']
+    indicadores_fallo = ['fix', 'error', 'bug', 'issue', 'problem', 'typo', 'mistake']
 
-    for message in commit_messages:
-        if any(indicator in message.lower() for indicator in failure_indicators):
-            # Extract the type of failure
-            if 'async' in message.lower():
-                patterns.append({
-                    'type': 'async_context_issue',
-                    'description': message,
-                    'frequency': 'high',
-                    'solution': 'Always use async/await consistently'
+    for mensaje in mensajes_commit:
+        if any(indicador in mensaje.lower() for indicador in indicadores_fallo):
+            # Extraer el tipo de fallo
+            if 'async' in mensaje.lower():
+                patrones.append({
+                    'tipo': 'problema_contexto_async',
+                    'descripcion': mensaje,
+                    'frecuencia': 'alta',
+                    'solucion': 'Usar siempre async/await de forma consistente'
                 })
-            elif 'import' in message.lower():
-                patterns.append({
-                    'type': 'import_error',
-                    'description': message,
-                    'frequency': 'medium',
-                    'solution': 'Verify all imports before implementation'
+            elif 'import' in mensaje.lower():
+                patrones.append({
+                    'tipo': 'error_importacion',
+                    'descripcion': mensaje,
+                    'frecuencia': 'media',
+                    'solucion': 'Verificar todas las importaciones antes de la implementación'
                 })
-            elif 'type' in message.lower():
-                patterns.append({
-                    'type': 'type_error',
-                    'description': message,
-                    'frequency': 'medium',
-                    'solution': 'Run mypy validation before proceeding'
+            elif 'type' in mensaje.lower():
+                patrones.append({
+                    'tipo': 'error_tipo',
+                    'descripcion': mensaje,
+                    'frecuencia': 'media',
+                    'solucion': 'Ejecutar la validación de mypy antes de proceder'
                 })
 
-    return patterns
+    return patrones
 ```
 
-### Success Pattern Identification
+### Identificación de Patrones de Éxito
 
 ```python
-# Identify successful patterns from the implementation
-def identify_success_patterns():
-    """Identify patterns that led to successful implementation."""
+# Identificar patrones exitosos de la implementación
+def identificar_patrones_exito():
+    """Identifica patrones que llevaron a una implementación exitosa."""
 
-    success_patterns = []
+    patrones_exito = []
 
-    # Check for clean test runs
-    test_output = subprocess.check_output(['pytest', 'tests/', '--tb=no', '-q']).decode()
-    if 'passed' in test_output and 'failed' not in test_output:
-        success_patterns.append({
-            'pattern': 'comprehensive_testing',
-            'description': 'All tests passed on implementation',
-            'reuse_recommendation': 'Include similar test coverage in future PRPs'
+    # Verificar ejecuciones de pruebas limpias
+    salida_pruebas = subprocess.check_output(['pytest', 'tests/', '--tb=no', '-q']).decode()
+    if 'passed' in salida_pruebas and 'failed' not in salida_pruebas:
+        patrones_exito.append({
+            'patron': 'pruebas_exhaustivas',
+            'descripcion': 'Todas las pruebas pasaron en la implementación',
+            'recomendacion_reutilizacion': 'Incluir una cobertura de pruebas similar en futuros PRPs'
         })
 
-    # Check for clean code quality
-    ruff_output = subprocess.check_output(['ruff', 'check', '.', '--quiet']).decode()
-    if not ruff_output.strip():
-        success_patterns.append({
-            'pattern': 'clean_code_style',
-            'description': 'No style issues detected',
-            'reuse_recommendation': 'Maintain consistent style patterns'
+    # Verificar la calidad del código limpio
+    salida_ruff = subprocess.check_output(['ruff', 'check', '.', '--quiet']).decode()
+    if not salida_ruff.strip():
+        patrones_exito.append({
+            'patron': 'estilo_codigo_limpio',
+            'descripcion': 'No se detectaron problemas de estilo',
+            'recomendacion_reutilizacion': 'Mantener patrones de estilo consistentes'
         })
 
-    # Check for proper error handling
-    python_files = subprocess.check_output(['find', '.', '-name', '*.py', '-not', '-path', './venv*']).decode().strip().split('\n')
+    # Verificar el manejo adecuado de errores
+    archivos_python = subprocess.check_output(['find', '.', '-name', '*.py', '-not', '-path', './venv*']).decode().strip().split('\n')
 
-    error_handling_count = 0
-    for file in python_files:
-        if file.strip():
-            with open(file, 'r') as f:
-                content = f.read()
-                if 'try:' in content and 'except' in content:
-                    error_handling_count += 1
+    contador_manejo_errores = 0
+    for archivo in archivos_python:
+        if archivo.strip():
+            with open(archivo, 'r') as f:
+                contenido = f.read()
+                if 'try:' in contenido and 'except' in contenido:
+                    contador_manejo_errores += 1
 
-    if error_handling_count > 0:
-        success_patterns.append({
-            'pattern': 'proper_error_handling',
-            'description': f'Error handling implemented in {error_handling_count} files',
-            'reuse_recommendation': 'Continue including error handling patterns in PRPs'
+    if contador_manejo_errores > 0:
+        patrones_exito.append({
+            'patron': 'manejo_errores_adecuado',
+            'descripcion': f'Manejo de errores implementado en {contador_manejo_errores} archivos',
+            'recomendacion_reutilizacion': 'Continuar incluyendo patrones de manejo de errores en los PRPs'
         })
 
-    return success_patterns
+    return patrones_exito
 ```
 
-## Knowledge Base Updates
+## Actualizaciones de la Base de Conocimiento
 
-### Failure Pattern Database
+### Base de Datos de Patrones de Fallo
 
 ```yaml
 # PRPs/knowledge_base/failure_patterns.yaml
-failure_patterns:
-  - id: "async_context_mixing"
-    description: "Mixing sync and async code contexts"
-    frequency: "high"
-    detection_signs:
+patrones_fallo:
+  - id: "mezcla_contexto_async"
+    descripcion: "Mezclar contextos de código síncrono y asíncrono"
+    frecuencia: "alta"
+    señales_deteccion:
       - "RuntimeError: cannot be called from a running event loop"
       - "SyncError in async context"
-    prevention:
-      - "Always use async/await consistently"
-      - "Use asyncio.run() for top-level async calls"
-    related_libraries: ["asyncio", "aiohttp", "fastapi"]
+    prevencion:
+      - "Usar siempre async/await de forma consistente"
+      - "Usar asyncio.run() para llamadas asíncronas de alto nivel"
+    bibliotecas_relacionadas: ["asyncio", "aiohttp", "fastapi"]
 
-  - id: "pydantic_v2_breaking_changes"
-    description: "Pydantic v2 syntax changes"
-    frequency: "medium"
-    detection_signs:
+  - id: "cambios_rompedores_pydantic_v2"
+    descripcion: "Cambios de sintaxis de Pydantic v2"
+    frecuencia: "media"
+    señales_deteccion:
       - "ValidationError: Field required"
       - "AttributeError: 'Field' object has no attribute"
-    prevention:
-      - "Use Field() instead of ... for optional fields"
-      - "Update to v2 syntax for validators"
-    related_libraries: ["pydantic", "fastapi"]
+    prevencion:
+      - "Usar Field() en lugar de ... para campos opcionales"
+      - "Actualizar a la sintaxis v2 para los validadores"
+    bibliotecas_relacionadas: ["pydantic", "fastapi"]
 
-  - id: "environment_variable_missing"
-    description: "Missing environment variables"
-    frequency: "medium"
-    detection_signs:
+  - id: "variable_entorno_faltante"
+    descripcion: "Variables de entorno faltantes"
+    frecuencia: "media"
+    señales_deteccion:
       - "KeyError: 'API_KEY'"
       - "None type has no attribute"
-    prevention:
-      - "Always check .env.example completeness"
-      - "Use default values in config"
-    related_libraries: ["python-dotenv", "pydantic-settings"]
+    prevencion:
+      - "Revisar siempre la completitud de .env.example"
+      - "Usar valores por defecto en la configuración"
+    bibliotecas_relacionadas: ["python-dotenv", "pydantic-settings"]
 ```
 
-### Success Metrics Database
+### Base de Datos de Métricas de Éxito
 
 ```yaml
 # PRPs/knowledge_base/success_metrics.yaml
-success_metrics:
-  - feature_type: "api_integration"
-    avg_token_usage: 2500
-    avg_implementation_time: 35
-    success_rate: 85
-    common_patterns:
-      - "async http client usage"
-      - "proper error handling"
-      - "rate limiting implementation"
+metricas_exito:
+  - tipo_funcionalidad: "integracion_api"
+    uso_promedio_tokens: 2500
+    tiempo_promedio_implementacion: 35
+    tasa_exito: 85
+    patrones_comunes:
+      - "uso de cliente http asíncrono"
+      - "manejo adecuado de errores"
+      - "implementación de limitación de velocidad"
 
-  - feature_type: "database_operations"
-    avg_token_usage: 1800
-    avg_implementation_time: 25
-    success_rate: 92
-    common_patterns:
-      - "sqlalchemy async sessions"
-      - "proper migration handling"
-      - "connection pooling"
+  - tipo_funcionalidad: "operaciones_bd"
+    uso_promedio_tokens: 1800
+    tiempo_promedio_implementacion: 25
+    tasa_exito: 92
+    patrones_comunes:
+      - "sesiones asíncronas de sqlalchemy"
+      - "manejo adecuado de migraciones"
+      - "agrupación de conexiones"
 
-  - feature_type: "cli_applications"
-    avg_token_usage: 1200
-    avg_implementation_time: 20
-    success_rate: 95
-    common_patterns:
-      - "click or typer usage"
-      - "proper argument parsing"
-      - "colored output"
+  - tipo_funcionalidad: "aplicaciones_cli"
+    uso_promedio_tokens: 1200
+    tiempo_promedio_implementacion: 20
+    tasa_exito: 95
+    patrones_comunes:
+      - "uso de click o typer"
+      - "análisis adecuado de argumentos"
+      - "salida coloreada"
 ```
 
-## Analysis Report Generation
+## Generación de Informe de Análisis
 
 ```python
-# Generate comprehensive analysis report
-def generate_analysis_report(prp_file):
-    """Generate a comprehensive analysis report."""
+# Generar informe de análisis completo
+def generar_informe_analisis(archivo_prp):
+    """Genera un informe de análisis completo."""
 
-    report = {
-        'prp_file': prp_file,
+    informe = {
+        'archivo_prp': archivo_prp,
         'timestamp': datetime.now().isoformat(),
-        'metrics': collect_metrics(),
-        'context_effectiveness': analyze_context_effectiveness(prp_file),
-        'failure_patterns': extract_failure_patterns(),
-        'success_patterns': identify_success_patterns(),
-        'recommendations': generate_recommendations(),
-        'confidence_validation': validate_confidence_score(prp_file)
+        'metricas': recopilar_metricas(),
+        'efectividad_contexto': analizar_efectividad_contexto(archivo_prp),
+        'patrones_fallo': extraer_patrones_fallo(),
+        'patrones_exito': identificar_patrones_exito(),
+        'recomendaciones': generar_recomendaciones(),
+        'validacion_confianza': validar_puntuacion_confianza(archivo_prp)
     }
 
-    # Save to knowledge base
-    save_to_knowledge_base(report)
+    # Guardar en la base de conocimiento
+    guardar_en_base_conocimiento(informe)
 
-    # Generate human-readable report
-    return format_analysis_report(report)
+    # Generar informe legible por humanos
+    return formatear_informe_analisis(informe)
 
-def collect_metrics():
-    """Collect implementation metrics."""
-    # Git statistics
-    commits = get_commit_count_since_hours_ago(2)
-    files_changed = get_files_changed_in_commits(commits)
-    lines_stats = get_line_change_stats(commits)
+def recopilar_metricas():
+    """Recopila las métricas de implementación."""
+    # Estadísticas de Git
+    commits = obtener_contador_commits_desde_hace_horas(2)
+    archivos_cambiados = obtener_archivos_cambiados_en_commits(commits)
+    estadisticas_lineas = obtener_estadisticas_cambio_lineas(commits)
 
-    # Test results
-    test_results = run_test_suite()
+    # Resultados de las pruebas
+    resultados_pruebas = ejecutar_suite_pruebas()
 
-    # Code quality
-    quality_metrics = get_code_quality_metrics()
+    # Calidad del código
+    metricas_calidad = obtener_metricas_calidad_codigo()
 
     return {
         'commits': commits,
-        'files_changed': files_changed,
-        'lines_added': lines_stats['added'],
-        'lines_deleted': lines_stats['deleted'],
-        'tests_passed': test_results['passed'],
-        'tests_failed': test_results['failed'],
-        'ruff_issues': quality_metrics['ruff_issues'],
-        'mypy_errors': quality_metrics['mypy_errors'],
-        'implementation_time_minutes': calculate_implementation_time()
+        'archivos_cambiados': archivos_cambiados,
+        'lineas_añadidas': estadisticas_lineas['añadidas'],
+        'lineas_eliminadas': estadisticas_lineas['eliminadas'],
+        'pruebas_pasadas': resultados_pruebas['pasadas'],
+        'pruebas_fallidas': resultados_pruebas['fallidas'],
+        'problemas_ruff': metricas_calidad['problemas_ruff'],
+        'errores_mypy': metricas_calidad['errores_mypy'],
+        'tiempo_implementacion_minutos': calcular_tiempo_implementacion()
     }
 
-def generate_recommendations():
-    """Generate recommendations for future PRPs."""
-    recommendations = []
+def generar_recomendaciones():
+    """Genera recomendaciones para futuros PRPs."""
+    recomendaciones = []
 
-    # Analyze current implementation for improvement opportunities
-    metrics = collect_metrics()
+    # Analizar la implementación actual en busca de oportunidades de mejora
+    metricas = recopilar_metricas()
 
-    if metrics['tests_failed'] > 0:
-        recommendations.append({
-            'type': 'testing',
-            'priority': 'high',
-            'suggestion': 'Add more comprehensive test cases to PRP template',
-            'rationale': f"Had {metrics['tests_failed']} test failures during implementation"
+    if metricas['pruebas_fallidas'] > 0:
+        recomendaciones.append({
+            'tipo': 'pruebas',
+            'prioridad': 'alta',
+            'sugerencia': 'Añadir casos de prueba más completos a la plantilla de PRP',
+            'justificacion': f"Hubo {metricas['pruebas_fallidas']} fallos en las pruebas durante la implementación"
         })
 
-    if metrics['ruff_issues'] > 5:
-        recommendations.append({
-            'type': 'code_quality',
-            'priority': 'medium',
-            'suggestion': 'Include stricter style checking in validation loop',
-            'rationale': f"Found {metrics['ruff_issues']} style issues"
+    if metricas['problemas_ruff'] > 5:
+        recomendaciones.append({
+            'tipo': 'calidad_codigo',
+            'prioridad': 'media',
+            'sugerencia': 'Incluir una verificación de estilo más estricta en el bucle de validación',
+            'justificacion': f"Se encontraron {metricas['problemas_ruff']} problemas de estilo"
         })
 
-    if metrics['implementation_time_minutes'] > 60:
-        recommendations.append({
-            'type': 'complexity',
-            'priority': 'medium',
-            'suggestion': 'Break down complex features into smaller PRPs',
-            'rationale': f"Implementation took {metrics['implementation_time_minutes']} minutes"
+    if metricas['tiempo_implementacion_minutos'] > 60:
+        recomendaciones.append({
+            'tipo': 'complejidad',
+            'prioridad': 'media',
+            'sugerencia': 'Desglosar las funcionalidades complejas en PRPs más pequeños',
+            'justificacion': f"La implementación tardó {metricas['tiempo_implementacion_minutos']} minutos"
         })
 
-    return recommendations
+    return recomendaciones
 
-def validate_confidence_score(prp_file):
-    """Validate whether the original confidence score was accurate."""
-    # Extract original confidence score from PRP
-    with open(prp_file, 'r') as f:
-        content = f.read()
+def validar_puntuacion_confianza(archivo_prp):
+    """Valida si la puntuación de confianza original era precisa."""
+    # Extraer la puntuación de confianza original del PRP
+    with open(archivo_prp, 'r') as f:
+        contenido = f.read()
 
-    confidence_match = re.search(r'Confidence Score: (\d+)/10', content)
-    original_confidence = int(confidence_match.group(1)) if confidence_match else None
+    coincidencia_confianza = re.search(r'Puntuación de Confianza: (\d+)/10', contenido)
+    confianza_original = int(coincidencia_confianza.group(1)) if coincidencia_confianza else None
 
-    # Calculate actual success indicators
-    metrics = collect_metrics()
+    # Calcular indicadores de éxito reales
+    metricas = recopilar_metricas()
 
-    # Score based on actual outcomes
-    actual_score = 10
+    # Puntuación basada en resultados reales
+    puntuacion_real = 10
 
-    if metrics['tests_failed'] > 0:
-        actual_score -= 2
-    if metrics['mypy_errors'] > 0:
-        actual_score -= 1
-    if metrics['ruff_issues'] > 10:
-        actual_score -= 1
-    if metrics['implementation_time_minutes'] > 90:
-        actual_score -= 2
-    if metrics['commits'] > 10:  # Too many iterations
-        actual_score -= 1
+    if metricas['pruebas_fallidas'] > 0:
+        puntuacion_real -= 2
+    if metricas['errores_mypy'] > 0:
+        puntuacion_real -= 1
+    if metricas['problemas_ruff'] > 10:
+        puntuacion_real -= 1
+    if metricas['tiempo_implementacion_minutos'] > 90:
+        puntuacion_real -= 2
+    if metricas['commits'] > 10:  # Demasiadas iteraciones
+        puntuacion_real -= 1
 
     return {
-        'original_confidence': original_confidence,
-        'actual_score': max(actual_score, 1),
-        'accuracy': abs(original_confidence - actual_score) <= 2 if original_confidence else None
+        'confianza_original': confianza_original,
+        'puntuacion_real': max(puntuacion_real, 1),
+        'precision': abs(confianza_original - puntuacion_real) <= 2 if confianza_original else None
     }
 ```
 
-## Report Output Format
+## Formato de Salida del Informe
 
 ```yaml
-📊 PRP Analysis Report
+📊 Informe de Análisis de PRP
 ======================
 
-🎯 Implementation Summary:
-- PRP File: {prp_file}
-- Execution Date: {timestamp}
-- Overall Success: [SUCCESS/PARTIAL/FAILED]
+🎯 Resumen de la Implementación:
+- Archivo PRP: {archivo_prp}
+- Fecha de Ejecución: {timestamp}
+- Éxito General: [ÉXITO/PARCIAL/FALLIDO]
 
-📈 Metrics:
-- Commits during implementation: {commits}
-- Files changed: {files_changed}
-- Lines added/deleted: {lines_added}/{lines_deleted}
-- Implementation time: {implementation_time_minutes} minutes
-- Tests: {tests_passed} passed, {tests_failed} failed
-- Code quality: {ruff_issues} style issues, {mypy_errors} type errors
+📈 Métricas:
+- Commits durante la implementación: {commits}
+- Archivos cambiados: {archivos_cambiados}
+- Líneas añadidas/eliminadas: {lineas_añadidas}/{lineas_eliminadas}
+- Tiempo de implementación: {tiempo_implementacion_minutos} minutos
+- Pruebas: {pruebas_pasadas} pasadas, {pruebas_fallidas} fallidas
+- Calidad del código: {problemas_ruff} problemas de estilo, {errores_mypy} errores de tipo
 
-🎯 Context Effectiveness:
-- Documentation URLs: {effectiveness_percentage}% referenced
-- File references: {effectiveness_percentage}% used
-- Examples: {effectiveness_percentage}% followed
-- Gotchas: {effectiveness_percentage}% prevented issues
+🎯 Efectividad del Contexto:
+- URLs de documentación: {porcentaje_efectividad}% referenciadas
+- Referencias de archivos: {porcentaje_efectividad}% usadas
+- Ejemplos: {porcentaje_efectividad}% seguidos
+- Problemas conocidos: {porcentaje_efectividad}% previnieron problemas
 
-🔍 Patterns Discovered:
-Success Patterns:
-{for pattern in success_patterns}
-  ✅ {pattern.description}
-     → Reuse: {pattern.reuse_recommendation}
+🔍 Patrones Descubiertos:
+Patrones de Éxito:
+{for patron in patrones_exito}
+  ✅ {patron.descripcion}
+     → Reutilización: {patron.recomendacion_reutilizacion}
 
-Failure Patterns:
-{for pattern in failure_patterns}
-  ❌ {pattern.description}
-     → Prevention: {pattern.solution}
+Patrones de Fallo:
+{for patron in patrones_fallo}
+  ❌ {patron.descripcion}
+     → Prevención: {patron.solucion}
 
-🎯 Confidence Score Validation:
-- Original estimate: {original_confidence}/10
-- Actual performance: {actual_score}/10
-- Prediction accuracy: {accuracy ? "Good" : "Needs improvement"}
+🎯 Validación de la Puntuación de Confianza:
+- Estimación original: {confianza_original}/10
+- Rendimiento real: {puntuacion_real}/10
+- Precisión de la predicción: {precision ? "Buena" : "Necesita mejorar"}
 
-💡 Recommendations for Future PRPs:
-{for rec in recommendations}
-  [{rec.priority}] {rec.suggestion}
-  Reason: {rec.rationale}
+💡 Recomendaciones para Futuros PRPs:
+{for rec in recomendaciones}
+  [{rec.prioridad}] {rec.sugerencia}
+  Razón: {rec.justificacion}
 
-📚 Knowledge Base Updates:
-- New failure patterns: {new_failure_patterns_count}
-- Updated success metrics: {updated_metrics_count}
-- Template improvements: {template_improvements_count}
+📚 Actualizaciones de la Base de Conocimiento:
+- Nuevos patrones de fallo: {contador_nuevos_patrones_fallo}
+- Métricas de éxito actualizadas: {contador_metricas_actualizadas}
+- Mejoras en la plantilla: {contador_mejoras_plantilla}
 ```
 
-## Knowledge Base Integration
+## Integración con la Base de Conocimiento
 
-### Update Failure Patterns Database
+### Actualizar Base de Datos de Patrones de Fallo
 
 ```bash
-# Update the failure patterns database
-echo "Updating failure patterns database..."
+# Actualizar la base de datos de patrones de fallo
+echo "Actualizando la base de datos de patrones de fallo..."
 
-# Add new patterns to PRPs/knowledge_base/failure_patterns.yaml
+# Añadir nuevos patrones a PRPs/knowledge_base/failure_patterns.yaml
 python3 -c "
 import yaml
 import sys
 from datetime import datetime
 
-# Load existing patterns
+# Cargar patrones existentes
 try:
     with open('PRPs/knowledge_base/failure_patterns.yaml', 'r') as f:
-        db = yaml.safe_load(f) or {'failure_patterns': []}
+        db = yaml.safe_load(f) or {'patrones_fallo': []}
 except FileNotFoundError:
-    db = {'failure_patterns': []}
+    db = {'patrones_fallo': []}
 
-# Add new patterns from analysis
-new_patterns = extract_failure_patterns()
-for pattern in new_patterns:
-    # Check if pattern already exists
-    existing = next((p for p in db['failure_patterns'] if p.get('id') == pattern['type']), None)
+# Añadir nuevos patrones del análisis
+nuevos_patrones = extraer_patrones_fallo()
+for patron in nuevos_patrones:
+    # Comprobar si el patrón ya existe
+    existente = next((p for p in db['patrones_fallo'] if p.get('id') == patron['tipo']), None)
 
-    if existing:
-        # Update frequency if pattern seen again
-        existing['last_seen'] = datetime.now().isoformat()
-        existing['frequency'] = 'high' if existing.get('frequency') == 'medium' else existing.get('frequency', 'medium')
+    if existente:
+        # Actualizar la frecuencia si se vuelve a ver el patrón
+        existente['ultima_vez_visto'] = datetime.now().isoformat()
+        existente['frecuencia'] = 'alta' if existente.get('frecuencia') == 'media' else existente.get('frecuencia', 'media')
     else:
-        # Add new pattern
-        db['failure_patterns'].append({
-            'id': pattern['type'],
-            'description': pattern['description'],
-            'frequency': pattern['frequency'],
-            'solution': pattern['solution'],
-            'first_seen': datetime.now().isoformat(),
-            'last_seen': datetime.now().isoformat()
+        # Añadir nuevo patrón
+        db['patrones_fallo'].append({
+            'id': patron['tipo'],
+            'descripcion': patron['descripcion'],
+            'frecuencia': patron['frecuencia'],
+            'solucion': patron['solucion'],
+            'primera_vez_visto': datetime.now().isoformat(),
+            'ultima_vez_visto': datetime.now().isoformat()
         })
 
-# Save updated database
+# Guardar la base de datos actualizada
 with open('PRPs/knowledge_base/failure_patterns.yaml', 'w') as f:
-    yaml.dump(db, f, default_flow_style=False)
+    yaml.dump(db, f, default_flow_style=False, allow_unicode=True)
 
-print(f'Updated failure patterns database with {len(new_patterns)} new patterns')
+print(f'Base de datos de patrones de fallo actualizada con {len(nuevos_patrones)} nuevos patrones')
 "
 ```
 
-### Update Success Metrics
+### Actualizar Métricas de Éxito
 
 ```bash
-# Update success metrics for this feature type
-echo "Updating success metrics..."
+# Actualizar las métricas de éxito para este tipo de funcionalidad
+echo "Actualizando las métricas de éxito..."
 
 python3 -c "
 import yaml
 from datetime import datetime
 
-# Determine feature type from PRP content
-feature_type = determine_feature_type('$PRP_FILE')
-metrics = collect_metrics()
+# Determinar el tipo de funcionalidad a partir del contenido del PRP
+tipo_funcionalidad = determinar_tipo_funcionalidad('$PRP_FILE')
+metricas = recopilar_metricas()
 
-# Load existing metrics
+# Cargar métricas existentes
 try:
     with open('PRPs/knowledge_base/success_metrics.yaml', 'r') as f:
-        db = yaml.safe_load(f) or {'success_metrics': []}
+        db = yaml.safe_load(f) or {'metricas_exito': []}
 except FileNotFoundError:
-    db = {'success_metrics': []}
+    db = {'metricas_exito': []}
 
-# Find or create entry for this feature type
-existing = next((m for m in db['success_metrics'] if m.get('feature_type') == feature_type), None)
+# Encontrar o crear una entrada para este tipo de funcionalidad
+existente = next((m for m in db['metricas_exito'] if m.get('tipo_funcionalidad') == tipo_funcionalidad), None)
 
-if existing:
-    # Update running averages
-    existing['implementations'] = existing.get('implementations', 0) + 1
-    existing['avg_token_usage'] = update_running_average(
-        existing['avg_token_usage'],
-        metrics['estimated_tokens'],
-        existing['implementations']
+if existente:
+    # Actualizar promedios móviles
+    existente['implementaciones'] = existente.get('implementaciones', 0) + 1
+    existente['uso_promedio_tokens'] = actualizar_promedio_movil(
+        existente['uso_promedio_tokens'],
+        metricas['tokens_estimados'],
+        existente['implementaciones']
     )
-    existing['avg_implementation_time'] = update_running_average(
-        existing['avg_implementation_time'],
-        metrics['implementation_time_minutes'],
-        existing['implementations']
+    existente['tiempo_promedio_implementacion'] = actualizar_promedio_movil(
+        existente['tiempo_promedio_implementacion'],
+        metricas['tiempo_implementacion_minutos'],
+        existente['implementaciones']
     )
-    # Update success rate based on test results
-    success = 1 if metrics['tests_failed'] == 0 else 0
-    existing['success_rate'] = update_running_average(
-        existing['success_rate'],
-        success * 100,
-        existing['implementations']
+    # Actualizar tasa de éxito basada en los resultados de las pruebas
+    exito = 1 if metricas['pruebas_fallidas'] == 0 else 0
+    existente['tasa_exito'] = actualizar_promedio_movil(
+        existente['tasa_exito'],
+        exito * 100,
+        existente['implementaciones']
     )
 else:
-    # Create new entry
-    success_rate = 100 if metrics['tests_failed'] == 0 else 0
-    db['success_metrics'].append({
-        'feature_type': feature_type,
-        'implementations': 1,
-        'avg_token_usage': metrics.get('estimated_tokens', 0),
-        'avg_implementation_time': metrics['implementation_time_minutes'],
-        'success_rate': success_rate,
-        'last_updated': datetime.now().isoformat()
+    # Crear nueva entrada
+    tasa_exito = 100 if metricas['pruebas_fallidas'] == 0 else 0
+    db['metricas_exito'].append({
+        'tipo_funcionalidad': tipo_funcionalidad,
+        'implementaciones': 1,
+        'uso_promedio_tokens': metricas.get('tokens_estimados', 0),
+        'tiempo_promedio_implementacion': metricas['tiempo_implementacion_minutos'],
+        'tasa_exito': tasa_exito,
+        'ultima_actualizacion': datetime.now().isoformat()
     })
 
-# Save updated metrics
+# Guardar métricas actualizadas
 with open('PRPs/knowledge_base/success_metrics.yaml', 'w') as f:
-    yaml.dump(db, f, default_flow_style=False)
+    yaml.dump(db, f, default_flow_style=False, allow_unicode=True)
 "
 ```
 
-## Template Improvement Suggestions
+## Sugerencias de Mejora de Plantilla
 
 ```python
-# Generate specific template improvements
-def suggest_template_improvements():
-    """Suggest specific improvements to PRP templates."""
+# Generar mejoras específicas para la plantilla
+def sugerir_mejoras_plantilla():
+    """Sugiere mejoras específicas para las plantillas de PRP."""
 
-    improvements = []
+    mejoras = []
 
-    # Analyze what context was missing
-    missing_context = analyze_missing_context()
-    for context in missing_context:
-        improvements.append({
-            'section': 'Context',
-            'improvement': f'Add {context["type"]} validation to template',
-            'rationale': f'Missing {context["description"]} caused implementation delay'
+    # Analizar qué contexto faltaba
+    contexto_faltante = analizar_contexto_faltante()
+    for contexto in contexto_faltante:
+        mejoras.append({
+            'seccion': 'Contexto',
+            'mejora': f'Añadir validación de {contexto["tipo"]} a la plantilla',
+            'justificacion': f'La falta de {contexto["descripcion"]} causó un retraso en la implementación'
         })
 
-    # Analyze validation gaps
-    validation_gaps = analyze_validation_gaps()
-    for gap in validation_gaps:
-        improvements.append({
-            'section': 'Validation',
-            'improvement': f'Add {gap["type"]} validation step',
-            'rationale': f'Would have caught {gap["issue"]} earlier'
+    # Analizar lagunas de validación
+    lagunas_validacion = analizar_lagunas_validacion()
+    for laguna in lagunas_validacion:
+        mejoras.append({
+            'seccion': 'Validación',
+            'mejora': f'Añadir paso de validación de {laguna["tipo"]}',
+            'justificacion': f'Habría detectado {laguna["problema"]} antes'
         })
 
-    # Analyze documentation gaps
-    doc_gaps = analyze_documentation_gaps()
-    for gap in doc_gaps:
-        improvements.append({
-            'section': 'Documentation',
-            'improvement': f'Include {gap["type"]} documentation',
-            'rationale': f'Had to research {gap["topic"]} during implementation'
+    # Analizar lagunas de documentación
+    lagunas_doc = analizar_lagunas_documentacion()
+    for laguna in lagunas_doc:
+        mejoras.append({
+            'seccion': 'Documentación',
+            'mejora': f'Incluir documentación de {laguna["tipo"]}',
+            'justificacion': f'Tuve que investigar sobre {laguna["tema"]} durante la implementación'
         })
 
-    return improvements
+    return mejoras
 
-# Auto-generate improved template
-def generate_improved_template():
-    """Generate an improved template based on lessons learned."""
+# Generar automáticamente una plantilla mejorada
+def generar_plantilla_mejorada():
+    """Genera una plantilla mejorada basada en las lecciones aprendidas."""
 
-    base_template = load_template('PRPs/templates/prp_base.md')
-    improvements = suggest_template_improvements()
+    plantilla_base = cargar_plantilla('PRPs/templates/prp_base.md')
+    mejoras = sugerir_mejoras_plantilla()
 
-    # Apply improvements to template
-    improved_template = apply_improvements(base_template, improvements)
+    # Aplicar mejoras a la plantilla
+    plantilla_mejorada = aplicar_mejoras(plantilla_base, mejoras)
 
-    # Save as versioned template
+    # Guardar como plantilla versionada
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    save_template(f'PRPs/templates/prp_base_v{timestamp}.md', improved_template)
+    guardar_plantilla(f'PRPs/templates/prp_base_v{timestamp}.md', plantilla_mejorada)
 
-    return improved_template
+    return plantilla_mejorada
 ```
 
-## Auto-Update Mechanism
+## Mecanismo de Auto-actualización
 
 ```bash
-# Auto-update PRP templates based on analysis
-echo "Checking for template updates..."
+# Auto-actualizar las plantillas de PRP basadas en el análisis
+echo "Comprobando actualizaciones de la plantilla..."
 
-ANALYSIS_COUNT=$(find PRPs/analysis_reports/ -name "*.yaml" | wc -l)
-TEMPLATE_VERSION=$(ls PRPs/templates/prp_base_v*.md 2>/dev/null | tail -n1 | grep -o 'v[0-9_]*' || echo "v1")
+CONTADOR_ANALISIS=$(find PRPs/analysis_reports/ -name "*.yaml" | wc -l)
+VERSION_PLANTILLA=$(ls PRPs/templates/prp_base_v*.md 2>/dev/null | tail -n1 | grep -o 'v[0-9_]*' || echo "v1")
 
-# If we have 5+ analyses since last template update, generate new version
-if [ "$ANALYSIS_COUNT" -ge 5 ]; then
-    echo "Generating improved template based on recent analyses..."
+# Si tenemos 5+ análisis desde la última actualización de la plantilla, generar nueva versión
+if [ "$CONTADOR_ANALISIS" -ge 5 ]; then
+    echo "Generando plantilla mejorada basada en análisis recientes..."
     python3 -c "
 from analysis_utils import generate_improved_template
 improved_template = generate_improved_template()
-print('Generated improved template with latest learnings')
+print('Plantilla mejorada generada con los últimos aprendizajes')
 "
 fi
 ```
 
-## Integration with Execute Command
+## Integración con el Comando de Ejecución
 
-Update the execute-prp command to automatically run analysis after completion:
+Actualizar el comando `execute-prp` para ejecutar automáticamente el análisis después de la finalización:
 
 ```bash
-# Add to end of execute-prp.md
-echo "Running post-execution analysis..."
+# Añadir al final de execute-prp.md
+echo "Ejecutando análisis post-ejecución..."
 analyze-prp-results "$PRP_FILE"
 
-echo "✅ Implementation complete with analysis"
-echo "📊 Check PRPs/analysis_reports/ for detailed analysis"
-echo "💡 Template improvements will be applied to future PRPs"
+echo "✅ Implementación completa con análisis"
+echo "📊 Revisa PRPs/analysis_reports/ para un análisis detallado"
+echo "💡 Las mejoras de la plantilla se aplicarán a futuros PRPs"
 ```
 
-## Continuous Improvement Loop
+## Bucle de Mejora Continua
 
-This analysis system creates a continuous improvement loop:
+Este sistema de análisis crea un bucle de mejora continua:
 
-1. **Execute PRP** → Implement feature
-2. **Analyze Results** → Extract patterns and metrics
-3. **Update Knowledge Base** → Store learnings
-4. **Improve Templates** → Apply learnings to future PRPs
-5. **Better Context** → Higher success rates
+1.  **Ejecutar PRP** → Implementar funcionalidad
+2.  **Analizar Resultados** → Extraer patrones y métricas
+3.  **Actualizar Base de Conocimiento** → Almacenar aprendizajes
+4.  **Mejorar Plantillas** → Aplicar aprendizajes a futuros PRPs
+5.  **Mejor Contexto** → Tasas de éxito más altas
 
-The system learns from each implementation, making future PRPs more effective and reducing failure rates over time.
+El sistema aprende de cada implementación, haciendo que los futuros PRPs sean más efectivos y reduciendo las tasas de fallo con el tiempo.

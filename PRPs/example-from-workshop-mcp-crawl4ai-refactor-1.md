@@ -1,99 +1,99 @@
-name: "MCP Crawl4AI RAG Refactor - Phase 1: Foundation First"
+name: "Refactorización de MCP Crawl4AI RAG - Fase 1: Primero la Base"
 description: |
 
-## Purpose
-Transform the monolithic mcp-crawl4ai-rag codebase into a maintainable vertical slice architecture with proper separation of concerns, type safety, and comprehensive testing.
+## Propósito
+Transformar la base de código monolítica de mcp-crawl4ai-rag en una arquitectura de "vertical slice" mantenible con una separación de conceptos adecuada, seguridad de tipos y pruebas exhaustivas.
 
-## Core Principles
-1. **Foundation First**: Build core structure before moving functionality
-2. **Type Safety**: Use Pydantic models for all data validation
-3. **Test as You Go**: Add pytest tests for each component
-4. **Progressive Validation**: Verify each phase before proceeding
-5. **Zero Regression**: All existing functionality must continue working
+## Principios Fundamentales
+1. **Primero la Base**: Construir la estructura central antes de mover la funcionalidad.
+2. **Seguridad de Tipos**: Usar modelos de Pydantic para toda la validación de datos.
+3. **Probar sobre la Marcha**: Añadir pruebas de pytest para cada componente.
+4. **Validación Progresiva**: Verificar cada fase antes de continuar.
+5. **Cero Regresiones**: Toda la funcionalidad existente debe seguir funcionando.
 
 ---
 
-## Goal
-Refactor the current monolithic codebase (src/crawl4ai_mcp.py: 1054 lines, src/utils.py: 738 lines) into a well-structured vertical slice architecture with proper separation of concerns, comprehensive type safety, and unit tests for all components.
+## Objetivo
+Refactorizar la base de código monolítica actual (`src/crawl4ai_mcp.py`: 1054 líneas, `src/utils.py`: 738 líneas) a una arquitectura de "vertical slice" bien estructurada con una separación de conceptos adecuada, seguridad de tipos completa y pruebas unitarias para todos los componentes.
 
-## Why
-- Current files exceed 500-line limit (CLAUDE.md requirement)
-- Business logic mixed with MCP tool definitions
-- No type safety or request/response validation
-- Missing unit tests make changes risky
-- Difficult to maintain and extend current structure
+## Por qué
+- Los archivos actuales exceden el límite de 500 líneas (requisito de `CLAUDE.md`).
+- La lógica de negocio está mezclada con las definiciones de herramientas de MCP.
+- No hay seguridad de tipos ni validación de solicitud/respuesta.
+- La falta de pruebas unitarias hace que los cambios sean arriesgados.
+- Es difícil de mantener y extender la estructura actual.
 
-## What
-Transform the codebase into a vertical slice architecture where:
-- Each tool is a thin wrapper calling service methods
-- Services contain all business logic
-- Models provide type safety via Pydantic
-- Tests live next to the code they test
-- Configuration is centralized and validated
+## Qué
+Transformar la base de código en una arquitectura de "vertical slice" donde:
+- Cada herramienta es un envoltorio delgado que llama a métodos de servicio.
+- Los servicios contienen toda la lógica de negocio.
+- Los modelos proporcionan seguridad de tipos a través de Pydantic.
+- Las pruebas residen junto al código que prueban.
+- La configuración está centralizada y validada.
 
-### Success Criteria
-- [ ] All files under 500 lines
-- [ ] 100% type coverage with Pydantic models
-- [ ] Pytest tests for all new components
-- [ ] All existing functionality working
-- [ ] UV package management properly configured
-- [ ] Ruff linting passing
+### Criterios de Éxito
+- [ ] Todos los archivos por debajo de 500 líneas.
+- [ ] Cobertura de tipos del 100% con modelos de Pydantic.
+- [ ] Pruebas de Pytest para todos los componentes nuevos.
+- [ ] Toda la funcionalidad existente funcionando.
+- [ ] Gestión de paquetes con UV configurada correctamente.
+- [ ] Linting con Ruff pasando sin errores.
 
-## All Needed Context
+## Todo el Contexto Necesario
 
-### Documentation & References
+### Documentación y Referencias
 ```yaml
-# MUST READ - Include these in your context window
+# LECTURA OBLIGATORIA - Incluye esto en tu ventana de contexto
 - file: PRPs/ai_docs/uv_practices.md
-  why: Complete UV package management guide - read sections on pyproject.toml setup and pytest integration
+  why: Guía completa de gestión de paquetes con UV - lee las secciones sobre la configuración de pyproject.toml y la integración con pytest.
   
 - file: PRPs/ai_docs/uv_tools.md
-  why: UV tools documentation for running tests and linting
+  why: Documentación de las herramientas de UV para ejecutar pruebas y linting.
   
 - file: CLAUDE.md
-  why: Project coding standards - especially file size limits and testing requirements
+  why: Estándares de codificación del proyecto - especialmente los límites de tamaño de archivo y los requisitos de prueba.
   
 - url: https://docs.pydantic.dev/latest/concepts/models/
-  why: Pydantic v2 model creation and validation patterns
+  why: Patrones de creación y validación de modelos de Pydantic v2.
   
 - url: https://docs.pytest.org/en/stable/how-to/fixtures.html
-  why: Pytest fixture patterns for test setup
+  why: Patrones de fixtures de Pytest para la configuración de pruebas.
   
 - docfile: PRPs/ai_docs/refactor_plan.md
-  why: Complete refactor requirements and target structure
+  why: Requisitos completos de la refactorización y estructura objetivo.
 ```
 
-### Current Codebase tree
+### Árbol Actual de la Base de Código
 ```bash
 mcp-crawl4ai-rag/
 ├── src/
-│   ├── crawl4ai_mcp.py    # 1054 lines - MCP server + all tool logic
-│   └── utils.py           # 738 lines - database, embeddings, search
-├── pyproject.toml         # Missing pytest configuration
-├── crawled_pages.sql      # Database schema
+│   ├── crawl4ai_mcp.py    # 1054 líneas - Servidor MCP + toda la lógica de las herramientas
+│   └── utils.py           # 738 líneas - base de datos, embeddings, búsqueda
+├── pyproject.toml         # Falta la configuración de pytest
+├── crawled_pages.sql      # Esquema de la base de datos
 ├── Dockerfile
 ├── README.md
 └── QUICKSTART.md
 ```
 
-### Desired Codebase tree with files to be added and responsibility of file
+### Árbol Deseado de la Base de Código con archivos a añadir y responsabilidad del archivo
 ```bash
 mcp-crawl4ai-rag/
-├── main.py                    # Entry point (minimal - just runs src.mcp_server)
-├── pyproject.toml            # Updated with pytest config and src layout
+├── main.py                    # Punto de entrada (mínimo - solo ejecuta src.mcp_server)
+├── pyproject.toml            # Actualizado con configuración de pytest y layout de src
 ├── src/
 │   ├── __init__.py
-│   ├── config.py             # Pydantic settings & environment validation
-│   ├── models.py             # All Pydantic models for requests/responses
-│   ├── mcp_server.py         # FastMCP server setup & lifespan management
-│   ├── conftest.py           # Shared pytest fixtures
+│   ├── config.py             # Configuración de Pydantic y validación de entorno
+│   ├── models.py             # Todos los modelos de Pydantic para solicitudes/respuestas
+│   ├── mcp_server.py         # Configuración del servidor FastMCP y gestión del ciclo de vida
+│   ├── conftest.py           # Fixtures de pytest compartidas
 │   │
-│   ├── services/             # Business logic layer
+│   ├── services/             # Capa de lógica de negocio
 │   │   ├── __init__.py
-│   │   ├── crawling.py       # All crawling logic (from crawl4ai_mcp.py)
-│   │   ├── search.py         # Search/RAG logic (from utils.py)
-│   │   ├── database.py       # Database operations (from utils.py)
-│   │   ├── embeddings.py     # Embedding operations (from utils.py)
+│   │   ├── crawling.py       # Toda la lógica de crawling (de crawl4ai_mcp.py)
+│   │   ├── search.py         # Lógica de búsqueda/RAG (de utils.py)
+│   │   ├── database.py       # Operaciones de base de datos (de utils.py)
+│   │   ├── embeddings.py     # Operaciones de embedding (de utils.py)
 │   │   └── tests/
 │   │       ├── __init__.py
 │   │       ├── test_crawling.py
@@ -101,7 +101,7 @@ mcp-crawl4ai-rag/
 │   │       ├── test_database.py
 │   │       └── test_embeddings.py
 │   │
-│   ├── tools/                # MCP tool definitions (thin wrappers)
+│   ├── tools/                # Definiciones de herramientas de MCP (envoltorios delgados)
 │   │   ├── __init__.py
 │   │   ├── crawl_single_page.py
 │   │   ├── smart_crawl_url.py
@@ -116,34 +116,34 @@ mcp-crawl4ai-rag/
 │   │       ├── test_perform_rag_query.py
 │   │       └── test_search_code_examples.py
 │   │
-│   └── utils/                # Shared utilities
+│   └── utils/                # Utilidades compartidas
 │       ├── __init__.py
-│       ├── text_processing.py  # Text chunking & extraction
-│       ├── reranking.py        # Cross-encoder reranking
+│       ├── text_processing.py  # Fragmentación y extracción de texto
+│       ├── reranking.py        # Re-ranking con cross-encoder
 │       └── tests/
 │           ├── __init__.py
 │           ├── test_text_processing.py
 │           └── test_reranking.py
 ```
 
-### Known Gotchas of our codebase & Library Quirks
+### Problemas Conocidos (Gotchas) de nuestra base de código y Peculiaridades de las Bibliotecas
 ```python
-# CRITICAL: FastMCP requires async functions for all tools
-# CRITICAL: Pydantic v2 is used - use model_dump() not dict()
-# CRITICAL: UV requires src/ layout for editable installs
-# CRITICAL: Supabase client is synchronous but used in async context
-# CRITICAL: Environment variables must be loaded with override=True
-# CRITICAL: Cross-encoder model loading can fail - needs try/except
-# CRITICAL: Crawl4AI crawler needs proper lifecycle management
+# CRÍTICO: FastMCP requiere funciones asíncronas para todas las herramientas.
+# CRÍTICO: Se usa Pydantic v2 - usar model_dump() no dict().
+# CRÍTICO: UV requiere una estructura de src/ para instalaciones editables.
+# CRÍTICO: El cliente de Supabase es síncrono pero se usa en un contexto asíncrono.
+# CRÍTICO: Las variables de entorno deben cargarse con override=True.
+# CRÍTICO: La carga del modelo de cross-encoder puede fallar - necesita try/except.
+# CRÍTICO: El crawler de Crawl4AI necesita una gestión adecuada de su ciclo de vida.
 ```
 
-## Implementation Blueprint
+## Plan de Implementación
 
-### Data models and structure
+### Modelos de datos y estructura
 
-Create the core data models for type safety and consistency:
+Crear los modelos de datos principales para seguridad de tipos y consistencia:
 ```python
-# src/models.py examples:
+# Ejemplos de src/models.py:
 from pydantic import BaseModel, HttpUrl, Field
 from typing import Optional, List, Dict, Any
 from enum import Enum
@@ -182,119 +182,119 @@ class RAGResponse(BaseModel):
     error: Optional[str] = None
 ```
 
-### List of tasks to be completed to fulfill the PRP in the order they should be completed
+### Lista de tareas a completar para cumplir con el PRP en el orden en que deben completarse
 
 ```yaml
-Task 1 - Setup UV and pytest:
-DONT pyproject.toml:
-  - ADD pytest and pytest-asyncio by running uv add pytest pytest-asyncio
-  - ADD [tool.pytest.ini_options] section
-  - ENSURE src/ layout configuration
-  - ADD development dependencies group
+Tarea 1 - Configurar UV y pytest:
+NO MODIFICAR pyproject.toml:
+  - AÑADIR pytest y pytest-asyncio ejecutando `uv add pytest pytest-asyncio`
+  - AÑADIR la sección [tool.pytest.ini_options]
+  - ASEGURAR la configuración del layout de src/
+  - AÑADIR el grupo de dependencias de desarrollo
 
-Task 2 - Create foundation structure:
-CREATE src/__init__.py:
-  - Empty file to make src a package
-CREATE main.py:
-  - MINIMAL entry point that imports and runs src.mcp_server
-CREATE src/conftest.py:
-  - Shared pytest fixtures for all tests
+Tarea 2 - Crear la estructura base:
+CREAR src/__init__.py:
+  - Archivo vacío para convertir src en un paquete
+CREAR main.py:
+  - Punto de entrada MÍNIMO que importa y ejecuta src.mcp_server
+CREAR src/conftest.py:
+  - Fixtures de pytest compartidas para todas las pruebas
 
-Task 3 - Create config module:
-CREATE src/config.py:
-  - MOVE all os.getenv() calls from existing files
-  - USE pydantic_settings.BaseSettings
-  - VALIDATE all configuration values
-  - PATTERN from: PRPs/ai_docs/refactor_plan.md lines 249-274
+Tarea 3 - Crear el módulo de configuración:
+CREAR src/config.py:
+  - MOVER todas las llamadas a os.getenv() de los archivos existentes
+  - USAR pydantic_settings.BaseSettings
+  - VALIDAR todos los valores de configuración
+  - PATRÓN de: PRPs/ai_docs/refactor_plan.md líneas 249-274
 
-Task 4 - Create models module:
-CREATE src/models.py:
-  - CONVERT Crawl4AIContext dataclass to Pydantic model
-  - ADD all request/response models shown above
-  - ENSURE all fields have proper validation
+Tarea 4 - Crear el módulo de modelos:
+CREAR src/models.py:
+  - CONVERTIR la clase de datos Crawl4AIContext a un modelo de Pydantic
+  - AÑADIR todos los modelos de solicitud/respuesta mostrados arriba
+  - ASEGURAR que todos los campos tengan la validación adecuada
 
-Task 5 - Create MCP server module:
-CREATE src/mcp_server.py:
-  - MOVE FastMCP initialization from crawl4ai_mcp.py
-  - MOVE crawl4ai_lifespan function
-  - IMPORT tools from tools package (will error until Phase 3)
-  - NO business logic - just server setup
+Tarea 5 - Crear el módulo del servidor MCP:
+CREAR src/mcp_server.py:
+  - MOVER la inicialización de FastMCP desde crawl4ai_mcp.py
+  - MOVER la función crawl4ai_lifespan
+  - IMPORTAR herramientas del paquete de herramientas (dará error hasta la Fase 3)
+  - SIN lógica de negocio - solo configuración del servidor
 
-Task 6 - Create services structure:
-CREATE src/services/__init__.py:
-  - Empty file
-CREATE src/services/database.py:
-  - MOVE get_supabase_client from utils.py
-  - MOVE add_documents_to_supabase from utils.py
-  - MOVE update_source_info from utils.py
-  - MOVE add_code_examples_to_supabase from utils.py
-CREATE src/services/tests/test_database.py:
-  - Unit tests for database operations
+Tarea 6 - Crear la estructura de servicios:
+CREAR src/services/__init__.py:
+  - Archivo vacío
+CREAR src/services/database.py:
+  - MOVER get_supabase_client de utils.py
+  - MOVER add_documents_to_supabase de utils.py
+  - MOVER update_source_info de utils.py
+  - MOVER add_code_examples_to_supabase de utils.py
+CREAR src/services/tests/test_database.py:
+  - Pruebas unitarias para las operaciones de la base de datos
 
-Task 7 - Create embeddings service:
-CREATE src/services/embeddings.py:
-  - MOVE create_embedding from utils.py
-  - MOVE create_embeddings_batch from utils.py
-  - MOVE generate_contextual_embedding from utils.py
-  - MOVE process_chunk_with_context from utils.py
-CREATE src/services/tests/test_embeddings.py:
-  - Unit tests for embedding operations
+Tarea 7 - Crear el servicio de embeddings:
+CREAR src/services/embeddings.py:
+  - MOVER create_embedding de utils.py
+  - MOVER create_embeddings_batch de utils.py
+  - MOVER generate_contextual_embedding de utils.py
+  - MOVER process_chunk_with_context de utils.py
+CREAR src/services/tests/test_embeddings.py:
+  - Pruebas unitarias para las operaciones de embedding
 
-Task 8 - Create search service:
-CREATE src/services/search.py:
-  - MOVE search_documents from utils.py
-  - MOVE search_code_examples from utils.py
-  - INTEGRATE with reranking if enabled
-CREATE src/services/tests/test_search.py:
-  - Unit tests for search operations
+Tarea 8 - Crear el servicio de búsqueda:
+CREAR src/services/search.py:
+  - MOVER search_documents de utils.py
+  - MOVER search_code_examples de utils.py
+  - INTEGRAR con re-ranking si está habilitado
+CREAR src/services/tests/test_search.py:
+  - Pruebas unitarias para las operaciones de búsqueda
 
-Task 9 - Create crawling service:
-CREATE src/services/crawling.py:
-  - MOVE all crawling logic from crawl4ai_mcp.py
-  - MOVE is_sitemap, is_txt, parse_sitemap functions
-  - MOVE crawl_batch, crawl_recursive_internal_links
-  - MOVE extract_code_blocks, generate_code_example_summary from utils.py
-CREATE src/services/tests/test_crawling.py:
-  - Unit tests for crawling operations
+Tarea 9 - Crear el servicio de crawling:
+CREAR src/services/crawling.py:
+  - MOVER toda la lógica de crawling desde crawl4ai_mcp.py
+  - MOVER las funciones is_sitemap, is_txt, parse_sitemap
+  - MOVER crawl_batch, crawl_recursive_internal_links
+  - MOVER extract_code_blocks, generate_code_example_summary de utils.py
+CREAR src/services/tests/test_crawling.py:
+  - Pruebas unitarias para las operaciones de crawling
 
-Task 10 - Create utilities:
-CREATE src/utils/__init__.py:
-  - Empty file
-CREATE src/utils/text_processing.py:
-  - MOVE smart_chunk_markdown from crawl4ai_mcp.py
-  - MOVE extract_section_info from crawl4ai_mcp.py
-CREATE src/utils/reranking.py:
-  - MOVE rerank_results from crawl4ai_mcp.py
-CREATE src/utils/tests/:
-  - Unit tests for utilities
+Tarea 10 - Crear utilidades:
+CREAR src/utils/__init__.py:
+  - Archivo vacío
+CREAR src/utils/text_processing.py:
+  - MOVER smart_chunk_markdown de crawl4ai_mcp.py
+  - MOVER extract_section_info de crawl4ai_mcp.py
+CREAR src/utils/reranking.py:
+  - MOVER rerank_results de crawl4ai_mcp.py
+CREAR src/utils/tests/:
+  - Pruebas unitarias para las utilidades
 
-Task 11 - Create tools (Phase 3):
-CREATE src/tools/ structure:
-  - One file per tool
-  - Each tool is a thin wrapper calling services
-  - Include tests for each tool
+Tarea 11 - Crear herramientas (Fase 3):
+CREAR la estructura de src/tools/:
+  - Un archivo por herramienta
+  - Cada herramienta es un envoltorio delgado que llama a los servicios
+  - Incluir pruebas para cada herramienta
 
-Task 12 - Final cleanup:
-UPDATE imports throughout codebase
-DELETE src/crawl4ai_mcp.py
-DELETE src/utils.py
-RUN full test suite
+Tarea 12 - Limpieza final:
+ACTUALIZAR las importaciones en toda la base de código
+ELIMINAR src/crawl4ai_mcp.py
+ELIMINAR src/utils.py
+EJECUTAR la suite de pruebas completa
 ```
 
-### Per task pseudocode as needed
+### Pseudocódigo por tarea según sea necesario
 
 ```python
-# Task 1 - uv add pytest pytest-asyncio
+# Tarea 1 - uv add pytest pytest-asyncio
 
 uv add pytest pytest-asyncio
 
-# Task 2 - uv add ruff mypy ipython
+# Tarea 2 - uv add ruff mypy ipython
 
 uv add ruff mypy ipython
 
-# Task 2.5 - morify pyproject.toml
+# Tarea 2.5 - modificar pyproject.toml
 
-morify pyproject.toml
+modificar pyproject.toml
 
 [tool.pytest.ini_options]
 testpaths = ["src"]
@@ -302,25 +302,25 @@ pythonpath = ["src"]
 asyncio_mode = "auto"
 addopts = "-v --tb=short"
 
-# Task 3 - config.py structure
+# Tarea 3 - estructura de config.py
 from pydantic_settings import BaseSettings
 from typing import Optional
 from pathlib import Path
 
 class Settings(BaseSettings):
-    # MCP Server
+    # Servidor MCP
     host: str = "0.0.0.0"
     port: int = 8051
     
-    # OpenAI - REQUIRED
+    # OpenAI - REQUERIDO
     openai_api_key: str
     model_choice: str = "gpt-4o-mini"
     
-    # Supabase - REQUIRED
+    # Supabase - REQUERIDO
     supabase_url: str
     supabase_service_key: str
     
-    # Feature flags
+    # Banderas de funcionalidad
     use_contextual_embeddings: bool = False
     use_hybrid_search: bool = False
     use_reranking: bool = False
@@ -329,7 +329,7 @@ class Settings(BaseSettings):
         env_file = Path(__file__).parent.parent / ".env"
         extra = "ignore"
 
-# Task 6 - Service pattern example
+# Tarea 6 - ejemplo de patrón de servicio
 # src/services/database.py
 from typing import List, Dict, Any
 from supabase import Client
@@ -342,12 +342,12 @@ class DatabaseService:
         self.settings = settings
     
     async def add_documents(self, documents: List[Document]) -> Dict[str, Any]:
-        # PATTERN: Validate input with Pydantic first
-        # PATTERN: Use existing retry patterns
-        # PATTERN: Return structured response
+        # PATRÓN: Validar la entrada con Pydantic primero
+        # PATRÓN: Usar patrones de reintento existentes
+        # PATRÓN: Devolver una respuesta estructurada
         pass
 
-# Task 11 - Tool wrapper pattern
+# Tarea 11 - patrón de envoltorio de herramienta
 # src/tools/crawl_single_page.py
 from src.mcp_server import mcp
 from src.services.crawling import CrawlingService
@@ -356,45 +356,45 @@ from mcp.server.fastmcp import Context
 
 @mcp.tool()
 async def crawl_single_page(ctx: Context, url: str) -> str:
-    """Crawl a single web page and store its content."""
-    # PATTERN: Tool is just a thin wrapper
+    """Rastrea una sola página web y almacena su contenido."""
+    # PATRÓN: La herramienta es solo un envoltorio delgado
     service = CrawlingService(ctx.crawler, ctx.supabase_client)
     request = CrawlRequest(url=url)
     result: CrawlResult = await service.crawl_single_page(request)
     return result.model_dump_json(indent=2)
 ```
 
-### Integration Points
+### Puntos de Integración
 ```yaml
-DATABASE:
-  - No schema changes needed
-  - Existing crawled_pages.sql remains valid
+BASE DE DATOS:
+  - No se necesitan cambios en el esquema
+  - El `crawled_pages.sql` existente sigue siendo válido
   
-CONFIG:
-  - move to: src/config.py
-  - pattern: Use BaseSettings with validation
-  - load .env from project root
+CONFIGURACIÓN:
+  - mover a: src/config.py
+  - patrón: Usar BaseSettings con validación
+  - cargar .env desde la raíz del proyecto
   
-IMPORTS:
-  - Update all imports to use new structure
-  - main.py imports from src.mcp_server
-  - services import from src.models and src.config
+IMPORTACIONES:
+  - Actualizar todas las importaciones para usar la nueva estructura
+  - main.py importa desde src.mcp_server
+  - los servicios importan desde src.models y src.config
 ```
 
-## Validation Loop
+## Bucle de Validación
 
-### Level 1: Syntax & Style
+### Nivel 1: Sintaxis y Estilo
 ```bash
-# After each file creation, run:
-uv run ruff check src/new_file.py --fix
-uv run mypy src/new_file.py
+# Después de la creación de cada archivo, ejecutar:
+uv run ruff check src/nuevo_archivo.py --fix
+uv run mypy src/nuevo_archivo.py
 
-# Expected: No errors. If errors, READ and fix.
+# Esperado: Sin errores. Si hay errores, LEER y corregir.
 ```
 
-### Level 2: Unit Tests for each component
+### Nivel 2: Pruebas Unitarias para cada componente
 ```python
-# Example: src/services/tests/test_database.py
+# Ejemplo: src/services/tests/test_database.py
 import pytest
 from unittest.mock import Mock, AsyncMock
 from src.services.database import DatabaseService
@@ -402,7 +402,7 @@ from src.models import Document
 
 @pytest.fixture
 def mock_supabase_client():
-    """Mock Supabase client for testing."""
+    """Cliente de Supabase simulado para pruebas."""
     client = Mock()
     client.table = Mock(return_value=Mock(
         insert=Mock(return_value=Mock(execute=AsyncMock()))
@@ -411,53 +411,53 @@ def mock_supabase_client():
 
 @pytest.fixture
 def database_service(mock_supabase_client, test_settings):
-    """Create DatabaseService with mocked dependencies."""
+    """Crea DatabaseService con dependencias simuladas."""
     return DatabaseService(mock_supabase_client, test_settings)
 
 async def test_add_documents_success(database_service):
-    """Test successful document addition."""
+    """Prueba la adición exitosa de documentos."""
     docs = [Document(content="test", url="http://example.com")]
     result = await database_service.add_documents(docs)
     assert result["success"] is True
 
 async def test_add_documents_empty_list(database_service):
-    """Test handling of empty document list."""
+    """Prueba el manejo de una lista de documentos vacía."""
     result = await database_service.add_documents([])
     assert result["success"] is True
     assert result["count"] == 0
 ```
 
 ```bash
-# Run tests after creating each service:
+# Ejecutar pruebas después de crear cada servicio:
 uv run pytest src/services/tests/test_database.py -v
-# If failing: Read error, fix code, re-run
+# Si falla: Leer el error, corregir el código, volver a ejecutar
 ```
 
-### Level 3: Integration Test
+### Nivel 3: Prueba de Integración
 ```bash
-# After Phase 5 completion:
-# Start the refactored service
+# Después de completar la Fase 5:
+# Iniciar el servicio refactorizado
 uv run python main.py
 ```
 
-Ensure it runs
+Asegurarse de que se ejecute.
 
-## Final Validation Checklist
-- [ ] UV properly configured: `uv sync` works
-- [ ] All tests pass: `uv run pytest src/ -v`
-- [ ] No linting errors: `uv run ruff check src/`
-- [ ] No type errors: `uv run mypy src/`
-- [ ] All files under 500 lines
-- [ ] Each component has tests
-- [ ] Original functionality preserved
-- [ ] Can run with: `uv run python main.py`
+## Lista de Verificación de Validación Final
+- [ ] UV configurado correctamente: `uv sync` funciona.
+- [ ] Todas las pruebas pasan: `uv run pytest src/ -v`.
+- [ ] Sin errores de linting: `uv run ruff check src/`.
+- [ ] Sin errores de tipo: `uv run mypy src/`.
+- [ ] Todos los archivos por debajo de 500 líneas.
+- [ ] Cada componente tiene pruebas.
+- [ ] Funcionalidad original preservada.
+- [ ] Se puede ejecutar con: `uv run python main.py`.
 
 ---
 
-## Anti-Patterns to Avoid
-- ❌ Don't move code without understanding dependencies
-- ❌ Don't create circular imports between modules
-- ❌ Don't put business logic in tool files
-- ❌ Don't skip writing tests "to save time"
-- ❌ Don't use synchronous Supabase calls in async functions without proper handling
-- ❌ Don't forget to validate all inputs with Pydantic models
+## Anti-Patrones a Evitar
+- ❌ No mover código sin entender las dependencias.
+- ❌ No crear importaciones circulares entre módulos.
+- ❌ No poner lógica de negocio en los archivos de herramientas.
+- ❌ No saltarse la escritura de pruebas "para ahorrar tiempo".
+- ❌ No usar llamadas síncronas de Supabase en funciones asíncronas sin el manejo adecuado.
+- ❌ No olvidar validar todas las entradas con modelos de Pydantic.

@@ -1,29 +1,30 @@
-Quick refactoring check for Python code focusing on:
-- Vertical slice boundaries
-- Function complexity
-- Type safety with Pydantic v2
-- Single responsibility
 
-Scan for:
-1. Functions >20 lines that need decomposition
-2. long files that need decomposition
-3. Missing Pydantic models for I/O
-4. Cross-feature imports violating vertical slices
-5. Classes with multiple responsibilities
-6. Missing type hints
+Revisión rápida de refactorización para código Python centrándose en:
+- Límites de "vertical slice" (porciones verticales de la aplicación)
+- Complejidad de funciones
+- Seguridad de tipos con Pydantic v2
+- Responsabilidad única
 
-Desired architecture:
-- Vertical slice boundaries
-- Single responsibility
-- Type safety with Pydantic v2 
+Escanear en busca de:
+1. Funciones de más de 20 líneas que necesiten descomposición.
+2. Archivos largos que necesiten descomposición.
+3. Modelos Pydantic faltantes para Entrada/Salida (I/O).
+4. Importaciones entre funcionalidades que violen los límites de "vertical slice".
+5. Clases con múltiples responsabilidades.
+6. Anotaciones de tipo (type hints) faltantes.
 
-For each issue found, provide:
-- Location
-- Why it's a problem
-- Specific fix with code example
-- Specific place where the fix should be implemented
-- Priority (high/medium/low)
+Arquitectura deseada:
+- Límites de "vertical slice".
+- Responsabilidad única.
+- Seguridad de tipos con Pydantic v2.
 
-Focus on actionable items that can be fixed in <1 hour each.
+Para cada problema encontrado, proporciona:
+- Ubicación.
+- Por qué es un problema.
+- Solución específica con ejemplo de código.
+- Lugar específico donde la solución debe ser implementada.
+- Prioridad (alta/media/baja).
 
-save a refactor_plan.md in the PRPs/ai_docs folder, ensure you dont overwrite any existing files
+Céntrate en elementos accionables que puedan ser solucionados en menos de 1 hora cada uno.
+
+Guarda un `plan_de_refactorizacion.md` en la carpeta `PRPs/ai_docs`, asegúrate de no sobrescribir ningún archivo existente.

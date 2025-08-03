@@ -1,127 +1,128 @@
-List and review any files in the staging area, both staged and unstaged.
-Ensure you look at both new files and modified files.
 
-Check the diff of each file to see what has changed.
+Enumera y revisa cualquier archivo en el área de "staging", tanto los que están preparados ("staged") como los que no ("unstaged").
+Asegúrate de mirar tanto los archivos nuevos como los modificados.
 
-Previous review report: $ARGUMENTS
+Revisa el `diff` de cada archivo para ver qué ha cambiado.
 
-May or may not be added, ignore the previous review if not specified.
+Informe de revisión anterior: $ARGUMENTS
 
-## Review Focus Areas
+Puede que se añada o no, ignora la revisión anterior si no se especifica.
 
-1. **TypeScript Code Quality**
-   - Strict TypeScript usage with explicit types
-   - No `any` types - use `unknown` if type is truly unknown
-   - Proper type imports with `import type { }` syntax
-   - Component props interfaces defined
-   - Astro's built-in types used (HTMLAttributes, ComponentProps)
-   - Following TypeScript strict mode compliance
+## Áreas de Enfoque de la Revisión
 
-2. **Astro-Specific Patterns**
-   - Proper hydration directives usage (client:load, client:visible, client:idle)
-   - Static-first approach with selective hydration
-   - Astro components for static content, framework components only for interactivity
-   - Proper use of Astro.props and component interfaces
-   - Content collections with Zod schemas
-   - Server islands implementation where appropriate
+1.  **Calidad del Código TypeScript**
+    -   Uso de TypeScript estricto con tipos explícitos.
+    -   No usar tipos `any` - usar `unknown` si el tipo es verdaderamente desconocido.
+    -   Importaciones de tipos adecuadas con la sintaxis `import type { }`.
+    -   Interfaces de props de componentes definidas.
+    -   Uso de los tipos incorporados de Astro (HTMLAttributes, ComponentProps).
+    -   Cumplimiento del modo estricto (strict mode) de TypeScript.
 
-3. **Performance & Bundle Optimization**
-   - No unnecessary client-side JavaScript
-   - Appropriate hydration strategy choices
-   - Image optimization with Astro's Image component
-   - Bundle size considerations
-   - No over-hydration of static content
+2.  **Patrones Específicos de Astro**
+    -   Uso adecuado de las directivas de hidratación (`client:load`, `client:visible`, `client:idle`).
+    -   Enfoque "estático primero" (static-first) con hidratación selectiva.
+    -   Componentes de Astro para contenido estático, componentes de framework solo para interactividad.
+    -   Uso adecuado de `Astro.props` e interfaces de componentes.
+    -   Colecciones de contenido (content collections) con esquemas de Zod.
+    -   Implementación de islas de servidor (server islands) donde sea apropiado.
 
-4. **Security & Validation**
-   - Input validation with Zod schemas
-   - Environment variables properly typed with astro:env
-   - Content Security Policy implementation
-   - No hardcoded secrets in client-side code
-   - API route validation with proper error handling
+3.  **Rendimiento y Optimización del Paquete (Bundle)**
+    -   Sin JavaScript innecesario en el lado del cliente.
+    -   Elección adecuada de la estrategia de hidratación.
+    -   Optimización de imágenes con el componente `Image` de Astro.
+    -   Consideraciones sobre el tamaño del paquete.
+    -   Sin sobre-hidratación de contenido estático.
 
-5. **Content Management**
-   - Content collections properly configured
-   - Zod schemas for all content types
-   - Type-safe content queries
-   - Proper content rendering and data handling
+4.  **Seguridad y Validación**
+    -   Validación de entradas con esquemas de Zod.
+    -   Variables de entorno debidamente tipadas con `astro:env`.
+    -   Implementación de la Política de Seguridad de Contenido (CSP).
+    -   No tener secretos (secrets) hardcodeados en el código del lado del cliente.
+    -   Validación de rutas de API con manejo de errores adecuado.
 
-6. **Package Management**
-   - Using pnpm (not npm or yarn)
-   - Proper dependency management
-   - No unused dependencies
-   - Correct dev vs runtime dependencies
+5.  **Gestión de Contenido**
+    -   Colecciones de contenido configuradas correctamente.
+    -   Esquemas de Zod para todos los tipos de contenido.
+    -   Consultas de contenido con seguridad de tipos (type-safe).
+    -   Renderizado y manejo de datos de contenido adecuados.
 
-7. **Code Structure & Architecture**
-   - Components under 200 lines (500 line hard limit)
-   - Functions under 50 lines with single responsibility
-   - Proper separation of concerns
-   - Feature-based organization
-   - Islands architecture principles followed
+6.  **Gestión de Paquetes**
+    -   Uso de `pnpm` (no `npm` o `yarn`).
+    -   Gestión adecuada de dependencias.
+    -   Sin dependencias no utilizadas.
+    -   Dependencias de desarrollo vs. de ejecución correctas.
 
-8. **Testing & Quality Assurance**
-   - Vitest configuration and tests
-   - 80%+ test coverage maintained
-   - Component tests using Astro Container API
-   - API route integration tests
-   - Proper mocking of external dependencies
+7.  **Estructura del Código y Arquitectura**
+    -   Componentes de menos de 200 líneas (límite estricto de 500 líneas).
+    -   Funciones de menos de 50 líneas con una única responsabilidad.
+    -   Separación adecuada de conceptos (separation of concerns).
+    -   Organización basada en funcionalidades.
+    -   Principios de la arquitectura de islas (islands architecture) seguidos.
 
-9. **Build & Development**
-   - `astro check` passes with zero errors
-   - ESLint compliance with zero warnings
-   - Prettier formatting applied
-   - Production build succeeds
-   - No hydration mismatches
+8.  **Pruebas y Aseguramiento de la Calidad**
+    -   Configuración y pruebas con Vitest.
+    -   Cobertura de pruebas mantenida por encima del 80%.
+    -   Pruebas de componentes utilizando la API de Contenedor de Astro.
+    -   Pruebas de integración de rutas de API.
+    -   Simulación (mocking) adecuada de dependencias externas.
 
-10. **Documentation & Maintenance**
-    - Clear component interfaces
-    - Proper prop descriptions
-    - CLAUDE.md updates for new patterns/dependencies
-    - README updates if needed
+9.  **Compilación (Build) y Desarrollo**
+    -   `astro check` pasa sin errores.
+    -   Cumplimiento de ESLint sin advertencias.
+    -   Formato de Prettier aplicado.
+    -   La compilación de producción tiene éxito.
+    -   Sin desajustes de hidratación.
 
-## Review Output
+10. **Documentación y Mantenimiento**
+    -   Interfaces de componentes claras.
+    -   Descripciones adecuadas de las props.
+    -   Actualizaciones de `CLAUDE.md` para nuevos patrones/dependencias.
+    -   Actualizaciones del README si es necesario.
 
-Create a concise review report with:
+## Resultado de la Revisión
+
+Crea un informe de revisión conciso con:
 
 ```markdown
-# TypeScript/Astro Code Review #[number]
+# Revisión de Código TypeScript/Astro #[número]
 
-## Summary
-[2-3 sentence overview focusing on Astro-specific patterns and TypeScript quality]
+## Resumen
+[Vistazo general de 2-3 frases centrado en los patrones específicos de Astro y la calidad de TypeScript]
 
-## Issues Found
+## Problemas Encontrados
 
-### 🔴 Critical (Must Fix)
-- [Issue with file:line and suggested fix - focus on type safety, hydration, security]
+### 🔴 Crítico (Debe solucionarse)
+- [Problema con archivo:línea y solución sugerida - centrarse en la seguridad de tipos, hidratación, seguridad]
 
-### 🟡 Important (Should Fix)
-- [Issue with file:line and suggested fix - focus on performance, patterns]
+### 🟡 Importante (Debería solucionarse)
+- [Problema con archivo:línea y solución sugerida - centrarse en el rendimiento, patrones]
 
-### 🟢 Minor (Consider)
-- [Improvement suggestions for optimization, maintainability]
+### 🟢 Menor (A considerar)
+- [Sugerencias de mejora para optimización, mantenibilidad]
 
-## Good Practices
-- [What was done well - highlight proper Astro patterns, TypeScript usage]
+## Buenas Prácticas
+- [Qué se hizo bien - destacar patrones adecuados de Astro, uso de TypeScript]
 
-## Astro-Specific Findings
-- [Hydration strategy assessment]
-- [Bundle size impact]
-- [Content collection usage]
-- [Performance optimizations]
+## Hallazgos Específicos de Astro
+- [Evaluación de la estrategia de hidratación]
+- [Impacto en el tamaño del paquete]
+- [Uso de colecciones de contenido]
+- [Optimizaciones de rendimiento]
 
-## TypeScript Quality
-- [Type safety assessment]
-- [Strict mode compliance]
-- [Interface definitions]
+## Calidad de TypeScript
+- [Evaluación de la seguridad de tipos]
+- [Cumplimiento del modo estricto]
+- [Definiciones de interfaz]
 
-## Test Coverage
-Current: X% | Required: 80%
-Missing tests: [list with focus on component and API tests]
+## Cobertura de Pruebas
+Actual: X% | Requerido: 80%
+Pruebas faltantes: [lista con enfoque en pruebas de componentes y API]
 
-## Build Validation
-- [ ] `astro check` passes
-- [ ] `pnpm run lint` passes
-- [ ] `pnpm run build` succeeds
-- [ ] `pnpm test` passes with 80%+ coverage
+## Validación de la Compilación
+- [ ] `astro check` pasa
+- [ ] `pnpm run lint` pasa
+- [ ] `pnpm run build` tiene éxito
+- [ ] `pnpm test` pasa con 80%+ de cobertura
 ```
 
-Save report to PRPs/code_reviews/review[#].md (check existing files first)
+Guardar informe en PRPs/code_reviews/review[#].md (revisar archivos existentes primero)

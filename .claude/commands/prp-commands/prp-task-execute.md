@@ -1,23 +1,23 @@
-# Execute TASK PRP
+# Ejecutar PRP de TAREA
 
-Run through a task list from an existing TASK PRP.
+Recorre una lista de tareas de un PRP de TAREA existente.
 
-## PRP File: $ARGUMENTS
+## Archivo PRP: $ARGUMENTS
 
-## Execution Process
+## Proceso de Ejecución
 
-1. **Load Tasks**
-   - Read task list
-   - Understand context
+1.  **Cargar Tareas**
+    -   Leer la lista de tareas.
+    -   Entender el contexto.
 
-2. **Execute Each Task**
-   - Perform ACTION
-   - Run VALIDATE
-   - Fix IF_FAIL issues
+2.  **Ejecutar Cada Tarea**
+    -   Realizar la ACCIÓN.
+    -   Ejecutar la VALIDACIÓN.
+    -   Corregir los problemas de SI_FALLA.
 
-3. **Complete Checklist**
-   - Verify all tasks done
-   - Run final validation
-   - Check no regressions
+3.  **Completar Lista de Verificación**
+    -   Verificar que todas las tareas estén hechas.
+    -   Ejecutar la validación final.
+    -   Verificar que no haya regresiones.
 
-Work through tasks sequentially, validating each.
+Trabaja a través de las tareas secuencialmente, validando cada una.

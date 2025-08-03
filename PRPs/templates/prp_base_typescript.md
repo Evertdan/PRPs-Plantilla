@@ -1,346 +1,346 @@
-name: "TypeScript PRP Template v3 - Implementation-Focused with Precision Standards"
+name: "Plantilla de PRP para TypeScript v3 - Enfocada en la Implementación con Estándares de Precisión"
 description: |
 
 ---
 
-## Goal
+## Objetivo
 
-**Feature Goal**: [Specific, measurable end state of what needs to be built]
+**Objetivo de la Funcionalidad**: [Estado final específico y medible de lo que se necesita construir]
 
-**Deliverable**: [Concrete artifact - React component, API route, integration, etc.]
+**Entregable**: [Artefacto concreto - componente de React, ruta de API, integración, etc.]
 
-**Success Definition**: [How you'll know this is complete and working]
+**Definición de Éxito**: [Cómo sabrás que esto está completo y funcionando]
 
-## User Persona (if applicable)
+## Persona de Usuario (si aplica)
 
-**Target User**: [Specific user type - developer, end user, admin, etc.]
+**Usuario Objetivo**: [Tipo de usuario específico - desarrollador, usuario final, administrador, etc.]
 
-**Use Case**: [Primary scenario when this feature will be used]
+**Caso de Uso**: [Escenario principal en el que se utilizará esta funcionalidad]
 
-**User Journey**: [Step-by-step flow of how user interacts with this feature]
+**Viaje del Usuario**: [Flujo paso a paso de cómo el usuario interactúa con esta funcionalidad]
 
-**Pain Points Addressed**: [Specific user frustrations this feature solves]
+**Puntos de Dolor Abordados**: [Frustraciones específicas del usuario que esta funcionalidad resuelve]
 
-## Why
+## Por qué
 
-- [Business value and user impact]
-- [Integration with existing features]
-- [Problems this solves and for whom]
+- [Valor de negocio e impacto para el usuario]
+- [Integración con funcionalidades existentes]
+- [Problemas que esto resuelve y para quién]
 
-## What
+## Qué
 
-[User-visible behavior and technical requirements]
+[Comportamiento visible para el usuario y requisitos técnicos]
 
-### Success Criteria
+### Criterios de Éxito
 
-- [ ] [Specific measurable outcomes]
+- [ ] [Resultados medibles específicos]
 
-## All Needed Context
+## Todo el Contexto Necesario
 
-### Context Completeness Check
+### Verificación de Completitud del Contexto
 
-_Before writing this PRP, validate: "If someone knew nothing about this codebase, would they have everything needed to implement this successfully?"_
+_Antes de escribir este PRP, valida: "Si alguien no supiera nada sobre esta base de código, ¿tendría todo lo necesario para implementar esto con éxito?"_
 
-### Documentation & References
+### Documentación y Referencias
 
 ```yaml
-# MUST READ - Include these in your context window
-- url: [Complete URL with section anchor]
-  why: [Specific methods/concepts needed for implementation]
-  critical: [Key insights that prevent common implementation errors]
+# LECTURA OBLIGATORIA - Incluye esto en tu ventana de contexto
+- url: [URL completa con ancla de sección]
+  why: [Métodos/conceptos específicos necesarios para la implementación]
+  critical: [Perspectivas clave que previenen errores comunes de implementación]
 
-- file: [exact/path/to/pattern/file.tsx]
-  why: [Specific pattern to follow - component structure, hook usage, etc.]
-  pattern: [Brief description of what pattern to extract]
-  gotcha: [Known constraints or limitations to avoid]
+- file: [ruta/exacta/al/archivo/de/patron.tsx]
+  why: [Patrón específico a seguir - estructura de componente, uso de hooks, etc.]
+  pattern: [Breve descripción de qué patrón extraer]
+  gotcha: [Restricciones o limitaciones conocidas a evitar]
 
 - docfile: [PRPs/ai_docs/typescript_specific.md]
-  why: [Custom documentation for complex TypeScript/Next.js patterns]
-  section: [Specific section if document is large]
+  why: [Documentación personalizada para patrones complejos de TypeScript/Next.js]
+  section: [Sección específica si el documento es grande]
 ```
 
-### Current Codebase tree (run `tree` in the root of the project) to get an overview of the codebase
+### Árbol Actual de la Base de Código (ejecuta `tree` en la raíz del proyecto) para obtener una visión general de la base de código
 
 ```bash
 
 ```
 
-### Desired Codebase tree with files to be added and responsibility of file
+### Árbol Deseado de la Base de Código con archivos a añadir y responsabilidad del archivo
 
 ```bash
 
 ```
 
-### Known Gotchas of our codebase & Library Quirks
+### Problemas Conocidos (Gotchas) de nuestra base de código y Peculiaridades de las Bibliotecas
 
 ```typescript
-// CRITICAL: [Library name] requires [specific setup]
-// Example: Next.js 15 App Router - Route handlers must export named functions
-// Example: 'use client' directive must be at top of file, affects entire component tree
-// Example: Server Components can't use browser APIs or event handlers
-// Example: We use TypeScript strict mode and require proper typing
+// CRÍTICO: [Nombre de la biblioteca] requiere [configuración específica]
+// Ejemplo: Next.js 15 App Router - Los manejadores de ruta deben exportar funciones con nombre.
+// Ejemplo: La directiva 'use client' debe estar al principio del archivo, afecta a todo el árbol de componentes.
+// Ejemplo: Los Componentes de Servidor no pueden usar APIs del navegador o manejadores de eventos.
+// Ejemplo: Usamos el modo estricto de TypeScript y requerimos un tipado adecuado.
 ```
 
-## Implementation Blueprint
+## Plan de Implementación
 
-### Data models and structure
+### Modelos de datos y estructura
 
-Create the core data models, we ensure type safety and consistency.
+Crear los modelos de datos principales, aseguramos la seguridad de tipos y la consistencia.
 
 ```typescript
-Examples:
- - Zod schemas for validation
- - TypeScript interfaces/types
- - Database schema types
- - API response types
- - Component prop types
+Ejemplos:
+ - esquemas de Zod para validación
+ - interfaces/tipos de TypeScript
+ - tipos de esquema de base de datos
+ - tipos de respuesta de API
+ - tipos de props de componentes
 
 ```
 
-### Implementation Tasks (ordered by dependencies)
+### Tareas de Implementación (ordenadas por dependencias)
 
 ```yaml
-Task 1: CREATE lib/types/{domain}.types.ts
-  - IMPLEMENT: TypeScript interfaces and types for domain models
-  - FOLLOW pattern: lib/types/existing.types.ts (interface structure, export patterns)
-  - NAMING: PascalCase for interfaces, camelCase for properties
-  - PLACEMENT: Type definitions in lib/types/
+Tarea 1: CREAR lib/types/{dominio}.types.ts
+  - IMPLEMENTAR: Interfaces y tipos de TypeScript para los modelos del dominio.
+  - SEGUIR patrón: lib/types/existing.types.ts (estructura de interfaz, patrones de exportación).
+  - NOMENCLATURA: PascalCase para interfaces, camelCase para propiedades.
+  - UBICACIÓN: Definiciones de tipos en lib/types/.
 
-Task 2: CREATE components/{domain}/{ComponentName}.tsx
-  - IMPLEMENT: React component with proper TypeScript props interface
-  - FOLLOW pattern: components/existing/ExistingComponent.tsx (component structure, props typing)
-  - NAMING: PascalCase for components, camelCase for props, kebab-case for CSS classes
-  - DEPENDENCIES: Import types from Task 1
-  - PLACEMENT: Component layer in components/{domain}/
+Tarea 2: CREAR components/{dominio}/{NombreComponente}.tsx
+  - IMPLEMENTAR: Componente de React con la interfaz de props de TypeScript adecuada.
+  - SEGUIR patrón: components/existing/ExistingComponent.tsx (estructura de componente, tipado de props).
+  - NOMENCLATURA: PascalCase para componentes, camelCase para props, kebab-case para clases CSS.
+  - DEPENDENCIAS: Importar tipos de la Tarea 1.
+  - UBICACIÓN: Capa de componentes en components/{dominio}/.
 
-Task 3: CREATE app/api/{resource}/route.ts
-  - IMPLEMENT: Next.js API route handlers (GET, POST, etc.)
-  - FOLLOW pattern: app/api/existing/route.ts (request/response handling, error patterns)
-  - NAMING: Named exports (GET, POST, PUT, DELETE), proper TypeScript typing
-  - DEPENDENCIES: Import types and components from previous tasks
-  - PLACEMENT: API routes in app/api/{resource}/
+Tarea 3: CREAR app/api/{recurso}/route.ts
+  - IMPLEMENTAR: Manejadores de ruta de la API de Next.js (GET, POST, etc.).
+  - SEGUIR patrón: app/api/existing/route.ts (manejo de solicitud/respuesta, patrones de error).
+  - NOMENCLATURA: Exportaciones con nombre (GET, POST, PUT, DELETE), tipado de TypeScript adecuado.
+  - DEPENDENCIAS: Importar tipos y componentes de tareas anteriores.
+  - UBICACIÓN: Rutas de API en app/api/{recurso}/.
 
-Task 4: CREATE app/{feature}/page.tsx
-  - IMPLEMENT: Next.js page component using domain components
-  - FOLLOW pattern: app/existing-page/page.tsx (page structure, metadata, error boundaries)
-  - NAMING: Default export, proper metadata export, TypeScript page props
-  - DEPENDENCIES: Import components from Task 2, types from Task 1
-  - PLACEMENT: Page routes in app/{feature}/
+Tarea 4: CREAR app/{funcionalidad}/page.tsx
+  - IMPLEMENTAR: Componente de página de Next.js usando componentes del dominio.
+  - SEGUIR patrón: app/existing-page/page.tsx (estructura de página, metadatos, límites de error).
+  - NOMENCLATURA: Exportación por defecto, exportación de metadatos adecuada, props de página de TypeScript.
+  - DEPENDENCIAS: Importar componentes de la Tarea 2, tipos de la Tarea 1.
+  - UBICACIÓN: Rutas de página en app/{funcionalidad}/.
 
-Task 5: CREATE hooks/use{DomainAction}.ts
-  - IMPLEMENT: Custom React hooks for state management and API calls
-  - FOLLOW pattern: hooks/useExisting.ts (hook structure, TypeScript generics, error handling)
-  - NAMING: use{ActionName} with proper TypeScript return types
-  - DEPENDENCIES: Import types from Task 1, API endpoints from Task 3
-  - PLACEMENT: Custom hooks in hooks/
+Tarea 5: CREAR hooks/use{AccionDominio}.ts
+  - IMPLEMENTAR: Hooks personalizados de React para la gestión del estado y llamadas a la API.
+  - SEGUIR patrón: hooks/useExisting.ts (estructura de hook, genéricos de TypeScript, manejo de errores).
+  - NOMENCLATURA: use{NombreAccion} con tipos de retorno de TypeScript adecuados.
+  - DEPENDENCIAS: Importar tipos de la Tarea 1, endpoints de API de la Tarea 3.
+  - UBICACIÓN: Hooks personalizados en hooks/.
 
-Task 6: CREATE __tests__/{component}.test.tsx
-  - IMPLEMENT: Jest/Testing Library tests for components and hooks
-  - FOLLOW pattern: __tests__/existing.test.tsx (test structure, mocking patterns)
-  - NAMING: describe blocks, test naming conventions, TypeScript test typing
-  - COVERAGE: All components and hooks with positive and negative test cases
-  - PLACEMENT: Tests alongside the code they test
+Tarea 6: CREAR __tests__/{componente}.test.tsx
+  - IMPLEMENTAR: Pruebas de Jest/Testing Library para componentes y hooks.
+  - SEGUIR patrón: __tests__/existing.test.tsx (estructura de prueba, patrones de simulación).
+  - NOMENCLATURA: Bloques `describe`, convenciones de nomenclatura de pruebas, tipado de pruebas de TypeScript.
+  - COBERTURA: Todos los componentes y hooks con casos de prueba positivos y negativos.
+  - UBICACIÓN: Pruebas junto al código que prueban.
 ```
 
-### Implementation Patterns & Key Details
+### Patrones de Implementación y Detalles Clave
 
 ```typescript
-// Show critical patterns and gotchas - keep concise, focus on non-obvious details
+// Muestra patrones críticos y problemas conocidos - sé conciso, céntrate en detalles no obvios
 
-// Example: Component pattern
-interface {Domain}Props {
-  // PATTERN: Strict TypeScript interfaces (follow lib/types/existing.types.ts)
-  data: {Domain}Data;
+// Ejemplo: Patrón de componente
+interface {Dominio}Props {
+  // PATRÓN: Interfaces estrictas de TypeScript (seguir lib/types/existing.types.ts)
+  data: {Dominio}Data;
   onAction?: (id: string) => void;
 }
 
-export function {Domain}Component({ data, onAction }: {Domain}Props) {
-  // PATTERN: Client/Server component patterns (check existing components)
-  // GOTCHA: 'use client' needed for event handlers, useState, useEffect
-  // CRITICAL: Server Components for data fetching, Client Components for interactivity
+export function {Dominio}Component({ data, onAction }: {Dominio}Props) {
+  // PATRÓN: Patrones de componente Cliente/Servidor (revisar componentes existentes)
+  // GOTCHA: Se necesita 'use client' para manejadores de eventos, useState, useEffect
+  // CRÍTICO: Componentes de Servidor para la obtención de datos, Componentes de Cliente para la interactividad
 
   return (
-    // PATTERN: Consistent styling approach (see components/ui/)
+    // PATRÓN: Enfoque de estilo consistente (ver components/ui/)
     <div className="existing-class-pattern">
-      {/* Follow existing component composition patterns */}
+      {/* Seguir los patrones de composición de componentes existentes */}
     </div>
   );
 }
 
-// Example: API route pattern
+// Ejemplo: Patrón de ruta de API
 export async function GET(request: Request): Promise<Response> {
-  // PATTERN: Request validation and error handling (see app/api/existing/route.ts)
-  // GOTCHA: [TypeScript-specific constraint or Next.js requirement]
-  // RETURN: Response object with proper TypeScript typing
+  // PATRÓN: Validación de solicitud y manejo de errores (ver app/api/existing/route.ts)
+  // GOTCHA: [Restricción específica de TypeScript o requisito de Next.js]
+  // RETORNAR: Objeto Response con tipado de TypeScript adecuado
 }
 
-// Example: Custom hook pattern
-export function use{Domain}Action(): {Domain}ActionResult {
-  // PATTERN: Hook structure with TypeScript generics (see hooks/useExisting.ts)
-  // GOTCHA: [React hook rules and TypeScript typing requirements]
+// Ejemplo: Patrón de hook personalizado
+export function use{AccionDominio}(): {Dominio}ActionResult {
+  // PATRÓN: Estructura de hook con genéricos de TypeScript (ver hooks/useExisting.ts)
+  // GOTCHA: [Reglas de los hooks de React y requisitos de tipado de TypeScript]
 }
 ```
 
-### Integration Points
+### Puntos de Integración
 
 ```yaml
-DATABASE:
-  - migration: "Add table 'feature_data' with proper indexes"
-  - client: "@/lib/database/client"
-  - pattern: "createClient() for client components, createServerClient() for server components"
+BASE DE DATOS:
+  - migración: "Añadir tabla 'feature_data' con los índices adecuados"
+  - cliente: "@/lib/database/client"
+  - patrón: "createClient() para componentes de cliente, createServerClient() para componentes de servidor"
 
-CONFIG:
-  - add to: .env.local
-  - pattern: "NEXT_PUBLIC_* for client-side env vars"
-  - pattern: "FEATURE_TIMEOUT = process.env.FEATURE_TIMEOUT || '30000'"
+CONFIGURACIÓN:
+  - añadir a: .env.local
+  - patrón: "NEXT_PUBLIC_* para variables de entorno del lado del cliente"
+  - patrón: "FEATURE_TIMEOUT = process.env.FEATURE_TIMEOUT || '30000'"
 
-ROUTES:
-  - file structure: app/feature-name/page.tsx
-  - api routes: app/api/feature-name/route.ts
-  - middleware: middleware.ts (root level)
+RUTAS:
+  - estructura de archivos: app/nombre-funcionalidad/page.tsx
+  - rutas de api: app/api/nombre-funcionalidad/route.ts
+  - middleware: middleware.ts (a nivel raíz)
 ```
 
-## Validation Loop
+## Bucle de Validación
 
-### Level 1: Syntax & Style (Immediate Feedback)
+### Nivel 1: Sintaxis y Estilo (Retroalimentación Inmediata)
 
 ```bash
-# Run after each file creation - fix before proceeding
-npm run lint                    # ESLint checks with TypeScript rules
-npx tsc --noEmit               # TypeScript type checking (no JS output)
-npm run format                 # Prettier formatting
+# Ejecutar después de la creación de cada archivo - corregir antes de continuar
+npm run lint                    # Verificaciones de ESLint con reglas de TypeScript
+npx tsc --noEmit               # Verificación de tipos de TypeScript (sin salida de JS)
+npm run format                 # Formateo con Prettier
 
-# Project-wide validation
-npm run lint:fix               # Auto-fix linting issues
-npm run type-check             # Full TypeScript validation
+# Validación a nivel de proyecto
+npm run lint:fix               # Auto-corregir problemas de linting
+npm run type-check             # Validación completa de TypeScript
 
-# Expected: Zero errors. If errors exist, READ output and fix before proceeding.
+# Esperado: Cero errores. Si existen errores, LEER la salida y corregir antes de continuar.
 ```
 
-### Level 2: Unit Tests (Component Validation)
+### Nivel 2: Pruebas Unitarias (Validación de Componentes)
 
 ```bash
-# Test each component/hook as it's created
-npm test -- __tests__/{domain}.test.tsx
+# Probar cada componente/hook a medida que se crea
+npm test -- __tests__/{dominio}.test.tsx
 npm test -- __tests__/use{Hook}.test.ts
 
-# Full test suite for affected areas
-npm test -- components/{domain}/
+# Suite de pruebas completa para las áreas afectadas
+npm test -- components/{dominio}/
 npm test -- hooks/
 
-# Coverage validation (if available)
+# Validación de cobertura (si está disponible)
 npm test -- --coverage --watchAll=false
 
-# Expected: All tests pass. If failing, debug root cause and fix implementation.
+# Esperado: Todas las pruebas pasan. Si fallan, depurar la causa raíz y corregir la implementación.
 ```
 
-### Level 3: Integration Testing (System Validation)
+### Nivel 3: Pruebas de Integración (Validación del Sistema)
 
 ```bash
-# Development server validation
-npm run dev &
-sleep 5  # Allow Next.js startup time
+# Validación del servidor de desarrollo
+npm run dev & 
+sleep 5  # Dar tiempo para el arranque de Next.js
 
-# Page load validation
-curl -I http://localhost:3000/{feature-page}
-# Expected: 200 OK response
+# Validación de la carga de la página
+curl -I http://localhost:3000/{pagina-funcionalidad}
+# Esperado: Respuesta 200 OK
 
-# API endpoint validation
-curl -X POST http://localhost:3000/api/{resource} \
+# Validación del endpoint de la API
+curl -X POST http://localhost:3000/api/{recurso} \
   -H "Content-Type: application/json" \
   -d '{"test": "data"}' \
-  | jq .  # Pretty print JSON response
+  | jq .  # Imprimir en formato legible la respuesta JSON
 
-# Production build validation
+# Validación del build de producción
 npm run build
-# Expected: Successful build with no TypeScript errors or warnings
+# Esperado: Build exitoso sin errores o advertencias de TypeScript
 
-# Component rendering validation (if SSR/SSG)
-curl http://localhost:3000/{page} | grep -q "expected-content"
+# Validación del renderizado de componentes (si es SSR/SSG)
+curl http://localhost:3000/{pagina} | grep -q "contenido-esperado"
 
-# Expected: All integrations working, proper responses, no hydration errors
+# Esperado: Todas las integraciones funcionando, respuestas adecuadas, sin errores de hidratación
 ```
 
-### Level 4: Creative & Domain-Specific Validation
+### Nivel 4: Validación Creativa y Específica del Dominio
 
 ```bash
-# TypeScript/Next.js Specific Validation:
+# Validación Específica de TypeScript/Next.js:
 
-# Production build performance
-npm run build && npm run analyze  # Bundle analyzer if available
+# Rendimiento del build de producción
+npm run build && npm run analyze  # Analizador de bundle si está disponible
 
-# Type safety validation
-npx tsc --noEmit --strict        # Strict TypeScript checking
+# Validación de la seguridad de tipos
+npx tsc --noEmit --strict        # Verificación estricta de TypeScript
 
-# Next.js specific checks
-npm run lint:next                # Next.js linting rules if available
+# Verificaciones específicas de Next.js
+npm run lint:next                # Reglas de linting de Next.js si están disponibles
 
-# MCP Server Validation Examples:
-# Playwright MCP (for E2E testing)
+# Ejemplos de Validación del Servidor MCP:
+# Playwright MCP (para pruebas E2E)
 playwright-mcp --test-user-flows --browser chromium
 
-# Performance MCP (for Lighthouse audits)
+# Performance MCP (para auditorías de Lighthouse)
 lighthouse-mcp --url http://localhost:3000 --audit performance
 
-# Accessibility MCP (for a11y testing)
-axe-mcp --scan http://localhost:3000/{pages}
+# Accessibility MCP (para pruebas de accesibilidad)
+axe-mcp --scan http://localhost:3000/{paginas}
 
-# Custom TypeScript/React Validation
-# React Testing Library integration tests
-# Storybook visual regression tests (if available)
-# TypeScript strict mode compliance
+# Validación Personalizada de TypeScript/React
+# Pruebas de integración de React Testing Library
+# Pruebas de regresión visual de Storybook (si están disponibles)
+# Cumplimiento del modo estricto de TypeScript
 
-# Expected: All creative validations pass, performance/accessibility standards met
+# Esperado: Todas las validaciones creativas pasan, se cumplen los estándares de rendimiento/accesibilidad
 ```
 
-## Final Validation Checklist
+## Lista de Verificación de Validación Final
 
-### Technical Validation
+### Validación Técnica
 
-- [ ] All 4 validation levels completed successfully
-- [ ] All tests pass: `npm test`
-- [ ] No linting errors: `npm run lint`
-- [ ] No type errors: `npx tsc --noEmit`
-- [ ] No formatting issues: `npm run format --check`
-- [ ] Production build succeeds: `npm run build`
+- [ ] Los 4 niveles de validación se completaron con éxito.
+- [ ] Todas las pruebas pasan: `npm test`
+- [ ] Sin errores de linting: `npm run lint`
+- [ ] Sin errores de tipo: `npx tsc --noEmit`
+- [ ] Sin problemas de formato: `npm run format --check`
+- [ ] El build de producción tiene éxito: `npm run build`
 
-### Feature Validation
+### Validación de la Funcionalidad
 
-- [ ] All success criteria from "What" section met
-- [ ] Manual testing successful: [specific commands from Level 3]
-- [ ] Error cases handled gracefully with proper TypeScript error types
-- [ ] Integration points work as specified
-- [ ] User persona requirements satisfied (if applicable)
+- [ ] Todos los criterios de éxito de la sección "Qué" se cumplieron.
+- [ ] Las pruebas manuales fueron exitosas: [comandos específicos del Nivel 3]
+- [ ] Los casos de error se manejan con elegancia con tipos de error de TypeScript adecuados.
+- [ ] Los puntos de integración funcionan como se especificó.
+- [ ] Los requisitos de la persona de usuario se satisfacen (si aplica).
 
-### Code Quality Validation
+### Validación de la Calidad del Código
 
-- [ ] Follows existing TypeScript/React patterns and naming conventions
-- [ ] File placement matches desired codebase tree structure
-- [ ] Anti-patterns avoided (check against Anti-Patterns section)
-- [ ] Dependencies properly managed with correct TypeScript typings
-- [ ] Configuration changes properly integrated
+- [ ] Sigue los patrones y convenciones de nomenclatura existentes de TypeScript/React.
+- [ ] La ubicación de los archivos coincide con la estructura deseada del árbol de la base de código.
+- [ ] Se evitaron los anti-patrones (verificar contra la sección de Anti-Patrones).
+- [ ] Las dependencias se gestionan correctamente con los tipados de TypeScript correctos.
+- [ ] Los cambios de configuración se integraron correctamente.
 
-### TypeScript/Next.js Specific
+### Específico de TypeScript/Next.js
 
-- [ ] Proper TypeScript interfaces and types defined
-- [ ] Server/Client component patterns followed correctly
-- [ ] 'use client' directives used appropriately
-- [ ] API routes follow Next.js App Router patterns
-- [ ] No hydration mismatches between server/client rendering
+- [ ] Interfaces y tipos de TypeScript adecuados definidos.
+- [ ] Los patrones de componente Servidor/Cliente se siguieron correctamente.
+- [ ] Las directivas 'use client' se usaron apropiadamente.
+- [ ] Las rutas de API siguen los patrones del App Router de Next.js.
+- [ ] Sin desajustes de hidratación entre el renderizado del servidor/cliente.
 
-### Documentation & Deployment
+### Documentación y Despliegue
 
-- [ ] Code is self-documenting with clear TypeScript types
-- [ ] Props interfaces properly documented
-- [ ] Environment variables documented if new ones added
+- [ ] El código es autodocumentado con tipos de TypeScript claros.
+- [ ] Las interfaces de las props están debidamente documentadas.
+- [ ] Las variables de entorno se documentan si se añaden nuevas.
 
 ---
 
-## Anti-Patterns to Avoid
+## Anti-Patrones a Evitar
 
-- ❌ Don't create new patterns when existing ones work
-- ❌ Don't skip validation because "it should work"
-- ❌ Don't ignore failing tests - fix them
-- ❌ Don't use 'use client' unnecessarily - embrace Server Components
-- ❌ Don't hardcode values that should be config
-- ❌ Don't catch all exceptions - be specific
+- ❌ No crear nuevos patrones cuando los existentes funcionan.
+- ❌ No saltarse la validación porque "debería funcionar".
+- ❌ No ignorar las pruebas que fallan - arréglalas.
+- ❌ No usar 'use client' innecesariamente - aprovecha los Componentes de Servidor.
+- ❌ No codificar valores fijos que deberían estar en la configuración.
+- ❌ No capturar todas las excepciones - sé específico.

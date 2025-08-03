@@ -1,47 +1,47 @@
 # CLAUDE.md
 
-This file provides comprehensive guidance to Claude Code when working with Python code in this repository.
+Este archivo proporciona una guía completa a Claude Code cuando se trabaja con código Python en este repositorio.
 
-## Core Development Philosophy
+## Filosofía de Desarrollo Principal
 
-### KISS (Keep It Simple, Stupid)
+### KISS (Keep It Simple, Stupid - Mantenlo Simple, Estúpido)
 
-Simplicity should be a key goal in design. Choose straightforward solutions over complex ones whenever possible. Simple solutions are easier to understand, maintain, and debug.
+La simplicidad debe ser un objetivo clave en el diseño. Elige soluciones sencillas sobre las complejas siempre que sea posible. Las soluciones simples son más fáciles de entender, mantener y depurar.
 
-### YAGNI (You Aren't Gonna Need It)
+### YAGNI (You Aren't Gonna Need It - No lo vas a necesitar)
 
-Avoid building functionality on speculation. Implement features only when they are needed, not when you anticipate they might be useful in the future.
+Evita construir funcionalidades por especulación. Implementa características solo cuando sean necesarias, no cuando anticipes que podrían ser útiles en el futuro.
 
-### Design Principles
+### Principios de Diseño
 
-- **Dependency Inversion**: High-level modules should not depend on low-level modules. Both should depend on abstractions.
-- **Open/Closed Principle**: Software entities should be open for extension but closed for modification.
-- **Single Responsibility**: Each function, class, and module should have one clear purpose.
-- **Fail Fast**: Check for potential errors early and raise exceptions immediately when issues occur.
+- **Inversión de Dependencias**: Los módulos de alto nivel no deben depender de los de bajo nivel. Ambos deben depender de abstracciones.
+- **Principio Abierto/Cerrado**: Las entidades de software deben estar abiertas a la extensión pero cerradas a la modificación.
+- **Responsabilidad Única**: Cada función, clase y módulo debe tener un propósito claro.
+- **Fallar Rápido**: Comprueba los posibles errores temprano y lanza excepciones inmediatamente cuando ocurran problemas.
 
-## 🧱 Code Structure & Modularity
+## 🧱 Estructura del Código y Modularidad
 
-### File and Function Limits
+### Límites de Archivos y Funciones
 
-- **Never create a file longer than 500 lines of code**. If approaching this limit, refactor by splitting into modules.
-- **Functions should be under 50 lines** with a single, clear responsibility.
-- **Classes should be under 100 lines** and represent a single concept or entity.
-- **Organize code into clearly separated modules**, grouped by feature or responsibility.
-- **Line lenght should be max 100 characters** ruff rule in pyproject.toml
+- **Nunca crees un archivo de más de 500 líneas de código**. Si te acercas a este límite, refactoriza dividiendo en módulos.
+- **Las funciones deben tener menos de 50 líneas** con una única y clara responsabilidad.
+- **Las clases deben tener menos de 100 líneas** y representar un único concepto o entidad.
+- **Organiza el código en módulos claramente separados**, agrupados por característica o responsabilidad.
+- **La longitud de la línea debe ser de máximo 100 caracteres** (regla de ruff en pyproject.toml).
 
-### Project Architecture
+### Arquitectura del Proyecto
 
-Follow strict vertical slice architecture with tests living next to the code they test:
+Sigue una estricta arquitectura de "vertical slice" con las pruebas ubicadas junto al código que prueban:
 
 ```
-src/project/
+src/proyecto/
     __init__.py
     main.py
     tests/
         test_main.py
     conftest.py
 
-    # Core modules
+    # Módulos principales
     database/
         __init__.py
         connection.py
@@ -58,7 +58,7 @@ src/project/
             test_authentication.py
             test_authorization.py
 
-    # Feature slices
+    # "Slices" de características
     features/
         user_management/
             __init__.py
@@ -77,84 +77,84 @@ src/project/
                 test_gateway.py
 ```
 
-## 🛠️ Development Environment
+## 🛠️ Entorno de Desarrollo
 
-### UV Package Management
+### Gestión de Paquetes con UV
 
-This project uses UV for blazing-fast Python package and environment management.
+Este proyecto utiliza UV para una gestión de paquetes y entornos de Python ultrarrápida.
 
 ```bash
-# Install UV (if not already installed)
+# Instalar UV (si no está ya instalado)
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Create virtual environment
+# Crear entorno virtual
 uv venv
 
-# Sync dependencies
+# Sincronizar dependencias
 uv sync
 
-# Add a package ***NEVER UPDATE A DEPENDENCY DIRECTLY IN PYPROJECT.toml***
-# ALWAYS USE UV ADD
+# Añadir un paquete ***NUNCA ACTUALICES UNA DEPENDENCIA DIRECTAMENTE EN PYPROJECT.toml***
+# SIEMPRE USA UV ADD
 uv add requests
 
-# Add development dependency
+# Añadir una dependencia de desarrollo
 uv add --dev pytest ruff mypy
 
-# Remove a package
+# Eliminar un paquete
 uv remove requests
 
-# Run commands in the environment
+# Ejecutar comandos en el entorno
 uv run python script.py
 uv run pytest
 uv run ruff check .
 
-# Install specific Python version
+# Instalar una versión específica de Python
 uv python install 3.12
 ```
 
-### Development Commands
+### Comandos de Desarrollo
 
 ```bash
-# Run all tests
+# Ejecutar todas las pruebas
 uv run pytest
 
-# Run specific tests with verbose output
+# Ejecutar pruebas específicas con salida detallada
 uv run pytest tests/test_module.py -v
 
-# Run tests with coverage
+# Ejecutar pruebas con cobertura
 uv run pytest --cov=src --cov-report=html
 
-# Format code
+# Formatear código
 uv run ruff format .
 
-# Check linting
+# Comprobar el linting
 uv run ruff check .
 
-# Fix linting issues automatically
+# Corregir problemas de linting automáticamente
 uv run ruff check --fix .
 
-# Type checking
+# Comprobación de tipos
 uv run mypy src/
 
-# Run pre-commit hooks
+# Ejecutar ganchos de pre-commit
 uv run pre-commit run --all-files
 ```
 
-## 📋 Style & Conventions
+## 📋 Estilo y Convenciones
 
-### Python Style Guide
+### Guía de Estilo de Python
 
-- **Follow PEP8** with these specific choices:
-  - Line length: 100 characters (set by Ruff in pyproject.toml)
-  - Use double quotes for strings
-  - Use trailing commas in multi-line structures
-- **Always use type hints** for function signatures and class attributes
-- **Format with `ruff format`** (faster alternative to Black)
-- **Use `pydantic` v2** for data validation and settings management
+- **Seguir PEP8** con estas elecciones específicas:
+  - Longitud de línea: 100 caracteres (establecido por Ruff en pyproject.toml)
+  - Usar comillas dobles para las cadenas
+  - Usar comas finales en estructuras multilínea
+- **Siempre usar anotaciones de tipo (type hints)** para las firmas de funciones y atributos de clase.
+- **Formatear con `ruff format`** (alternativa más rápida a Black).
+- **Usar `pydantic` v2** para la validación de datos y la gestión de la configuración.
 
-### Docstring Standards
+### Estándares de Docstrings
 
-Use Google-style docstrings for all public functions, classes, and modules:
+Usa docstrings de estilo Google para todas las funciones, clases y módulos públicos:
 
 ```python
 def calculate_discount(
@@ -163,19 +163,19 @@ def calculate_discount(
     min_amount: Decimal = Decimal("0.01")
 ) -> Decimal:
     """
-    Calculate the discounted price for a product.
+    Calcula el precio con descuento de un producto.
 
     Args:
-        price: Original price of the product
-        discount_percent: Discount percentage (0-100)
-        min_amount: Minimum allowed final price
+        price: Precio original del producto.
+        discount_percent: Porcentaje de descuento (0-100).
+        min_amount: Precio final mínimo permitido.
 
     Returns:
-        Final price after applying discount
+        Precio final después de aplicar el descuento.
 
     Raises:
-        ValueError: If discount_percent is not between 0 and 100
-        ValueError: If final price would be below min_amount
+        ValueError: Si discount_percent no está entre 0 y 100.
+        ValueError: Si el precio final sería inferior a min_amount.
 
     Example:
         >>> calculate_discount(Decimal("100"), 20)
@@ -183,101 +183,101 @@ def calculate_discount(
     """
 ```
 
-### Naming Conventions
+### Convenciones de Nomenclatura
 
-- **Variables and functions**: `snake_case`
-- **Classes**: `PascalCase`
-- **Constants**: `UPPER_SNAKE_CASE`
-- **Private attributes/methods**: `_leading_underscore`
-- **Type aliases**: `PascalCase`
-- **Enum values**: `UPPER_SNAKE_CASE`
+- **Variables y funciones**: `snake_case`
+- **Clases**: `PascalCase`
+- **Constantes**: `UPPER_SNAKE_CASE`
+- **Atributos/métodos privados**: `_guion_bajo_inicial`
+- **Alias de tipo**: `PascalCase`
+- **Valores de Enum**: `UPPER_SNAKE_CASE`
 
-## 🧪 Testing Strategy
+## 🧪 Estrategia de Pruebas
 
-### Test-Driven Development (TDD)
+### Desarrollo Dirigido por Pruebas (TDD)
 
-1. **Write the test first** - Define expected behavior before implementation
-2. **Watch it fail** - Ensure the test actually tests something
-3. **Write minimal code** - Just enough to make the test pass
-4. **Refactor** - Improve code while keeping tests green
-5. **Repeat** - One test at a time
+1. **Escribe la prueba primero** - Define el comportamiento esperado antes de la implementación.
+2. **Observa cómo falla** - Asegúrate de que la prueba realmente prueba algo.
+3. **Escribe el código mínimo** - Solo lo suficiente para que la prueba pase.
+4. **Refactoriza** - Mejora el código manteniendo las pruebas en verde.
+5. **Repite** - Una prueba a la vez.
 
-### Testing Best Practices
+### Mejores Prácticas de Pruebas
 
 ```python
-# Always use pytest fixtures for setup
+# Siempre usa fixtures de pytest para la configuración
 import pytest
 from datetime import datetime
 
 @pytest.fixture
 def sample_user():
-    """Provide a sample user for testing."""
+    """Proporciona un usuario de muestra para las pruebas."""
     return User(
         id=123,
-        name="Test User",
+        name="Usuario de Prueba",
         email="test@example.com",
         created_at=datetime.now()
     )
 
-# Use descriptive test names
+# Usa nombres de prueba descriptivos
 def test_user_can_update_email_when_valid(sample_user):
-    """Test that users can update their email with valid input."""
+    """Prueba que los usuarios pueden actualizar su correo electrónico con una entrada válida."""
     new_email = "newemail@example.com"
     sample_user.update_email(new_email)
     assert sample_user.email == new_email
 
-# Test edge cases and error conditions
+# Prueba casos borde y condiciones de error
 def test_user_update_email_fails_with_invalid_format(sample_user):
-    """Test that invalid email formats are rejected."""
+    """Prueba que los formatos de correo electrónico no válidos son rechazados."""
     with pytest.raises(ValidationError) as exc_info:
-        sample_user.update_email("not-an-email")
-    assert "Invalid email format" in str(exc_info.value)
+        sample_user.update_email("no-es-un-email")
+    assert "Formato de correo electrónico no válido" in str(exc_info.value)
 ```
 
-### Test Organization
+### Organización de las Pruebas
 
-- Unit tests: Test individual functions/methods in isolation
-- Integration tests: Test component interactions
-- End-to-end tests: Test complete user workflows
-- Keep test files next to the code they test
-- Use `conftest.py` for shared fixtures
-- Aim for 80%+ code coverage, but focus on critical paths
+- Pruebas unitarias: Prueban funciones/métodos individuales de forma aislada.
+- Pruebas de integración: Prueban las interacciones entre componentes.
+- Pruebas de extremo a extremo: Prueban flujos de trabajo completos del usuario.
+- Mantén los archivos de prueba junto al código que prueban.
+- Usa `conftest.py` para fixtures compartidas.
+- Apunta a una cobertura de código del 80%+, pero céntrate en las rutas críticas.
 
-## 🚨 Error Handling
+## 🚨 Manejo de Errores
 
-### Exception Best Practices
+### Mejores Prácticas de Excepciones
 
 ```python
-# Create custom exceptions for your domain
+# Crea excepciones personalizadas para tu dominio
 class PaymentError(Exception):
-    """Base exception for payment-related errors."""
+    """Excepción base para errores relacionados con pagos."""
     pass
 
 class InsufficientFundsError(PaymentError):
-    """Raised when account has insufficient funds."""
+    """Lanzada cuando la cuenta no tiene fondos suficientes."""
     def __init__(self, required: Decimal, available: Decimal):
         self.required = required
         self.available = available
         super().__init__(
-            f"Insufficient funds: required {required}, available {available}"
+            f"Fondos insuficientes: se requieren {required}, disponibles {available}"
         )
 
-# Use specific exception handling
+# Usa un manejo de excepciones específico
 try:
     process_payment(amount)
 except InsufficientFundsError as e:
-    logger.warning(f"Payment failed: {e}")
-    return PaymentResult(success=False, reason="insufficient_funds")
+    logger.warning(f"Pago fallido: {e}")
+    return PaymentResult(success=False, reason="fondos_insuficientes")
 except PaymentError as e:
-    logger.error(f"Payment error: {e}")
-    return PaymentResult(success=False, reason="payment_error")
+    logger.error(f"Error de pago: {e}")
+    return PaymentResult(success=False, reason="error_de_pago")
 
-# Use context managers for resource management
+# Usa gestores de contexto para la gestión de recursos
 from contextlib import contextmanager
 
 @contextmanager
 def database_transaction():
-    """Provide a transactional scope for database operations."""
+    """Proporciona un ámbito transaccional para las operaciones de base de datos."""
     conn = get_connection()
     trans = conn.begin_transaction()
     try:
@@ -290,13 +290,13 @@ def database_transaction():
         conn.close()
 ```
 
-### Logging Strategy
+### Estrategia de Registro (Logging)
 
 ```python
 import logging
 from functools import wraps
 
-# Configure structured logging
+# Configurar registro estructurado
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -304,32 +304,32 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# Log function entry/exit for debugging
+# Registrar la entrada/salida de funciones para depuración
 def log_execution(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        logger.debug(f"Entering {func.__name__}")
+        logger.debug(f"Entrando en {func.__name__}")
         try:
             result = func(*args, **kwargs)
-            logger.debug(f"Exiting {func.__name__} successfully")
+            logger.debug(f"Saliendo de {func.__name__} con éxito")
             return result
         except Exception as e:
-            logger.exception(f"Error in {func.__name__}: {e}")
+            logger.exception(f"Error en {func.__name__}: {e}")
             raise
     return wrapper
 ```
 
-## 🔧 Configuration Management
+## 🔧 Gestión de la Configuración
 
-### Environment Variables and Settings
+### Variables de Entorno y Ajustes
 
 ```python
 from pydantic_settings import BaseSettings
 from functools import lru_cache
 
 class Settings(BaseSettings):
-    """Application settings with validation."""
-    app_name: str = "MyApp"
+    """Ajustes de la aplicación con validación."""
+    app_name: str = "MiApp"
     debug: bool = False
     database_url: str
     redis_url: str = "redis://localhost:6379"
@@ -343,16 +343,16 @@ class Settings(BaseSettings):
 
 @lru_cache()
 def get_settings() -> Settings:
-    """Get cached settings instance."""
+    """Obtiene una instancia de ajustes en caché."""
     return Settings()
 
-# Usage
+# Uso
 settings = get_settings()
 ```
 
-## 🏗️ Data Models and Validation
+## 🏗️ Modelos de Datos y Validación
 
-### Example Pydantic Models strict with pydantic v2
+### Ejemplo de Modelos Pydantic estrictos con pydantic v2
 
 ```python
 from pydantic import BaseModel, Field, validator, EmailStr
@@ -361,7 +361,7 @@ from typing import Optional, List
 from decimal import Decimal
 
 class ProductBase(BaseModel):
-    """Base product model with common fields."""
+    """Modelo base de producto con campos comunes."""
     name: str = Field(..., min_length=1, max_length=255)
     description: Optional[str] = None
     price: Decimal = Field(..., gt=0, decimal_places=2)
@@ -371,7 +371,7 @@ class ProductBase(BaseModel):
     @validator('price')
     def validate_price(cls, v):
         if v > Decimal('1000000'):
-            raise ValueError('Price cannot exceed 1,000,000')
+            raise ValueError('El precio no puede exceder 1,000,000')
         return v
 
     class Config:
@@ -381,11 +381,11 @@ class ProductBase(BaseModel):
         }
 
 class ProductCreate(ProductBase):
-    """Model for creating new products."""
+    """Modelo para crear nuevos productos."""
     pass
 
 class ProductUpdate(BaseModel):
-    """Model for updating products - all fields optional."""
+    """Modelo para actualizar productos - todos los campos son opcionales."""
     name: Optional[str] = Field(None, min_length=1, max_length=255)
     description: Optional[str] = None
     price: Optional[Decimal] = Field(None, gt=0, decimal_places=2)
@@ -393,61 +393,61 @@ class ProductUpdate(BaseModel):
     tags: Optional[List[str]] = None
 
 class Product(ProductBase):
-    """Complete product model with database fields."""
+    """Modelo completo de producto con campos de la base de datos."""
     id: int
     created_at: datetime
     updated_at: datetime
     is_active: bool = True
 
     class Config:
-        from_attributes = True  # Enable ORM mode
+        from_attributes = True  # Habilitar modo ORM
 ```
 
-## 🔄 Git Workflow
+## 🔄 Flujo de Trabajo de Git
 
-### Branch Strategy
+### Estrategia de Ramas
 
-- `main` - Production-ready code
-- `develop` - Integration branch for features
-- `feature/*` - New features
-- `fix/*` - Bug fixes
-- `docs/*` - Documentation updates
-- `refactor/*` - Code refactoring
-- `test/*` - Test additions or fixes
+- `main` - Código listo para producción.
+- `develop` - Rama de integración para características.
+- `feature/*` - Nuevas características.
+- `fix/*` - Correcciones de errores.
+- `docs/*` - Actualizaciones de documentación.
+- `refactor/*` - Refactorización de código.
+- `test/*` - Adiciones o correcciones de pruebas.
 
-### Commit Message Format
+### Formato de Mensaje de Commit
 
-Never include claude code, or written by claude code in commit messages
+Nunca incluyas "claude code" o "escrito por claude code" en los mensajes de commit.
 
 ```
-<type>(<scope>): <subject>
+<tipo>(<ámbito>): <asunto>
 
-<body>
+<cuerpo>
 
-<footer>
+<pie>
 ``
-Types: feat, fix, docs, style, refactor, test, chore
+Tipos: feat, fix, docs, style, refactor, test, chore
 
-Example:
+Ejemplo:
 ```
 
-feat(auth): add two-factor authentication
+feat(auth): añadir autenticación de dos factores
 
-- Implement TOTP generation and validation
-- Add QR code generation for authenticator apps
-- Update user model with 2FA fields
+- Implementar generación y validación de TOTP.
+- Añadir generación de código QR para aplicaciones de autenticación.
+- Actualizar el modelo de usuario con campos para 2FA.
 
-Closes #123
+Cierra #123
 
 ````
 
-## 🗄️ Database Naming Standards
+## 🗄️ Estándares de Nomenclatura de Base de Datos
 
-### Entity-Specific Primary Keys
-All database tables use entity-specific primary keys for clarity and consistency:
+### Claves Primarias Específicas de la Entidad
+Todas las tablas de la base de datos utilizan claves primarias específicas de la entidad para mayor claridad y consistencia:
 
 ```sql
--- ✅ STANDARDIZED: Entity-specific primary keys
+-- ✅ ESTANDARIZADO: Claves primarias específicas de la entidad
 sessions.session_id UUID PRIMARY KEY
 leads.lead_id UUID PRIMARY KEY
 messages.message_id UUID PRIMARY KEY
@@ -455,98 +455,98 @@ daily_metrics.daily_metric_id UUID PRIMARY KEY
 agencies.agency_id UUID PRIMARY KEY
 ````
 
-### Field Naming Conventions
+### Convenciones de Nomenclatura de Campos
 
 ```sql
--- Primary keys: {entity}_id
+-- Claves primarias: {entidad}_id
 session_id, lead_id, message_id
 
--- Foreign keys: {referenced_entity}_id
+-- Claves foráneas: {entidad_referenciada}_id
 session_id REFERENCES sessions(session_id)
 agency_id REFERENCES agencies(agency_id)
 
--- Timestamps: {action}_at
+-- Marcas de tiempo: {accion}_at
 created_at, updated_at, started_at, expires_at
 
--- Booleans: is_{state}
+-- Booleanos: is_{estado}
 is_connected, is_active, is_qualified
 
--- Counts: {entity}_count
+-- Contadores: {entidad}_count
 message_count, lead_count, notification_count
 
--- Durations: {property}_{unit}
+-- Duraciones: {propiedad}_{unidad}
 duration_seconds, timeout_minutes
 ```
 
-### Repository Pattern Auto-Derivation
+### Derivación Automática del Patrón de Repositorio
 
-The enhanced BaseRepository automatically derives table names and primary keys:
+El `BaseRepository` mejorado deriva automáticamente los nombres de las tablas y las claves primarias:
 
 ```python
-# ✅ STANDARDIZED: Convention-based repositories
+# ✅ ESTANDARIZADO: Repositorios basados en convenciones
 class LeadRepository(BaseRepository[Lead]):
     def __init__(self):
-        super().__init__()  # Auto-derives "leads" and "lead_id"
+        super().__init__()  # Deriva automáticamente "leads" y "lead_id"
 
 class SessionRepository(BaseRepository[AvatarSession]):
     def __init__(self):
-        super().__init__()  # Auto-derives "sessions" and "session_id"
+        super().__init__()  # Deriva automáticamente "sessions" y "session_id"
 ```
 
-**Benefits**:
+**Beneficios**:
 
-- ✅ Self-documenting schema
-- ✅ Clear foreign key relationships
-- ✅ Eliminates repository method overrides
-- ✅ Consistent with entity naming patterns
+- ✅ Esquema autodocumentado.
+- ✅ Relaciones de clave foránea claras.
+- ✅ Elimina la necesidad de sobrescribir métodos del repositorio.
+- ✅ Consistente con los patrones de nomenclatura de entidades.
 
-### Model-Database Alignment
+### Alineación Modelo-Base de Datos
 
-Models mirror database fields exactly to eliminate field mapping complexity:
+Los modelos reflejan exactamente los campos de la base de datos para eliminar la complejidad del mapeo de campos:
 
 ```python
-# ✅ STANDARDIZED: Models mirror database exactly
+# ✅ ESTANDARIZADO: Los modelos reflejan exactamente la base de datos
 class Lead(BaseModel):
-    lead_id: UUID = Field(default_factory=uuid4)  # Matches database field
-    session_id: UUID                               # Matches database field
-    agency_id: str                                 # Matches database field
+    lead_id: UUID = Field(default_factory=uuid4)  # Coincide con el campo de la base de datos
+    session_id: UUID                               # Coincide con el campo de la base de datos
+    agency_id: str                                 # Coincide con el campo de la base de datos
     created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
     model_config = ConfigDict(
         use_enum_values=True,
         populate_by_name=True,
-        alias_generator=None  # Use exact field names
+        alias_generator=None  # Usar nombres de campo exactos
     )
 ```
 
-### API Route Standards
+### Estándares de Rutas de API
 
 ```python
-# ✅ STANDARDIZED: RESTful with consistent parameter naming
+# ✅ ESTANDARIZADO: RESTful con nomenclatura de parámetros consistente
 router = APIRouter(prefix="/api/v1/leads", tags=["leads"])
 
 @router.get("/{lead_id}")           # GET /api/v1/leads/{lead_id}
 @router.put("/{lead_id}")           # PUT /api/v1/leads/{lead_id}
 @router.delete("/{lead_id}")        # DELETE /api/v1/leads/{lead_id}
 
-# Sub-resources
+# Sub-recursos
 @router.get("/{lead_id}/messages")  # GET /api/v1/leads/{lead_id}/messages
 @router.get("/agency/{agency_id}")  # GET /api/v1/leads/agency/{agency_id}
 ```
 
-For complete naming standards, see [NAMING_CONVENTIONS.md](./NAMING_CONVENTIONS.md).
+Para los estándares de nomenclatura completos, consulta [NAMING_CONVENTIONS.md](./NAMING_CONVENTIONS.md).
 
-## 📝 Documentation Standards
+## 📝 Estándares de Documentación
 
-### Code Documentation
+### Documentación del Código
 
-- Every module should have a docstring explaining its purpose
-- Public functions must have complete docstrings
-- Complex logic should have inline comments with `# Reason:` prefix
-- Keep README.md updated with setup instructions and examples
-- Maintain CHANGELOG.md for version history
+- Cada módulo debe tener un docstring que explique su propósito.
+- Las funciones públicas deben tener docstrings completos.
+- La lógica compleja debe tener comentarios en línea con el prefijo `# Razón:`.
+- Mantén `README.md` actualizado con instrucciones de configuración y ejemplos.
+- Mantén `CHANGELOG.md` para el historial de versiones.
 
-### API Documentation
+### Documentación de la API
 
 ```python
 from fastapi import APIRouter, HTTPException, status
@@ -557,8 +557,8 @@ router = APIRouter(prefix="/products", tags=["products"])
 @router.get(
     "/",
     response_model=List[Product],
-    summary="List all products",
-    description="Retrieve a paginated list of all active products"
+    summary="Listar todos los productos",
+    description="Recuperar una lista paginada de todos los productos activos"
 )
 async def list_products(
     skip: int = 0,
@@ -566,27 +566,27 @@ async def list_products(
     category: Optional[str] = None
 ) -> List[Product]:
     """
-    Retrieve products with optional filtering.
+    Recupera productos con filtrado opcional.
 
-    - **skip**: Number of products to skip (for pagination)
-    - **limit**: Maximum number of products to return
-    - **category**: Filter by product category
+    - **skip**: Número de productos a omitir (para paginación).
+    - **limit**: Número máximo de productos a devolver.
+    - **category**: Filtrar por categoría de producto.
     """
-    # Implementation here
+    # Implementación aquí
 ```
 
-## 🚀 Performance Considerations
+## 🚀 Consideraciones de Rendimiento
 
-### Optimization Guidelines
+### Directrices de Optimización
 
-- Profile before optimizing - use `cProfile` or `py-spy`
-- Use `lru_cache` for expensive computations
-- Prefer generators for large datasets
-- Use `asyncio` for I/O-bound operations
-- Consider `multiprocessing` for CPU-bound tasks
-- Cache database queries appropriately
+- Perfila antes de optimizar - usa `cProfile` o `py-spy`.
+- Usa `lru_cache` para cálculos costosos.
+- Prefiere generadores para grandes conjuntos de datos.
+- Usa `asyncio` para operaciones ligadas a E/S.
+- Considera `multiprocessing` para tareas ligadas a la CPU.
+- Almacena en caché las consultas a la base de datos apropiadamente.
 
-### Example Optimization
+### Ejemplo de Optimización
 
 ```python
 from functools import lru_cache
@@ -595,32 +595,32 @@ from typing import AsyncIterator
 
 @lru_cache(maxsize=1000)
 def expensive_calculation(n: int) -> int:
-    """Cache results of expensive calculations."""
-    # Complex computation here
+    """Almacena en caché los resultados de cálculos costosos."""
+    # Cómputo complejo aquí
     return result
 
 async def process_large_dataset() -> AsyncIterator[dict]:
-    """Process large dataset without loading all into memory."""
+    """Procesa un gran conjunto de datos sin cargarlo todo en memoria."""
     async with aiofiles.open('large_file.json', mode='r') as f:
         async for line in f:
             data = json.loads(line)
-            # Process and yield each item
+            # Procesa y cede cada elemento
             yield process_item(data)
 ```
 
-## 🛡️ Security Best Practices
+## 🛡️ Mejores Prácticas de Seguridad
 
-### Security Guidelines
+### Directrices de Seguridad
 
-- Never commit secrets - use environment variables
-- Validate all user input with Pydantic
-- Use parameterized queries for database operations
-- Implement rate limiting for APIs
-- Keep dependencies updated with `uv`
-- Use HTTPS for all external communications
-- Implement proper authentication and authorization
+- Nunca registres secretos - usa variables de entorno.
+- Valida todas las entradas del usuario con Pydantic.
+- Usa consultas parametrizadas para las operaciones de base de datos.
+- Implementa limitación de velocidad para las APIs.
+- Mantén las dependencias actualizadas con `uv`.
+- Usa HTTPS para todas las comunicaciones externas.
+- Implementa una autenticación y autorización adecuadas.
 
-### Example Security Implementation
+### Ejemplo de Implementación de Seguridad
 
 ```python
 from passlib.context import CryptContext
@@ -629,52 +629,52 @@ import secrets
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str) -> str:
-    """Hash password using bcrypt."""
+    """Hashea la contraseña usando bcrypt."""
     return pwd_context.hash(password)
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify a password against its hash."""
+    """Verifica una contraseña contra su hash."""
     return pwd_context.verify(plain_password, hashed_password)
 
 def generate_secure_token(length: int = 32) -> str:
-    """Generate a cryptographically secure random token."""
+    """Genera un token aleatorio criptográficamente seguro."""
     return secrets.token_urlsafe(length)
 ```
 
-## 🔍 Debugging Tools
+## 🔍 Herramientas de Depuración
 
-### Debugging Commands
+### Comandos de Depuración
 
 ```bash
-# Interactive debugging with ipdb
+# Depuración interactiva con ipdb
 uv add --dev ipdb
-# Add breakpoint: import ipdb; ipdb.set_trace()
+# Añadir punto de interrupción: import ipdb; ipdb.set_trace()
 
-# Memory profiling
+# Perfilado de memoria
 uv add --dev memory-profiler
 uv run python -m memory_profiler script.py
 
-# Line profiling
+# Perfilado de línea
 uv add --dev line-profiler
-# Add @profile decorator to functions
+# Añadir decorador @profile a las funciones
 
-# Debug with rich traceback
+# Depurar con traceback enriquecido
 uv add --dev rich
-# In code: from rich.traceback import install; install()
+# En el código: from rich.traceback import install; install()
 ```
 
-## 📊 Monitoring and Observability
+## 📊 Monitoreo y Observabilidad
 
-### Structured Logging
+### Registro Estructurado
 
 ```python
 import structlog
 
 logger = structlog.get_logger()
 
-# Log with context
+# Registrar con contexto
 logger.info(
-    "payment_processed",
+    "pago_procesado",
     user_id=user.id,
     amount=amount,
     currency="USD",
@@ -682,77 +682,77 @@ logger.info(
 )
 ```
 
-## 📚 Useful Resources
+## 📚 Recursos Útiles
 
-### Essential Tools
+### Herramientas Esenciales
 
-- UV Documentation: https://github.com/astral-sh/uv
+- Documentación de UV: https://github.com/astral-sh/uv
 - Ruff: https://github.com/astral-sh/ruff
 - Pytest: https://docs.pytest.org/
 - Pydantic: https://docs.pydantic.dev/
 - FastAPI: https://fastapi.tiangolo.com/
 
-### Python Best Practices
+### Mejores Prácticas de Python
 
 - PEP 8: https://pep8.org/
-- PEP 484 (Type Hints): https://www.python.org/dev/peps/pep-0484/
-- The Hitchhiker's Guide to Python: https://docs.python-guide.org/
+- PEP 484 (Anotaciones de Tipo): https://www.python.org/dev/peps/pep-0484/
+- La Guía del Autoestopista para Python: https://docs.python-guide.org/
 
-## ⚠️ Important Notes
+## ⚠️ Notas Importantes
 
-- **NEVER ASSUME OR GUESS** - When in doubt, ask for clarification
-- **Always verify file paths and module names** before use
-- **Keep CLAUDE.md updated** when adding new patterns or dependencies
-- **Test your code** - No feature is complete without tests
-- **Document your decisions** - Future developers (including yourself) will thank you
+- **NUNCA ASUMAS O ADIVINES** - En caso de duda, pide una aclaración.
+- **Siempre verifica las rutas de archivos y los nombres de los módulos** antes de usarlos.
+- **Mantén CLAUDE.md actualizado** al añadir nuevos patrones o dependencias.
+- **Prueba tu código** - Ninguna característica está completa sin pruebas.
+- **Documenta tus decisiones** - Los futuros desarrolladores (incluyéndote a ti mismo) te lo agradecerán.
 
-## 🔍 Search Command Requirements
+## 🔍 Requisitos del Comando de Búsqueda
 
-**CRITICAL**: Always use `rg` (ripgrep) instead of traditional `grep` and `find` commands:
+**CRÍTICO**: Siempre usa `rg` (ripgrep) en lugar de los comandos tradicionales `grep` y `find`:
 
 ```bash
-# ❌ Don't use grep
-grep -r "pattern" .
+# ❌ No uses grep
+grep -r "patron" .
 
-# ✅ Use rg instead
-rg "pattern"
+# ✅ Usa rg en su lugar
+rg "patron"
 
-# ❌ Don't use find with name
+# ❌ No uses find con name
 find . -name "*.py"
 
-# ✅ Use rg with file filtering
+# ✅ Usa rg con filtrado de archivos
 rg --files | rg "\.py$"
-# or
+# o
 rg --files -g "*.py"
 ```
 
-**Enforcement Rules:**
+**Reglas de Aplicación:**
 
 ```
 (
     r"^grep\b(?!.*\|)",
-    "Use 'rg' (ripgrep) instead of 'grep' for better performance and features",
+    "Usa 'rg' (ripgrep) en lugar de 'grep' para un mejor rendimiento y características",
 ),
 (
     r"^find\s+\S+\s+-name\b",
-    "Use 'rg --files | rg pattern' or 'rg --files -g pattern' instead of 'find -name' for better performance",
+    "Usa 'rg --files | rg patron' o 'rg --files -g patron' en lugar de 'find -name' para un mejor rendimiento",
 ),
 ```
 
-## 🚀 GitHub Flow Workflow Summary
+## 🚀 Resumen del Flujo de Trabajo de GitHub Flow
 
-main (protected) ←── PR ←── feature/your-feature
+main (protegido) ←── PR ←── feature/tu-caracteristica
 ↓ ↑
-deploy development
+desplegar desarrollo
 
-### Daily Workflow:
+### Flujo de Trabajo Diario:
 
 1. git checkout main && git pull origin main
-2. git checkout -b feature/new-feature
-3. Make changes + tests
-4. git push origin feature/new-feature
-5. Create PR → Review → Merge to main
+2. git checkout -b feature/nueva-caracteristica
+3. Realizar cambios + pruebas
+4. git push origin feature/nueva-caracteristica
+5. Crear PR → Revisar → Fusionar a main
 
 ---
 
-_This document is a living guide. Update it as the project evolves and new patterns emerge._
+_Este documento es una guía viva. Actualízala a medida que el proyecto evolucione y surjan nuevos patrones._

@@ -1,579 +1,579 @@
 ---
 name: parallel-prp-creation
-description: Create multiple PRP variations in parallel for comparative analysis and implementation strategy validation
+description: Crea múltiples variaciones de PRP en paralelo para análisis comparativo y validación de la estrategia de implementación
 arguments:
   - name: prp_name
-    description: The base name for the PRP (e.g., "user-authentication")
+    description: El nombre base para el PRP (ej., "autenticacion-de-usuario")
   - name: implementation_details
-    description: Core feature requirements and context
+    description: Requisitos y contexto principales de la funcionalidad
   - name: number_of_parallel_prps
-    description: Number of parallel PRP variations to create (recommended 2-5)
+    description: Número de variaciones de PRP paralelas a crear (recomendado 2-5)
 ---
 
-# Parallel PRP Creation - Multiple Implementation Strategies
+# Creación de PRP en Paralelo - Múltiples Estrategias de Implementación
 
-Generate **ARGS** parallel PRP variations for comparative analysis and implementation approach validation. This command leverages multiple AI agents working simultaneously to create different implementation strategies for the same feature, enabling selection of the optimal approach.
+Genera **ARGS** variaciones de PRP en paralelo para análisis comparativo y validación del enfoque de implementación. Este comando aprovecha múltiples agentes de IA que trabajan simultáneamente para crear diferentes estrategias de implementación para la misma funcionalidad, permitiendo la selección del enfoque óptimo.
 
-## Overview
+## Resumen
 
-This workflow creates **NUMBER_OF_PARALLEL_PRPs** independent PRP variations:
+Este flujo de trabajo crea **NUMBER_OF_PARALLEL_PRPs** variaciones de PRP independientes:
 
-- Each agent researches the same feature from different architectural perspectives
-- Each agent creates a complete PRP with distinct implementation approaches
-- All agents work concurrently for maximum efficiency
-- Results enable comparative analysis and strategy selection
+- Cada agente investiga la misma funcionalidad desde diferentes perspectivas arquitectónicas.
+- Cada agente crea un PRP completo con enfoques de implementación distintos.
+- Todos los agentes trabajan de forma concurrente para una máxima eficiencia.
+- Los resultados permiten el análisis comparativo y la selección de la estrategia.
 
-## Execution Parameters
+## Parámetros de Ejecución
 
 PRP_NAME: $ARGUMENTS[0]
 IMPLEMENTATION_DETAILS: $ARGUMENTS[1]
 NUMBER_OF_PARALLEL_PRPs: $ARGUMENTS[2]
 
-## Parallel Agent Coordination
+## Coordinación de Agentes en Paralelo
 
-**CRITICAL**: Execute all agents simultaneously using multiple Task tool calls in a single response. Do not wait for one agent to complete before starting the next.
+**CRÍTICO**: Ejecuta todos los agentes simultáneamente utilizando múltiples llamadas a la herramienta Tarea en una sola respuesta. No esperes a que un agente termine para empezar el siguiente.
 
-## Agent Assignment Strategy
+## Estrategia de Asignación de Agentes
 
-Each agent approaches the same feature with different focus areas:
+Cada agente aborda la misma funcionalidad con diferentes áreas de enfoque:
 
-### Agent Specialization Matrix
+### Matriz de Especialización de Agentes
 
 ```yaml
-Agent 1: Performance-Optimized Approach
-  Focus: Scalability, caching, optimization
-  Architecture: High-performance patterns
-  Validation: Load testing, performance metrics
+Agente 1: Enfoque Optimizado para el Rendimiento
+  Foco: Escalabilidad, caché, optimización
+  Arquitectura: Patrones de alto rendimiento
+  Validación: Pruebas de carga, métricas de rendimiento
 
-Agent 2: Security-First Approach
-  Focus: Security, validation, authentication
-  Architecture: Defense-in-depth patterns
-  Validation: Security testing, penetration testing
+Agente 2: Enfoque "Seguridad Primero"
+  Foco: Seguridad, validación, autenticación
+  Arquitectura: Patrones de defensa en profundidad
+  Validación: Pruebas de seguridad, pruebas de penetración
 
-Agent 3: Maintainability-Focused Approach
-  Focus: Clean code, modularity, testing
-  Architecture: SOLID principles, design patterns
-  Validation: Unit testing, code quality
+Agente 3: Enfoque Centrado en la Mantenibilidad
+  Foco: Código limpio, modularidad, pruebas
+  Arquitectura: Principios SOLID, patrones de diseño
+  Validación: Pruebas unitarias, calidad del código
 
-Agent 4: Rapid-Development Approach
-  Focus: Quick implementation, minimal complexity
-  Architecture: Simplified patterns, frameworks
-  Validation: Integration testing, functionality
+Agente 4: Enfoque de Desarrollo Rápido
+  Foco: Implementación rápida, complejidad mínima
+  Arquitectura: Patrones simplificados, frameworks
+  Validación: Pruebas de integración, funcionalidad
 
-Agent 5: Enterprise-Grade Approach
-  Focus: Robustness, monitoring, observability
-  Architecture: Enterprise patterns, microservices
-  Validation: End-to-end testing, monitoring
+Agente 5: Enfoque de Grado Empresarial
+  Foco: Robustez, monitoreo, observabilidad
+  Arquitectura: Patrones empresariales, microservicios
+  Validación: Pruebas de extremo a extremo, monitoreo
 ```
 
-## Parallel Execution Commands
+## Comandos de Ejecución en Paralelo
 
-Execute these agents concurrently:
-
-```
-Use the Task tool to run these ${NUMBER_OF_PARALLEL_PRPs} agents in PARALLEL for feature: ${PRP_NAME}
-
-Implementation Details: ${IMPLEMENTATION_DETAILS}
-```
-
-### Agent 1: Performance-Optimized Implementation
+Ejecuta estos agentes de forma concurrente:
 
 ```
-Task: Performance-Optimized PRP Creation
-Prompt: Create a comprehensive PRP for "${PRP_NAME}" with focus on PERFORMANCE AND SCALABILITY.
+Usa la herramienta Tarea para ejecutar estos ${NUMBER_OF_PARALLEL_PRPs} agentes en PARALELO para la funcionalidad: ${PRP_NAME}
 
-Feature Details: ${IMPLEMENTATION_DETAILS}
-
-Your approach should emphasize:
-- High-performance architecture patterns
-- Caching strategies and optimization techniques
-- Database optimization and indexing
-- Async/await patterns and concurrency
-- Memory management and resource efficiency
-- Load balancing and horizontal scaling considerations
-
-Research Phase:
-1. Analyze existing codebase for performance patterns
-2. Research high-performance libraries and frameworks
-3. Identify bottlenecks and optimization opportunities
-4. Study caching layers and data access patterns
-5. Review performance monitoring and metrics
-
-PRP Creation:
-- Use PRPs/templates/prp_base.md as foundation
-- Focus implementation blueprint on performance patterns
-- Include specific performance validation gates
-- Add load testing and benchmarking requirements
-- Reference existing high-performance code examples
-
-Output Files:
-1. Save PRP as: PRPs/${PRP_NAME}-1.md
-2. Save comprehensive results as: RESULTS_${PRP_NAME}-1.md
-
-Include in results:
-- Performance analysis of current codebase
-- Specific optimization opportunities identified
-- Implementation approach summary
-- Performance validation strategy
-- Expected performance improvements
-
-Do NOT run any servers, builds, or executables. Focus on research and PRP creation only.
+Detalles de Implementación: ${IMPLEMENTATION_DETAILS}
 ```
 
-### Agent 2: Security-First Implementation
+### Agente 1: Implementación Optimizada para el Rendimiento
 
 ```
-Task: Security-First PRP Creation
-Prompt: Create a comprehensive PRP for "${PRP_NAME}" with focus on SECURITY AND DATA PROTECTION.
+Tarea: Creación de PRP Optimizado para el Rendimiento
+Prompt: Crea un PRP completo para "${PRP_NAME}" con un enfoque en RENDIMIENTO Y ESCALABILIDAD.
 
-Feature Details: ${IMPLEMENTATION_DETAILS}
+Detalles de la Funcionalidad: ${IMPLEMENTATION_DETAILS}
 
-Your approach should emphasize:
-- Security-by-design architecture patterns
-- Authentication and authorization strategies
-- Input validation and sanitization
-- Data encryption and protection
-- Security monitoring and logging
-- Vulnerability assessment and mitigation
+Tu enfoque debe enfatizar:
+- Patrones de arquitectura de alto rendimiento.
+- Estrategias de caché y técnicas de optimización.
+- Optimización de base de datos e indexación.
+- Patrones async/await y concurrencia.
+- Gestión de memoria y eficiencia de recursos.
+- Consideraciones de balanceo de carga y escalado horizontal.
 
-Research Phase:
-1. Analyze existing security patterns in codebase
-2. Research security frameworks and best practices
-3. Identify potential attack vectors and vulnerabilities
-4. Study authentication and authorization mechanisms
-5. Review security testing and validation approaches
+Fase de Investigación:
+1. Analiza la base de código existente en busca de patrones de rendimiento.
+2. Investiga bibliotecas y frameworks de alto rendimiento.
+3. Identifica cuellos de botella y oportunidades de optimización.
+4. Estudia las capas de caché y los patrones de acceso a datos.
+5. Revisa el monitoreo de rendimiento y las métricas.
 
-PRP Creation:
-- Use PRPs/templates/prp_base.md as foundation
-- Focus implementation blueprint on security patterns
-- Include comprehensive security validation gates
-- Add penetration testing and security scan requirements
-- Reference existing security implementations
+Creación del PRP:
+- Usa PRPs/templates/prp_base.md como base.
+- Enfoca el plan de implementación en patrones de rendimiento.
+- Incluye puertas de validación de rendimiento específicas.
+- Añade requisitos de pruebas de carga y benchmarking.
+- Referencia ejemplos de código existentes de alto rendimiento.
 
-Output Files:
-1. Save PRP as: PRPs/${PRP_NAME}-2.md
-2. Save comprehensive results as: RESULTS_${PRP_NAME}-2.md
+Archivos de Salida:
+1. Guarda el PRP como: PRPs/${PRP_NAME}-1.md
+2. Guarda los resultados completos como: RESULTS_${PRP_NAME}-1.md
 
-Include in results:
-- Security analysis of current implementation
-- Identified security risks and mitigations
-- Implementation approach summary
-- Security validation strategy
-- Compliance considerations
+Incluye en los resultados:
+- Análisis de rendimiento de la base de código actual.
+- Oportunidades de optimización específicas identificadas.
+- Resumen del enfoque de implementación.
+- Estrategia de validación del rendimiento.
+- Mejoras de rendimiento esperadas.
 
-Do NOT run any servers, builds, or executables. Focus on research and PRP creation only.
+NO ejecutes ningún servidor, build o ejecutable. Céntrate solo en la investigación y la creación del PRP.
 ```
 
-### Agent 3: Maintainability-Focused Implementation
+### Agente 2: Implementación "Seguridad Primero"
 
 ```
-Task: Maintainability-Focused PRP Creation
-Prompt: Create a comprehensive PRP for "${PRP_NAME}" with focus on CODE QUALITY AND MAINTAINABILITY.
+Tarea: Creación de PRP "Seguridad Primero"
+Prompt: Crea un PRP completo para "${PRP_NAME}" con un enfoque en SEGURIDAD Y PROTECCIÓN DE DATOS.
 
-Feature Details: ${IMPLEMENTATION_DETAILS}
+Detalles de la Funcionalidad: ${IMPLEMENTATION_DETAILS}
 
-Your approach should emphasize:
-- Clean code principles and SOLID design
-- Comprehensive testing strategies (unit, integration, E2E)
-- Modular architecture and separation of concerns
-- Documentation and code readability
-- Refactoring and technical debt prevention
-- Type safety and static analysis
+Tu enfoque debe enfatizar:
+- Patrones de arquitectura de seguridad por diseño.
+- Estrategias de autenticación y autorización.
+- Validación y sanitización de entradas.
+- Cifrado y protección de datos.
+- Monitoreo y registro de seguridad.
+- Evaluación y mitigación de vulnerabilidades.
 
-Research Phase:
-1. Analyze existing code quality patterns in codebase
-2. Research testing frameworks and quality tools
-3. Identify areas for improved modularity
-4. Study documentation and commenting standards
-5. Review refactoring opportunities and patterns
+Fase de Investigación:
+1. Analiza los patrones de seguridad existentes en la base de código.
+2. Investiga frameworks de seguridad y mejores prácticas.
+3. Identifica posibles vectores de ataque y vulnerabilidades.
+4. Estudia los mecanismos de autenticación y autorización.
+5. Revisa los enfoques de pruebas y validación de seguridad.
 
-PRP Creation:
-- Use PRPs/templates/prp_base.md as foundation
-- Focus implementation blueprint on clean code patterns
-- Include comprehensive testing validation gates
-- Add code quality metrics and static analysis
-- Reference existing well-structured code examples
+Creación del PRP:
+- Usa PRPs/templates/prp_base.md como base.
+- Enfoca el plan de implementación en patrones de seguridad.
+- Incluye puertas de validación de seguridad completas.
+- Añade requisitos de pruebas de penetración y escaneo de seguridad.
+- Referencia implementaciones de seguridad existentes.
 
-Output Files:
-1. Save PRP as: PRPs/${PRP_NAME}-3.md
-2. Save comprehensive results as: RESULTS_${PRP_NAME}-3.md
+Archivos de Salida:
+1. Guarda el PRP como: PRPs/${PRP_NAME}-2.md
+2. Guarda los resultados completos como: RESULTS_${PRP_NAME}-2.md
 
-Include in results:
-- Code quality analysis of current codebase
-- Identified technical debt and improvement opportunities
-- Implementation approach summary
-- Testing and quality validation strategy
-- Maintainability metrics and targets
+Incluye en los resultados:
+- Análisis de seguridad de la implementación actual.
+- Riesgos de seguridad identificados y mitigaciones.
+- Resumen del enfoque de implementación.
+- Estrategia de validación de seguridad.
+- Consideraciones de cumplimiento.
 
-Do NOT run any servers, builds, or executables. Focus on research and PRP creation only.
+NO ejecutes ningún servidor, build o ejecutable. Céntrate solo en la investigación y la creación del PRP.
 ```
 
-### Agent 4: Rapid-Development Implementation
+### Agente 3: Implementación Centrada en la Mantenibilidad
 
 ```
-Task: Rapid-Development PRP Creation
-Prompt: Create a comprehensive PRP for "${PRP_NAME}" with focus on SPEED OF IMPLEMENTATION.
+Tarea: Creación de PRP Centrado en la Mantenibilidad
+Prompt: Crea un PRP completo para "${PRP_NAME}" con un enfoque en CALIDAD DEL CÓDIGO Y MANTENIBILIDAD.
 
-Feature Details: ${IMPLEMENTATION_DETAILS}
+Detalles de la Funcionalidad: ${IMPLEMENTATION_DETAILS}
 
-Your approach should emphasize:
-- Minimal viable implementation patterns
-- Framework utilization and code generation
-- Simplified architecture and reduced complexity
-- Quick wins and iterative development
-- Leveraging existing libraries and components
-- Fast feedback loops and validation
+Tu enfoque debe enfatizar:
+- Principios de código limpio y diseño SOLID.
+- Estrategias de pruebas completas (unitarias, de integración, E2E).
+- Arquitectura modular y separación de conceptos.
+- Documentación y legibilidad del código.
+- Refactorización y prevención de la deuda técnica.
+- Seguridad de tipos y análisis estático.
 
-Research Phase:
-1. Analyze existing codebase for reusable components
-2. Research rapid development frameworks and tools
-3. Identify opportunities for code reuse and simplification
-4. Study existing patterns that can be quickly adapted
-5. Review integration testing for fast validation
+Fase de Investigación:
+1. Analiza los patrones de calidad de código existentes en la base de código.
+2. Investiga frameworks de pruebas y herramientas de calidad.
+3. Identifica áreas para mejorar la modularidad.
+4. Estudia los estándares de documentación y comentarios.
+5. Revisa las oportunidades y patrones de refactorización.
 
-PRP Creation:
-- Use PRPs/templates/prp_base.md as foundation
-- Focus implementation blueprint on rapid delivery patterns
-- Include streamlined validation gates for quick feedback
-- Add integration testing for core functionality
-- Reference existing components that can be leveraged
+Creación del PRP:
+- Usa PRPs/templates/prp_base.md como base.
+- Enfoca el plan de implementación en patrones de código limpio.
+- Incluye puertas de validación de pruebas completas.
+- Añade métricas de calidad de código y análisis estático.
+- Referencia ejemplos de código existentes bien estructurados.
 
-Output Files:
-1. Save PRP as: PRPs/${PRP_NAME}-4.md
-2. Save comprehensive results as: RESULTS_${PRP_NAME}-4.md
+Archivos de Salida:
+1. Guarda el PRP como: PRPs/${PRP_NAME}-3.md
+2. Guarda los resultados completos como: RESULTS_${PRP_NAME}-3.md
 
-Include in results:
-- Analysis of reusable components in codebase
-- Identified shortcuts and simplification opportunities
-- Implementation approach summary
-- Rapid validation strategy
-- Time estimates and delivery milestones
+Incluye en los resultados:
+- Análisis de la calidad del código de la base de código actual.
+- Deuda técnica identificada y oportunidades de mejora.
+- Resumen del enfoque de implementación.
+- Estrategia de pruebas y validación de calidad.
+- Métricas y objetivos de mantenibilidad.
 
-Do NOT run any servers, builds, or executables. Focus on research and PRP creation only.
+NO ejecutes ningún servidor, build o ejecutable. Céntrate solo en la investigación y la creación del PRP.
 ```
 
-### Agent 5: Enterprise-Grade Implementation
+### Agente 4: Implementación de Desarrollo Rápido
 
 ```
-Task: Enterprise-Grade PRP Creation
-Prompt: Create a comprehensive PRP for "${PRP_NAME}" with focus on ENTERPRISE ROBUSTNESS.
+Tarea: Creación de PRP de Desarrollo Rápido
+Prompt: Crea un PRP completo para "${PRP_NAME}" con un enfoque en la VELOCIDAD DE IMPLEMENTACIÓN.
 
-Feature Details: ${IMPLEMENTATION_DETAILS}
+Detalles de la Funcionalidad: ${IMPLEMENTATION_DETAILS}
 
-Your approach should emphasize:
-- Enterprise architecture patterns and scalability
-- Comprehensive monitoring and observability
-- Error handling and resilience patterns
-- Configuration management and deployment
-- Documentation and operational procedures
-- Compliance and audit requirements
+Tu enfoque debe enfatizar:
+- Patrones de implementación mínima viable.
+- Utilización de frameworks y generación de código.
+- Arquitectura simplificada y complejidad reducida.
+- Victorias rápidas y desarrollo iterativo.
+- Aprovechamiento de bibliotecas y componentes existentes.
+- Bucles de retroalimentación y validación rápidos.
 
-Research Phase:
-1. Analyze existing enterprise patterns in codebase
-2. Research enterprise frameworks and monitoring tools
-3. Identify requirements for production deployment
-4. Study error handling and recovery mechanisms
-5. Review operational and maintenance procedures
+Fase de Investigación:
+1. Analiza la base de código existente en busca de componentes reutilizables.
+2. Investiga frameworks y herramientas de desarrollo rápido.
+3. Identifica oportunidades para la reutilización y simplificación del código.
+4. Estudia patrones existentes que puedan adaptarse rápidamente.
+5. Revisa las pruebas de integración para una validación rápida.
 
-PRP Creation:
-- Use PRPs/templates/prp_base.md as foundation
-- Focus implementation blueprint on enterprise patterns
-- Include comprehensive operational validation gates
-- Add monitoring, logging, and alerting requirements
-- Reference existing enterprise-grade implementations
+Creación del PRP:
+- Usa PRPs/templates/prp_base.md como base.
+- Enfoca el plan de implementación en patrones de entrega rápida.
+- Incluye puertas de validación simplificadas para una retroalimentación rápida.
+- Añade pruebas de integración para la funcionalidad principal.
+- Referencia componentes existentes que puedan ser aprovechados.
 
-Output Files:
-1. Save PRP as: PRPs/${PRP_NAME}-5.md
-2. Save comprehensive results as: RESULTS_${PRP_NAME}-5.md
+Archivos de Salida:
+1. Guarda el PRP como: PRPs/${PRP_NAME}-4.md
+2. Guarda los resultados completos como: RESULTS_${PRP_NAME}-4.md
 
-Include in results:
-- Enterprise readiness analysis of current codebase
-- Identified operational and monitoring requirements
-- Implementation approach summary
-- Production validation strategy
-- Operational procedures and documentation
+Incluye en los resultados:
+- Análisis de componentes reutilizables en la base de código.
+- Atajos y oportunidades de simplificación identificados.
+- Resumen del enfoque de implementación.
+- Estrategia de validación rápida.
+- Estimaciones de tiempo e hitos de entrega.
 
-Do NOT run any servers, builds, or executables. Focus on research and PRP creation only.
+NO ejecutes ningún servidor, build o ejecutable. Céntrate solo en la investigación y la creación del PRP.
 ```
 
-## Agent Execution Rules
+### Agente 5: Implementación de Grado Empresarial
 
-### Research Guidelines
+```
+Tarea: Creación de PRP de Grado Empresarial
+Prompt: Crea un PRP completo para "${PRP_NAME}" con un enfoque en la ROBUSTEZ EMPRESARIAL.
 
-Each agent must independently:
+Detalles de la Funcionalidad: ${IMPLEMENTATION_DETAILS}
 
-1. **Codebase Analysis**
-   - Use Glob, Grep, and Read tools extensively
-   - Identify relevant existing patterns and code examples
-   - Analyze project structure and architectural decisions
-   - Find similar implementations to reference
+Tu enfoque debe enfatizar:
+- Patrones de arquitectura empresarial y escalabilidad.
+- Monitoreo y observabilidad completos.
+- Patrones de manejo de errores y resiliencia.
+- Gestión de la configuración y despliegue.
+- Documentación y procedimientos operativos.
+- Requisitos de cumplimiento y auditoría.
 
-2. **External Research**
-   - Use WebSearch for framework documentation
-   - Research best practices and implementation patterns
-   - Find relevant examples and case studies
-   - Identify potential libraries and tools
+Fase de Investigación:
+1. Analiza los patrones empresariales existentes en la base de código.
+2. Investiga frameworks empresariales y herramientas de monitoreo.
+3. Identifica los requisitos para el despliegue en producción.
+4. Estudia los mecanismos de manejo de errores y recuperación.
+5. Revisa los procedimientos operativos y de mantenimiento.
 
-3. **Context Documentation**
-   - Read PRPs/ai_docs/ for project-specific documentation
-   - Analyze configuration files and setup patterns
-   - Identify environment and dependency requirements
-   - Document existing conventions and standards
+Creación del PRP:
+- Usa PRPs/templates/prp_base.md como base.
+- Enfoca el plan de implementación en patrones empresariales.
+- Incluye puertas de validación operativas completas.
+- Añade requisitos de monitoreo, registro y alertas.
+- Referencia implementaciones de grado empresarial existentes.
 
-### PRP Creation Requirements
+Archivos de Salida:
+1. Guarda el PRP como: PRPs/${PRP_NAME}-5.md
+2. Guarda los resultados completos como: RESULTS_${PRP_NAME}-5.md
 
-Each agent must create a complete PRP including:
+Incluye en los resultados:
+- Análisis de la preparación empresarial de la base de código actual.
+- Requisitos operativos y de monitoreo identificados.
+- Resumen del enfoque de implementación.
+- Estrategia de validación en producción.
+- Procedimientos operativos y documentación.
+
+NO ejecutes ningún servidor, build o ejecutable. Céntrate solo en la investigación y la creación del PRP.
+```
+
+## Reglas de Ejecución de Agentes
+
+### Directrices de Investigación
+
+Cada agente debe, de forma independiente:
+
+1.  **Análisis de la Base de Código**
+    -   Usar las herramientas Glob, Grep y Read extensivamente.
+    -   Identificar patrones y ejemplos de código existentes relevantes.
+    -   Analizar la estructura del proyecto y las decisiones arquitectónicas.
+    -   Encontrar implementaciones similares para referenciar.
+
+2.  **Investigación Externa**
+    -   Usar WebSearch para la documentación de frameworks.
+    -   Investigar mejores prácticas y patrones de implementación.
+    -   Encontrar ejemplos y casos de estudio relevantes.
+    -   Identificar posibles bibliotecas y herramientas.
+
+3.  **Documentación de Contexto**
+    -   Leer `PRPs/ai_docs/` para la documentación específica del proyecto.
+    -   Analizar archivos de configuración y patrones de instalación.
+    -   Identificar requisitos de entorno y dependencias.
+    -   Documentar convenciones y estándares existentes.
+
+### Requisitos de Creación de PRP
+
+Cada agente debe crear un PRP completo que incluya:
 
 ```yaml
-## Goal
-[Specific implementation goal with focus area emphasis]
+## Objetivo
+[Objetivo de implementación específico con énfasis en el área de enfoque]
 
-## Why
-- Business value aligned with approach focus
-- Integration considerations for chosen strategy
-- Trade-offs and benefits of selected approach
+## Por qué
+- Valor de negocio alineado con el enfoque elegido.
+- Consideraciones de integración para la estrategia seleccionada.
+- Compromisos y beneficios del enfoque seleccionado.
 
-## What
-[Feature requirements tailored to implementation strategy]
+## Qué
+[Requisitos de la funcionalidad adaptados a la estrategia de implementación]
 
-## All Needed Context
-### Documentation & References
-- url: [Framework docs specific to approach]
-- file: [Relevant existing code examples]
-- docfile: [Project documentation from ai_docs/]
+## Todo el Contexto Necesario
+### Documentación y Referencias
+- url: [Documentación del framework específica para el enfoque]
+- file: [Ejemplos de código existentes relevantes]
+- docfile: [Documentación del proyecto de ai_docs/]
 
-### Implementation Patterns
-[Specific patterns for chosen approach]
+### Patrones de Implementación
+[Patrones específicos para el enfoque elegido]
 
-### Known Gotchas
-[Approach-specific challenges and solutions]
+### Problemas Conocidos (Gotchas)
+[Desafíos y soluciones específicos del enfoque]
 
-## Implementation Blueprint
-### Data Models and Structure
-[Models optimized for chosen approach]
+## Plan de Implementación
+### Modelos de Datos y Estructura
+[Modelos optimizados para el enfoque elegido]
 
-### Task List
-[Ordered tasks specific to implementation strategy]
+### Lista de Tareas
+[Tareas ordenadas específicas para la estrategia de implementación]
 
-### Pseudocode
-[Implementation approach with strategy-specific details]
+### Pseudocódigo
+[Enfoque de implementación con detalles específicos de la estrategia]
 
-### Integration Points
-[Integration strategy for chosen approach]
+### Puntos de Integración
+[Estrategia de integración para el enfoque elegido]
 
-## Validation Loop
-### Level 1: Syntax & Style
-[Standard validation commands]
+## Bucle de Validación
+### Nivel 1: Sintaxis y Estilo
+[Comandos de validación estándar]
 
-### Level 2: Unit Tests
-[Testing strategy aligned with approach]
+### Nivel 2: Pruebas Unitarias
+[Estrategia de pruebas alineada con el enfoque]
 
-### Level 3: Integration Tests
-[Validation specific to implementation strategy]
+### Nivel 3: Pruebas de Integración
+[Validación específica para la estrategia de implementación]
 
-## Final Validation Checklist
-[Comprehensive quality gates for chosen approach]
+## Lista de Verificación de Validación Final
+[Puertas de calidad completas para el enfoque elegido]
 ```
 
-### Results Documentation
+### Documentación de Resultados
 
-Each agent must create a comprehensive results file containing:
+Cada agente debe crear un archivo de resultados completo que contenga:
 
 ```markdown
-# ${PRP_NAME} Implementation Results - Agent ${N}
+# Resultados de Implementación de ${PRP_NAME} - Agente ${N}
 
-## Approach Summary
+## Resumen del Enfoque
 
-**Focus**: [Performance/Security/Maintainability/Rapid/Enterprise]
-**Strategy**: [Brief description of chosen implementation strategy]
+**Foco**: [Rendimiento/Seguridad/Mantenibilidad/Rápido/Empresarial]
+**Estrategia**: [Breve descripción de la estrategia de implementación elegida]
 
-## Research Findings
+## Hallazgos de la Investigación
 
-### Codebase Analysis
+### Análisis de la Base de Código
 
-- Existing patterns identified: [list with file paths]
-- Reusable components found: [list with descriptions]
-- Architectural insights: [key findings]
+- Patrones existentes identificados: [lista con rutas de archivo]
+- Componentes reutilizables encontrados: [lista con descripciones]
+- Perspectivas arquitectónicas: [hallazgos clave]
 
-### External Research
+### Investigación Externa
 
-- Frameworks/libraries recommended: [list with justifications]
-- Best practices identified: [key insights]
-- Implementation examples found: [relevant sources]
+- Frameworks/bibliotecas recomendados: [lista con justificaciones]
+- Mejores prácticas identificadas: [perspectivas clave]
+- Ejemplos de implementación encontrados: [fuentes relevantes]
 
-### Documentation Review
+### Revisión de la Documentación
 
-- Project-specific constraints: [from ai_docs analysis]
-- Configuration requirements: [environment setup needs]
-- Integration considerations: [existing system compatibility]
+- Restricciones específicas del proyecto: [del análisis de ai_docs]
+- Requisitos de configuración: [necesidades de configuración del entorno]
+- Consideraciones de integración: [compatibilidad con sistemas existentes]
 
-## Implementation Strategy
+## Estrategia de Implementación
 
-### Core Approach
+### Enfoque Principal
 
-[Detailed explanation of implementation strategy]
+[Explicación detallada de la estrategia de implementación]
 
-### Key Differentiators
+### Diferenciadores Clave
 
-[What makes this approach unique compared to alternatives]
+[Qué hace que este enfoque sea único en comparación con las alternativas]
 
-### Trade-offs
+### Compromisos
 
-**Advantages**: [benefits of this approach]
-**Disadvantages**: [limitations and challenges]
-**Complexity**: [implementation complexity assessment]
+**Ventajas**: [beneficios de este enfoque]
+**Desventajas**: [limitaciones y desafíos]
+**Complejidad**: [evaluación de la complejidad de la implementación]
 
-## Validation Strategy
+## Estrategia de Validación
 
-### Testing Approach
+### Enfoque de Pruebas
 
-[Specific testing strategy for this implementation]
+[Estrategia de pruebas específica para esta implementación]
 
-### Quality Gates
+### Puertas de Calidad
 
-[Validation checkpoints and success criteria]
+[Puntos de control de validación y criterios de éxito]
 
-### Success Metrics
+### Métricas de Éxito
 
-[How to measure implementation success]
+[Cómo medir el éxito de la implementación]
 
-## Recommendations
+## Recomendaciones
 
-### Implementation Priority
+### Prioridad de Implementación
 
-[Recommended implementation order and dependencies]
+[Orden de implementación recomendado y dependencias]
 
-### Risk Mitigation
+### Mitigación de Riesgos
 
-[Identified risks and mitigation strategies]
+[Riesgos identificados y estrategias de mitigación]
 
-### Next Steps
+### Próximos Pasos
 
-[Immediate actions required to proceed]
+[Acciones inmediatas requeridas para proceder]
 
-## Comparative Analysis
+## Análisis Comparativo
 
-### Strengths vs Other Approaches
+### Fortalezas vs Otros Enfoques
 
-[Why choose this approach over alternatives]
+[Por qué elegir este enfoque sobre las alternativas]
 
-### Ideal Use Cases
+### Casos de Uso Ideales
 
-[When this approach is most suitable]
+[Cuándo este enfoque es más adecuado]
 
-### Performance Expectations
+### Expectativas de Rendimiento
 
-[Expected outcomes and benchmarks]
+[Resultados y benchmarks esperados]
 ```
 
-## Coordination Protocol
+## Protocolo de Coordinación
 
-### Execution Management
+### Gestión de la Ejecución
 
-1. **Parallel Launch**: All agents start simultaneously
-2. **Independent Operation**: No inter-agent communication
-3. **Consistent Base**: All use same prp_base.md template
-4. **Unique Focus**: Each agent maintains distinct strategic approach
-5. **Complete Output**: Each produces both PRP and results files
+1.  **Lanzamiento Paralelo**: Todos los agentes comienzan simultáneamente.
+2.  **Operación Independiente**: Sin comunicación entre agentes.
+3.  **Base Consistente**: Todos usan la misma plantilla `prp_base.md`.
+4.  **Foco Único**: Cada agente mantiene un enfoque estratégico distinto.
+5.  **Salida Completa**: Cada uno produce tanto el archivo PRP como el de resultados.
 
-### Quality Assurance
+### Garantía de Calidad
 
-Each agent must ensure:
+Cada agente debe asegurar:
 
-- [ ] Complete research across codebase, external sources, and documentation
-- [ ] PRP follows base template structure exactly
-- [ ] Implementation strategy is clearly differentiated
-- [ ] Validation gates are executable and specific
-- [ ] Results file provides comprehensive analysis
-- [ ] No code execution or server startup attempts
+- [ ] Investigación completa en la base de código, fuentes externas y documentación.
+- [ ] El PRP sigue la estructura de la plantilla base exactamente.
+- [ ] La estrategia de implementación está claramente diferenciada.
+- [ ] Las puertas de validación son ejecutables y específicas.
+- [ ] El archivo de resultados proporciona un análisis completo.
+- [ ] No hay intentos de ejecución de código o arranque de servidores.
 
-### Time Management
+### Gestión del Tiempo
 
-- **Research Phase**: 10-15 minutes per agent
-- **PRP Creation**: 15-20 minutes per agent
-- **Results Documentation**: 5-10 minutes per agent
-- **Total Parallel Time**: 30-45 minutes (all agents concurrent)
+-   **Fase de Investigación**: 10-15 minutos por agente.
+-   **Creación del PRP**: 15-20 minutos por agente.
+-   **Documentación de Resultados**: 5-10 minutos por agente.
+-   **Tiempo Total en Paralelo**: 30-45 minutos (todos los agentes concurrentes).
 
-## Expected Outputs
+## Salidas Esperadas
 
-Upon completion, you will have:
+Al finalizar, tendrás:
 
 ```
 PRPs/
-├── ${PRP_NAME}-1.md    # Performance-optimized approach
-├── ${PRP_NAME}-2.md    # Security-first approach
-├── ${PRP_NAME}-3.md    # Maintainability-focused approach
-├── ${PRP_NAME}-4.md    # Rapid-development approach
-├── ${PRP_NAME}-5.md    # Enterprise-grade approach
+├── ${PRP_NAME}-1.md    # Enfoque optimizado para el rendimiento
+├── ${PRP_NAME}-2.md    # Enfoque "seguridad primero"
+├── ${PRP_NAME}-3.md    # Enfoque centrado en la mantenibilidad
+├── ${PRP_NAME}-4.md    # Enfoque de desarrollo rápido
+├── ${PRP_NAME}-5.md    # Enfoque de grado empresarial
 
-Root Directory/
-├── RESULTS_${PRP_NAME}-1.md    # Performance approach analysis
-├── RESULTS_${PRP_NAME}-2.md    # Security approach analysis
-├── RESULTS_${PRP_NAME}-3.md    # Maintainability approach analysis
-├── RESULTS_${PRP_NAME}-4.md    # Rapid development approach analysis
-├── RESULTS_${PRP_NAME}-5.md    # Enterprise approach analysis
+Directorio Raíz/
+├── RESULTS_${PRP_NAME}-1.md    # Análisis del enfoque de rendimiento
+├── RESULTS_${PRP_NAME}-2.md    # Análisis del enfoque de seguridad
+├── RESULTS_${PRP_NAME}-3.md    # Análisis del enfoque de mantenibilidad
+├── RESULTS_${PRP_NAME}-4.md    # Análisis del enfoque de desarrollo rápido
+├── RESULTS_${PRP_NAME}-5.md    # Análisis del enfoque empresarial
 ```
 
-## Comparative Analysis Framework
+## Marco de Análisis Comparativo
 
-After all agents complete, synthesize results by comparing:
+Después de que todos los agentes completen, sintetiza los resultados comparando:
 
-### Implementation Complexity
+### Complejidad de la Implementación
 
-- Lines of code estimates
-- Development time projections
-- Dependency requirements
-- Configuration complexity
+- Estimaciones de líneas de código.
+- Proyecciones de tiempo de desarrollo.
+- Requisitos de dependencia.
+- Complejidad de la configuración.
 
-### Performance Characteristics
+### Características de Rendimiento
 
-- Expected response times
-- Resource utilization
-- Scalability limitations
-- Optimization potential
+- Tiempos de respuesta esperados.
+- Utilización de recursos.
+- Limitaciones de escalabilidad.
+- Potencial de optimización.
 
-### Maintenance Burden
+### Carga de Mantenimiento
 
-- Code complexity metrics
-- Testing requirements
-- Documentation needs
-- Long-term sustainability
+- Métricas de complejidad del código.
+- Requisitos de pruebas.
+- Necesidades de documentación.
+- Sostenibilidad a largo plazo.
 
-### Risk Assessment
+### Evaluación de Riesgos
 
-- Technical risks
-- Security vulnerabilities
-- Performance bottlenecks
-- Integration challenges
+- Riesgos técnicos.
+- Vulnerabilidades de seguridad.
+- Cuellos de botella de rendimiento.
+- Desafíos de integración.
 
-## Selection Criteria
+## Criterios de Selección
 
-Choose optimal approach based on:
+Elige el enfoque óptimo basado en:
 
-1. **Project Requirements**: Match approach to actual needs
-2. **Team Capabilities**: Align with team expertise and resources
-3. **Timeline Constraints**: Balance quality with delivery speed
-4. **Maintenance Goals**: Consider long-term sustainability
-5. **Performance Needs**: Match optimization level to requirements
+1.  **Requisitos del Proyecto**: Coincidir el enfoque con las necesidades reales.
+2.  **Capacidades del Equipo**: Alinear con la experiencia y los recursos del equipo.
+3.  **Restricciones de Tiempo**: Equilibrar la calidad con la velocidad de entrega.
+4.  **Objetivos de Mantenimiento**: Considerar la sostenibilidad a largo plazo.
+5.  **Necesidades de Rendimiento**: Coincidir el nivel de optimización con los requisitos.
 
-## Success Metrics
+## Métricas de Éxito
 
-Evaluate parallel PRP creation success by:
+Evalúa el éxito de la creación de PRP en paralelo mediante:
 
-- **Coverage Completeness**: All approaches thoroughly researched
-- **Strategic Differentiation**: Each PRP offers unique implementation strategy
-- **Context Richness**: Comprehensive codebase and external research
-- **Validation Clarity**: Executable and specific quality gates
-- **Decision Support**: Clear trade-offs enable informed selection
+-   **Completitud de la Cobertura**: Todos los enfoques investigados a fondo.
+-   **Diferenciación Estratégica**: Cada PRP ofrece una estrategia de implementación única.
+-   **Riqueza del Contexto**: Investigación exhaustiva de la base de código y externa.
+-   **Claridad de la Validación**: Puertas de calidad ejecutables y específicas.
+-   **Soporte a la Decisión**: Compromisos claros que permiten una selección informada.
 
-## Emergency Protocols
+## Protocolos de Emergencia
 
-If agents encounter issues:
+Si los agentes encuentran problemas:
 
-1. **Research Roadblocks**: Skip to available similar examples
-2. **Context Limitations**: Focus on most relevant existing patterns
-3. **Time Constraints**: Prioritize core implementation over edge cases
-4. **Resource Conflicts**: Ensure agents work independently
-5. **Quality Issues**: Maintain minimum PRP completeness standards
+1.  **Bloqueos en la Investigación**: Pasar a ejemplos similares disponibles.
+2.  **Limitaciones de Contexto**: Centrarse en los patrones existentes más relevantes.
+3.  **Restricciones de Tiempo**: Priorizar la implementación principal sobre los casos borde.
+4.  **Conflictos de Recursos**: Asegurar que los agentes trabajen de forma independiente.
+5.  **Problemas de Calidad**: Mantener los estándares mínimos de completitud del PRP.
 
-This parallel approach maximizes the probability of identifying the optimal implementation strategy by exploring multiple architectural approaches simultaneously, enabling data-driven selection of the best approach for your specific requirements.
+Este enfoque paralelo maximiza la probabilidad de identificar la estrategia de implementación óptima al explorar múltiples enfoques arquitectónicos simultáneamente, permitiendo una selección basada en datos del mejor enfoque para tus requisitos específicos.

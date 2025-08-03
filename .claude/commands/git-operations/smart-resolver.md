@@ -1,60 +1,60 @@
-Perform an intelligent merge conflict resolution with deep understanding of our codebase.
+Realiza una resolución inteligente de conflictos de fusión con un profundo conocimiento de nuestra base de código.
 
-## Pre-resolution analysis:
+## Análisis previo a la resolución:
 
-1. Understand what each branch was trying to achieve:
-git log --oneline origin/main..HEAD
-git log --oneline HEAD..origin/main
+1.  Entender lo que cada rama intentaba lograr:
+    `git log --oneline origin/main..HEAD`
+    `git log --oneline HEAD..origin/main`
 
-2. Check if there are any related issues or PRs:
-git log --grep="fix" --grep="feat" --oneline -20
-- use the github cli as needed
+2.  Revisar si hay issues o PRs relacionados:
+    `git log --grep="fix" --grep="feat" --oneline -20`
+    -   Usa la CLI de GitHub según sea necesario.
 
-3. Identify the type of conflicts (feature vs feature, fix vs refactor, etc.)
+3.  Identificar el tipo de conflictos (funcionalidad vs funcionalidad, corrección vs refactorización, etc.).
 
-4. Think hard about your findings and plan accordingly
+4.  Piensa detenidamente sobre tus hallazgos y planifica en consecuencia.
 
-## Resolution strategy:
+## Estrategia de resolución:
 
-### For different file types:
+### Para diferentes tipos de archivos:
 
-**Source code conflicts (.js, .ts, .py, etc.)**:
-- Understand the business logic of both changes
-- Merge both features if they're complementary
-- If conflicting, check which has better test coverage
-- Look for related files that might need updates
+**Conflictos en código fuente (.js, .ts, .py, etc.)**:
+-   Entender la lógica de negocio de ambos cambios.
+-   Fusionar ambas funcionalidades si son complementarias.
+-   Si entran en conflicto, verificar cuál tiene mejor cobertura de pruebas.
+-   Buscar archivos relacionados que puedan necesitar actualizaciones.
 
-**Test file conflicts**:
-- Usually merge both sets of tests
-- Ensure no duplicate test names
-- Update test descriptions if needed
+**Conflictos en archivos de prueba**:
+-   Generalmente, fusionar ambos conjuntos de pruebas.
+-   Asegurarse de que no haya nombres de prueba duplicados.
+-   Actualizar las descripciones de las pruebas si es necesario.
 
-**Configuration files**:
-- package.json: Merge dependencies, scripts
-- .env.example: Include all new variables
-- CI/CD configs: Merge all jobs unless duplicate
+**Archivos de configuración**:
+-   `package.json`: Fusionar dependencias, scripts.
+-   `.env.example`: Incluir todas las variables nuevas.
+-   Configuraciones de CI/CD: Fusionar todos los trabajos (jobs) a menos que estén duplicados.
 
-**Documentation conflicts**:
-- Merge both documentation updates
-- Ensure consistency in terminology
-- Update table of contents if needed
+**Conflictos en documentación**:
+-   Fusionar ambas actualizaciones de la documentación.
+-   Asegurar la consistencia en la terminología.
+-   Actualizar la tabla de contenidos si es necesario.
 
-**Lock files (package-lock.json, poetry.lock)**:
-- Delete and regenerate after resolving package.json/pyproject.toml
+**Archivos de bloqueo (lock files) (package-lock.json, poetry.lock)**:
+-   Eliminar y regenerar después de resolver `package.json`/`pyproject.toml`.
 
-## Post-resolution verification:
+## Verificación posterior a la resolución:
 
-1. Run linters to check code style
-2. Run type checkers if applicable  
-3. Run test suite
-4. Check for semantic conflicts (code that merges but breaks functionality)
-5. Verify no debugging code was left in
+1.  Ejecutar linters para revisar el estilo del código.
+2.  Ejecutar verificadores de tipo (type checkers) si aplica.
+3.  Ejecutar la suite de pruebas.
+4.  Buscar conflictos semánticos (código que se fusiona pero rompe la funcionalidad).
+5.  Verificar que no se haya dejado código de depuración.
 
-## Final steps:
+## Pasos finales:
 
-1. Create a detailed summary of all resolutions
-2. If any resolutions are uncertain, mark them with TODO comments
-3. Suggest additional testing that might be needed
-4. Stage all resolved files
+1.  Crear un resumen detallado de todas las resoluciones.
+2.  Si alguna resolución es incierta, marcarla con comentarios `TODO`.
+3.  Sugerir pruebas adicionales que puedan ser necesarias.
+4.  Añadir al "staging" todos los archivos resueltos.
 
-Begin by analyzing the current conflict situation with git status and understanding both branches.
+Comienza analizando la situación actual del conflicto con `git status` y entendiendo ambas ramas.

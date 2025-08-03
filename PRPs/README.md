@@ -1,44 +1,44 @@
-# Product Requirement Prompt (PRP) Concept
+# Concepto de Prompt de Requisito de Producto (PRP)
 
-"Over-specifying what to build while under-specifying the context, and how to build it, is why so many AI-driven coding attempts stall at 80%. A Product Requirement Prompt (PRP) fixes that by fusing the disciplined scope of a classic Product Requirements Document (PRD) with the “context-is-king” mindset of modern prompt engineering."
+"Especificar en exceso qué construir mientras se sub-especifica el contexto y cómo construirlo, es la razón por la cual tantos intentos de codificación impulsados por IA se estancan en el 80%. Un Prompt de Requisito de Producto (PRP) soluciona eso al fusionar el alcance disciplinado de un Documento de Requisitos de Producto (PRD) clásico con la mentalidad de "el contexto es el rey" de la ingeniería de prompts moderna."
 
-## What is a PRP?
+## ¿Qué es un PRP?
 
-Product Requirement Prompt (PRP)
-A PRP is a structured prompt that supplies an AI coding agent with everything it needs to deliver a vertical slice of working software—no more, no less.
+Prompt de Requisito de Producto (PRP)
+Un PRP es un prompt estructurado que suministra a un agente de codificación de IA todo lo que necesita para entregar una porción vertical de software funcional, ni más, ni menos.
 
-### How it differs from a PRD
+### ¿Cómo se diferencia de un PRD?
 
-A traditional PRD clarifies what the product must do and why customers need it, but deliberately avoids how it will be built.
+Un PRD tradicional clarifica qué debe hacer el producto y por qué los clientes lo necesitan, pero evita deliberadamente cómo se construirá.
 
-A PRP keeps the goal and justification sections of a PRD yet adds three AI-critical layers:
+Un PRP mantiene las secciones de objetivo y justificación de un PRD, pero añade tres capas críticas para la IA:
 
-### Context
+### Contexto
 
-- Precise file paths and content, library versions and library context, code snippets examples. LLMs generate higher-quality code when given direct, in-prompt references instead of broad descriptions. Usage of a ai_docs/ directory to pipe in library and other docs.
+-   Rutas y contenido de archivos precisos, versiones de bibliotecas y contexto de las mismas, ejemplos de fragmentos de código. Los LLMs generan código de mayor calidad cuando se les dan referencias directas en el prompt en lugar de descripciones amplias. Uso de un directorio `ai_docs/` para inyectar documentación de bibliotecas y otros documentos.
 
-### Implementation Details and Strategy
+### Detalles y Estrategia de Implementación
 
-- In contrast of a traditional PRD, a PRP explicitly states how the product will be built. This includes the use of API endpoints, test runners, or agent patterns (ReAct, Plan-and-Execute) to use. Usage of typehints, dependencies, architectural patterns and other tools to ensure the code is built correctly.
+-   A diferencia de un PRD tradicional, un PRP establece explícitamente cómo se construirá el producto. Esto incluye el uso de endpoints de API, ejecutores de pruebas o patrones de agentes (ReAct, Planificar y Ejecutar) a utilizar. Uso de anotaciones de tipo (typehints), dependencias, patrones arquitectónicos y otras herramientas para asegurar que el código se construya correctamente.
 
-### Validation Gates
+### Puertas de Validación
 
-- Deterministic checks such as pytest, ruff, or static type passes “Shift-left” quality controls catch defects early and are cheaper than late re-work.
-  Example: Each new funtion should be individaully tested, Validation gate = all tests pass.
+-   Verificaciones deterministas como `pytest`, `ruff` o verificaciones de tipos estáticos "desplazan hacia la izquierda" los controles de calidad, detectando defectos temprano, lo cual es más barato que rehacer el trabajo tarde.
+    Ejemplo: Cada nueva función debe ser probada individualmente. Puerta de validación = todas las pruebas pasan.
 
-### PRP Layer Why It Exists
+### ¿Por qué existe la capa de PRP?
 
-- The PRP folder is used to prepare and pipe PRPs to the agentic coder.
+-   La carpeta `PRPs` se utiliza para preparar y enviar PRPs al codificador agéntico.
 
-## Why context is non-negotiable
+## Por qué el contexto no es negociable
 
-Large-language-model outputs are bounded by their context window; irrelevant or missing context literally squeezes out useful tokens
+Las salidas de los modelos de lenguaje grandes están limitadas por su ventana de contexto; un contexto irrelevante o faltante literalmente exprime los tokens útiles.
 
-The industry mantra “Garbage In → Garbage Out” applies doubly to prompt engineering and especially in agentic engineering: sloppy input yields brittle code
+El mantra de la industria "Basura Entra → Basura Sale" se aplica doblemente a la ingeniería de prompts y especialmente en la ingeniería agéntica: una entrada descuidada produce un código frágil.
 
-## In short
+## En resumen
 
-A PRP is PRD + curated codebase intelligence + agent/runbook—the minimum viable packet an AI needs to plausibly ship production-ready code on the first pass.
+Un PRP es un PRD + inteligencia curada de la base de código + agente/manual de ejecución—el paquete mínimo viable que una IA necesita para poder entregar de manera plausible código listo para producción en el primer intento.
 
-The PRP can be small and focusing on a single task or large and covering multiple tasks.
-The true power of PRP is in the ability to chain tasks together in a PRP to build, self-validate and ship complex features.
+El PRP puede ser pequeño y centrarse en una sola tarea, o grande y cubrir múltiples tareas.
+El verdadero poder del PRP reside en la capacidad de encadenar tareas en un PRP para construir, autovalidar y entregar funcionalidades complejas.

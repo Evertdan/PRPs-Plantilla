@@ -1,37 +1,37 @@
 # CLAUDE.md
 
-This file provides comprehensive guidance to Claude Code when working with Java code in this repository.
+Este archivo proporciona una guía completa a Claude Code cuando se trabaja con código Java en este repositorio.
 
-## Core Development Philosophy
+## Filosofía de Desarrollo Principal
 
-### KISS (Keep It Simple, Stupid)
+### KISS (Keep It Simple, Stupid - Mantenlo Simple, Estúpido)
 
-Simplicity should be a key goal in design. Choose straightforward solutions over complex ones whenever possible. Simple solutions are easier to understand, maintain, and debug.
+La simplicidad debe ser un objetivo clave en el diseño. Elige soluciones sencillas sobre las complejas siempre que sea posible. Las soluciones simples son más fáciles de entender, mantener y depurar.
 
-### YAGNI (You Aren't Gonna Need It)
+### YAGNI (You Aren't Gonna Need It - No lo vas a necesitar)
 
-Avoid building functionality on speculation. Implement features only when they are needed, not when you anticipate they might be useful in the future.
+Evita construir funcionalidades por especulación. Implementa características solo cuando sean necesarias, no cuando anticipes que podrían ser útiles en el futuro.
 
-### Design Principles
+### Principios de Diseño
 
-- **Dependency Inversion**: High-level modules should not depend on low-level modules. Both should depend on abstractions.
-- **Open/Closed Principle**: Software entities should be open for extension but closed for modification.
-- **Single Responsibility**: Each class, method, and module should have one clear purpose.
-- **Fail Fast**: Validate inputs early and throw exceptions immediately when issues occur.
+- **Inversión de Dependencias**: Los módulos de alto nivel no deben depender de los de bajo nivel. Ambos deben depender de abstracciones.
+- **Principio Abierto/Cerrado**: Las entidades de software deben estar abiertas a la extensión pero cerradas a la modificación.
+- **Responsabilidad Única**: Cada clase, método y módulo debe tener un propósito claro.
+- **Fallar Rápido**: Valida las entradas temprano y lanza excepciones inmediatamente cuando ocurran problemas.
 
-## 🧱 Code Structure & Modularity
+## 🧱 Estructura del Código y Modularidad
 
-### File and Method Limits
+### Límites de Archivos y Métodos
 
-- **Never create a class file longer than 500 lines**. If approaching this limit, refactor by extracting classes.
-- **Methods should be under 50 lines** for better AI comprehension and maintainability.
-- **Classes should focus on one concept** - follow Single Responsibility Principle.
-- **Cyclomatic complexity must not exceed 10** per method (SonarQube rule).
+- **Nunca crees un archivo de clase de más de 500 líneas**. Si te acercas a este límite, refactoriza extrayendo clases.
+- **Los métodos deben tener menos de 50 líneas** para una mejor comprensión por parte de la IA y mantenibilidad.
+- **Las clases deben centrarse en un concepto** - sigue el Principio de Responsabilidad Única.
+- **La complejidad ciclomática no debe exceder de 10** por método (regla de SonarQube).
 
-### Project Structure (Maven Standard Layout)
+### Estructura del Proyecto (Diseño Estándar de Maven)
 
 ```
-project-root/
+raiz-del-proyecto/
 ├── pom.xml
 ├── CLAUDE.md
 ├── .claude/
@@ -39,7 +39,7 @@ project-root/
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   └── com/company/project/
+│   │   │   └── com/empresa/proyecto/
 │   │   │       ├── controller/
 │   │   │       ├── service/
 │   │   │       ├── repository/
@@ -54,319 +54,319 @@ project-root/
 │   │       └── logback-spring.xml
 │   └── test/
 │       ├── java/
-│       │   └── com/company/project/
+│       │   └── com/empresa/proyecto/
 │       └── resources/
 └── target/
 ```
 
-## 🛠️ Maven Configuration
+## 🛠️ Configuración de Maven
 
-### Essential POM Configuration
+### Configuración Esencial del POM
 
 ```xml
 <properties>
-    <!-- Java Version -->
-    > Insert project specific versions
+    <!-- Versión de Java -->
+    > Insertar versiones específicas del proyecto
 
-    <!-- Spring Versions -->
-    > Insert project specific versions
+    <!-- Versiones de Spring -->
+    > Insertar versiones específicas del proyecto
 
-    <!-- Plugin Versions -->
-    > Insert project specific versions
+    <!-- Versiones de Plugins -->
+    > Insertar versiones específicas del proyecto
 </properties>
 ```
 
-### Maven Commands
+### Comandos de Maven
 
 ```bash
-# Clean and compile
+# Limpiar y compilar
 mvn clean compile
 
-# Run tests
+# Ejecutar pruebas
 mvn test
 
-# Run tests with coverage
+# Ejecutar pruebas con cobertura
 mvn clean test jacoco:report
 
-# Package application
+# Empaquetar la aplicación
 mvn clean package
 
-# Run SonarQube analysis
+# Ejecutar análisis de SonarQube
 mvn clean verify sonar:sonar
 
-# Check for dependency updates
+# Comprobar actualizaciones de dependencias
 mvn versions:display-dependency-updates
 
-# Enforce code style
+# Forzar el estilo de código
 mvn checkstyle:check
 
-# Run SpotBugs analysis
+# Ejecutar análisis de SpotBugs
 mvn spotbugs:check
 ```
 
-## 📋 Code Style & Conventions
+## 📋 Estilo de Código y Convenciones
 
-### Java Style Guide
+### Guía de Estilo de Java
 
-- **Follow Google Java Style Guide** with these specifics:
-  - Line length: 100 characters
-  - Indent: 4 spaces (no tabs)
-  - Braces: Egyptian style (same line)
-- **Use `final` keyword judiciously** - for variables and parameters, but avoid on classes using Spring AOP features
-- **Prefer immutable objects** - thread-safe by design
-- **No wildcard imports** - explicit imports only
-- **One class per file** - except for inner classes
+- **Seguir la Guía de Estilo de Java de Google** con estas especificaciones:
+  - Longitud de línea: 100 caracteres
+  - Indentación: 4 espacios (sin tabuladores)
+  - Llaves: Estilo egipcio (en la misma línea)
+- **Usar la palabra clave `final` con criterio** - para variables y parámetros, pero evitarla en clases que usan características de AOP de Spring.
+- **Preferir objetos inmutables** - seguros para hilos por diseño.
+- **Sin importaciones con comodín** - solo importaciones explícitas.
+- **Una clase por archivo** - excepto para clases internas.
 
-### Naming Conventions
+### Convenciones de Nomenclatura
 
-- **Classes**: `PascalCase` (e.g., `UserService`)
-- **Interfaces**: `PascalCase` without "I" prefix
-- **Methods**: `camelCase` (e.g., `getUserById`)
-- **Constants**: `UPPER_SNAKE_CASE`
-- **Packages**: `lowercase` (e.g., `com.company.project`)
-- **Type Parameters**: Single capital letters (e.g., `T`, `E`, `K`, `V`)
+- **Clases**: `PascalCase` (p. ej., `UserService`)
+- **Interfaces**: `PascalCase` sin prefijo "I"
+- **Métodos**: `camelCase` (p. ej., `getUserById`)
+- **Constantes**: `UPPER_SNAKE_CASE`
+- **Paquetes**: `lowercase` (p. ej., `com.empresa.proyecto`)
+- **Parámetros de Tipo**: Letras mayúsculas únicas (p. ej., `T`, `E`, `K`, `V`)
 
-## 🎯 Type Safety & Annotations
+## 🎯 Seguridad de Tipos y Anotaciones
 
-### Bean Validation
+### Validación de Beans
 
-- **Use Bean Validation** (JSR-380) for validation
-- **Use `@Valid`** for method parameters
-- **Use `@Validated`** for method return values
+- **Usar Validación de Beans** (JSR-380) para la validación.
+- **Usar `@Valid`** para parámetros de método.
+- **Usar `@Validated`** para valores de retorno de método.
 
-### Strict Typing Requirements
+### Requisitos de Tipado Estricto
 
-- **No raw types** - Always use generics
-- **No `Object` type** unless absolutely necessary
-- **Use `Optional<T>`** instead of returning null
-- **Annotate everything** - `@NonNull`, `@Nullable`
-- **No suppressed warnings** without justification
+- **Sin tipos crudos (raw types)** - Siempre usar genéricos.
+- **Sin tipo `Object`** a menos que sea absolutamente necesario.
+- **Usar `Optional<T>`** en lugar de devolver nulo.
+- **Anotar todo** - `@NonNull`, `@Nullable`.
+- **Sin advertencias suprimidas** sin justificación.
 
-### Essential Annotations
+### Anotaciones Esenciales
 
 ```java
-// Nullability annotations (JSR-305)
+// Anotaciones de nulidad (JSR-305)
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-// Package-level default
+// Por defecto a nivel de paquete
 @ParametersAreNonnullByDefault
-package com.company.project;
+package com.empresa.proyecto;
 
-// Lombok for boilerplate reduction
+// Lombok para reducir el código repetitivo
 import lombok.Data;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-// Validation annotations
+// Anotaciones de validación
 import jakarta.validation.constraints.*;
 ```
 
-### Generic Types Best Practices
+### Mejores Prácticas de Tipos Genéricos
 
 ```java
-// ❌ Bad: Raw types
+// ❌ Mal: Tipos crudos
 List list = new ArrayList();
 Map map = new HashMap();
 
-// ✅ Good: Parameterized types
+// ✅ Bien: Tipos parametrizados
 List<String> list = new ArrayList<>();
 Map<String, User> map = new HashMap<>();
 
-// ✅ Good: Bounded type parameters
+// ✅ Bien: Parámetros de tipo acotados
 public interface Repository<T extends Entity> {
     Optional<T> findById(Long id);
     List<T> findAll();
 }
 
-// ✅ Good: Multiple bounds
+// ✅ Bien: Múltiples cotas
 public <T extends Comparable<T> & Serializable> void process(T item) {
-    // Implementation
+    // Implementación
 }
 ```
 
 ## 🤖 Claude Code
 
-### Best Practices
+### Mejores Prácticas
 
-- Document repository-specific conventions in CLAUDE.md
-- Specify coding style preferences in CLAUDE.md
-- List unexpected behaviors or warnings in CLAUDE.md
-- Include environment setup instructions in CLAUDE.md
+- Documentar las convenciones específicas del repositorio en CLAUDE.md.
+- Especificar las preferencias de estilo de codificación en CLAUDE.md.
+- Listar comportamientos inesperados o advertencias en CLAUDE.md.
+- Incluir instrucciones de configuración del entorno en CLAUDE.md.
 
-### AI-Assisted Development Guidelines
+### Directrices para el Desarrollo Asistido por IA
 
-- Provide clear context in method names and Javadoc
-- Include example inputs/outputs in documentation
-- Use descriptive variable names that convey intent
-- Structure code to be easily understood by AI assistants
-- Keep methods focused and under 50 lines for better AI comprehension
-- Use consistent naming patterns across the codebase
-- Document edge cases and business logic clearly
-- Include unit tests that demonstrate usage patterns
+- Proporcionar un contexto claro en los nombres de los métodos y en Javadoc.
+- Incluir ejemplos de entradas/salidas en la documentación.
+- Usar nombres de variables descriptivos que transmitan la intención.
+- Estructurar el código para que sea fácilmente comprensible por los asistentes de IA.
+- Mantener los métodos enfocados y de menos de 50 líneas para una mejor comprensión por parte de la IA.
+- Usar patrones de nomenclatura consistentes en toda la base de código.
+- Documentar claramente los casos borde y la lógica de negocio.
+- Incluir pruebas unitarias que demuestren los patrones de uso.
 
-### Search Command Requirements
+### Requisitos del Comando de Búsqueda
 
-**CRITICAL**: Always use `rg` (ripgrep) instead of traditional `grep` and `find` commands:
+**CRÍTICO**: Siempre usa `rg` (ripgrep) en lugar de los comandos tradicionales `grep` y `find`:
 
 ```bash
-# ❌ Don't use grep
-grep -r "pattern" .
+# ❌ No uses grep
+grep -r "patron" .
 
-# ✅ Use rg instead
-rg "pattern"
+# ✅ Usa rg en su lugar
+rg "patron"
 
-# ❌ Don't use find with name
+# ❌ No uses find con name
 find . -name "*.java"
 
-# ✅ Use rg with file filtering
+# ✅ Usa rg con filtrado de archivos
 rg --files | rg "\.java$"
-# or
+# o
 rg --files -g "*.java"
 ```
 
-**Enforcement Rules:**
+**Reglas de Aplicación:**
 
 ```
 (
     r"^grep\b(?!.*\|)",
-    "Use 'rg' (ripgrep) instead of 'grep' for better performance and features",
+    "Usa 'rg' (ripgrep) en lugar de 'grep' para un mejor rendimiento y características",
 ),
 (
     r"^find\s+\S+\s+-name\b",
-    "Use 'rg --files | rg pattern' or 'rg --files -g pattern' instead of 'find -name' for better performance",
+    "Usa 'rg --files | rg patron' o 'rg --files -g patron' en lugar de 'find -name' para un mejor rendimiento",
 ),
 ```
 
-## 📖 Documentation Standards
+## 📖 Estándares de Documentación
 
-### OpenAPI/Swagger Documentation Requirements (MANDATORY)
+### Requisitos de Documentación OpenAPI/Swagger (OBLIGATORIO)
 
-**CRITICAL**: Every REST controller and DTO MUST include comprehensive OpenAPI annotations for frontend developers.
+**CRÍTICO**: Cada controlador REST y DTO DEBE incluir anotaciones OpenAPI completas para los desarrolladores de frontend.
 
-#### Required Controller Annotations
+#### Anotaciones de Controlador Requeridas
 
-Every `@RestController` class MUST include:
+Cada clase `@RestController` DEBE incluir:
 
 ```java
 @RestController
-@RequestMapping("/api/resource")
-@Tag(name = "Resource Management", description = "Operations for managing resources")
+@RequestMapping("/api/recurso")
+@Tag(name = "Gestión de Recursos", description = "Operaciones para gestionar recursos")
 @Validated
 public class ResourceController {
 
     @Operation(
-        summary = "Brief action description",
-        description = "Detailed explanation of what this endpoint does, including business logic"
+        summary = "Breve descripción de la acción",
+        description = "Explicación detallada de lo que hace este endpoint, incluyendo la lógica de negocio"
     )
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Success case description"),
-        @ApiResponse(responseCode = "400", description = "Bad request - validation failed"),
-        @ApiResponse(responseCode = "404", description = "Resource not found"),
-        @ApiResponse(responseCode = "500", description = "Internal server error")
+        @ApiResponse(responseCode = "200", description = "Descripción del caso de éxito"),
+        @ApiResponse(responseCode = "400", description = "Solicitud incorrecta - validación fallida"),
+        @ApiResponse(responseCode = "404", description = "Recurso no encontrado"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @GetMapping("/{id}")
     public ResponseEntity<ResourceResponse> getById(
-        @Parameter(description = "Resource unique identifier", example = "123", required = true)
+        @Parameter(description = "Identificador único del recurso", example = "123", required = true)
         @PathVariable Long id,
 
-        @Parameter(description = "Include related data", example = "true")
+        @Parameter(description = "Incluir datos relacionados", example = "true")
         @RequestParam(defaultValue = "false") Boolean includeDetails
     ) {
-        // Implementation
+        // Implementación
     }
 }
 ```
 
-#### Required DTO Annotations
+#### Anotaciones de DTO Requeridas
 
-Every DTO class MUST include:
+Cada clase DTO DEBE incluir:
 
 ```java
-@Schema(description = "Resource response containing all resource information")
+@Schema(description = "Respuesta del recurso que contiene toda la información del recurso")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResourceResponse {
 
-    @Schema(description = "Unique identifier", example = "123", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Identificador único", example = "123", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @Schema(description = "Resource name", example = "Sample Resource", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotBlank(message = "Name cannot be blank")
-    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
+    @Schema(description = "Nombre del recurso", example = "Recurso de Muestra", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank(message = "El nombre no puede estar en blanco")
+    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
     private String name;
 
-    @Schema(description = "Resource creation timestamp", example = "2024-01-15T10:30:00Z", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Marca de tiempo de creación del recurso", example = "2024-01-15T10:30:00Z", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime createdAt;
 
-    @Schema(description = "List of related items", implementation = RelatedItemResponse.class)
+    @Schema(description = "Lista de elementos relacionados", implementation = RelatedItemResponse.class)
     private List<RelatedItemResponse> relatedItems;
 }
 ```
 
-#### OpenAPI Documentation Checklist
+#### Lista de Verificación de Documentación OpenAPI
 
-Every endpoint MUST document:
+Cada endpoint DEBE documentar:
 
-- ✅ **HTTP methods** - Explicit @Operation annotation
-- ✅ **Path parameters** - @Parameter with description and example
-- ✅ **Query parameters** - @Parameter with description, example, and default values
-- ✅ **Request/Response schemas** - @Schema on all DTO fields
-- ✅ **HTTP status codes** - Complete @ApiResponses with all possible outcomes
-- ✅ **Validation rules** - @Schema.requiredMode, constraints descriptions
-- ✅ **Examples** - Real-world example values for all fields
-- ✅ **Business context** - What the endpoint does and why
+- ✅ **Métodos HTTP** - Anotación explícita @Operation
+- ✅ **Parámetros de ruta** - @Parameter con descripción y ejemplo
+- ✅ **Parámetros de consulta** - @Parameter con descripción, ejemplo y valores por defecto
+- ✅ **Esquemas de Solicitud/Respuesta** - @Schema en todos los campos de DTO
+- ✅ **Códigos de estado HTTP** - @ApiResponses completas con todos los resultados posibles
+- ✅ **Reglas de validación** - @Schema.requiredMode, descripciones de restricciones
+- ✅ **Ejemplos** - Valores de ejemplo del mundo real para todos los campos
+- ✅ **Contexto de negocio** - Qué hace el endpoint y por qué
 
-#### Validation Integration
+#### Integración de la Validación
 
-Combine OpenAPI with Bean Validation for automatic schema generation:
+Combina OpenAPI con la Validación de Beans para la generación automática de esquemas:
 
 ```java
 public class CreateResourceRequest {
 
-    @Schema(description = "Resource name", example = "New Resource")
-    @NotBlank(message = "Name is required")
-    @Size(min = 2, max = 100, message = "Name must be 2-100 characters")
+    @Schema(description = "Nombre del recurso", example = "Nuevo Recurso")
+    @NotBlank(message = "El nombre es obligatorio")
+    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
     private String name;
 
-    @Schema(description = "Resource category", example = "CATEGORY_A", allowableValues = {"CATEGORY_A", "CATEGORY_B", "CATEGORY_C"})
-    @NotNull(message = "Category is required")
+    @Schema(description = "Categoría del recurso", example = "CATEGORIA_A", allowableValues = {"CATEGORIA_A", "CATEGORIA_B", "CATEGORIA_C"})
+    @NotNull(message = "La categoría es obligatoria")
     private ResourceCategory category;
 
-    @Schema(description = "Resource priority", example = "5", minimum = "1", maximum = "10")
-    @Min(value = 1, message = "Priority must be at least 1")
-    @Max(value = 10, message = "Priority must be at most 10")
+    @Schema(description = "Prioridad del recurso", example = "5", minimum = "1", maximum = "10")
+    @Min(value = 1, message = "La prioridad debe ser al menos 1")
+    @Max(value = 10, message = "La prioridad debe ser como máximo 10")
     private Integer priority;
 }
 ```
 
-#### Error Response Documentation
+#### Documentación de Respuesta de Error
 
-MUST document error responses consistently:
+DEBE documentar las respuestas de error de manera consistente:
 
 ```java
-@Schema(description = "Error response for validation failures")
+@Schema(description = "Respuesta de error para fallos de validación")
 public class ErrorResponse {
 
-    @Schema(description = "Error message", example = "Validation failed")
+    @Schema(description = "Mensaje de error", example = "Validación fallida")
     private String message;
 
-    @Schema(description = "HTTP status code", example = "400")
+    @Schema(description = "Código de estado HTTP", example = "400")
     private Integer status;
 
-    @Schema(description = "Request timestamp", example = "2024-01-15T10:30:00Z")
+    @Schema(description = "Marca de tiempo de la solicitud", example = "2024-01-15T10:30:00Z")
     private LocalDateTime timestamp;
 
-    @Schema(description = "Field validation errors", implementation = FieldError.class)
+    @Schema(description = "Errores de validación de campos", implementation = FieldError.class)
     private List<FieldError> fieldErrors;
 }
 ```
 
-#### Dependencies Required
+#### Dependencias Requeridas
 
 ```xml
 <dependency>
@@ -376,27 +376,27 @@ public class ErrorResponse {
 </dependency>
 ```
 
-**Access URLs:**
+**URLs de Acceso:**
 
 - Swagger UI: `http://localhost:8080/swagger-ui.html`
 - OpenAPI JSON: `http://localhost:8080/v3/api-docs`
 
-### Javadoc Requirements
+### Requisitos de Javadoc
 
-Every public class, method, and field MUST have Javadoc. Use Google's Javadoc style:
+Cada clase, método y campo público DEBE tener Javadoc. Usa el estilo de Javadoc de Google:
 
 ```java
 /**
- * Calculates the discount price for a product.
+ * Calcula el precio con descuento de un producto.
  *
- * <p>This method applies a percentage discount to the original price,
- * ensuring the final price doesn't go below the minimum threshold.
+ * <p>Este método aplica un descuento porcentual al precio original,
+ * asegurando que el precio final no sea inferior al umbral mínimo.
  *
- * @param originalPrice the original price of the product, must be positive
- * @param discountPercent the discount percentage (0-100)
- * @param minPrice the minimum allowed price after discount
- * @return the calculated discount price
- * @throws IllegalArgumentException if any parameter is invalid
+ * @param originalPrice el precio original del producto, debe ser positivo
+ * @param discountPercent el porcentaje de descuento (0-100)
+ * @param minPrice el precio mínimo permitido después del descuento
+ * @return el precio con descuento calculado
+ * @throws IllegalArgumentException si algún parámetro es inválido
  * @since 1.2.0
  */
 @Nonnull
@@ -404,30 +404,30 @@ public BigDecimal calculateDiscount(
         @Nonnull BigDecimal originalPrice,
         double discountPercent,
         @Nonnull BigDecimal minPrice) {
-    // Implementation
+    // Implementación
 }
 ```
 
-### Documentation Rules
+### Reglas de Documentación
 
-- First sentence is a summary (ends with period)
-- Use `<p>` for paragraph breaks
-- Document all parameters with `@param`
-- Document return value with `@return`
-- Document exceptions with `@throws`
-- Use `@since` for API versioning
-- Link related items with `{@link}`
+- La primera oración es un resumen (termina con un punto).
+- Usa `<p>` para saltos de párrafo.
+- Documenta todos los parámetros con `@param`.
+- Documenta el valor de retorno con `@return`.
+- Documenta las excepciones con `@throws`.
+- Usa `@since` para el versionado de la API.
+- Enlaza elementos relacionados con `{@link}`.
 
-## 🧪 Testing Strategy
+## 🧪 Estrategia de Pruebas
 
-### Test Organization
+### Organización de las Pruebas
 
-- Unit tests: Same package structure as main code
-- Integration tests: Separate `src/test/integration` folder
-- Test naming: `ClassNameTest` for unit tests
-- Test method naming: `should_ExpectedBehavior_When_StateUnderTest`
+- Pruebas unitarias: Misma estructura de paquetes que el código principal.
+- Pruebas de integración: Carpeta separada `src/test/integration`.
+- Nomenclatura de pruebas: `NombreClaseTest` para pruebas unitarias.
+- Nomenclatura de métodos de prueba: `deberia_ComportamientoEsperado_Cuando_EstadoBajoPrueba`
 
-### Testing Best Practices
+### Mejores Prácticas de Pruebas
 
 ```java
 // JUnit 5 + AssertJ + Mockito
@@ -450,9 +450,9 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("should return user when valid ID provided")
-    void should_ReturnUser_When_ValidIdProvided() {
-        // Given
+    @DisplayName("debería devolver un usuario cuando se proporciona un ID válido")
+    void deberia_DevolverUsuario_Cuando_IdValidoProporcionado() {
+        // Dado
         Long userId = 1L;
         User expectedUser = User.builder()
             .id(userId)
@@ -461,10 +461,10 @@ class UserServiceTest {
         when(userRepository.findById(userId))
             .thenReturn(Optional.of(expectedUser));
 
-        // When
+        // Cuando
         Optional<User> result = userService.findById(userId);
 
-        // Then
+        // Entonces
         assertThat(result)
             .isPresent()
             .hasValue(expectedUser);
@@ -472,209 +472,209 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("should throw exception when ID is null")
-    void should_ThrowException_When_IdIsNull() {
-        // When/Then
+    @DisplayName("debería lanzar una excepción cuando el ID es nulo")
+    void deberia_LanzarExcepcion_Cuando_IdEsNulo() {
+        // Cuando/Entonces
         assertThatThrownBy(() -> userService.findById(null))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("User ID cannot be null");
+            .hasMessage("El ID de usuario no puede ser nulo");
     }
 }
 ```
 
-### Test Coverage Requirements
+### Requisitos de Cobertura de Pruebas
 
-- Minimum 80% line coverage
-- Minimum 80% branch coverage
-- Critical business logic: 90%+ coverage
-- All public methods must have tests
+- Cobertura de línea mínima del 80%
+- Cobertura de rama mínima del 80%
+- Lógica de negocio crítica: cobertura del 90%+
+- Todos los métodos públicos deben tener pruebas
 
 ## 🚀 Spring Boot
 
-### Spring Boot Best Practices
+### Mejores Prácticas de Spring Boot
 
-- Use Spring Boot starters for dependency management
-- Enable DevTools for development productivity
-- Configure virtual threads for better performance (Java 21)
-- Use `@ConfigurationProperties` for type-safe configuration
-- Implement proper actuator endpoints for monitoring
-- Enable graceful shutdown by default
+- Usar starters de Spring Boot para la gestión de dependencias.
+- Habilitar DevTools para la productividad en el desarrollo.
+- Configurar hilos virtuales para un mejor rendimiento (Java 21).
+- Usar `@ConfigurationProperties` para una configuración segura en tipos.
+- Implementar endpoints de actuador adecuados para el monitoreo.
+- Habilitar el apagado gradual por defecto.
 
-## 🔐 Input Validation
+## 🔐 Validación de Entradas
 
-### Bean Validation (Jakarta Validation)
+### Validación de Beans (Jakarta Validation)
 
-## 📊 IMPORTANT!!! Follow SonarQube Configuration
+## 📊 ¡¡¡IMPORTANTE!!! Seguir la Configuración de SonarQube
 
-### Code Quality Rules (standard sonarqube rules)
+### Reglas de Calidad del Código (reglas estándar de sonarqube)
 
-- **Cognitive Complexity**: Max 15 per method
-- **Cyclomatic Complexity**: Max 10 per method
-- **Duplicated Lines**: Max 3%
-- **Code Coverage**: Min 80%
-- **No new issues introduced (default Sonar way quality gate)**
-- **Technical Debt Ratio**: Max 5%
-- **Security Hotspots**: Must be reviewed
+- **Complejidad Cognitiva**: Máximo 15 por método.
+- **Complejidad Ciclomática**: Máximo 10 por método.
+- **Líneas Duplicadas**: Máximo 3%.
+- **Cobertura de Código**: Mínimo 80%.
+- **No introducir nuevos problemas (puerta de calidad por defecto de Sonar way)**.
+- **Ratio de Deuda Técnica**: Máximo 5%.
+- **Puntos Calientes de Seguridad**: Deben ser revisados.
 
-## 🌱 Spring Boot Best Practices
+## 🌱 Mejores Prácticas de Spring Boot
 
-### Final Classes and AOP Limitations
+### Clases Finales y Limitaciones de AOP
 
-- **CRITICAL**: Avoid `final` modifier on Spring service classes (`@Service`, `@Component`, `@Repository`)
-- **Reason**: Spring AOP (including `@Transactional`, `@Cacheable`, `@Async`) uses CGLIB proxies
-- **Problem**: Final classes cannot be subclassed, preventing proxy creation
-- **Solution**: Use non-final classes with constructor injection
+- **CRÍTICO**: Evita el modificador `final` en las clases de servicio de Spring (`@Service`, `@Component`, `@Repository`).
+- **Razón**: Spring AOP (incluyendo `@Transactional`, `@Cacheable`, `@Async`) usa proxies CGLIB.
+- **Problema**: Las clases finales no pueden ser subclasificadas, lo que impide la creación de proxies.
+- **Solución**: Usa clases no finales con inyección de constructor.
 
-#### When to Use Final
+#### Cuándo Usar Final
 
-✅ **DO use final for:**
+✅ **SÍ usa final para:**
 
-- Local variables and method parameters
-- Fields that should never change
-- Utility classes with only static methods
-- DTOs and value objects without AOP annotations
+- Variables locales y parámetros de método.
+- Campos que nunca deben cambiar.
+- Clases de utilidad con solo métodos estáticos.
+- DTOs y objetos de valor sin anotaciones AOP.
 
-❌ **AVOID final for:**
+❌ **EVITA final para:**
 
-- `@Service`, `@Component`, `@Repository` classes
-- Classes using `@Transactional`, `@Cacheable`, `@Async`
-- Any class requiring Spring AOP features
+- Clases `@Service`, `@Component`, `@Repository`.
+- Clases que usan `@Transactional`, `@Cacheable`, `@Async`.
+- Cualquier clase que requiera características de Spring AOP.
 
-### Interface vs Class-Based Design
+### Diseño Basado en Interfaces vs Clases
 
-- **Modern Spring**: Interfaces are **optional** for most services
-- **Use interfaces when**:
-  - Multiple implementations exist
-  - You want to hide AOP annotations from public API
-  - Following domain-driven design patterns
-- **Skip interfaces when**:
-  - Single implementation with constructor injection
-  - Internal services with no external API
-  - Simple CRUD operations
+- **Spring Moderno**: Las interfaces son **opcionales** para la mayoría de los servicios.
+- **Usa interfaces cuando**:
+  - Existen múltiples implementaciones.
+  - Quieres ocultar las anotaciones AOP de la API pública.
+  - Sigues patrones de diseño dirigido por el dominio.
+- **Omite las interfaces cuando**:
+  - Hay una única implementación con inyección de constructor.
+  - Son servicios internos sin API externa.
+  - Son operaciones CRUD simples.
 
-### Proxy Strategy
+### Estrategia de Proxy
 
 ```java
-// ✅ Good: Non-final service class
+// ✅ Bien: Clase de servicio no final
 @Service
 @Transactional
 public class UserService {
-    // Implementation
+    // Implementación
 }
 
-// ❌ Bad: Final class prevents AOP
+// ❌ Mal: La clase final impide AOP
 @Service
 @Transactional
-public final class UserService { // CGLIB cannot proxy this!
-    // Implementation
+public final class UserService { // ¡CGLIB no puede crear un proxy para esto!
+    // Implementación
 }
 ```
 
-## 🚀 Performance Guidelines
+## 🚀 Directrices de Rendimiento
 
-### Spring Boot 3.5 Performance Features
+### Características de Rendimiento de Spring Boot 3.5
 
-- **Virtual Threads (Java 21)**: Enable with `spring.threads.virtual.enabled=true`
-- **HTTP/2**: Enabled by default for better multiplexing
-- **Compression**: Enable response compression
-- **Connection Pooling**: Configure for AWS SDK (if needed)
-- **Caching**: Use Spring Cache abstraction
+- **Hilos Virtuales (Java 21)**: Habilitar con `spring.threads.virtual.enabled=true`.
+- **HTTP/2**: Habilitado por defecto para una mejor multiplexación.
+- **Compresión**: Habilitar la compresión de respuestas.
+- **Agrupación de Conexiones**: Configurar para el SDK de AWS (si es necesario).
+- **Caché**: Usar la abstracción de Caché de Spring.
 
-## 🛡️ Security Best Practices
+## 🛡️ Mejores Prácticas de Seguridad
 
-### Security Guidelines
+### Directrices de Seguridad
 
-- Never log sensitive information
-- Use parameterized queries (no string concatenation)
-- Validate all inputs
-- Use strong encryption algorithms
-- Keep dependencies updated
-- Follow OWASP guidelines
-- Use security annotations
+- Nunca registrar información sensible.
+- Usar consultas parametrizadas (sin concatenación de cadenas).
+- Validar todas las entradas.
+- Usar algoritmos de cifrado fuertes.
+- Mantener las dependencias actualizadas.
+- Seguir las directrices de OWASP.
+- Usar anotaciones de seguridad.
 
-## 🔧 Common Issues and Solutions
+## 🔧 Problemas Comunes y Soluciones
 
-### Virtual Thread Pinning
+### Fijación de Hilos Virtuales (Virtual Thread Pinning)
 
-- Avoid synchronized blocks in hot paths
-- Use `ReentrantLock` instead of `synchronized`
-- Monitor with `-Djdk.tracePinnedThreads=short`
-- Profile with JDK Flight Recorder
+- Evita los bloques `synchronized` en rutas críticas.
+- Usa `ReentrantLock` en lugar de `synchronized`.
+- Monitorea con `-Djdk.tracePinnedThreads=short`.
+- Perfila con JDK Flight Recorder.
 
-### Bedrock Rate Limiting
+### Limitación de Tasa de Bedrock
 
-- Implement exponential backoff with jitter
-- Use circuit breakers (Resilience4j)
-- Monitor token usage with CloudWatch
-- Configure request queuing
+- Implementa un retroceso exponencial con fluctuación (jitter).
+- Usa interruptores de circuito (Resilience4j).
+- Monitorea el uso de tokens con CloudWatch.
+- Configura la cola de solicitudes.
 
-### Spring AI Memory Management
+### Gestión de Memoria de Spring AI
 
-- Configure appropriate context windows
-- Implement conversation pruning
-- Use streaming for large responses
-- Monitor heap usage
+- Configura ventanas de contexto apropiadas.
+- Implementa la poda de conversaciones.
+- Usa streaming para respuestas grandes.
+- Monitorea el uso del heap.
 
-## 🔄 Git Workflow
+## 🔄 Flujo de Trabajo de Git
 
-### Commit Message Format
+### Formato de Mensaje de Commit
 
-- NEVER include claude code, written by claude code or similar in the commit message
-
-```
-<type>(<scope>): <subject>
-
-<body>
-
-<footer>
-```
-
-Types: feat, fix, docs, style, refactor, test, chore
-
-Example:
+- NUNCA incluyas "claude code", "written by claude code" o similares en el mensaje de commit.
 
 ```
-feat(user): add email verification with Nova model
+<tipo>(<ámbito>): <asunto>
 
-- Implement email verification service
-- Add verification token generation
-- Integrate with Amazon Nova for content generation
-- Update user entity with verification fields
+<cuerpo>
 
-Closes #234
+<pie>
 ```
 
-## ⚠️ Critical Guidelines
+Tipos: feat, fix, docs, style, refactor, test, chore
 
-1. **No raw types** - Always use generics
-2. **No null returns** - Use Optional<T>
-3. **Validate all inputs** - Use Jakarta Validation
-4. **Document all public APIs** - Complete Javadoc AND OpenAPI annotations
-5. **MANDATORY OpenAPI** - Every REST endpoint MUST have complete @Operation, @ApiResponses, @Parameter, and @Schema annotations
-6. **Test everything** - Minimum 80% coverage
-7. **Handle all exceptions** - No empty catch blocks
-8. **Use final judiciously** - For variables/parameters, avoid on Spring service classes
-9. **No magic numbers** - Extract to constants
-10. **One class per file** - Except inner classes
-11. **Follow SonarQube rules** - Zero blockers/criticals
-12. **Frontend-first API design** - All endpoints must be React developer friendly with complete examples and schemas
+Ejemplo:
 
-## 📋 Pre-commit Checklist
+```
+feat(user): añadir verificación de correo electrónico con el modelo Nova
 
-- [ ] All compiler warnings resolved
-- [ ] Javadoc for all public methods/classes
-- [ ] **OpenAPI annotations on ALL REST endpoints** (@Operation, @ApiResponses, @Parameter, @Schema)
-- [ ] **DTO schemas with examples** (@Schema with description and example on all fields)
-- [ ] **API documentation accessible** at `/swagger-ui.html`
-- [ ] Unit tests written (80%+ coverage)
-- [ ] No SonarQube critical/blocker issues
-- [ ] No SpotBugs high priority warnings
-- [ ] Code formatted (mvn spotless:apply)
-- [ ] All inputs validated
-- [ ] Logging at appropriate levels (if logging is setup)
-- [ ] **Frontend developer can use API** without asking questions
+- Implementar servicio de verificación de correo electrónico.
+- Añadir generación de token de verificación.
+- Integrar con Amazon Nova para la generación de contenido.
+- Actualizar el modelo de usuario con campos de verificación.
+
+Cierra #234
+```
+
+## ⚠️ Directrices Críticas
+
+1. **Sin tipos crudos** - Siempre usar genéricos.
+2. **Sin retornos nulos** - Usar `Optional<T>`.
+3. **Validar todas las entradas** - Usar Jakarta Validation.
+4. **Documentar todas las APIs públicas** - Javadoc COMPLETO Y anotaciones OpenAPI.
+5. **OpenAPI OBLIGATORIO** - Cada endpoint REST DEBE tener anotaciones @Operation, @ApiResponses, @Parameter y @Schema completas.
+6. **Probar todo** - Cobertura mínima del 80%.
+7. **Manejar todas las excepciones** - Sin bloques `catch` vacíos.
+8. **Usar `final` con criterio** - Para variables/parámetros, evitar en clases de servicio de Spring.
+9. **Sin números mágicos** - Extraer a constantes.
+10. **Una clase por archivo** - Excepto clases internas.
+11. **Seguir las reglas de SonarQube** - Cero bloqueadores/críticos.
+12. **Diseño de API "Frontend-first"** - Todos los endpoints deben ser amigables para los desarrolladores de React con ejemplos y esquemas completos.
+
+## 📋 Lista de Verificación Pre-commit
+
+- [ ] Todas las advertencias del compilador resueltas.
+- [ ] Javadoc para todos los métodos/clases públicos.
+- [ ] **Anotaciones OpenAPI en TODOS los endpoints REST** (@Operation, @ApiResponses, @Parameter, @Schema).
+- [ ] **Esquemas de DTO con ejemplos** (@Schema con descripción y ejemplo en todos los campos).
+- [ ] **Documentación de la API accesible** en `/swagger-ui.html`.
+- [ ] Pruebas unitarias escritas (cobertura del 80%+).
+- [ ] Sin problemas críticos/bloqueadores de SonarQube.
+- [ ] Sin advertencias de alta prioridad de SpotBugs.
+- [ ] Código formateado (mvn spotless:apply).
+- [ ] Todas las entradas validadas.
+- [ ] Registro en los niveles apropiados (si el registro está configurado).
+- [ ] **El desarrollador de frontend puede usar la API** sin hacer preguntas.
 
 ---
 
-_Keep this guide updated as patterns evolve. Quality over speed, always._
-_Last updated: July 2025_
+_Mantén esta guía actualizada a medida que los patrones evolucionen. Calidad sobre velocidad, siempre._
+_Última actualización: Julio de 2025_

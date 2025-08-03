@@ -1,175 +1,175 @@
 ---
-Intended for Jira/GitHub tasks or other task management systems to break down and plan the implementation.
+Destinado a tareas de Jira/GitHub u otros sistemas de gestión de tareas para desglosar y planificar la implementación.
 ---
 
-# Task Template v2 - Information Dense with Validation Loops
+# Plantilla de Tarea v2 - Densa en Información con Bucles de Validación
 
-> Concise, executable tasks with embedded context and validation commands
+> Tareas concisas y ejecutables con contexto incrustado y comandos de validación
 
-## Format
+## Formato
 
 ```
-[ACTION] path/to/file:
-  - [OPERATION]: [DETAILS]
-  - VALIDATE: [COMMAND]
-  - IF_FAIL: [DEBUG_HINT]
+[ACCIÓN] ruta/al/archivo:
+  - [OPERACIÓN]: [DETALLES]
+  - VALIDAR: [COMANDO]
+  - SI_FALLA: [PISTA_DE_DEPURACIÓN]
 ```
 
-## Actions keywords to use when creating tasks for concise and meaningful descriptions
+## Palabras clave de acciones a usar al crear tareas para descripciones concisas y significativas
 
-- **READ**: Understand existing patterns
-- **CREATE**: New file with specific content
-- **UPDATE**: Modify existing file
-- **DELETE**: Remove file/code
-- **FIND**: Search for patterns
-- **TEST**: Verify behavior
-- **FIX**: Debug and repair
+- **LEER**: Entender patrones existentes.
+- **CREAR**: Nuevo archivo con contenido específico.
+- **ACTUALIZAR**: Modificar archivo existente.
+- **ELIMINAR**: Quitar archivo/código.
+- **ENCONTRAR**: Buscar patrones.
+- **PROBAR**: Verificar comportamiento.
+- **CORREGIR**: Depurar y reparar.
 
-## Critical Context Section
+## Sección de Contexto Crítico
 
 ```yaml
-# Include these BEFORE tasks when context is crucial
-context:
+# Incluir esto ANTES de las tareas cuando el contexto es crucial
+contexto:
   docs:
-    - url: [API documentation]
-      focus: [specific method/section]
+    - url: [documentación de la API]
+      enfoque: [método/sección específica]
 
-  patterns:
-    - file: existing/example.py
-      copy: [pattern name]
+  patrones:
+    - archivo: ejemplo/existente.py
+      copiar: [nombre del patrón]
 
-  gotchas:
-    - issue: "Library X requires Y"
-      fix: "Always do Z first"
+  problemas_conocidos:
+    - problema: "La biblioteca X requiere Y"
+      solucion: "Siempre hacer Z primero"
 ```
 
-## Task Examples with Validation
+## Ejemplos de Tareas con Validación
 
-### Setup Tasks
+### Tareas de Configuración
 
 ```
-READ src/config/settings.py:
-  - UNDERSTAND: Current configuration structure
-  - FIND: Model configuration pattern
-  - NOTE: Config uses pydantic BaseSettings
+LEER src/config/settings.py:
+  - ENTENDER: Estructura de configuración actual.
+  - ENCONTRAR: Patrón de configuración de modelos.
+  - NOTA: La configuración usa pydantic BaseSettings.
 
-READ tests/test_models.py:
-  - UNDERSTAND: Test pattern for models
-  - FIND: Fixture setup approach
-  - NOTE: Uses pytest-asyncio for async tests
+LEER tests/test_models.py:
+  - ENTENDER: Patrón de prueba para modelos.
+  - ENCONTRAR: Enfoque de configuración de fixtures.
+  - NOTA: Usa pytest-asyncio para pruebas asíncronas.
 ```
 
-### Implementation Tasks
+### Tareas de Implementación
 
 ````
-UPDATE path/to/file:
-  - FIND: MODEL_REGISTRY = {
-  - ADD: "new-model": NewModelClass,
-  - VALIDATE: python -c "from path/to/file import MODEL_REGISTRY; assert 'new-model' in MODEL_REGISTRY"
-  - IF_FAIL: Check import statement for NewModelClass
+ACTUALIZAR ruta/al/archivo:
+  - ENCONTRAR: MODEL_REGISTRY = {
+  - AÑADIR: "nuevo-modelo": NuevaClaseModelo,
+  - VALIDAR: python -c "from ruta/al/archivo import MODEL_REGISTRY; assert 'nuevo-modelo' in MODEL_REGISTRY"
+  - SI_FALLA: Revisar la declaración de importación para NuevaClaseModelo.
 
-CREATE path/to/file:
-  - COPY_PATTERN: path/to/other/file
-  - IMPLEMENT:
-   - [Detailed description of what needs to be implemented based on codebase intelligence]
-  - VALIDATE: uv run pytest path/to/file -v
+CREAR ruta/al/archivo:
+  - COPIAR_PATRÓN: ruta/a/otro/archivo
+  - IMPLEMENTAR:
+   - [Descripción detallada de lo que necesita ser implementado basado en la inteligencia de la base de código]
+  - VALIDAR: uv run pytest ruta/al/archivo -v
 
-UPDATE path/to/file:
-  - FIND: app.include_router(
-  - ADD_AFTER:
+ACTUALIZAR ruta/al/archivo:
+  - ENCONTRAR: app.include_router(
+  - AÑADIR_DESPUÉS:
     ```python
-    from .endpoints import new_model_router
-    app.include_router(new_model_router, prefix="/api/v1")
+    from .endpoints import nuevo_router_modelo
+    app.include_router(nuevo_router_modelo, prefix="/api/v1")
     ```
-  - VALIDATE: uv run pytest path/to/file -v
+  - VALIDAR: uv run pytest ruta/al/archivo -v
 ````
 
-## Validation Checkpoints
+## Puntos de Control de Validación
 
 ```
-CHECKPOINT syntax:
-  - RUN: ruff check && mypy .
-  - FIX: Any reported issues
-  - CONTINUE: Only when clean
+PUNTO_DE_CONTROL sintaxis:
+  - EJECUTAR: ruff check && mypy .
+  - CORREGIR: Cualquier problema reportado.
+  - CONTINUAR: Solo cuando esté limpio.
 
-CHECKPOINT tests:
-  - RUN: uv run pytest path/to/file -v
-  - REQUIRE: All passing
-  - DEBUG: uv run pytest -vvs path/to/file/failing_test.py
-  - CONTINUE: Only when all green
+PUNTO_DE_CONTROL pruebas:
+  - EJECUTAR: uv run pytest ruta/al/archivo -v
+  - REQUERIR: Todas pasando.
+  - DEPURAR: uv run pytest -vvs ruta/al/archivo/prueba_fallida.py
+  - CONTINUAR: Solo cuando todo esté en verde.
 
-CHECKPOINT integration:
-  - START: docker-compose up -d
-  - RUN: ./scripts/integration_test.sh
-  - EXPECT: "All tests passed"
-  - CLEANUP: docker-compose down
+PUNTO_DE_CONTROL integración:
+  - INICIAR: docker-compose up -d
+  - EJECUTAR: ./scripts/integration_test.sh
+  - ESPERAR: "Todas las pruebas pasaron"
+  - LIMPIAR: docker-compose down
 ```
 
-## Debug Patterns
+## Patrones de Depuración
 
 ```
-DEBUG import_error:
-  - CHECK: File exists at path
-  - CHECK: __init__.py in all parent dirs
-  - TRY: python -c "import path/to/file"
-  - FIX: Add to PYTHONPATH or fix import
+DEPURAR error_de_importacion:
+  - REVISAR: El archivo existe en la ruta.
+  - REVISAR: __init__.py en todos los directorios padres.
+  - INTENTAR: python -c "import ruta/al/archivo"
+  - CORREGIR: Añadir a PYTHONPATH o corregir la importación.
 
-DEBUG test_failure:
-  - RUN: uv run pytest -vvs path/to/test.py::test_name
-  - ADD: print(f"Debug: {variable}")
-  - IDENTIFY: Assertion vs implementation issue
-  - FIX: Update test or fix code
+DEPURAR fallo_de_prueba:
+  - EJECUTAR: uv run pytest -vvs ruta/a/la/prueba.py::nombre_de_la_prueba
+  - AÑADIR: print(f"Debug: {variable}")
+  - IDENTIFICAR: Problema de aserción vs implementación.
+  - CORREGIR: Actualizar la prueba o corregir el código.
 
-DEBUG api_error:
-  - CHECK: Server running (ps aux | grep uvicorn)
-  - TEST: curl http://localhost:8000/health
-  - READ: Server logs for stack trace
-  - FIX: Based on specific error
+DEPURAR error_de_api:
+  - REVISAR: El servidor está corriendo (ps aux | grep uvicorn).
+  - PROBAR: curl http://localhost:8000/health
+  - LEER: Registros del servidor para ver el stack trace.
+  - CORREGIR: Basado en el error específico.
 ```
 
-## Common Task examples
+## Ejemplos de Tareas Comunes
 
-### Add New Feature
-
-```
-1. READ existing similar feature
-2. CREATE new feature file (COPY pattern)
-3. UPDATE registry/router to include
-4. CREATE tests for feature
-5. TEST all tests pass
-6. FIX any linting/type issues
-7. TEST integration works
-```
-
-### Fix Bug
+### Añadir Nueva Funcionalidad
 
 ```
-1. CREATE failing test that reproduces bug
-2. TEST confirm test fails
-3. READ relevant code to understand
-4. UPDATE code with fix
-5. TEST confirm test now passes
-6. TEST no other tests broken
-7. UPDATE changelog
+1. LEER funcionalidad similar existente.
+2. CREAR nuevo archivo de funcionalidad (COPIAR patrón).
+3. ACTUALIZAR registro/router para incluirla.
+4. CREAR pruebas para la funcionalidad.
+5. PROBAR que todas las pruebas pasen.
+6. CORREGIR cualquier problema de linting/tipado.
+7. PROBAR que la integración funcione.
 ```
 
-### Refactor Code
+### Corregir un Bug
 
 ```
-1. TEST current tests pass (baseline)
-2. CREATE new structure (don't delete old yet)
-3. UPDATE one usage to new structure
-4. TEST still passes
-5. UPDATE remaining usages incrementally
-6. DELETE old structure
-7. TEST full suite passes
+1. CREAR una prueba que falle y reproduzca el bug.
+2. PROBAR para confirmar que la prueba falla.
+3. LEER el código relevante para entender.
+4. ACTUALIZAR el código con la corrección.
+5. PROBAR para confirmar que la prueba ahora pasa.
+6. PROBAR que no se hayan roto otras pruebas.
+7. ACTUALIZAR el changelog.
 ```
 
-## Tips for Effective Tasks
+### Refactorizar Código
 
-- Use VALIDATE after every change
-- Include IF_FAIL hints for common issues
-- Reference specific line numbers or patterns
-- Keep validation commands simple and fast
-- Chain related tasks with clear dependencies
-- Always include rollback/undo steps for risky changes
+```
+1. PROBAR que las pruebas actuales pasen (línea base).
+2. CREAR nueva estructura (no eliminar la antigua todavía).
+3. ACTUALIZAR un uso a la nueva estructura.
+4. PROBAR que todavía pase.
+5. ACTUALIZAR los usos restantes incrementalmente.
+6. ELIMINAR la estructura antigua.
+7. PROBAR que la suite completa de pruebas pase.
+```
+
+## Consejos para Tareas Efectivas
+
+- Usa VALIDAR después de cada cambio.
+- Incluye pistas de SI_FALLA para problemas comunes.
+- Referencia números de línea o patrones específicos.
+- Mantén los comandos de validación simples y rápidos.
+- Encadena tareas relacionadas con dependencias claras.
+- Siempre incluye pasos de retroceso/deshacer para cambios arriesgados.

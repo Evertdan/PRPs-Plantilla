@@ -1,231 +1,231 @@
-# Create PLANNING PRP (Parallel Research)
+# Crear PRP de PLANIFICACIÓN (Investigación Paralela)
 
-Transform rough ideas into comprehensive PRDs using parallel research agents for maximum efficiency and depth.
+Transforma ideas aproximadas en PRDs (Documentos de Requisitos de Producto) completos utilizando agentes de investigación paralelos para una máxima eficiencia y profundidad.
 
 ## Idea: $ARGUMENTS
 
-## Phase 1: Parallel Research Discovery
+## Fase 1: Descubrimiento mediante Investigación Paralela
 
-**IMPORTANT**: Execute the following 4 research agents simultaneously using multiple Agent tool calls in a single response to maximize research efficiency.
+**IMPORTANTE**: Ejecuta los siguientes 4 agentes de investigación simultáneamente utilizando múltiples llamadas a la herramienta Agente en una sola respuesta para maximizar la eficiencia de la investigación.
 
-### Research Agent Coordination
+### Coordinación de Agentes de Investigación
 
-Launch these agents concurrently - do not wait for one to complete before starting the next:
+Lanza estos agentes de forma concurrente - no esperes a que uno termine para empezar el siguiente:
 
-#### Agent 1: Market Intelligence
+#### Agente 1: Inteligencia de Mercado
 ```
-Task: Market Research Analysis
-Prompt: Research the market landscape for "$ARGUMENTS". Conduct deep analysis of:
-- Competitor landscape and positioning
-- Market size, growth trends, and opportunities
-- Pricing models and revenue strategies
-- Existing solutions and their limitations
-- Market gaps and unmet needs
-- Target audience and user segments
+Tarea: Análisis de Investigación de Mercado
+Prompt: Investiga el panorama del mercado para "$ARGUMENTS". Realiza un análisis profundo de:
+- Panorama competitivo y posicionamiento.
+- Tamaño del mercado, tendencias de crecimiento y oportunidades.
+- Modelos de precios y estrategias de ingresos.
+- Soluciones existentes y sus limitaciones.
+- Brechas de mercado y necesidades no satisfechas.
+- Audiencia objetivo y segmentos de usuarios.
 
-Focus purely on research - do not write any code. Use web search extensively. Return a comprehensive market analysis report with specific data points and insights.
-```
-
-#### Agent 2: Technical Feasibility
-```
-Task: Technical Architecture Research
-Prompt: Analyze technical feasibility for "$ARGUMENTS". Research and evaluate:
-- Recommended technology stacks and frameworks
-- System architecture patterns and best practices
-- Integration possibilities with existing systems
-- Scalability and performance considerations
-- Technical challenges and solutions
-- Development effort estimation
-
-Focus on research only - no code implementation. Use web search for current best practices. Return technical recommendations with pros/cons analysis.
+Céntrate puramente en la investigación - no escribas ningún código. Usa la búsqueda web extensivamente. Devuelve un informe completo de análisis de mercado con puntos de datos y conocimientos específicos.
 ```
 
-#### Agent 3: User Experience Research
+#### Agente 2: Viabilidad Técnica
 ```
-Task: UX Pattern Analysis
-Prompt: Research user experience patterns for "$ARGUMENTS". Investigate:
-- User journey mapping and flow examples
-- Pain points in existing solutions
-- UX best practices and design patterns
-- Accessibility standards and requirements
-- User interface trends and innovations
-- Usability testing insights from similar products
+Tarea: Investigación de Arquitectura Técnica
+Prompt: Analiza la viabilidad técnica para "$ARGUMENTS". Investiga y evalúa:
+- Pilas tecnológicas y frameworks recomendados.
+- Patrones de arquitectura de sistemas y mejores prácticas.
+- Posibilidades de integración con sistemas existentes.
+- Consideraciones de escalabilidad y rendimiento.
+- Desafíos técnicos y soluciones.
+- Estimación del esfuerzo de desarrollo.
 
-Research only - no design creation. Use web search for UX case studies. Return UX analysis with actionable recommendations.
-```
-
-#### Agent 4: Best Practices & Compliance
-```
-Task: Industry Standards Research
-Prompt: Research industry best practices for "$ARGUMENTS". Cover:
-- Security standards and compliance requirements
-- Data privacy and protection regulations
-- Performance benchmarks and KPIs
-- Quality assurance methodologies
-- Risk management practices
-- Legal and regulatory considerations
-
-Research focus only. Use web search for compliance guides. Return comprehensive best practices guide with specific standards.
+Solo enfoque en investigación - sin implementación de código. Usa la búsqueda web para las mejores prácticas actuales. Devuelve recomendaciones técnicas con análisis de pros y contras.
 ```
 
-## Phase 2: Research Synthesis & Analysis
+#### Agente 3: Investigación de Experiencia de Usuario (UX)
+```
+Tarea: Análisis de Patrones de UX
+Prompt: Investiga patrones de experiencia de usuario para "$ARGUMENTS". Investiga:
+- Mapeo del viaje del usuario y ejemplos de flujos.
+- Puntos de dolor en las soluciones existentes.
+- Mejores prácticas de UX y patrones de diseño.
+- Estándares y requisitos de accesibilidad.
+- Tendencias e innovaciones en la interfaz de usuario.
+- Perspectivas de pruebas de usabilidad de productos similares.
 
-Once all agents complete their research, synthesize the findings into:
+Solo investigación - sin creación de diseño. Usa la búsqueda web para estudios de caso de UX. Devuelve un análisis de UX con recomendaciones accionables.
+```
 
-### Market Opportunity Assessment
-- Market size and growth potential
-- Competitive landscape overview
-- Target user segments and personas
-- Value proposition differentiation
+#### Agente 4: Mejores Prácticas y Cumplimiento
+```
+Tarea: Investigación de Estándares de la Industria
+Prompt: Investiga las mejores prácticas de la industria para "$ARGUMENTS". Cubre:
+- Estándares de seguridad y requisitos de cumplimiento.
+- Regulaciones de privacidad y protección de datos.
+- Benchmarks de rendimiento y KPIs.
+- Metodologías de aseguramiento de la calidad.
+- Prácticas de gestión de riesgos.
+- Consideraciones legales y regulatorias.
 
-### Technical Architecture Framework
-- Recommended technology stack
-- System design approach
-- Integration strategy
-- Scalability plan
+Solo enfoque en investigación. Usa la búsqueda web para guías de cumplimiento. Devuelve una guía completa de mejores prácticas con estándares específicos.
+```
 
-### User Experience Blueprint
-- User journey mapping
-- Key interaction patterns
-- Accessibility requirements
-- Design system recommendations
+## Fase 2: Síntesis y Análisis de la Investigación
 
-### Implementation Readiness
-- Security and compliance checklist
-- Risk assessment and mitigation
-- Success metrics and KPIs
-- Quality gates and validation
+Una vez que todos los agentes completen su investigación, sintetiza los hallazgos en:
 
-## Phase 3: User Validation & Requirements Gathering
+### Evaluación de la Oportunidad de Mercado
+-   Tamaño del mercado y potencial de crecimiento.
+-   Visión general del panorama competitivo.
+-   Segmentos de usuarios y personas objetivo.
+-   Diferenciación de la propuesta de valor.
 
-### Critical Questions for User
-Before generating the final PRD, ask the user to clarify:
+### Marco de Arquitectura Técnica
+-   Pila tecnológica recomendada.
+-   Enfoque de diseño del sistema.
+-   Estrategia de integración.
+-   Plan de escalabilidad.
 
-1. **Scope & Constraints**
-   - What's the target timeline?
-   - Budget or resource constraints?
-   - Must-have vs nice-to-have features?
+### Plan de Experiencia de Usuario
+-   Mapeo del viaje del usuario.
+-   Patrones de interacción clave.
+-   Requisitos de accesibilidad.
+-   Recomendaciones de sistema de diseño.
 
-2. **Success Definition**
-   - Primary success metrics?
-   - User adoption goals?
-   - Business objectives?
+### Preparación para la Implementación
+-   Lista de verificación de seguridad y cumplimiento.
+-   Evaluación de riesgos y mitigación.
+-   Métricas de éxito y KPIs.
+-   Puertas de calidad y validación.
 
-3. **Technical Context**
-   - Existing systems to integrate with?
-   - Technology preferences or restrictions?
-   - Team expertise and capabilities?
+## Fase 3: Validación con el Usuario y Recopilación de Requisitos
 
-4. **User Context**
-   - Primary user personas?
-   - Use case priorities?
-   - Current user pain points?
+### Preguntas Críticas para el Usuario
+Antes de generar el PRD final, pide al usuario que aclare:
 
-## Phase 4: PRD Generation
+1.  **Alcance y Restricciones**
+    -   ¿Cuál es el cronograma objetivo?
+    -   ¿Restricciones de presupuesto o recursos?
+    -   ¿Funcionalidades imprescindibles vs. deseables?
 
-Using the synthesized research and user input, create a comprehensive PRD following this structure:
+2.  **Definición de Éxito**
+    -   ¿Métricas de éxito primarias?
+    -   ¿Objetivos de adopción por parte del usuario?
+    -   ¿Objetivos de negocio?
 
-### PRD Output Template
+3.  **Contexto Técnico**
+    -   ¿Sistemas existentes con los que integrarse?
+    -   ¿Preferencias o restricciones tecnológicas?
+    -   ¿Experiencia y capacidades del equipo?
+
+4.  **Contexto del Usuario**
+    -   ¿Personas de usuario primarias?
+    -   ¿Prioridades de casos de uso?
+    -   ¿Puntos de dolor actuales del usuario?
+
+## Fase 4: Generación del PRD
+
+Usando la investigación sintetizada y la entrada del usuario, crea un PRD completo siguiendo esta estructura:
+
+### Plantilla de Salida del PRD
 ```markdown
-# Product Requirements Document: [Feature Name]
+# Documento de Requisitos de Producto: [Nombre de la Funcionalidad]
 
-## 1. Executive Summary
-- Problem statement
-- Proposed solution
-- Success criteria
-- Resource requirements
+## 1. Resumen Ejecutivo
+- Declaración del problema.
+- Solución propuesta.
+- Criterios de éxito.
+- Requisitos de recursos.
 
-## 2. Market Analysis
-[Insert Market Intelligence Agent findings]
-- Market opportunity
-- Competitive landscape
-- User segments
+## 2. Análisis de Mercado
+[Insertar hallazgos del Agente de Inteligencia de Mercado]
+- Oportunidad de mercado.
+- Panorama competitivo.
+- Segmentos de usuarios.
 
-## 3. User Experience Design
-[Insert UX Research Agent findings]
-- User personas and journeys
-- Key user flows (with Mermaid diagrams)
-- Wireframes and mockups needed
+## 3. Diseño de Experiencia de Usuario
+[Insertar hallazgos del Agente de Investigación de UX]
+- Personas y viajes del usuario.
+- Flujos de usuario clave (con diagramas de Mermaid).
+- Wireframes y maquetas necesarias.
 
-## 4. Technical Architecture
-[Insert Technical Feasibility Agent findings]
-- System architecture (with Mermaid diagrams)
-- Technology stack
-- Integration points
-- Scalability considerations
+## 4. Arquitectura Técnica
+[Insertar hallazgos del Agente de Viabilidad Técnica]
+- Arquitectura del sistema (con diagramas de Mermaid).
+- Pila tecnológica.
+- Puntos de integración.
+- Consideraciones de escalabilidad.
 
-## 5. Security & Compliance
-[Insert Best Practices Agent findings]
-- Security requirements
-- Compliance standards
-- Risk assessment
+## 5. Seguridad y Cumplimiento
+[Insertar hallazgos del Agente de Mejores Prácticas]
+- Requisitos de seguridad.
+- Estándares de cumplimiento.
+- Evaluación de riesgos.
 
-## 6. Implementation Plan
-- Development phases
-- Dependencies and prerequisites
-- Timeline estimates
-- Resource allocation
+## 6. Plan de Implementación
+- Fases de desarrollo.
+- Dependencias y prerrequisitos.
+- Estimaciones de cronograma.
+- Asignación de recursos.
 
-## 7. Success Metrics
-- Key Performance Indicators
-- Acceptance criteria
-- Testing strategy
+## 7. Métricas de Éxito
+- Indicadores Clave de Rendimiento (KPIs).
+- Criterios de aceptación.
+- Estrategia de pruebas.
 
-## 8. Risk Assessment
-- Technical risks and mitigation
-- Market risks and contingencies
-- Resource risks and alternatives
+## 8. Evaluación de Riesgos
+- Riesgos técnicos y mitigación.
+- Riesgos de mercado y contingencias.
+- Riesgos de recursos y alternativas.
 ```
 
-### Required Diagrams (using Mermaid)
-Generate these diagrams in the PRD:
+### Diagramas Requeridos (usando Mermaid)
+Genera estos diagramas en el PRD:
 
-1. **User Flow Diagram**
-```mermaid
-flowchart TD
-    A[User Entry] --> B{Decision Point}
-    B -->|Yes| C[Success Path]
-    B -->|No| D[Alternative Path]
-```
+1.  **Diagrama de Flujo de Usuario**
+    ```mermaid
+    flowchart TD
+        A[Entrada del Usuario] --> B{Punto de Decisión}
+        B -->|Sí| C[Ruta de Éxito]
+        B -->|No| D[Ruta Alternativa]
+    ```
 
-2. **System Architecture Diagram**
-```mermaid
-graph TB
-    Frontend --> API
-    API --> Database
-    API --> ExternalService
-```
+2.  **Diagrama de Arquitectura del Sistema**
+    ```mermaid
+    graph TB
+        Frontend --> API
+        API --> BaseDeDatos
+        API --> ServicioExterno
+    ```
 
-3. **Implementation Timeline**
-```mermaid
-gantt
-    title Implementation Phases
-    section Phase 1
-    Research & Design: 2024-01-01, 2w
-    section Phase 2
-    Core Development: 2w
-```
+3.  **Cronograma de Implementación**
+    ```mermaid
+    gantt
+        title Fases de Implementación
+        section Fase 1
+        Investigación y Diseño: 2024-01-01, 2s
+        section Fase 2
+        Desarrollo Principal: 2s
+    ```
 
-## Phase 5: Save and Handoff
+## Fase 5: Guardar y Entregar
 
-Save the completed PRD as: `PRPs/{sanitized-feature-name}-prd.md`
+Guarda el PRD completado como: `PRPs/{nombre-de-funcionalidad-sanitizado}-prd.md`
 
-### Quality Checklist
-Before marking complete, verify:
-- [ ] All 4 research areas covered comprehensively
-- [ ] User validation questions answered
-- [ ] Technical architecture clearly defined
-- [ ] User flows diagrammed with Mermaid
-- [ ] Implementation phases outlined
-- [ ] Success metrics defined
-- [ ] Security requirements documented
-- [ ] Ready for implementation PRP creation
+### Lista de Verificación de Calidad
+Antes de marcar como completado, verifica:
+- [ ] Las 4 áreas de investigación cubiertas de manera exhaustiva.
+- [ ] Preguntas de validación del usuario respondidas.
+- [ ] Arquitectura técnica claramente definida.
+- [ ] Flujos de usuario diagramados con Mermaid.
+- [ ] Fases de implementación delineadas.
+- [ ] Métricas de éxito definidas.
+- [ ] Requisitos de seguridad documentados.
+- [ ] Listo para la creación del PRP de implementación.
 
-### Next Steps
-1. Review PRD with stakeholders
-2. Create implementation PRP using `/prp` command
-3. Begin development planning and sprint creation
+### Próximos Pasos
+1.  Revisar el PRD con las partes interesadas.
+2.  Crear el PRP de implementación usando el comando `/prp`.
+3.  Comenzar la planificación del desarrollo y la creación de sprints.
 
 ---
 
-**Remember**: This command leverages parallel research agents to create comprehensive PRDs 4x faster than sequential research. The quality depends on thorough agent coordination and synthesis of findings.
+**Recuerda**: Este comando aprovecha agentes de investigación paralelos para crear PRDs completos 4 veces más rápido que la investigación secuencial. La calidad depende de la coordinación exhaustiva de los agentes y la síntesis de los hallazgos.

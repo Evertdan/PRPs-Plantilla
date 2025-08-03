@@ -1,85 +1,32 @@
-# Create Pull Request
+# Crear Pull Request
 
-Create a well-structured pull request with proper description and context.
+Este comando crea una Pull Request (PR) en GitHub.
 
-## PR Title (if provided)
-$ARGUMENTS
+## Argumentos: $ARGUMENTS
 
-## Process
+## Proceso
 
-1. **Prepare Branch**
-   ```bash
-   # Check current branch
-   git branch --show-current
-   
-   # Ensure we're not on main
-   # If on main, create a feature branch
-   ```
+1.  **Verificar Estado de Git**
+    -   Asegurarse de que no haya cambios sin guardar.
+    -   Confirmar que la rama actual está adelantada a la rama base.
 
-2. **Review Changes**
-   ```bash
-   # See what will be included
-   git status
-   git diff main...HEAD
-   ```
+2.  **Obtener Título y Cuerpo de la PR**
+    -   **Título**: Crear un título conciso y descriptivo para la PR.
+        -   Ejemplo: `feat(auth): Añadir autenticación con OAuth2`
+    -   **Cuerpo**: Generar un cuerpo de PR detallado.
+        -   Resumen de los cambios.
+        -   Problema que resuelve.
+        -   Cómo probar los cambios.
+        -   PRs o issues relacionados.
 
-3. **Create Commits**
-   - Stage relevant files
-   - Create logical, atomic commits if not already done
-   - Write clear commit messages following conventional commits, do not include any reference to cluade, written by clade etc:
-     - `feat:` for new features
-     - `fix:` for bug fixes
-     - `docs:` for documentation
-     - `test:` for tests
-     - `refactor:` for refactoring
+3.  **Crear la Pull Request**
+    -   Usar el comando `gh pr create`.
+    -   Rellenar el título y el cuerpo.
+    -   Añadir etiquetas (p. ej., `feature`, `bugfix`, `needs-review`).
+    -   Asignar revisores si es necesario.
 
-4. **Push to Remote**
-   ```bash
-   git push -u origin HEAD
-   ```
+4.  **Confirmar Creación**
+    -   Mostrar la URL de la PR creada.
 
-5. **Create PR**
-   ```bash
-   gh pr create --title "$ARGUMENTS" --body "$(cat <<'EOF'
-   ## Summary
-   [Brief description of what this PR does]
-   
-   ## Changes
-   - [List key changes]
-   - [Be specific]
-   
-   ## Type of Change
-   - [ ] Bug fix
-   - [ ] New feature
-   - [ ] Breaking change
-   - [ ] Documentation update
-   
-   ## Testing
-   - [ ] Tests pass locally
-   - [ ] Added new tests
-   - [ ] Manual testing completed
-   
-   ## Checklist
-   - [ ] Code follows project style
-   - [ ] Self-reviewed
-   - [ ] Updated documentation
-   - [ ] No console.logs or debug code
-   
-   ## Screenshots (if applicable)
-   [Add screenshots for UI changes]
-   
-   ## Additional Context
-   [Any extra information reviewers should know]
-   EOF
-   )"
-   ```
-
-6. **Post-Creation**
-   - Add labels if needed: `gh pr edit --add-label "feature,needs-review"`
-   - Request reviewers if known
-   - Link to related issues
-
-Remember to:
-- Keep PRs focused and small
-- Provide context for reviewers
-- Test thoroughly before creating PR
+## Ejemplo de Uso
+/create-pr --title "feat(api): Nuevo endpoint de usuario" --body "Este PR añade un endpoint para obtener perfiles de usuario."

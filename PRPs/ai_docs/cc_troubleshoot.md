@@ -1,156 +1,156 @@
-# Troubleshooting
+# Solución de problemas
 
-> Discover solutions to common issues with Claude Code installation and usage.
+> Descubre soluciones a problemas comunes con la instalación y el uso de Claude Code.
 
-## Common installation issues
+## Problemas comunes de instalación
 
-### Windows installation issues: errors in WSL
+### Problemas de instalación en Windows: errores en WSL
 
-You might encounter the following issues in WSL:
+Puedes encontrar los siguientes problemas en WSL:
 
-**OS/platform detection issues**: If you receive an error during installation, WSL may be using Windows `npm`. Try:
+**Problemas de detección de SO/plataforma**: Si recibes un error durante la instalación, es posible que WSL esté usando el `npm` de Windows. Intenta:
 
-- Run `npm config set os linux` before installation
-- Install with `npm install -g @anthropic-ai/claude-code --force --no-os-check` (Do NOT use `sudo`)
+- Ejecutar `npm config set os linux` antes de la instalación.
+- Instalar con `npm install -g @anthropic-ai/claude-code --force --no-os-check` (NO uses `sudo`).
 
-**Node not found errors**: If you see `exec: node: not found` when running `claude`, your WSL environment may be using a Windows installation of Node.js. You can confirm this with `which npm` and `which node`, which should point to Linux paths starting with `/usr/` rather than `/mnt/c/`. To fix this, try installing Node via your Linux distribution's package manager or via [`nvm`](https://github.com/nvm-sh/nvm).
+**Errores de "Node not found"**: Si ves `exec: node: not found` al ejecutar `claude`, es posible que tu entorno WSL esté usando una instalación de Node.js de Windows. Puedes confirmarlo con `which npm` y `which node`, que deberían apuntar a rutas de Linux que comiencen con `/usr/` en lugar de `/mnt/c/`. Para solucionarlo, intenta instalar Node a través del gestor de paquetes de tu distribución de Linux o a través de [`nvm`](https://github.com/nvm-sh/nvm).
 
-### Linux and Mac installation issues: permission or command not found errors
+### Problemas de instalación en Linux y Mac: errores de permisos o "command not found"
 
-When installing Claude Code with npm, `PATH` problems may prevent access to `claude`.
-You may also encounter permission errors if your npm global prefix is not user writable (eg. `/usr`, or `/usr/local`).
+Al instalar Claude Code con npm, los problemas de `PATH` pueden impedir el acceso a `claude`.
+También puedes encontrar errores de permisos si tu prefijo global de npm no es escribible por el usuario (p. ej., `/usr` o `/usr/local`).
 
-#### Recommended solution: Native Claude Code installation
+#### Solución recomendada: Instalación nativa de Claude Code
 
-Claude Code has a native installation that doesn't depend on npm or Node.js.
+Claude Code tiene una instalación nativa que no depende de npm o Node.js.
 
 <Note>
-  The native Claude Code installer is currently in beta.
+  El instalador nativo de Claude Code está actualmente en beta.
 </Note>
 
-Use the following command to run the native installer.
+Usa el siguiente comando para ejecutar el instalador nativo.
 
 **macOS, Linux, WSL:**
 
 ```bash
-# Install stable version (default)
+# Instalar versión estable (por defecto)
 curl -fsSL https://claude.ai/install.sh | bash
 
-# Install latest version
+# Instalar última versión
 curl -fsSL https://claude.ai/install.sh | bash -s latest
 
-# Install specific version number
+# Instalar número de versión específico
 curl -fsSL https://claude.ai/install.sh | bash -s 1.0.58
 ```
 
 **Windows PowerShell:**
 
 ```powershell
-# Install stable version (default)
+# Instalar versión estable (por defecto)
 irm https://claude.ai/install.ps1 | iex
 
-# Install latest version
+# Instalar última versión
 & ([scriptblock]::Create((irm https://claude.ai/install.ps1))) latest
 
-# Install specific version number
+# Instalar número de versión específico
 & ([scriptblock]::Create((irm https://claude.ai/install.ps1))) 1.0.58
 
 ```
 
-This command installs the appropriate build of Claude Code for your operating system and architecture and adds a symlink to the installation at `~/.local/bin/claude`.
+Este comando instala la compilación apropiada de Claude Code para tu sistema operativo y arquitectura y añade un enlace simbólico a la instalación en `~/.local/bin/claude`.
 
 <Tip>
-  Make sure that you have the installation directory in your system PATH.
+  Asegúrate de que el directorio de instalación esté en tu `PATH` del sistema.
 </Tip>
 
-#### Alternative solution: Migrate to local installation
+#### Solución alternativa: Migrar a una instalación local
 
-Alternatively, if Claude Code will run, you can migrate to a local installation:
+Alternativamente, si Claude Code se ejecuta, puedes migrar a una instalación local:
 
 ```bash
 claude migrate-installer
 ```
 
-This moves Claude Code to `~/.claude/local/` and sets up an alias in your shell configuration. No `sudo` is required for future updates.
+Esto mueve Claude Code a `~/.claude/local/` y configura un alias en la configuración de tu shell. No se requiere `sudo` para futuras actualizaciones.
 
-After migration, restart your shell, and then verify your installation:
+Después de la migración, reinicia tu shell y luego verifica tu instalación:
 
-On macOS/Linux/WSL:
+En macOS/Linux/WSL:
 
 ```bash
-which claude  # Should show an alias to ~/.claude/local/claude
+which claude  # Debería mostrar un alias a ~/.claude/local/claude
 ```
 
-On Windows:
+En Windows:
 
 ```powershell
-where claude  # Should show path to claude executable
+where claude  # Debería mostrar la ruta al ejecutable de claude
 ```
 
-Verify installation:
+Verificar instalación:
 
 ```bash
-claude doctor # Check installation health
+claude doctor # Comprobar la salud de la instalación
 ```
 
-## Permissions and authentication
+## Permisos y autenticación
 
-### Repeated permission prompts
+### Solicitudes de permiso repetidas
 
-If you find yourself repeatedly approving the same commands, you can allow specific tools
-to run without approval using the `/permissions` command. See [Permissions docs](/en/docs/claude-code/iam#configuring-permissions).
+Si te encuentras aprobando repetidamente los mismos comandos, puedes permitir que herramientas específicas
+se ejecuten sin aprobación usando el comando `/permissions`. Consulta la [documentación de Permisos](/en/docs/claude-code/iam#configuring-permissions).
 
-### Authentication issues
+### Problemas de autenticación
 
-If you're experiencing authentication problems:
+Si tienes problemas de autenticación:
 
-1. Run `/logout` to sign out completely
-2. Close Claude Code
-3. Restart with `claude` and complete the authentication process again
+1. Ejecuta `/logout` para cerrar sesión por completo.
+2. Cierra Claude Code.
+3. Reinicia con `claude` y completa el proceso de autenticación de nuevo.
 
-If problems persist, try:
+Si los problemas persisten, intenta:
 
 ```bash
 rm -rf ~/.config/claude-code/auth.json
 claude
 ```
 
-This removes your stored authentication information and forces a clean login.
+Esto elimina tu información de autenticación almacenada y fuerza un inicio de sesión limpio.
 
-## Performance and stability
+## Rendimiento y estabilidad
 
-### High CPU or memory usage
+### Alto uso de CPU o memoria
 
-Claude Code is designed to work with most development environments, but may consume significant resources when processing large codebases. If you're experiencing performance issues:
+Claude Code está diseñado para funcionar con la mayoría de los entornos de desarrollo, pero puede consumir recursos significativos al procesar grandes bases de código. Si tienes problemas de rendimiento:
 
-1. Use `/compact` regularly to reduce context size
-2. Close and restart Claude Code between major tasks
-3. Consider adding large build directories to your `.gitignore` file
+1. Usa `/compact` regularmente para reducir el tamaño del contexto.
+2. Cierra y reinicia Claude Code entre tareas importantes.
+3. Considera añadir grandes directorios de compilación a tu archivo `.gitignore`.
 
-### Command hangs or freezes
+### El comando se cuelga o se congela
 
-If Claude Code seems unresponsive:
+Si Claude Code parece no responder:
 
-1. Press Ctrl+C to attempt to cancel the current operation
-2. If unresponsive, you may need to close the terminal and restart
+1. Presiona Ctrl+C para intentar cancelar la operación actual.
+2. Si no responde, es posible que necesites cerrar el terminal y reiniciar.
 
-### ESC key not working in JetBrains (IntelliJ, PyCharm, etc.) terminals
+### La tecla ESC no funciona en los terminales de JetBrains (IntelliJ, PyCharm, etc.)
 
-If you're using Claude Code in JetBrains terminals and the ESC key doesn't interrupt the agent as expected, this is likely due to a keybinding clash with JetBrains' default shortcuts.
+Si estás usando Claude Code en los terminales de JetBrains y la tecla ESC no interrumpe al agente como se esperaba, es probable que se deba a un conflicto de atajos de teclado con los atajos predeterminados de JetBrains.
 
-To fix this issue:
+Para solucionar este problema:
 
-1. Go to Settings → Tools → Terminal
-2. Click the "Configure terminal keybindings" hyperlink next to "Override IDE Shortcuts"
-3. Within the terminal keybindings, scroll down to "Switch focus to Editor" and delete that shortcut
+1. Ve a `Settings` → `Tools` → `Terminal`.
+2. Haz clic en el hipervínculo "Configure terminal keybindings" junto a "Override IDE Shortcuts".
+3. Dentro de los atajos de teclado del terminal, desplázate hacia abajo hasta "Switch focus to Editor" y elimina ese atajo.
 
-This will allow the ESC key to properly function for canceling Claude Code operations instead of being captured by PyCharm's "Switch focus to Editor" action.
+Esto permitirá que la tecla ESC funcione correctamente para cancelar las operaciones de Claude Code en lugar de ser capturada por la acción "Switch focus to Editor" de PyCharm.
 
-## Getting more help
+## Obtener más ayuda
 
-If you're experiencing issues not covered here:
+Si tienes problemas que no se cubren aquí:
 
-1. Use the `/bug` command within Claude Code to report problems directly to Anthropic
-2. Check the [GitHub repository](https://github.com/anthropics/claude-code) for known issues
-3. Run `/doctor` to check the health of your Claude Code installation
-4. Ask Claude directly about its capabilities and features - Claude has built-in access to its documentation
+1. Usa el comando `/bug` dentro de Claude Code para informar de problemas directamente a Anthropic.
+2. Consulta el [repositorio de GitHub](https://github.com/anthropics/claude-code) para ver problemas conocidos.
+3. Ejecuta `/doctor` para comprobar la salud de tu instalación de Claude Code.
+4. Pregúntale directamente a Claude sobre sus capacidades y características - Claude tiene acceso incorporado a su documentación.

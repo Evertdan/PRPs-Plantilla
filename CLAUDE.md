@@ -1,138 +1,138 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Este archivo proporciona orientación a Claude Code (claude.ai/code) cuando trabaja con el código de este repositorio.
 
-## Project Nature
+## Naturaleza del Proyecto
 
-This is a **PRP (Product Requirement Prompt) Framework** repository, not a traditional software project. The core concept: **"PRP = PRD + curated codebase intelligence + agent/runbook"** - designed to enable AI agents to ship production-ready code on the first pass.
+Este es un repositorio de **Framework PRP (Prompt de Requisito de Producto)**, no un proyecto de software tradicional. El concepto central: **"PRP = PRD + inteligencia curada de la base de código + agente/manual de ejecución"**, diseñado para permitir a los agentes de IA entregar código listo para producción en el primer intento.
 
-## Core Architecture
+## Arquitectura Principal
 
-### Command-Driven System
+### Sistema Dirigido por Comandos
 
-- **pre-configured Claude Code commands** in `.claude/commands/`
-- Commands organized by function:
-  - `PRPs/` - PRP creation and execution workflows
-  - `development/` - Core development utilities (prime-core, onboarding, debug)
-  - `code-quality/` - Review and refactoring commands
-  - `rapid-development/experimental/` - Parallel PRP creation and hackathon tools
-  - `git-operations/` - Conflict resolution and smart git operations
+-   **Comandos preconfigurados de Claude Code** en `.claude/commands/`.
+-   Comandos organizados por función:
+    -   `PRPs/` - Flujos de trabajo de creación y ejecución de PRP.
+    -   `development/` - Utilidades de desarrollo principales (prime-core, onboarding, debug).
+    -   `code-quality/` - Comandos de revisión y refactorización.
+    -   `rapid-development/experimental/` - Creación paralela de PRP y herramientas para hackatones.
+    -   `git-operations/` - Resolución de conflictos y operaciones inteligentes de git.
 
-### Template-Based Methodology
+### Metodología Basada en Plantillas
 
-- **PRP Templates** in `PRPs/templates/` follow structured format with validation loops
-- **Context-Rich Approach**: Every PRP must include comprehensive documentation, examples, and gotchas
-- **Validation-First Design**: Each PRP contains executable validation gates (syntax, tests, integration)
+-   Las **Plantillas de PRP** en `PRPs/templates/` siguen un formato estructurado con bucles de validación.
+-   **Enfoque Rico en Contexto**: Cada PRP debe incluir documentación completa, ejemplos y problemas conocidos.
+-   **Diseño Orientado a la Validación Primero**: Cada PRP contiene puertas de validación ejecutables (sintaxis, pruebas, integración).
 
-### AI Documentation Curation
+### Curación de Documentación de IA
 
-- `PRPs/ai_docs/` contains curated Claude Code documentation for context injection
-- `claude_md_files/` provides framework-specific CLAUDE.md examples
+-   `PRPs/ai_docs/` contiene documentación curada de Claude Code para la inyección de contexto.
+-   `claude_md_files/` proporciona ejemplos de `CLAUDE.md` específicos del framework.
 
-## Development Commands
+## Comandos de Desarrollo
 
-### PRP Execution
+### Ejecución de PRP
 
 ```bash
-# Interactive mode (recommended for development)
-uv run PRPs/scripts/prp_runner.py --prp [prp-name] --interactive
+# Modo interactivo (recomendado para desarrollo)
+uv run PRPs/scripts/prp_runner.py --prp [nombre-del-prp] --interactive
 
-# Headless mode (for CI/CD)
-uv run PRPs/scripts/prp_runner.py --prp [prp-name] --output-format json
+# Modo sin supervisión (para CI/CD)
+uv run PRPs/scripts/prp_runner.py --prp [nombre-del-prp] --output-format json
 
-# Streaming JSON (for real-time monitoring)
-uv run PRPs/scripts/prp_runner.py --prp [prp-name] --output-format stream-json
+# JSON en streaming (para monitoreo en tiempo real)
+uv run PRPs/scripts/prp_runner.py --prp [nombre-del-prp] --output-format stream-json
 ```
 
-### Key Claude Commands
+### Comandos Clave de Claude
 
-- `/prp-base-create` - Generate comprehensive PRPs with research
-- `/prp-base-execute` - Execute PRPs against codebase
-- `/prp-planning-create` - Create planning documents with diagrams
-- `/prime-core` - Prime Claude with project context
-- `/review-staged-unstaged` - Review git changes using PRP methodology
+-   `/prp-base-create` - Genera PRPs completos con investigación.
+-   `/prp-base-execute` - Ejecuta PRPs contra la base de código.
+-   `/prp-planning-create` - Crea documentos de planificación con diagramas.
+-   `/prime-core` - Prepara a Claude con el contexto del proyecto.
+-   `/review-staged-unstaged` - Revisa los cambios de git usando la metodología PRP.
 
-## Critical Success Patterns
+## Patrones Críticos de Éxito
 
-### The PRP Methodology
+### La Metodología PRP
 
-1. **Context is King**: Include ALL necessary documentation, examples, and caveats
-2. **Validation Loops**: Provide executable tests/lints the AI can run and fix
-3. **Information Dense**: Use keywords and patterns from the codebase
-4. **Progressive Success**: Start simple, validate, then enhance
+1.  **El Contexto es Rey**: Incluye TODA la documentación, ejemplos y advertencias necesarias.
+2.  **Bucles de Validación**: Proporciona pruebas/linting ejecutables que la IA pueda correr y corregir.
+3.  **Denso en Información**: Usa palabras clave y patrones de la base de código.
+4.  **Éxito Progresivo**: Empieza simple, valida y luego mejora.
 
-### PRP Structure Requirements
+### Requisitos de la Estructura de un PRP
 
-- **Goal**: Specific end state and desires
-- **Why**: Business value and user impact
-- **What**: User-visible behavior and technical requirements
-- **All Needed Context**: Documentation URLs, code examples, gotchas, patterns
-- **Implementation Blueprint**: Pseudocode with critical details and task lists
-- **Validation Loop**: Executable commands for syntax, tests, integration
+-   **Objetivo**: Estado final específico y deseos.
+-   **Por qué**: Valor de negocio e impacto para el usuario.
+-   **Qué**: Comportamiento visible para el usuario y requisitos técnicos.
+-   **Todo el Contexto Necesario**: URLs de documentación, ejemplos de código, problemas conocidos, patrones.
+-   **Plan de Implementación**: Pseudocódigo con detalles críticos y listas de tareas.
+-   **Bucle de Validación**: Comandos ejecutables para sintaxis, pruebas, integración.
 
-### Validation Gates (Must be Executable)
+### Puertas de Validación (Deben ser Ejecutables)
 
 ```bash
-# Level 1: Syntax & Style
+# Nivel 1: Sintaxis y Estilo
 ruff check --fix && mypy .
 
-# Level 2: Unit Tests
+# Nivel 2: Pruebas Unitarias
 uv run pytest tests/ -v
 
-# Level 3: Integration
+# Nivel 3: Integración
 uv run uvicorn main:app --reload
 curl -X POST http://localhost:8000/endpoint -H "Content-Type: application/json" -d '{...}'
 
-# Level 4: Deployment
-# mcp servers, or other creative ways to self validate
+# Nivel 4: Despliegue
+# servidores mcp, u otras formas creativas de autovalidación
 ```
 
-## Anti-Patterns to Avoid
+## Anti-Patrones a Evitar
 
-- L Don't create minimal context prompts - context is everything - the PRP must be comprehensive and self-contained, reference relevant documentation and examples.
-- L Don't skip validation steps - they're critical for one-pass success - The better The AI is at running the validation loop, the more likely it is to succeed.
-- L Don't ignore the structured PRP format - it's battle-tested
-- L Don't create new patterns when existing templates work
-- L Don't hardcode values that should be config
-- L Don't catch all exceptions - be specific
+-   L No crear prompts con contexto mínimo - el contexto lo es todo - el PRP debe ser completo y autocontenido, referenciando documentación y ejemplos relevantes.
+-   L No saltarse los pasos de validación - son críticos para el éxito en un solo intento - Cuanto mejor sea la IA ejecutando el bucle de validación, más probable es que tenga éxito.
+-   L No ignorar el formato estructurado de PRP - ha sido probado en batalla.
+-   L No crear nuevos patrones cuando las plantillas existentes funcionan.
+-   L No codificar valores fijos que deberían estar en la configuración.
+-   L No capturar todas las excepciones - sé específico.
 
-## Working with This Framework
+## Trabajando con este Framework
 
-### When Creating new PRPs
+### Al Crear nuevos PRPs
 
-1. **Context Process**: New PRPs must consist of context sections, Context is King!
-2.
+1.  **Proceso de Contexto**: Los nuevos PRPs deben consistir en secciones de contexto, ¡El Contexto es Rey!
+2.  ...
 
-### When Executing PRPs
+### Al Ejecutar PRPs
 
-1. **Load PRP**: Read and understand all context and requirements
-2. **ULTRATHINK**: Create comprehensive plan, break down into todos, use subagents, batch tool etc check prps/ai_docs/
-3. **Execute**: Implement following the blueprint
-4. **Validate**: Run each validation command, fix failures
-5. **Complete**: Ensure all checklist items done
+1.  **Cargar PRP**: Leer y entender todo el contexto y los requisitos.
+2.  **ULTRAPENSAR**: Crear un plan completo, desglosarlo en tareas, usar subagentes, herramientas por lotes, etc. revisar `prps/ai_docs/`.
+3.  **Ejecutar**: Implementar siguiendo el plan.
+4.  **Validar**: Ejecutar cada comando de validación, corregir los fallos.
+5.  **Completar**: Asegurarse de que todos los elementos de la lista de verificación estén hechos.
 
-### Command Usage
+### Uso de Comandos
 
-- Read the .claude/commands directory
-- Access via `/` prefix in Claude Code
-- Commands are self-documenting with argument placeholders
-- Use parallel creation commands for rapid development
-- Leverage existing review and refactoring commands
+-   Leer el directorio `.claude/commands`.
+-   Acceder a través del prefijo `/` en Claude Code.
+-   Los comandos son autodocumentados con marcadores de posición para los argumentos.
+-   Usar comandos de creación paralela para un desarrollo rápido.
+-   Aprovechar los comandos existentes de revisión y refactorización.
 
-## Project Structure Understanding
+## Comprensión de la Estructura del Proyecto
 
 ```
 PRPs-agentic-eng/
 .claude/
-  commands/           # 28+ Claude Code commands
-  settings.local.json # Tool permissions
+  commands/           # Más de 28 comandos de Claude Code
+  settings.local.json # Permisos de herramientas
 PRPs/
-  templates/          # PRP templates with validation
-  scripts/           # PRP runner and utilities
-  ai_docs/           # Curated Claude Code documentation
-   *.md               # Active and example PRPs
- claude_md_files/        # Framework-specific CLAUDE.md examples
- pyproject.toml         # Python package configuration
+  templates/          # Plantillas de PRP con validación
+  scripts/           # Ejecutor de PRP y utilidades
+  ai_docs/           # Documentación curada de Claude Code
+   *.md               # PRPs activos y de ejemplo
+ claude_md_files/        # Ejemplos de CLAUDE.md específicos del framework
+ pyproject.toml         # Configuración de paquetes de Python
 ```
 
-Remember: This framework is about **one-pass implementation success through comprehensive context and validation**. Every PRP should contain the exact context for an AI agent to successfully implement working code in a single pass.
+Recuerda: Este framework se trata del **éxito de la implementación en un solo paso a través de un contexto y validación completos**. Cada PRP debe contener el contexto exacto para que un agente de IA implemente con éxito código funcional en un único intento.

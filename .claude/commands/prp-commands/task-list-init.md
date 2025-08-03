@@ -1,36 +1,36 @@
 claude
-\*\* Create a comprehensive task list in PRPs/checklist.md for PRP $ARGIMENTS
+\*\* Crea una lista de tareas exhaustiva en `PRPs/checklist.md` para el PRP $ARGUMENTS
 
-Ingest the infomration then dig deep into our existing codebase and PRP, When done ->
+Asimila la información y luego profundiza en nuestra base de código y PRP existentes. Cuando termines ->
 
-ULTRATHINK about the PRP task and create the plan based adhering to claude.md and extract and refine detailed tasks following this principle:
+ULTRAPIENSA sobre la tarea del PRP y crea el plan adhiriéndote a `claude.md`, y extrae y refina tareas detalladas siguiendo este principio:
 
-### list of tasks to be completed to fullfill the PRP in the order they should be completed using infomration dense keywords
+### Lista de tareas a completar para cumplir con el PRP, en el orden en que deben completarse, usando palabras clave densas en información.
 
-- Infomration dense keyword examples:
-  ADD, CREATE, MODIFY, MIRROR, FIND, EXECUTE, KEEP, PRESERVE etc
+- Ejemplos de palabras clave densas en información:
+  ADD (AÑADIR), CREATE (CREAR), MODIFY (MODIFICAR), MIRROR (ESPEJAR), FIND (ENCONTRAR), EXECUTE (EJECUTAR), KEEP (MANTENER), PRESERVE (PRESERVAR), etc.
 
-Mark done tasks with: STATUS [DONE], if not done leave empty
+Marca las tareas terminadas con: STATUS [DONE], si no está hecha, déjalo vacío.
 
 ```yaml
-Task 1:
+Tarea 1:
 STATUS [ ]
 MODIFY src/existing_module.py:
-  - FIND pattern: "class OldImplementation"
-  - INJECT after line containing "def __init__"
-  - PRESERVE existing method signatures
+  - FIND patrón: "class OldImplementation"
+  - INJECT después de la línea que contiene "def __init__"
+  - PRESERVE las firmas de los métodos existentes
 
 STATUS [ ]
 CREATE src/new_feature.py:
-  - MIRROR pattern from: src/similar_feature.py
-  - MODIFY class name and core logic
-  - KEEP error handling pattern identical
+  - MIRROR patrón de: src/similar_feature.py
+  - MODIFY el nombre de la clase y la lógica principal
+  - KEEP el patrón de manejo de errores idéntico
 
 ...(...)
 
-Task N:
+Tarea N:
 ...
 
 ```
 
-Each task should have unit test coverage, make tests pass on each task
+Cada tarea debe tener cobertura de pruebas unitarias, haz que las pruebas pasen en cada tarea.

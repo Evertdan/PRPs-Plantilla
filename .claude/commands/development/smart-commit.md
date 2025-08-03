@@ -1,49 +1,48 @@
----
-name: commit
-description: Analyze changes and create a smart git commit
-arguments: "Additional instructions for the commit"
----
+# Commit Inteligente
 
-additional instructions = $ARGUMENTS
+Este comando crea un mensaje de commit siguiendo la especificación de Commits Convencionales, basado en los archivos en el área de "staging".
 
-type = "feat", "fix", "docs", "style", "refactor", "perf", "test", "chore"
+## Proceso de Commit
 
-# Smart Git CommitPRPs/ai_docs
+1.  **Analizar Cambios en Staging**
+    -   Ejecutar `git diff --staged` para obtener un resumen de todos los cambios preparados para el commit.
+    -   Identificar los archivos modificados, añadidos o eliminados.
 
-Please help me create a git commit by:
+2.  **Determinar el Tipo de Commit**
+    -   Basado en los cambios, clasificar el commit:
+        -   `feat`: Una nueva funcionalidad.
+        -   `fix`: Una corrección de bug.
+        -   `docs`: Cambios en la documentación.
+        -   `style`: Cambios que no afectan el significado del código (espacios, formato, etc.).
+        -   `refactor`: Un cambio en el código que no corrige un bug ni añade una funcionalidad.
+        -   `test`: Añadir pruebas faltantes o corregir pruebas existentes.
+        -   `chore`: Cambios en el proceso de build o herramientas auxiliares.
+        -   `perf`: Un cambio de código que mejora el rendimiento.
+        -   `ci`: Cambios en los archivos y scripts de configuración de CI.
 
-1. First, check the current git status and analyze what changed:
+3.  **Determinar el Alcance (Scope)**
+    -   Identificar el componente o parte del proyecto afectado (ej. `auth`, `api`, `prp-runner`, `docs`). Es opcional.
 
-```bash
-git status
-git diff --staged
-```
+4.  **Escribir el Mensaje del Commit**
+    -   **Asunto**: `tipo(alcance): descripción concisa en imperativo y minúsculas`
+        -   Ejemplo: `feat(auth): añadir soporte para tokens JWT`
+        -   Ejemplo: `fix(parser): corregir error al manejar saltos de línea`
+    -   **Cuerpo (Opcional)**:
+        -   Explicar el "qué" y el "porqué" del cambio, no el "cómo".
+        -   Mencionar cualquier "BREAKING CHANGE" (cambio que rompe la compatibilidad).
+        -   Referenciar issues de GitHub (`Closes #123`).
+    -   **Pie (Opcional)**:
+        -   `BREAKING CHANGE: ...`
+        -   `Reviewed-by: ...`
 
-2. If no files are staged, show me the changes and help me decide what to stage:
+5.  **Crear el Commit**
+    -   Presentar el mensaje de commit propuesto para aprobación.
+    -   Si se aprueba, ejecutar `git commit -m "mensaje completo"`.
+    -   Si no se aprueba, permitir al usuario editar el mensaje.
 
-```bash
-git diff
-git status -s
-```
+## Argumentos: $ARGUMENTS
+(Opcional: el usuario puede proporcionar un mensaje o tipo específico para guiar la generación).
 
-3. Based on the changes, suggest:
-
-- The appropriate commit type (feat/fix/docs/style/refactor/perf/test/chore)
-- A concise, descriptive commit message following conventional commits
-- If the changes are complex, suggest breaking into multiple commits
-
-4. The commit format should be:
-
-$type: description for simple commits
-For complex changes, include a body explaining what and why
-
-5. After showing me the suggested commit message, ask if I want to:
-
-- Use it as-is
-- Modify it
-- Add more details to the body
-- Stage different files
-
-6. Once approved, create the commit and show me the result.
-
-7. Finally, ask if I want to push or create a PR.
+## Ejemplo de Uso
+`/smart-commit`
+(Claude analiza los cambios y propone un mensaje de commit completo)
